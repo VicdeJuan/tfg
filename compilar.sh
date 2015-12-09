@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Limpiar archivos auxiliares
-./limpiar.sh
+#./limpiar.sh
 
 # Compilar
 pdflatex main.tex
@@ -9,7 +9,7 @@ bibtex main
 makeglossaries main
 pdflatex main.tex
 pdflatex main.tex
-mv main.pdf "Trabajo de Fin de Grado.pdf"
+#mv main.pdf "Trabajo de Fin de Grado.pdf"
 
 # Limpiar archivos auxiliares
-./limpiar.sh
+#./limpiar.sh

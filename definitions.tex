@@ -10,7 +10,7 @@
 % Codificación UTF8
 \usepackage[utf8]{inputenc}
 % Caracteres del español
-\usepackage[spanish]{babel}
+\usepackage[spanish,english]{babel}
 % Código, algoritmos, etc.
 \usepackage{listings}
 % Definición de colores
@@ -110,7 +110,7 @@
 % Estilo páginas de capítulos
 \fancypagestyle{plain}{
 \fancyhf{}
-\fancyfoot[CO]{\footnotesize\emph{\nombretrabajo}}
+\fancyfoot[CO]{\footnotesize\emph{\workname}}
 \fancyfoot[RO]{\thepage}
 \renewcommand{\footrulewidth}{.6pt}
 \renewcommand{\headrulewidth}{0.0pt}
@@ -120,7 +120,7 @@
 \pagestyle{fancy}
 
 % Estilo páginas impares
-\fancyfoot[CO]{\footnotesize\emph{\nombretrabajo}}
+\fancyfoot[CO]{\footnotesize\emph{\workname}}
 \fancyfoot[RO]{\thepage}
 \rhead[]{\leftmark}
 
@@ -134,7 +134,7 @@
 \renewcommand{\footrulewidth}{.6pt}
 
 % Nombre de los bloques de código
-\renewcommand{\lstlistingname}{Código}
+\renewcommand{\lstlistingname}{Code}
 
 % Estilo de los lstlistings
 \lstset{
@@ -150,20 +150,16 @@
 \setlength{\resalto}{2.3ex plus.2ex}
 
 % Estilo de los acrónimos
-\renewcommand{\acronymname}{Glosario}
-\renewcommand{\glossaryname}{Glosario}
+
 \pretolerance=2000
 \tolerance=3000
 
 % Texto índice de tablas
-\addto\captionsspanish{
-\def\tablename{Tabla}
-\def\listtablename{\'Indice de tablas}
-}
+%\addto\captionsspanish{
+%\def\tablename{Tabla}
+%\def\listtablename{\'Indice de tablas}
+%}
 
-% Traducir appendix/appendices
-\renewcommand\appendixtocname{Apéndices}
-\renewcommand\appendixpagename{Apéndices}
 
 % Comando code (lstlisting sin cambio de página)
 \lstnewenvironment{code}[1][]%

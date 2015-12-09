@@ -1,43 +1,48 @@
 % Definiciones y constantes de estilo
-\include{definiciones}
+\include{definitions}
 
 % Definiciones de comandos
-\newcommand{\nombreautor}{TODO: Nombre Apellido1 Apellido2}
-\newcommand{\nombretutor}{TODO: NombreTutor Apellido1 Apellido2}
-\newcommand{\nombretrabajo}{TODO: Título del Trabajo de Fin de Grado}
-\newcommand{\fecha}{TODO: Fecha de entrega}
-\newcommand{\grado}{TODO: Grado}
+\newcommand{\nombreautor}{Víctor de Juan Sanz}
+\newcommand{\nombretutor}{César Sánchez Sánchez}
+\newcommand{\nombretrabajo}{Pruebas de primer orden de programas concurrentes}
+\newcommand{\workname}{First order proofs for concurrent programs}
+\newcommand{\fecha}{\today}
+\newcommand{\grado}{Double Degree in Computer Science and Mathematics}
+\newcommand{\degree}{Doble Grado en Ingeniería Informática y Matemáticas}
 % Descomentar si tu trabajo tiene un ponente
-%\newcommand{\nombreponente}{TODO: Nombre del ponente}
+\newcommand{\nombreponente}{Juan de Lara}
 % Descomentar si tu trabajo está asociado a un grupo de investigación
 % \newcommand{\grupoInvestigacion}{TODO: Grupo de investigación}
-\newcommand{\departamento}{TODO: Departamento}
+\newcommand{\departamento}{Computer Science}
 \newcommand{\facultad}{Escuela Politécnica Superior}
 \newcommand{\universidad}{Universidad Autónoma de Madrid}
-\newcommand{\pieparizq}{TODO: Pie de página par}
-\newcommand{\pieparcen}{Trabajo de Fin de Grado}
+\newcommand{\pieparizq}{}
+\newcommand{\pieparcen}{Bachelor work}
 \newcommand{\logoizq}{Logo_EPS}
 \newcommand{\logoder}{Logo_UAM}
-\newcommand{\correo}{TODO: Correo de contacto}
+\newcommand{\correo}{vic.juan@estudiante.uam.es}
 
 % Glosario y acrónimos
 \makeglossaries
 \input{src/glosario}
 
 % Rerefencias
-\bibliography{src/bibliografia}
+\def\citeapos#1{\citetitle{#1} (\citeauthor{#1}, \citeyear{#1}) \cite{#1}}
+\def\citetool#1{\citetitle{#1} \cite{#1}}
+\bibliography{src/bibliography}
+
 
 % Inicio del documento
 \begin{document}
 
 % Elección del idioma (español)
-\selectlanguage{spanish}
+\selectlanguage{english}
 
 %
 % Portada
 %
 \pagenumbering{gobble}
-\include{portada}
+\include{titlepage}
 \hypersetup{pageanchor=true}
 
 % Estilo de párrafo de los capítulos
@@ -51,18 +56,18 @@
 %
 \pagenumbering{Roman}
 \setcounter{page}{0}
-\include{src/agradecimientos}  
+\include{src/appreciations}  
 
 %
 % Resumen
 %
-\include{src/resumen}
+\include{src/abstract}
 
 %
 % Glosario
 %
-\printglossary[title=Glosario,toctitle=Glosario]
-\printglossary[title=Acrónimos,toctitle=Acrónimos,type=\acronymtype]
+\printglossary[title=Glossary,toctitle=Glossary]
+\printglossary[title=Acronym,toctitle=Acronym,type=\acronymtype]
 
 % Estilo de párrafo de los índices
 \setlength{\parskip}{1pt}
@@ -88,31 +93,31 @@
 %
 % Introducción
 %
-\include{src/introduccion}
+\include{src/introduction}
 %
 % Estado del arte
 %
-\include{src/estadoDelArte}
+\include{src/stateofArt}
 
 %
 % Diseño
 %
-\include{src/disenho}
+\include{src/design}
 
 %
 % Desarrollo
 %
-\include{src/desarrollo}
+\include{src/development}
 
 %
 % Resultados
 %
-\include{src/resultados}
+\include{src/results}
 
 %
 % Conclusiones
 %
-\include{src/conclusiones} 
+\include{src/conclussions} 
 
 %
 % Página en blanco
@@ -138,7 +143,9 @@
 %
 % TODO: Apéndices del TFG
 %
-\include{src/apendiceEjemplos}
+\include{src/appendixExample}
 
 % Fin del documento
+
+
 \end{document}
