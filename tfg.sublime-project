@@ -1,0 +1,11 @@
+{
+	"folders":
+	[
+		{
+			"file_exclude_patterns":
+			["**/*.aux", "**/*.auxlock", "**/*.cls", "**/*.dot", "**/*.dvi", "**/*.fls", "**/*.idx", "**/*.ilg", "**/*.ind", "**/*.jpg", "**/*.log", "**/*.out", "**/*.pdf", "**/*.png", "**/*.sublime-workspace", "**/*.toc", "**/*.txsprofile", "**/*.txt", "**/*.aux", "**/*.auxlock", "**/*.cls", "**/*.dot", "**/*.dvi", "**/*.fls", "**/*.idx", "**/*.ilg", "**/*.ind", "**/*.jpg", "**/*.log", "**/*.out", "**/*.pdf", "**/*.png", "**/*.sublime-project", "**/*.sublime-workspace", "**/*.toc", "**/*.txsprofile", "**/*.txt", "**/*.aux", "**/*.auxlock", "**/*.cls", "**/*.dot", "**/*.dvi", "**/*.fls", "**/*.idx", "**/*.ilg", "**/*.ind", "**/*.jpg", "**/*.log", "**/*.out", "**/*.pdf", "**/*.png", "**/*.sublime-project", "**/*.sublime-workspace", "**/*.toc", "**/*.txsprofile", "**/*.txt", "**/*.fdb_ltxmk" ,"**/*.acn","**/*.acr","**/*.alg","**/*.aux","**/*.bbl","**/*.blg","**/*.fls","**/*.glg","**/*.glo","**/*.gls","**/*.ist","**/*.lof","**/*.log","**/*.lot","**/*.pdf","**/*.run.xml","**/*.toc", "**/*-blx.bib", "**/*_latexmk", "modules/*"
+			],
+			"path": "."
+		}
+	]
+}
