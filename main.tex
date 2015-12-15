@@ -2,6 +2,8 @@
 \include{definitions}
 
 % Definiciones de comandos
+\newcommand{\thisworkm}{bachelor thesis}
+\newcommand{\thisworkM}{Bachelor thesis}
 \newcommand{\nombreautor}{Víctor de Juan Sanz}
 \newcommand{\nombretutor}{César Sánchez Sánchez}
 \newcommand{\nombretrabajo}{Pruebas de primer orden de programas concurrentes}
@@ -17,7 +19,7 @@
 \newcommand{\facultad}{Escuela Politécnica Superior}
 \newcommand{\universidad}{Universidad Autónoma de Madrid}
 \newcommand{\pieparizq}{}
-\newcommand{\pieparcen}{Bachelor work}
+\newcommand{\pieparcen}{\thisworkM}
 \newcommand{\logoizq}{Logo_EPS}
 \newcommand{\logoder}{Logo_UAM}
 \newcommand{\correo}{vic.juan@estudiante.uam.es}
@@ -30,6 +32,9 @@
 \def\citeapos#1{\citetitle{#1} (\citeauthor{#1}, \citeyear{#1}) \cite{#1}}
 \def\citetool#1{\citetitle{#1} \cite{#1}}
 \bibliography{src/bibliography}
+
+
+\setcounter{tocdepth}{3}
 
 
 % Inicio del documento
@@ -117,7 +122,9 @@
 %
 % Conclusiones
 %
-\include{src/conclussions} 
+\include{src/conclusions} 
+
+
 
 %
 % Página en blanco
