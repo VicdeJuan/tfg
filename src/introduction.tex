@@ -8,9 +8,26 @@ In this chapter we will introduce this \thisworkm. We will cover the motivation 
 We will discuss its scope and some details of the linked list most general client and finally we will make a brief description of the whole document. 
 
 \section{Motivation}
+
+Software verification is a very important problem. One need to be sure that the software being developed is correct. One would like it to work as expected with no bugs. There are some critical software as the ones developed for aeroplanes and spaceships which can't have any errors. How can we assure that?
+
+The cheap approach it testing. When the software is finished (or even while it is being developed) one can test it to check it is correct. How can one be sure that all functionalities have been proven? Maybe some test were missed and some bugs have not been found so the software is not correct.
+
+In the other hand, as a mathematician, I am very used to mathematical proofs of theorems and with logic as a very powerful tool. We wonder if it were possible to proof Software verification using those powerful tools. And the answer is affirmative. One can prove Software correctness in the same way as the Gauss theorem can be proven. One just need the appropriate framework, tools and of course, knowledge.
+
 \section{Objectives}
 
+The goal is to prove the correctness of an implementation of linked list. \footnote{The specification of the implementation is on \ref{def:problem}}
+
+We achieve to prove with mathematical certain the correctness of the program. We achieve to prove that a list is always a list and that it is always ordered, independently of the number of threads executing. Thus, there are 2 steps to prove. The first one is to prove that with just one process using the list, those properties are preserved always. The other one is with multiple processes using the same list (in a grain-lock implementation).
+
+But to achieve any mathematical proof, we need some axioms to use. We can't define absolute truth, we can just demonstrate that something is true, according to the truths we already know. We can prove some theorem, but must use the axioms we consider true. 
+
+So to achieve the verification, we need to obtain the axioms of the linked list theory.
+
 \section{Scope}
+
+
 
 \subsection{Details of problem studied}
 

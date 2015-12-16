@@ -8,7 +8,7 @@
 %250-500 words
 We study the uniform verification problem for infinite state processes. The problem consists on proving the parallel composition of an arbitrary number of processes running the same program satisfies a temporal property. As this problem is too big for a \thisworkm, we restricted to the linked list theory with insert,remove and search procedure in a most general client, as the selected theory to prove its validity. 
 
-By validity we mean that certain property of the theory is preserved. In this case, we prove that a list remains as a list and that it is always ordered (both with independence of the number of processes executing on the same list).
+By validity we mean that certain property of the theory is preserved. In this case, we prove that a list remains as a list and that it is always ordered (both with independence of the number of processes executing on the same list). We could lock all the list every time a process is using it, but that is a very inefficient procedure. We try to prove it in a grain-lock implementation.
 
 
 Those proofs can be done using first order logic or model checking. The approach chosen by Alejandro Sánchez and César Sánchez in his \citeapos{thesisAle} was model searching. This work has been developed to complement \citeapos{thesisAle} by providing a framework to prove some of the theories treated by them with first order logic. 
@@ -23,7 +23,7 @@ We will also cover a brief discussion (using the results observed) about the ben
 
 % Palabras clave en inglés
 \begin{keywordsEn}
-Software verification, Parallelism verification, first order logic, verification conditions, safety, lifeness, temporal logic, automatic theorem prover (spass).
+Software verification, Parallelism verification, first order logic, verification conditions, safety, lifeness, temporal logic, automatic theorem prover (spass), grain-lock.
 \end{keywordsEn}
 
 % Resumen en español
@@ -45,5 +45,5 @@ Además, incluimos una breve discusión a la luz de los resultados obtenidos sob
 
 % Palabras clave en español
 \begin{keywordsEs}
-Verificación de Software, Verificación de programas en paralelo, lógica de primer order, condiciones de verificación, safety, lifeness, lógica temporal, demostradores de teoremas automáticos (spass)
+Verificación de Software, Verificación de programas en paralelo, lógica de primer order, condiciones de verificación, safety, lifeness, lógica temporal, demostradores de teoremas automáticos (spass), grain-lock.
 \end{keywordsEs}
