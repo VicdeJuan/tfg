@@ -1,0 +1,232 @@
+\item[union-def] 
+\label{ax::union_def}
+
+\begin{dmath}
+((in(x,se) \vee in(x,se2)) \dimplies in(x,union(se,se2)))
+\end{dmath}
+
+\textcolor{red}{Auto-generated}
+\item[Intr-def] 
+\label{ax::Intr_def}
+
+\begin{dmath}
+((in(x,se) \wedge in(x,se2)) \dimplies in(x,intr(se,se2)))
+\end{dmath}
+
+\textcolor{red}{Auto-generated}
+\item[SetDiff-def] 
+\label{ax::SetDiff_def}
+
+\begin{dmath}
+((in(x,se) \wedge (\neg  (in(x,se2)))) \dimplies in(x,diff(se,se2)))
+\end{dmath}
+
+\textcolor{red}{Auto-generated}
+\item[in-set--def] 
+\label{ax::in_set__def}
+
+\begin{dmath}
+((\neg  (in(a,se))) \implies in(b,se) \implies (\neg  (b = a)))
+\end{dmath}
+
+\textcolor{red}{Auto-generated}
+\item[a--in--singl-a] 
+\label{ax::a__in__singl_a}
+
+\begin{dmath}
+(((\neg  (a = b)) \implies (\neg  (in(b,{ a })))) \wedge in(a,{ a }))
+\end{dmath}
+
+\textcolor{red}{Auto-generated}
+\item[a-not--in-se-dif-a] 
+\label{ax::a_not__in_se_dif_a}
+
+\begin{dmath}
+(in(a,se) \implies (\neg  (in(a,diff(se,{ a })))))
+\end{dmath}
+
+\textcolor{red}{Auto-generated}
+\item[nextreg] 
+\label{ax::nextreg}
+
+\begin{dmath}
+((in(a,se) \wedge se = addr2set(m,b) \wedge c = rd(m,a).next \wedge (\neg  (a = null))) \implies in(c,se))
+\end{dmath}
+
+\textcolor{red}{Auto-generated}
+\item[data--def] 
+\label{ax::data__def}
+
+\begin{dmath}
+mkcell(e,a,t).data = e
+\end{dmath}
+
+\textcolor{red}{Auto-generated}
+\item[next--def] 
+\label{ax::next__def}
+
+\begin{dmath}
+mkcell(e,a,t).next = a
+\end{dmath}
+
+\textcolor{red}{Auto-generated}
+\item[lockid--def] 
+\label{ax::lockid__def}
+
+\begin{dmath}
+mkcell(e,a,t).lockid = t
+\end{dmath}
+
+\textcolor{red}{Auto-generated}
+\item[next-error--is--null] 
+\label{ax::next_error__is__null}
+
+\begin{dmath}
+error.next = null
+\end{dmath}
+
+\textcolor{red}{Auto-generated}
+\item[equality-bt-cell] 
+\label{ax::equality_bt_cell}
+
+\begin{dmath}
+(c1 = c2 \implies (c1.data = c2.data \wedge c1.lockid = c2.lockid \wedge c1.next = c2.next))
+\end{dmath}
+
+\textcolor{red}{Auto-generated}
+\item[upd--def--not-null] 
+\label{ax::upd__def__not_null}
+
+\begin{dmath}
+((\neg  (a = null)) \implies upd(m,a,c) = m2 \implies rd(m2,a) = c)
+\end{dmath}
+
+\textcolor{red}{Auto-generated}
+\item[upd--def--null] 
+\label{ax::upd__def__null}
+
+\begin{dmath}
+(a = null \implies upd(m,a,c) = m2 \implies m2 = m)
+\end{dmath}
+
+\textcolor{red}{Auto-generated}
+\item[upd--def--one-at-the-time] 
+\label{ax::upd__def__one_at_the_time}
+
+\begin{dmath}
+(((\neg  (a = null)) \wedge (\neg  (a = b))) \implies upd(m,a,c) = m2 \implies rd(m,b) = rd(m2,b))
+\end{dmath}
+
+\textcolor{red}{Auto-generated}
+\item[rd-mem--def] 
+\label{ax::rd_mem__def}
+
+\begin{dmath}
+rd(m,null) = error
+\end{dmath}
+
+\textcolor{red}{Auto-generated}
+\item[lowest--less-than-highest] 
+\label{ax::lowest__less_than_highest}
+
+\begin{dmath}
+(\neg  (lowestElem = highestElem))
+\end{dmath}
+
+\textcolor{red}{Auto-generated}
+\item[less-total] 
+\label{ax::less_total}
+
+\begin{dmath}
+(\neg  ((x < y \wedge y < x)))
+\end{dmath}
+
+\textcolor{red}{Auto-generated}
+\item[ls-xy--not-ls-yx] 
+\label{ax::ls_xy__not_ls_yx}
+
+\begin{dmath}
+(x < y \implies (\neg  (y < x)))
+\end{dmath}
+
+\textcolor{red}{Auto-generated}
+\item[addr2set--def] 
+\label{ax::addr2set__def}
+
+\begin{dmath}
+(in(b,addr2set(m,a)) \dimplies reach(m,a,b,getp(m,a,b)))
+\end{dmath}
+
+\textcolor{red}{Auto-generated}
+\item[addr2set-null--is--singl-null] 
+\label{ax::addr2set_null__is__singl_null}
+
+\begin{dmath}
+addr2set(m,null) = { null }
+\end{dmath}
+
+\textcolor{red}{Auto-generated}
+\item[if--addr2set--then--reach-getp] 
+\label{ax::if__addr2set__then__reach_getp}
+
+\begin{dmath}
+(se = addr2set(m,a) \implies (in(b,se) \dimplies reach(m,a,b,getp(m,a,b))))
+\end{dmath}
+
+\textcolor{red}{Auto-generated}
+\item[reach--a-a-epsilon--true] 
+\label{ax::reach__a_a_epsilon__true}
+
+\begin{dmath}
+reach(m,a,a,epsilon)
+\end{dmath}
+
+\textcolor{red}{Auto-generated}
+\item[getp--same-addr--i-epsilon] 
+\label{ax::getp__same_addr__i_epsilon}
+
+\begin{dmath}
+getp(m,a,a) = epsilon
+\end{dmath}
+
+\textcolor{red}{Auto-generated}
+\item[getp--recursive--base] 
+\label{ax::getp__recursive__base}
+
+\begin{dmath}
+((\neg  (a = rd(m,a).next)) \implies getp(m,a,rd(m,a).next) = [ a ])
+\end{dmath}
+
+\textcolor{red}{Auto-generated}
+\item[getp--recursive--step] 
+\label{ax::getp__recursive__step}
+
+\begin{dmath}
+(((\neg  (getp(m,a,b) = epsilon)) \wedge (\neg  (a = b)) \wedge (\neg  (rd(m,a).next = b))) \implies append([ a ],getp(m,rd(m,a).next,b),getp(m,a,b)))
+\end{dmath}
+
+\textcolor{red}{Auto-generated}
+\item[path2set-epsilon--is--empty] 
+\label{ax::path2set_epsilon__is__empty}
+
+\begin{dmath}
+path2set(epsilon) = empty
+\end{dmath}
+
+\textcolor{red}{Auto-generated}
+\item[path2set-recursive--def--base] 
+\label{ax::path2set_recursive__def__base}
+
+\begin{dmath}
+path2set([ a ]) = { a }
+\end{dmath}
+
+\textcolor{red}{Auto-generated}
+\item[path2set-recursive--def--step] 
+\label{ax::path2set_recursive__def__step}
+
+\begin{dmath}
+(\neg  (getp(m,a,b) = epsilon)) \implies (path2set(getp(m,a,b)) = union({ a },path2set(getp(m,rd(m,a).next,b))))
+\end{dmath}
+
+\textcolor{red}{Auto-generated}
