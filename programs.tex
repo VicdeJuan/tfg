@@ -1,0 +1,459 @@
+\newcommand{\RefFigListClass}{\ref{fig:programs}(a)\xspace}
+\newcommand{\RefFigMGC}      {\ref{fig:programs}(b)\xspace}
+\newcommand{\RefFigSearch}   {\ref{fig:programs}(c)\xspace}
+\newcommand{\RefFigLocate}   {\ref{fig:programs}(d)\xspace}
+\newcommand{\RefFigAdd}      {\ref{fig:programs}(e)\xspace}
+\newcommand{\RefFigRemove}   {\ref{fig:programs}(f)\xspace}
+
+\newcommand{\RefFigListClassGhost}{\ref{fig:programs:ghost}(a)\xspace}
+\newcommand{\RefFigLocateGhost}		{\ref{fig:programs:ghost}(b)\xspace}
+\newcommand{\RefFigAddGhost}			{\ref{fig:programs:ghost}(c)\xspace}
+\newcommand{\RefFigRemoveGhost}		{\ref{fig:programs:ghost}(d)\xspace}
+
+\newcommand{\FigLabel}[1]{\multicolumn{1}{c}{#1}}
+\newcommand{\FigLabelWide}[1]{\multicolumn{3}{c}{#1}}
+
+\newcommand{\ListNode}{\ensuremath{\mathit{ListNode}}\xspace}
+\newcommand{\NodeP}{\ensuremath{\mathit{Node^{*}}}\xspace}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Figures for data structure  %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Lists
+\newcommand{\ListDataStructuresBody}{
+  \begin{array}{l>{\hspace{0.25em}}l<{\hspace{0.25em}}l}
+	  \class & \List & \{ \NodeP \: \tList; \; \} \\
+	  \class & \Node & \{
+			\Value \: \val; \;
+			\NodeP \: \tNext; \;
+			\Lock \: \lock; \; \}
+  \end{array}
+}
+
+\newcommand{\ListNodeDataStructureBody}{
+  \begin{array}{l>{\hspace{0.25em}}l>{\hspace{0.25em}}llll}
+		\class & \ListNode & \{ &
+			\Telem & \fData; \\
+			&&& \Taddr & \fNext; \\
+			&&& \Tsem & \fSem; & \}
+	\end{array}
+}
+
+
+\newcommand{\UnboundedQueueNodeDataStructureBody}{
+  \begin{array}{l>{\hspace{0.25em}}l>{\hspace{0.25em}}llll}
+		\class & \UnboundedQueueNode & \{ &
+			\Telem & \fData; \\
+			&&& \Taddr & \fNext; & \}
+	\end{array}
+}
+
+%% Skiplists
+\newcommand{\ConcSkiplistNodeDataStructureBody}{
+	\begin{array}{l>{\hspace{0.25em}}l>{\hspace{0.25em}}llll}
+		\class & \ConcSkiplistNode & \{ &
+			\Telem & \fData; \\
+			&&& \TArray \langle \Taddr \rangle(\K) & \fNext; \\
+			&&& \TArray \langle \Tlock \rangle(\K) & \locks; & \}
+	\end{array}
+}
+
+
+
+%% Unbounded Skiplists
+\newcommand{\UnboundedSkiplistNodeDataStructureBody}{
+	\begin{array}{l>{\hspace{0.25em}}l>{\hspace{0.25em}}llll}
+		\class & \UnboundedSkiplistNode & \{ &
+			\Telem & \fData; \\
+			&&& \TArray \langle \Taddr \rangle & \fNext; \\
+			&&& \Tint & @\level; & \}
+	\end{array}
+}
+
+
+%
+% Figures for most generate cliente "decide"
+%
+\newcommand{\ListMGCBody}{
+  \begin{algorithmic}[1]
+	\Procedure{MGC}{}
+	  \While {$\true$}
+	  \State $e := \NondetChooseElem$
+	  \State $\Nondet$
+	  \State $\left[ \begin{array}{l}
+		\Call \search(e) \\
+		\ProgOr \\
+		\Call \insertProg(e) \\
+		\ProgOr \\
+		\Call \remove(e)
+	  \end{array} \right]$
+	  \EndWhile
+	\EndProcedure
+  \end{algorithmic}
+}
+
+
+
+%
+% Figure for "search" 
+%
+
+\newcommand{\ListSearchBody}{
+  \begin{algorithmic}[1]
+	\Procedure{Search}{$\Value \: e$}
+	\State $\prev, \curr := \locate(e)$
+    \If {$\curr.\val = e$}
+    \State $\result := \true$
+    \Else
+    \State $\result := \false$
+    \EndIf
+    \State $\curr.\unlock()$
+    \State $\prev.\unlock()$
+    \State \tbf{return} $\result$
+	\EndProcedure
+  \end{algorithmic}
+}
+
+
+
+%
+% Figure for "locate"
+%
+\newcommand{\ListLocateBody}{
+  \begin{algorithmic}[1]
+	\Procedure{Locate}{$\Value \: e$}
+	  \State $\prev := \Head$
+	  \State $\prev.\lock()$
+	  \State $\curr := \prev.\tNext$
+	  \State $\curr.lock()$
+	  \While {$\curr.\val < e$}
+		\State $\prev.\unlock()$
+		\State $\prev := \curr$
+		\State $\curr := \curr.\tNext$
+		\State $\curr.\lock()$
+	  \EndWhile
+	  \State \tbf{return} $(\prev, \curr)$
+	\EndProcedure
+  \end{algorithmic}
+}
+
+
+
+%
+% Figure for "add"
+%
+\newcommand{\ListAddBody}{
+  \begin{algorithmic}[1]
+	\Procedure{Insert}{$\Value \: e$}
+	  \State $\prev, \curr := \locate(e)$
+	  \If {$\curr.\val \neq e$}
+		\State $\aux := \New \Node(e)$
+		\State $\aux.\tNext := \curr$
+		\State $\prev.\tNext := \aux$
+		\State $\result := \true$
+	  \Else
+		\State $\result := \false$
+	  \EndIf
+	  \State $\prev.\unlock()$
+	  \State $\curr.\unlock()$
+	  \State \tbf{return} $\result$
+	\EndProcedure
+  \end{algorithmic}
+}
+
+
+
+%
+% Figure for "remove"
+%
+\newcommand{\ListRemoveBody}{
+    \begin{algorithmic}[1]
+	  \Procedure{Remove}{$\Value \: e$}
+		\State $\prev, \curr := \locate(e)$
+		\If {$\curr.\val = e$}
+		  \State $\aux := \curr.\tNext$
+		  \State $\prev.\tNext := \aux$
+		  \State $\result := \true$
+		\Else
+		  \State $\result := \false$
+		\EndIf
+		\State $\prev.\unlock()$
+		\State $\curr.\unlock()$
+		\State \tbf{return} $\result$
+	  \EndProcedure
+	\end{algorithmic}
+}
+
+
+
+
+%
+% Figures for data structure
+%
+\newcommand{\DataStructuresGhostBody}{
+	\begin{tabular}{cc}
+		\renewcommand{\arraystretch}{0.4}
+		$\begin{array}{l}
+			\class \: \List \: \{ \\
+			\mhs \Node \: \tList ;\\
+			\hs{0.2} \fbox{ \begin{array}{l}
+				\rgn \: r; \\
+			\end{array}}\\
+		\}
+		\end{array}$ & \hs{2} $\begin{array}{l}
+			\class \: \Node \: \{ \\
+			\mhs \Value \: \val ;\\
+			\mhs \Node \: \tNext ;\\
+			\mhs \Lock \: \lock ;\\
+		\}
+	\end{array}$
+	\end{tabular}
+}
+
+\newcommand{\DataStructuresGhostFig}{
+\begin{minipage}[c]{6.5cm}
+	\DataStructuresGhostBody
+\label{fig:conclists:ghost}
+\end{minipage}
+}
+
+
+%
+% Figure for "locate" extended with ghost fields
+%
+
+\newcommand{\ListLocateGhostBody}{
+  \begin{algorithmic}[1]
+	\Procedure{Locate}{$\Value \: e$}
+	  \State $\prev := \Head$
+	  \State $\prev.\lock()$
+	  \State $\curr := \prev.\tNext$
+	  \State $\curr.lock()$
+	  \While {$\curr.\val < e$}
+		\State $\prev.\unlock()$
+		\State $\prev := \curr$
+		\State $\curr := \curr.\tNext$
+		\State $\curr.\lock()$
+	  \EndWhile
+	  \State \tbf{return} $(\prev, \curr)$
+	\EndProcedure
+  \end{algorithmic}
+}
+
+
+%
+% Figure for "add" extended with ghost fields
+%
+\newcommand{\ListAddGhostBody}{
+  \begin{algorithmic}[1]
+	\Procedure{Insert}{$\Value \: e$}
+	  \State $\prev, \curr := \locate(e)$
+	  \If {$\curr.\val \neq e$}
+		\State $\aux := \New \Node(e)$
+		\State $\aux.\tNext := \curr$
+		\State $\prev.\tNext := \aux$
+		\Statex $\hs{0.7}\fbox{
+		  \begin{array}{l}
+			l.r := l.r \cup \sreg{\aux} \\
+		  \end{array}}$
+		\State $\result := \true$
+	  \Else
+		\State $\result := \false$
+	  \EndIf
+	  \State $\prev.\unlock()$
+	  \State $\curr.\unlock()$
+	  \State \tbf{return} $\result$
+	\EndProcedure
+  \end{algorithmic}
+}
+
+
+
+%
+% Figure for "remove" extended with ghost fields
+%
+\newcommand{\ListRemoveGhostBody}{
+  \begin{algorithmic}[1]
+	\Procedure{Remove}{$\Value \: e$}
+	  \State $\prev, \curr := \locate(e)$
+	  \If {$\curr.\val = e$}
+		\State $\aux := \curr.\tNext$
+		\State $\prev.\tNext := \aux$
+		\Statex $\hs{0.7}\fbox{
+		  \begin{array}{l}
+			l.r := l.r - \sreg{\curr} \\
+		  \end{array}}$
+		\State $\result := \true$
+	  \Else
+		\State $\result := \false$
+	  \EndIf
+	  \State $\prev.\unlock()$
+	  \State $\curr.\unlock()$
+	  \State \tbf{return} $\result$
+	\EndProcedure
+  \end{algorithmic}
+}
+
+
+%
+% Figure for data structure for proving no overtake
+%
+\newcommand{\DataStructuresGhostTicketBody}{
+	\begin{tabular}{c>{\hspace{1cm}}c}
+		\renewcommand{\arraystretch}{0.4}
+		$\begin{array}{l}
+			\class \: \List \: \{ \\
+			\mhs \Node \: \tList ;\\
+			\hs{0.2} \fbox{ \begin{array}{l}
+				\rgn \: r; \\
+			\end{array}} \\
+		\}
+		\end{array}$ & 
+		$\begin{array}{l}
+			\class \: \Node \: \{ \\
+			\mhs \Value \: \val ;\\
+			\mhs \Node \: \tNext ;\\
+			\mhs \Lock \: \lock ;\\
+		\}
+	\end{array}$
+	\end{tabular}
+}
+
+\newcommand{\DataStructuresGhostTicketFig}{
+\begin{minipage}[c]{5cm}
+	\DataStructuresGhostTicketBody
+\label{fig:struct-cl-ticket}
+\end{minipage}
+}
+
+
+
+%
+% Figure for "locate" extended with ghost fields for proving no overtake
+%
+
+\newcommand{\ListLocateGhostTicketBody}{
+  \begin{algorithmic}[1]
+	\Procedure{Locate}{$\Value \: e$}
+	  \State $\prev := \Head$
+	  \State $\prev.\lock()$
+	  \Statex $\hs{0.7}\fbox{
+		\begin{array}{l}
+		  \myTicket := \ticket \\
+		  \ticket := \ticket + 1 \\
+		\end{array}}$
+	  \State $\curr := \prev.\tNext$
+	  \State $\curr.lock()$
+	  \While {$\curr.\val < e$}
+		\State $\prev.\unlock()$
+		\State $\prev := \curr$
+		\State $\curr := \curr.\tNext$
+		\State $\curr.\lock()$
+	  \EndWhile
+	  \State \tbf{return} $(\prev, \curr)$
+	\EndProcedure
+  \end{algorithmic}
+}
+
+
+
+
+\newcommand{\RefFigSkiplistClass}{\ref{fig:programs}(a)\xspace}
+\newcommand{\RefFigInsert}{\ref{fig:programs}(b)\xspace}
+
+%
+% Figures for data structure
+%
+\newcommand{\SkiplistDataStructuresBody}{
+  \begin{array}{l>{\hspace{0.25em}}l>{\hspace{0.25em}}lll}
+	  \class & \SkipList & \{ & \NodeP \: \head; \;
+								\NodeP \: \tail; & \} \\
+	  \class & \Node & \{ &
+			\Value \: \val;		\\
+			&&& \Key \: \key;	\\
+			&&& \TArray \langle \NodeP \rangle(\K) \: \fNext; \\
+			&&& \TArray \langle \NodeP \rangle(\K) \: \lock; & \}
+  \end{array}
+}
+
+
+\newcommand{\SkiplistInsertBody}{
+%  \framebox[\textwidth]{
+	\begin{algorithmic}[1]
+	\Statex
+	\Procedure{Insert}{$\SkipList \: sl$, $\Value \: \newval$}
+	\MState {$\Tvector\tuple{\NodeP} \upd[0..K-1]$}
+			{$\mrgn \: m_r := \emptyset$}{8}{0}
+	\State $lvl := \randomLevel(K)$
+	\State $\NodeP \pred := sl.\head$
+	\MState {$\pred.\locks[K-1].\lock()$}
+			{$m_r := m_r \cup \{ (\pred, K-1) \}$}{8}{0}
+	\State $\NodeP \curr := \pred.\fNext[K-1]$
+	\MState {$\curr.\locks[K-1].\lock()$}
+			{$m_r := m_r \cup \{ (\curr, K-1) \}$}{8}{0}
+	\For {$i:=K-1$ downto $0$}
+		\If {$i < K -1$}
+			\MState {$\pred.\locks[i].\lock()$}
+					{$m_r := m_r \cup \{ (\pred, i) \}$}{8}{2}
+			\If {$i \geq lvl$}
+				\MState {$\curr.\locks[i+1].\unlock()$}
+						{$m_r := m_r - \{ (\curr, i+1) \}$}{8}{3}
+				\MState {$\pred.\locks[i+1].\unlock()$}
+						{$m_r := m_r - \{ (\pred, i+1) \}$}{8}{3}
+			\EndIf
+			\State $\curr := \pred.\fNext[i]$
+			\MState {$\curr.\locks[i].\lock()$}
+					{$m_r := m_r \cup \{ (\curr, i) \}$}{8}{2}
+		\EndIf
+		\While {$\curr.\val < \newval$}
+			\MState {$\pred.\locks[i].\unlock()$}
+					{$m_r := m_r - \{ (\pred, i) \}$}{8}{2}
+			\State $\pred := \curr$
+			\State $\curr := \pred.\fNext[i]$
+			\MState {$\curr.\locks[i].\lock()$}
+					{$m_r := m_r \cup \{ (\curr, i) \}$}{8}{2}
+		\EndWhile
+		\State $\upd[i] := \pred$
+	\EndFor
+	\State $\bool \: \valueWasIn := (\curr.\val = \newval)$
+
+	\If {$\valueWasIn$}
+		\For {$i := 0$ to $lvl$}
+			\MState {$\upd[i].\fNext[i].\locks[i].\unlock()$}
+					{$m_r := m_r - \{ (\upd[i].\fNext[i], i)\}$}
+						{8}{2}
+			\MState {$\upd[i].\locks[i].\unlock()$}
+					{$m_r := m_r - \{ (\upd[i], i) \}$}{8}{2}
+		\EndFor
+	\Else
+		\State $x:=\CreateNode(lvl, \newval)$
+		\For {$i:=0$ to $lvl$}
+			\State $x.\fNext[i] := \upd[i].\fNext[i]$
+			\MState {$\upd[i].\fNext[i] := x$}
+					{$sl.r := sl.r \cup \{ (x, i) \}$}{8}{2}
+			\MState {$x.\fNext[i].\locks[i].\unlock()$}
+					{$m_r := m_r - \{ (x.\fNext[i], i) \}$}
+						{8}{2}
+			\MState {$\upd[i].\locks[i].\unlock()$}
+					{$m_r := m_r - \{ (\upd[i], i) \}$}{8}{2}
+		\EndFor
+	\EndIf
+	\State $\tbf{return } \lnot \valueWasIn$
+	\EndProcedure
+	\end{algorithmic}
+%      }
+}
+
+
+\newcommand{\ListDataStructuresBodyOnlyNode}{
+  \begin{array}{l>{\hspace{0.25em}}l<{\hspace{0.25em}}l}
+%		\class & \List & \{ \sAddr \: \head; \; \sAddr \: \tail; \} \\
+		\class & \Node & \{
+%			\sOrd \: \val; \;
+			\sElem \: \fData; \;\;\;
+			\sAddr \: \tNext; \;\;\;
+			\sLock \: \fLock; \; \}
+	\end{array}
+}

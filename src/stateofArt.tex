@@ -1,4 +1,5 @@
 % -*- root: ../main.tex -*-
+% -*- dic: en_GB  -*-
 \chapter{State of the art\label{sec:estado_del_arte}}
 
 \paragraph{Abstract}
@@ -61,7 +62,9 @@ Now we define some properties a theory may have.
 	A theory $\Sigma$ is complete \gls{iff} for every closed $\Sigma-$formula $\sigma$ we have \[(\Sigma\vDash \sigma) \orcond (\Sigma\neg\vDash \sigma) \] 
 \end{defn}
 
-\begin{defn}[Consistent]
+
+
+\begin{defn}[Consistency]
 
 	A theory $\Sigma$ is consistent if there is at least one $\Sigma-$interpretation.
 
@@ -71,8 +74,11 @@ Now we define some properties a theory may have.
 \end{defn}
 
 If our theory is not consistent, we can have a formal proof of everything we want to prove.
-We can prove that some program is correct and that is not correct, which gives us no information.
+We can prove that some program is correct and that is not correct, which gives us no information. 
+
 In the other hand, completeness may not be possible to achieve because of the incompleteness theorem of Godel.
+
+
 
 \begin{itheorem}[Godel's\IS incompleteness theorem]
 
@@ -82,6 +88,7 @@ For any formal effectively generated theory T including basic arithmetical truth
 
 \end{itheorem}
 
+% TODO: 
 \textcolor{red}{Conclusions of this theorem}
 
 %From this theorem we see that we can't have a complete and consistent theory while including basic arithmetical truths. Normally, we would have to choose.
@@ -93,17 +100,20 @@ For any formal effectively generated theory T including basic arithmetical truth
 
 A theory $\Sigma$ is decidable if $\Sigma \vDash F$ is decidable, for every $\Sigma-$formula.
 
-We say a theory in undecidable if it is not decidable.
 \end{defn}
 
 \begin{defn}[Decidability\IS of formula]
 
-$F$ a $\Sigma-$formula is decidable if there is an algorith that always terminates with ``yes'' if $F$ is valid in $\Sigma$ ($\Sigma$-valid) or ``no'' if $F$ is not $\Sigma-$valid.
+$F$ a $\Sigma-$formula is decidable if there is an algorithm that always terminates with ``yes'' if $F$ is valid in $\Sigma$ ($\Sigma$-valid) or ``no'' if $F$ is not $\Sigma-$valid.
 \end{defn}
 
 Decidability is a very desirable property but because \gls{FOL} (the theory with no axioms) is undecidable in general, we may not have decidability in the theory we are working on.
 
-\begin{example}
+Decidability is a stronger property of a theory than completeness. 
+
+
+\paragraph{Example:}
+
 \index{Theory\IS of equality}
 \label{theory:equality}
 We are going to define the theory of equality, because it is the simplest first-order theory and it is the only theory included in SPASS.\footnote{We will talk about SPASS in section \ref{def:SPASS}}
@@ -114,27 +124,27 @@ The signature of the theory is:
 
 and it's axioms are:
 
-\begin{itemize}
-	\item[Reflexivity] $\forall x, x=X$
-	\item[Symmetry] $\forall x,y x=y \implies y=x$
-	\item[Transitivity] $\forall x,y,z x=y \andcond y=z \implies x=z$
-	\item[Congruence]
-	\subitem[Function] For each function $f$
+\begin{description}
+	\item[Reflexivity:	] $\forall x, x=X$
+	\item[Symmetry:	] $\forall x,y x=y \implies y=x$
+	\item[Transitivity:	] $\forall x,y,z x=y \andcond y=z \implies x=z$
+	\item[Congruence:	]
+	\subitem \textbf{Function:} For each function $f$
 	\[\forall \gor{x},\gor{y} \left( \bigwedge_{i=1}^n x_i = y_i \right) \implies f(\gor{x}) = f(\gor{y})\]
-	\subitem[Predicate] For each function $f$
+	\subitem \textbf{Predicate:} For each predicate $P$
 	\[\forall \gor{x},\gor{y} \left( \bigwedge_{i=1}^n x_i = y_i \right) \implies f(\gor{x}) \dimplies f(\gor{y})\]
 
-	This 2 ``axioms'' are not axioms but an \concept{axiom schema}, because there is one axiom for each function $f$ we want to use.
-\end{itemize}
+	This 2 ``axioms'' are not axioms but an \concept{Axiom\IS schema}, because there is one axiom for each function $f$ we want to use.
+\end{description}
 
 This is a decidable theory as Leopold Löwenheim proved in 1915 \cite{EqualityIsDecidable}.
-\end{example}
 
-\section{Second-order logic (SOL)}
+
+\subsection{Second-order logic (SOL)}
 
 In \gls{SOL} the quantifiers can be used to quantify functions and/or predicates. This gives lot of possibilities to reason about the world and problems but adds lot of complexity.
 
-In the theory of equality (\label{theory:equality}) we could have defined axioms of congruence by:
+In the theory of equality (\ref{theory:equality}) we could have defined axioms of congruence by:
 
 \[\forall f \left( \forall \gor{x},\gor{y} \left( \bigwedge_{i=1}^n x_i = y_i \right) \implies f(\gor{x}) = f(\gor{y}) \right)\]
 \[\forall P \left( \forall \gor{x},\gor{y} \left( \bigwedge_{i=1}^n x_i = y_i \right) \implies P(\gor{x}) \dimplies P(\gor{y}) \right)\]
@@ -154,261 +164,14 @@ The remaining task is to define the framework and the conventions we use to prov
 There are two forms of proving properties. \textbf{Partial correctness} which assert that certain states can not occur during an execution (tipically error states) or \textbf{Total correctness} which assert that some state is eventually reached during any execution. For total correctness we will have to introduce what \textbf{temporal logic} is and its ``quantifiers'' always and eventually.
 
 
+\paragraph{Simplified Programming Language (SPL)}
+
+\label{def:SPL}
+
+We are going to use the \gls{SPL} used in \citep[II.1]{thesisAle}. This is a very simple way of representing programs, general enough so other programming languages fit in this definition. 
 
 
-\subsection{Representing a program in logic}
-
-How can we represent a program as logic.
-
-\subsubsection{Preliminaries (Notation, definition)}
-
-\textcolor{red}{Complete with definitions. What is a transition, what is the pc, etc...}
-
-
-\subsubsection{Possible instructions}
-\begin{description}
-\item [Assignments:]
-		The transition relation for a variable assignment consists of the 
-		update of the program counter for the running thread and the 
-		corresponding modification to the variable being assigned.
-\[
-\begin{array}[t]{p{8em}@{\hspace{6em}}p{\longtablesize}}
-	\hline
-	Statement & Transition relation \\ \hline\hline
-	$\begin{array}[t]{l@{\hspace{0.3em}}c@{\hspace{1em}}l}
-		l_1 & : & \mathtt{v := 2} \\
-		l_2 & : & \mathtt{\cdots}
-	\end{array}$
-	&
-	$\begin{array}[t]{ll}
-		 \pc(T) = l_1 \And
-		 \pc'(T) = l_2 \And
-		 \mathtt{v}' = 2
-	 \end{array}$ \\ 
-	 \hline
-\end{array}
-\]
-
-	\item [Pointer access:]
-		Cell fields are accessible through the pointer operator \pointsto.
-%
-		There are two possible scenarios for the use of pointers, depending on 
-		whether the statement accesses or modifies a cell field.
-%
-		We present now the semantics for both cases.
-%
-		The first case corresponds to the access of a cell field through an 
-		address pointer.
-%
-		The second case corresponds to the modification of a cell field using 
-		an address pointer.
-%
-		Note how, in the second case, all cells (except the one pointed by 
-		$\mathtt{b}$) remain unchanged.
-%
-		Also, all fields of the cell pointed by $\mathtt{b}$ remain unmodified 
-		except for $\mathtt{field_n}$.
-
-
-\[
-\begin{array}[t]{p{8em}@{\hspace{6em}}p{\longtablesize}}
-	\hline
-	Statement & Transition relation \\ \hline\hline
-	$\begin{array}[t]{l@{\hspace{0.3em}}c@{\hspace{1em}}l}
-		l_1 & : & \mathtt{v := a \pointsto field} \\ \\
-		l_2 & : & \mathtt{\cdots}
-	\end{array}$
-	&
-	$\begin{array}[t]{ll}
-		 \pc(T) = l_1 \And
-		 \pc'(T) = l_2 \And \\
-		 \mathtt{v}' = \heap[\mathtt{a}].\mathtt{field}
-	 \end{array}$ \\
-	 \hline
-\end{array}
-\]
-	\item [No operation:]
-		The no operation statement performs no change at all except from 
-		updating the program counter of the executing thread.
-
-\[
-\begin{array}[t]{p{8em}@{\hspace{6em}}p{\longtablesize}}
-	\hline
-	Statement & Transition relation \\ \hline\hline
-	$\begin{array}[t]{l@{\hspace{0.3em}}c@{\hspace{1em}}l}
-		l_1 & : & \mathtt{\SkipStm} \\
-		l_2 & : & \mathtt{\cdots}
-	\end{array}$
-	&
-	$\begin{array}[t]{ll}
-		 \pc(T) = l_1 \And
-		 \pc'(T) = l_2
-	 \end{array}$ \\ \hline
-\end{array}
-\]	
-
-	\item [Conditionals:]
-		We present now the two possible kinds of conditional statements in 
-		SPL.
-%
-		In the first case, if condition $c$ does not hold, the execution 
-		proceeds from the statement following the end of the conditional.
-
-		\[
-        \begin{array}[t]{p{8em}@{\hspace{6em}}p{\longtablesize}}
-				\hline
-				Statement & Transition relation \\ \hline\hline
-				$\begin{array}[t]{l@{\hspace{0.3em}}c@{\hspace{1em}}l}
-					\ell_1 & : & \mathtt{\textbf{if } c \textbf{ then }} \\ \\
-					\ell_2 & : & \mathtt{\cdots} \\
-						&& \mathtt{\vdots} \\
-					\ell_n & : & \mathtt{\textbf{end if}} \\
-					\ell_{n+1} & : & \mathtt{\cdots}
-				\end{array}$
-				&
-				$\begin{array}[t]{ll}
-					(\pc(T) = \ell_1 \And \;\;\mathtt{c} \And \pc'(T) = \ell_2) \; \Or \\
-					(\pc(T) = \ell_1 \And \lnot \mathtt{c} \And \pc'(T) = \ell_{n+1})
-				 \end{array}$ \\ \hline
-			 \end{array}
-		 \]
-
-		In the second case, if condition $c$ does not hold, the execution 
-		continues at the first statement in the \textbf{else} section of the 
-		conditional statement.
-
-		\[
-				\begin{array}[t]{p{8em}@{\hspace{6em}}p{\longtablesize}}
-				\hline
-				Statement & Transition relation \\ \hline\hline
-				$\begin{array}[t]{l@{\hspace{0.3em}}c@{\hspace{1em}}l}
-					\ell_1 & : & \mathtt{\textbf{if } c \textbf{ then }} \\ \\
-					\ell_2 & : & \mathtt{\cdots} \\
-					\mathtt{\vdots} \\
-					\ell_n & : & \mathtt{\textbf{else}} \\
-					\ell_{n+1} & : & \mathtt{\cdots} \\
-					\mathtt{\vdots} \\
-					\ell_m & : & \mathtt{\textbf{end if}} \\
-					\ell_{m+1} & : & \mathtt{\cdots}
-				\end{array}$
-				&
-				$\begin{array}[t]{ll}
-					(\pc(T) = \ell_1 \And \;\;\mathtt{c} \And \pc'(T) = \ell_2) \; \Or \\
-					(\pc(T) = \ell_1 \And \lnot \mathtt{c} \And \pc'(T) = \ell_{n+1})
-						& \text{for line } \ell_1 \\ \\ \phantom{\vdots} \\
-
-						\pc(T) = \ell_n \And \pc'(T) = \ell_{m+1} & \text{for line } \ell_n
-				 \end{array}$ \\ \hline
-			\end{array}
-		\]
-
-	\item [Loops:]
-		We consider the only loop statement available in SPL which executes 
-	the statements in the body as long as the loop condition holds.
-
-		\[
-				\begin{array}[t]{p{8em}@{\hspace{6em}}p{\longtablesize}}
-				\hline
-				Statement & Transition relation \\ \hline\hline
-				$\begin{array}[t]{l@{\hspace{0.3em}}c@{\hspace{1em}}l}
-					\ell_1 & : & \mathtt{\textbf{while } c \textbf{ do }} \\
-					\ell_2 & : & \mathtt{\cdots} \\
-					\mathtt{\vdots} \\
-					\ell_n & : & \mathtt{\textbf{end while}} \\
-					\ell_{n+1} & : & \mathtt{\cdots}
-				\end{array}$
-				&
-				$\begin{array}[t]{ll}
-						(\pc(T) = \ell_1 \And \;\;\texttt{c} \And \pc'(T) = \ell_2) \; 
-						\Or \\
-						(\pc(T) = \ell_1 \And \lnot \texttt{c} \And \pc'(T) = 
-					\ell_{n+1})
-					& \text{for line $\ell_1$} \\ \\
-					\pc(T) = \ell_n \And \pc'(T) = \ell_1 &
-						\text{for line $\ell_n$}
-				 \end{array}$ \\ \hline
-			 \end{array}
-		\]
-
-			\item [Non deterministic choice:]
-		The transition relation for the non-deterministic choice statement can 
-		be expressed as follows:
-
-		\[
-			\begin{array}[t]{p{8em}@{\hspace{6em}}p{\longtablesize}}
-				\hline
-				Statement & Transition relation \\ \hline\hline
-				$\begin{array}[t]{l@{\hspace{0.3em}}c@{\hspace{1em}}l}
-					\ell_1 & : & \mathtt{\Nondet} \\
-					\ell_2 & : & \mathtt{\;\;\;\;\;\; \cdots} \\
-					\ell_3 & : & \mathtt{\textbf{or } \; \cdots} \\
-					\mathtt{\vdots} \\
-					\ell_n & : & \mathtt{\textbf{or } \; \cdots} \\
-					\ell_{n+1} & : & \mathtt{\NondetEnd} \\
-				\end{array}$
-				&
-				$\begin{array}[t]{ll}
-					\pc(T) = \ell_1 \And
-					\bigvee\limits_{i = 2..n} \pc'(T) = \ell_i
-				 \end{array}$ \\ \hline
-			 \end{array}
-		\]
-
-
-	\item [Wait on condition:]
-		When waiting on a condition, the program execution does not progress 
-		until the condition is satisfied.
-	
-		\[
-			\begin{array}[t]{p{8em}@{\hspace{6em}}p{\longtablesize}}
-				\hline
-				Statement & Transition relation \\ \hline\hline
-				$\begin{array}[t]{l@{\hspace{0.3em}}c@{\hspace{1em}}l}
-					\ell_1 & : & \mathtt{\Await c} \\
-					\ell_2 & : & \mathtt{\cdots}
-				\end{array}$
-				&
-				$\begin{array}[t]{ll}
-					\pc(T) = \ell_1 \And c \And \pc'(T) = \ell_2
-				 \end{array}$ \\ \hline
-			 \end{array}
-		\]
-
-	We can relate to this statement the \fLock and \fUnlock operations used 
-	over locks.
-%
-	Even though these are not SPL statements, as they will be widely used in 
-	the rest of the chapters, we describe here the transition relation 
-	associated with these two functions.
-
-		\[
-			\begin{array}[t]{p{8em}@{\hspace{6em}}p{\longtablesize}}
-				\hline
-				Statement & Transition relation \\ \hline\hline
-				$\begin{array}[t]{l@{\hspace{0.3em}}c@{\hspace{1em}}l}
-					\ell_1 & : & \mathtt{\fLock(l)} \\
-					\ell_2 & : & \mathtt{\cdots}
-				\end{array}$
-				&
-				$\begin{array}[t]{ll}
-					\pc(T) = \ell_1 \And
-						\mathtt{l} = \oslash \And
-						\mathtt{l}' = T \And \pc'(T) = \ell_2
-				 \end{array}$ \\ \hline\hline
-				$\begin{array}[t]{l@{\hspace{0.3em}}c@{\hspace{1em}}l}
-					\ell_1 & : & \mathtt{\fUnlock(l)} \\
-					\ell_2 & : & \mathtt{\cdots}
-				\end{array}$
-				&
-				$\begin{array}[t]{ll}
-					\pc(T) = \ell_1 \And
-						\mathtt{l}' = \oslash \And \pc'(T) = \ell_2
-				 \end{array}$ \\ \hline
-			 \end{array}
-		\]
-
-\end{description}
-
+% TODO: Mention the assume.
 \subsection{Partial correctness (Safety)}
 
 
@@ -423,12 +186,37 @@ Basics on temporal logics
 
 \subsubsection{Lifeness examples}
 
-Now we can give some examples of lifeness examples.
+Now we can give some examples of lifeness examples. 
+% TODO:
+\textcolor{red}{Conjecture César told me}
 
 
-\subsection{Parametrized invariants}
+\subsection{Parametrized systems}
+
+All the exposed until this point is just for one thread executing, and that is not a very interesting problem. 
+The correctness of just one thread executing a program is easy because it sequentiality.
+The useful to solve problem is whenever we have multiple threads executing the same program. And this number of threads executing the same problems may be bounded or not. 
+
+We are going to study those cases.
+
+To do so, we need to represent a program executed by multiple threads. We can parametrize by the thread. Typically the threads would be $i$,$j$,$k_0$,$k_1$,... 
+
+% TODO:
+\textcolor{red}{Complete from book}
 
 \subsubsection{Finite number of threads}
 
+
 \subsubsection{Arbitrary number of threads}
 
+In this kind of programs, we have, for example, the web servers may not have a bound of the number of clients the can accept. Can we prove correctness when an unbounded number of processes are using the same shared variable?
+
+A recent research \citeapos{paperParametrizedInvariants} has proven a very important result. We will use this result.
+
+\textcolor{red}{Complete}
+\begin{itheorem}[Bound an arbitrary number of threads]
+We just need to prove 3 things. Initiation, self consecution and others consecution.
+\end{itheorem}
+\label{thm:biggest}
+
+Using this powerful result, we have reduced an arbitrary number of processes sharing the same variable to a finite number of threads sharing the variable. This is a very powerful result and we will come to it later on, when we talk about the proofs we have done. 
