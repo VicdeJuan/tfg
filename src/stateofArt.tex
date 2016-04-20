@@ -10,7 +10,8 @@ The thesis of this \thisworkm is the definition of a theory for linked list with
 
 We include a brief logic of temporal logic needed for lifeness proving, but this topic is not very important in this \thisworkm.
 
-Finally, we try to answer the question of parallelism. We will cover how can we prove safety for programs with multiple threads. We will describe some very important results used in this \thisworkm done by \citep{thesisAle}.
+Finally, we try to answer the question of parallelism. We will cover how can we prove safety for programs with multiple threads. We will describe some very important results used in this \thisworkm 
+done by \citep{thesisAle}.
 
 \section{First order logic}
 
@@ -26,97 +27,83 @@ We assume the usual way of representing and working with \gls{FOL}, this is
 
 One could consider $\exists x(P(x))$  as an abbreviation of $\neg (\forall x(\neg P(x)))$, but for better understanding we would use both quantifiers when needed.
 We could also use $(a \orcond b)$ instead of $(\neg a \implies b)$ but, again, for the better understanding those abbreviations will be used.
-The same happens with $\true \equiv \neq \false$, but it is clearer when we use both symbols and not just one of them.
+The same happens with $\true \equiv \neg \false$, but it is clearer when we use both symbols and not just one of them.
 
 
 \paragraph{Definitions}
 
-We are going to define some very basic concepts, needed and used during the whole \thisworkm.
+We are going to define some very basic concepts, needed and used during the whole \thisworkmp.
 
-\begin{defn}[Satisfiability]
-
-A formula $F$ is satisfiable \gls{iff} there exists an interpretation $I$ such that \[I \vDash F\]
-\end{defn}
-
-\begin{defn}[Validity]
-
-A formula $F$ is valid \gls{iff} for all interpretations $I$, \[I\vDash F\]
-\end{defn}
+We say a formula $F$ is \concept{satisfiable} \gls{iff} there exists an interpretation $I$ such that $I \vDash F$. 
+%
+We say a formula $F$ is \concept{valid} \gls{iff} for all interpretations $I$, $I\vDash F$.
 \label{def:validity}
 This 2 concepts are very important and they are very related. $F$ is valid \gls{iff} $\neg F$ is unsatisfiable. 
 
-\begin{defn}[Theory]
 
-A first-order theory is defined by the following components: 
+A first-order \concept{theory} is defined by the following components: 
 \begin{itemize}
 	\item Its \textbf{signature} $\Sigma$ is a set of constant, function and predicate symbols.
-	\item Its set of \textbf{axioms} $\axioms$ is a set of \gls{FOL} closed formulae in which only elements from $\Sigma$ appear.
-	\subitem The axioms must be 
+	\item Its set of \textbf{axioms} $\axioms$ is a set of \gls{FOL} closed formula in which only elements from $\Sigma$ appear.
 \end{itemize}
-\end{defn}
-
-Now we define some properties a theory may have.
-
-\begin{defn}[Completeness]
-
-	A theory $\Sigma$ is complete \gls{iff} for every closed $\Sigma-$formula $\sigma$ we have \[(\Sigma\vDash \sigma) \orcond (\Sigma\neg\vDash \sigma) \] 
-\end{defn}
 
 
 
-\begin{defn}[Consistency]
+There are some important properties than a theory may have. 
 
-	A theory $\Sigma$ is consistent if there is at least one $\Sigma-$interpretation.
+A theory $\Sigma$ is \concept[Completeness]{complete} \gls{iff} for every closed $\Sigma-$formula $\sigma$ we have $(\Sigma\vDash \sigma) \orcond (\Sigma\neg\vDash \sigma) $
 
-	Another equivalent definition of consistency is:
+A theory $\Sigma$ is \concept[Consistency]{consistent} if there is at least one $\Sigma-$interpretation.	Equivalently, a theory $\Sigma$ is consistent if $\Sigma \not\vDash \false$
 
-	A theory $\Sigma$ is consistent if $\Sigma \vDash \false$
-\end{defn}
+If our theory is not consistent, we can have a formal proof of anything we want to prove. 
+%
+We can prove contradictions. 
+%
+We could prove that some program is both correct and incorrect, which gives us no information. 
+%
+Thus consistency is a fundamental property for this \thisworkm.
 
-If our theory is not consistent, we can have a formal proof of everything we want to prove.
-We can prove that some program is correct and that is not correct, which gives us no information. 
-
-In the other hand, completeness may not be possible to achieve because of the incompleteness theorem of Godel.
+In the other hand, completeness is very desirable, but may not be possible to achieve because of the incompleteness theorem of Gödel.
 
 
+\begin{theorem}[Gödel's\IS incompleteness theorem]
 
-\begin{itheorem}[Godel's\IS incompleteness theorem]
-
-\textit{Obtained from \citeapos{Godel}}
 
 For any formal effectively generated theory T including basic arithmetical truths and also certain truths about formal provability, if T includes a statement of its own consistency then T is inconsistent.
 
-\end{itheorem}
+
+\textit{Obtained from \citeapos{Godel}}
+\end{theorem}
 
 % TODO: 
-\textcolor{red}{Conclusions of this theorem}
-
-%From this theorem we see that we can't have a complete and consistent theory while including basic arithmetical truths. Normally, we would have to choose.
+\todo{Conclusions}
 
 
-\subsection{Decidability}
 
-\begin{defn}[Decidability\IS of theory]
+It is not possible to have a complete and consistent theory while including basic arithmetical truths. 
+%
+One could expect that the theory needed to proof programs correctness wouldn't be complete. 
+%
+In that case, we will not be able to proof the incorrectness of a program.
+%
+Normally, consistency is basic while completeness is only desirable.
 
-A theory $\Sigma$ is decidable if $\Sigma \vDash F$ is decidable, for every $\Sigma-$formula.
+Another property of theories is the \textbf{decidability}. We say a theory $\Sigma$ is \concept{decidable} if $\Sigma \vDash F$ is decidable, for every $\Sigma-$formula 
+and 
+$F$ a $\Sigma-$formula is decidable if there is an \textbf{algorithm} that \textbf{always terminates} with ``yes'' if $F$ is valid in $\Sigma$ ($\Sigma$-valid) or ``no'' if $F$ is not $\Sigma-$valid.
 
-\end{defn}
-
-\begin{defn}[Decidability\IS of formula]
-
-$F$ a $\Sigma-$formula is decidable if there is an algorithm that always terminates with ``yes'' if $F$ is valid in $\Sigma$ ($\Sigma$-valid) or ``no'' if $F$ is not $\Sigma-$valid.
-\end{defn}
-
-Decidability is a very desirable property but because \gls{FOL} (the theory with no axioms) is undecidable in general, we may not have decidability in the theory we are working on.
 
 Decidability is a stronger property of a theory than completeness. 
+%
+As completeness, decidability is a very desirable property but because \gls{FOL} (the theory with no axioms) is undecidable in general, we may not have decidability in the theory we are working on.
 
 
-\paragraph{Example:}
 
-\index{Theory\IS of equality}
+\begin{example}[\concept{Theory\IS of equality}]
+
 \label{theory:equality}
-We are going to define the theory of equality, because it is the simplest first-order theory and it is the only theory included in SPASS.\footnote{We will talk about SPASS in section \ref{def:SPASS}}
+
+We are going to define the theory of equality, because it is the simplest first-order theory.
 
 The signature of the theory is:
 
@@ -128,21 +115,21 @@ and it's axioms are:
 	\item[Reflexivity:	] $\forall x, x=X$
 	\item[Symmetry:	] $\forall x,y x=y \implies y=x$
 	\item[Transitivity:	] $\forall x,y,z x=y \andcond y=z \implies x=z$
-	\item[Congruence:	]
-	\subitem \textbf{Function:} For each function $f$
+	\item[Function congruence:] For each function $f$
 	\[\forall \gor{x},\gor{y} \left( \bigwedge_{i=1}^n x_i = y_i \right) \implies f(\gor{x}) = f(\gor{y})\]
-	\subitem \textbf{Predicate:} For each predicate $P$
+	\item[Predicate congruence:]  For each predicate $P$
 	\[\forall \gor{x},\gor{y} \left( \bigwedge_{i=1}^n x_i = y_i \right) \implies f(\gor{x}) \dimplies f(\gor{y})\]
 
-	This 2 ``axioms'' are not axioms but an \concept{Axiom\IS schema}, because there is one axiom for each function $f$ we want to use.
+	This 2 ``axioms'' are not axioms but an \concept[Axioms schema]{axiom schema}, because there is one axiom for each function $f$ or predicate $p$.
 \end{description}
 
-This is a decidable theory as Leopold Löwenheim proved in 1915 \cite{EqualityIsDecidable}.
+\gls{FOL} with equality is a decidable theory as Leopold Löwenheim proved in 1915 \cite{EqualityIsDecidable}. It is consistent and complete.
+\end{example}
 
 
 \subsection{Second-order logic (SOL)}
 
-In \gls{SOL} the quantifiers can be used to quantify functions and/or predicates. This gives lot of possibilities to reason about the world and problems but adds lot of complexity.
+In \gls{SOL} the quantifiers can be used related to functions and/or predicates. This gives lot of possibilities to reason about the universe and problems but adds lot of complexity. 
 
 In the theory of equality (\ref{theory:equality}) we could have defined axioms of congruence by:
 
@@ -151,72 +138,158 @@ In the theory of equality (\ref{theory:equality}) we could have defined axioms o
 
 This is a simpler way of writing but a more complex way of reasoning.
 
-Because it is not possible to reason automatically in theories of second order, we haven't used any second-order logic and we won't get deeper into it.
-
+The \gls{SOL} is a very powerful tool in order to express formulaes. 
+%
+However, because it is not possible to reason automatically in theories of second order, we haven't used any second-order logic and we won't get deeper into it. 
 
 
 
 \section{Program correctness}
 
-We are finally ready to apply this concepts to a real word problem, proving properties of programs.
+We are finally ready to apply this concepts to a real word problem. In this \thisworkm we apply those concepts to prove some properties of programs.
+%
 The remaining task is to define the framework and the conventions we use to prove formally properties of programs.
 
-There are two forms of proving properties. \textbf{Partial correctness} which assert that certain states can not occur during an execution (tipically error states) or \textbf{Total correctness} which assert that some state is eventually reached during any execution. For total correctness we will have to introduce what \textbf{temporal logic} is and its ``quantifiers'' always and eventually.
+There are two forms of proving properties. 
+%
+\concept{Partial\IS correctness} which assert that certain states can not occur during an execution (typically error states) or 
+\concept{Total\IS correctness} which assert that some state is eventually reached during any execution. 
+%
+For total correctness we will have to introduce what \textbf{temporal logic} is and its quantifiers \textit{always} and \textit{eventually}. 
+%
+We will not go deep into temporal logic, because we will focus on partial correctness.
 
 
-\paragraph{Simplified Programming Language (SPL)}
+
 
 \label{def:SPL}
-
-We are going to use the \gls{SPL} used in \citep[II.1]{thesisAle}. This is a very simple way of representing programs, general enough so other programming languages fit in this definition. 
-
+\input{src/spl}
 
 % TODO: Mention the assume.
 \subsection{Partial correctness (Safety)}
+
+Proving partial correctness means proving some predicate about the program.
+%
+The predicate can be \textit{some state is never reached} (for example, \textit{some variable never takes some value}). 
+%
+This is used for mutual exclusion predicates in concurrent programs.
+%
+\todo{Complete with Césars Book}
+
+
+Some examples are studied next to clarify the concept.
+
+\begin{example}
+\todo{Single thread partial correctness example}
+\end{example}
+
+\begin{example}
+\todo{Multiple thread partial correctness example}
+\end{example}
+
 
 
 
 \subsection{Total correctness (Lifeness)}
 
+\todo{Complete with Césars Book}
 What is proving lifeness, for what we need temporal logic.
 
 \subsubsection{Temporal logic}
 
 Basics on temporal logics
 
-\subsubsection{Lifeness examples}
+Temporal logic studies problems like the one exposed below.
 
-Now we can give some examples of lifeness examples. 
-% TODO:
-\textcolor{red}{Conjecture César told me}
+\begin{example}
+\label{Collatz:conjecture}
+
+Let $f$ be the following function.
+
+\[
+f(n) = \left\{
+	\begin{array}{cc}
+		\rfrac{n}{2} & \text{ if } (n\text{ mod } 2) \equiv 0\\
+		3n+1 & \text{ if } (n\text{ mod } 2) \equiv 1
+	\end{array}
+\right.
+\]
+
+We can form a sequence applying repeatedly $f$. If we take the sequence starting in $n=13$ we get:
+
+\[ 
+	13 \overset{\displaystyle\;\; 3n+1\;\;}{\longrightarrow}
+	40 \overset{\displaystyle\;\;\rfrac{n}{2}\;\;}{\longrightarrow}
+	20 \overset{\displaystyle\;\;\rfrac{n}{2}\;\;}{\longrightarrow}
+	10 \overset{\displaystyle\;\;\rfrac{n}{2}\;\;}{\longrightarrow}
+	5 \overset{\displaystyle\;\; 3n+1\;\;}{\longrightarrow}
+	16 \overset{\displaystyle\;\;\rfrac{n}{2}\;\;}{\longrightarrow}
+	8 \overset{\displaystyle\;\;\rfrac{n}{2}\;\;}{\longrightarrow}
+	4 \overset{\displaystyle\;\;\rfrac{n}{2}\;\;}{\longrightarrow}
+	2 \overset{\displaystyle\;\;\rfrac{n}{2}\;\;}{\longrightarrow}
+	1
+\]
+
+One could ask if this sequence eventually stops regardless the integer chosen to begin. This question is called \concept{Collatz conjecture} and has not been solved yet. 
+For the moment, an infinite sequence has not been found, but the temporal logic problem has not been proven either.
+
+The temporal formula for this problem is:
+
+\todo{Formula of conjecture}
+\[
+
+\]
+
+
+\end{example}
 
 
 \subsection{Parametrized systems}
 
-All the exposed until this point is just for one thread executing, and that is not a very interesting problem. 
-The correctness of just one thread executing a program is easy because it sequentiality.
-The useful to solve problem is whenever we have multiple threads executing the same program. And this number of threads executing the same problems may be bounded or not. 
+The correctness of just one thread executing a program is easy because it runs sequentiality.
+%
+Multiple threads executing the same program is a different and more difficult problem to solve.
+%
+If the number of threads executing is not bounded is another important and difficult step.
+%
+If the number of threads is bound, one could unroll the formula for all the threads in the problem and try to prove it. 
+%
+This is why we focus the unbounded case, which is the usual scenario.
+\todo{Examples?}
 
-We are going to study those cases.
 
-To do so, we need to represent a program executed by multiple threads. We can parametrize by the thread. Typically the threads would be $i$,$j$,$k_0$,$k_1$,... 
+We are going to study those cases. 
+%
+To do so, we need to parametrize the program executed by multiple threads. Typically the threads would be $i$,$j$,$k_0$,$k_1$,... 
 
-% TODO:
-\textcolor{red}{Complete from book}
-
-\subsubsection{Finite number of threads}
 
 
 \subsubsection{Arbitrary number of threads}
 
-In this kind of programs, we have, for example, the web servers may not have a bound of the number of clients the can accept. Can we prove correctness when an unbounded number of processes are using the same shared variable?
+\todo{Reread paper of parametrized systems and rewrite}
 
-A recent research \citeapos{paperParametrizedInvariants} has proven a very important result. We will use this result.
+For example, the web servers may not have a bound of the number of clients they can accept.
+%
+Can we prove correctness when an unbounded number of processes are using the same shared variable?
 
-\textcolor{red}{Complete}
+A recent research \citeapos{paperParametrizedInvariants} has proven a very important result. 
+%
+We will enunciate it and discuss it because it is fundamental for this work.
+
+
 \begin{itheorem}[Bound an arbitrary number of threads]
 We just need to prove 3 things. Initiation, self consecution and others consecution.
+\todo{Real enunciate}
 \end{itheorem}
 \label{thm:biggest}
 
-Using this powerful result, we have reduced an arbitrary number of processes sharing the same variable to a finite number of threads sharing the variable. This is a very powerful result and we will come to it later on, when we talk about the proofs we have done. 
+Using this powerful result, we have reduced an arbitrary number of processes sharing the same variable to a finite number of threads sharing the variable. 
+%
+This is a very powerful result and we will come to it later on, when we talk about the proofs we have done. 
+
+We illustrate the power of this theorem with the next example:
+
+\begin{example}
+\todo{Example. From the paper?}
+\end{example}
+

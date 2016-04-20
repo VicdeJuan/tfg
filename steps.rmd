@@ -1,0 +1,17 @@
+·) State of Art
+	- Rethink structure. Not too basic.
+	- Write abstract.
+·) Design
+	- Description of invariants.
+	- Write abstract.
+·) Development
+	- Write abstract.
+·) Results
+	- Finish results.
+	- Rethink results.
+	- Write abstract.
+·) Conclussions
+	- Write abstract.
+·) Introduction
+	- Write abstract.
+	- Structure of the document.
