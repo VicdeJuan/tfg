@@ -5,16 +5,21 @@
 
 One can consider a program as a series of state changes. There are some variables, we execute one line of the program and some of those variables changes and some others don't. Thus, we can consider any program as a graph of states with some ways. For example, lets take a very simple program:
 
+\begin{center}
+\caption{Simple example.}
 \begin{lstlisting}
 (1) -- x = -2;
 (2) -- if (x<0) 
-(3) --     x = -x 
+(3) --     x = 2·x 
 (4) --
 \end{lstlisting}
+\label{simple:example}
+\end{center}
 
 This simple program doesn't do anything interesting, but it is useful to illustrate. This is the directed graph of states.
 
 \begin{center}
+\todo{Direct}
 \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
                     thick,main node/.style={circle,draw,font=\sffamily\Large\bfseries}]
 
@@ -31,32 +36,45 @@ This simple program doesn't do anything interesting, but it is useful to illustr
     (3) edge node [right] {} (4)
     (4) 
 \end{tikzpicture}
+
+\caption{State graph correspondent to program \ref{simple:example}}
 \end{center}
 
 In the execution of this program, it is not possible to execute line 3 just after line 1 skipping line 2. We need to go line by line, respecting the execution flow. 
 This is represented by the variable \pc (\concept{Program\IS counter}). This variable indicates the line to execute next.
 
-So the state of the program when we have passed the first line is:
+So the state of the program at the begining is 
 
-\[ \pc = 2 \andcond x=-2\]
+\[ \pc = 1\]
 
-This formula give all the information we have of the execution state. We know the program counter and the state and value of all variables.
+This formula give all the information we have of the execution state. We know the \pc and the state and value of all variables (there are no more variables than \pc).
 
-Now we need to define the step. How do we represent the execution of a line. To do so, we need to use \concept{post-state} variables. We define priming any variable to refer that same variable after the transition. Going back to the example, we have:
+Now we need to define the step. 
+%
+How can we represent the execution of a line.
+%
+We need to use \concept{post-state} variables. 
+%
+We define the prime version of any variable to refer that same variable after the execution of the line (transition). 
+%
+Going back to the example, we have:
 
 \[
-\pc = 2 \andcond x=-2 \andcond \pc'=3 \andcond x'=x \andcond x' < 0
+\pc = 1 \andcond \pc'=2 \andcond x'=2 
 \]
 
-We have a post-state program counter ($\pc'=3$) and some post-state variables. 
-As the execution of the \textit{if} doesn't change variable $x$, then $x'=x$, but the $\pc$ has changed according to the statement.
+We have a post-state program counter ($\pc'=2$) and some post-state variables. 
+%
+As the execution of the assignment the variable $x$ takes a value (independently of the value in the pre-state), then $x'=2$ (regardless what value $x$ has). 
 
-The next step would be
+The next step could be
 \[
-\pc = 3 \andcond x=-2 \andcond 	\pc'=4 \andcond x'= -x 
+\pc = 2 \andcond x'=x \andcond 	\pc'=?
 \]
 
-This steps we have illustrated are, actually, transition relations.
+The value of pc depends on the validity of the \textit{if}. 
+
+This steps we have illustrated are called transition relations.
 
 \begin{defn}[Transition relation]
 A transition relation is the formula that define the step from one line of the program to another.  
@@ -65,14 +83,18 @@ A transition relation is the formula that define the step from one line of the p
 With this simple example, we have shown what a program counter and what a transition relation are. Now we can define the possible instructions a program may have.\footnote{We have just took the set of instructions the programs we are going to proof have.}
 
 
-\marginpar{heap, cell}
+\todo{heap, cell}
 
 \subsubsection{Possible instructions}
-As we are going to work with programs used by more than one thread, we need to define one program counter for each thread executing. The way of doing so is defining the \textbf{program counter} as a \textbf{function} that giving a thread, returns its program counter. 
+As we are going to work with programs used by more than one thread, we need one program counter for each thread executing. 
+%
+We parametrize the program counter. 
+%
+This is, defining the \textbf{program counter} as a \textbf{function} that given a thread, returns its program counter. 
+%
 We could have define as one variable per thread, but it would be equivalent. 
 
 For this definitions we use the letter $T$ to refer a particular thread.
-
 
 \begin{description}
 \item [Assignments:]

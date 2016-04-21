@@ -168,19 +168,277 @@ We will not go deep into temporal logic, because we will focus on partial correc
 % TODO: Mention the assume.
 \subsection{Partial correctness (Safety)}
 
-Proving partial correctness means proving some predicate about the program.
+A function (or the whole program) is \textbf{partially correct} if when the function's precondition is satisfied on entry, its postcondition is satisfied when the function returns (if it ever does).
 %
-The predicate can be \textit{some state is never reached} (for example, \textit{some variable never takes some value}). 
-%
-This is used for mutual exclusion predicates in concurrent programs.
-%
-\todo{Complete with Césars Book}
+We present the \textbf{inductive assertion method} for proving partial correctness.
 
 
-Some examples are studied next to clarify the concept.
+Let $\tau$ be the \gls{FOL} property to study. 
+%
+The procedure is the following:
+%
+First each function is reduced to a finite set of \gls{FOL} formulae called \concept[Verification condition]{\gls{VC}}.
+%
+\footnote{This reduction is done with the basic reducing cases we studied in \ref{def:SPL}.}
+%
+We achieve to prove that $\tau$ is valid in every state of the execution.
+%
+\textbf{Induction} is the methodology used.
+%
+First, we assert $\tau$ is valid before the program starts (induction base).
+%
+Then, we assume $\tau$ in the precondition and prove $\tau'$ valid.
+
+
+
+Some examples are studied next to clarify the procedure.
 
 \begin{example}
-\todo{Single thread partial correctness example}
+We study the loop version of the factorial function. We achieve to proof two formulae.
+
+\[\tau_1 \equiv (l_5 \to \mathtt{x}\geq 1)\]
+
+\[\tau_2 \equiv \mathtt{x} \geq 0\]
+
+
+\caption{Loop version of the factorial function.}
+
+\todo{Format}
+\[
+	\begin{array}{l@{\hspace{0.3em}}c@{\hspace{1em}}l}
+	\hline
+		l_1 & : & \mathtt{x := 10} \\
+		l_2 & : & \mathtt{f := 1} \\
+		l_3 & : & \mathtt{\textbf{while } (x\geq 1) \textbf{ do }} \\
+		l_4 & : & \mathtt{	f = f*x} \\
+		l_5 & : & \mathtt{	x=x-1} \\ 
+		l_6 & : & \mathtt{\textbf{end while}}\\
+		l_7 & : & \mathtt{\cdots}
+	\end{array}
+	\hline
+\]
+\label{simple:example}
+
+
+First, we reduce the program to its \VC.
+
+
+\[
+	\begin{array}{l}
+		 \psi_1 \equiv\pc(T) = l_1 \andcond \pc'(T) = l_2 \andcond \mathtt{f'=f} \andcond \mathtt{x}' = 10\\
+		 \psi_2 \equiv\pc(T) = l_2 \andcond \pc'(T) = l_3 \andcond \mathtt{f}' = 1 \andcond x'=x\\
+		 \psi_3 \equiv\pc(T) = l_3 \andcond \pc'(T) = l_4 \andcond \mathtt{f'=f} \andcond x'\geq 1\\
+		 \psi_4 \equiv\pc(T) = l_4 \andcond \pc'(T) = l_5 \andcond \mathtt{f}' = \mathtt{f*x} \andcond \mathtt{x'=x}\\
+		 \psi_5 \equiv\pc(T) = l_5 \andcond \pc'(T) = l_3 \andcond \mathtt{f'=f} \andcond \mathtt{x'=x-1}\\
+		 \psi_6 \equiv\pc(T) = l_3 \andcond \pc'(T) = l_7 \andcond \mathtt{f'=f} \andcond \mathtt{x<1}
+	\end{array}
+\]
+
+We need to prove, for $i=1,2$:
+
+\[
+	\left\{
+		\begin{array}{l}
+			\psi_1 \andcond \tau_i \to \tau_i'\\
+			\psi_2 \andcond \tau_i \to \tau_i'\\
+			\psi_3 \andcond \tau_i \to \tau_i'\\
+			\psi_4 \andcond \tau_i \to \tau_i'\\
+			\psi_5 \andcond \tau_i \to \tau_i'\\
+			\psi_6 \andcond \tau_i \to \tau_i'\\
+		\end{array}
+	\right.
+\]
+
+\begin{center}\rule{4cm}{0.4pt}  $\tau_1$  \rule{4cm}{0.4pt}\end{center}
+	
+	\[
+		\left(
+			\underbrace{\pc(T) = l_1 \andcond \pc'(T) = l_2 \andcond \mathtt{f'=f} \andcond \mathtt{x}' = 10}_{\psi_1} \andcond \left(\underbrace{\pc(T) = l_5 \to \mathtt{x}\geq 1}_{\tau_1}\right)
+		\right) 
+				\to\left(\underbrace{\pc'(T) = l_5 \to \mathtt{x}' \geq 1}_{\tau_1'}\right)\\\\
+	\]
+
+	This formula is valid because $\pc(T) = l_2 \neq l_5$ thus the $\tau'_1$ is true.
+
+	\[
+		\left(
+			\underbrace{\pc(T) = l_2 \andcond \pc'(T) = l_3 \andcond \mathtt{f}' = 1 \andcond x'=x}_{\psi_1} \andcond \left(\underbrace{\pc(T) = l_5 \to \mathtt{x}\geq 1}_{\tau_1}\right)
+		\right) 
+			\to\left(\underbrace{\pc'(T) = l_5 \to \mathtt{x}' \geq 1}_{\tau_1'}\right)\\\\
+	\]
+
+	This formula is valid because $\pc(T) = l_3 \neq l_5$ thus the $\tau'_1$ is true.
+
+	\[
+		\left(
+			\underbrace{\pc(T) = l_3 \andcond \pc'(T) = l_4 \andcond \mathtt{f'=f} \andcond x'\geq 1}_{\psi_1} \andcond \left(\underbrace{\pc(T) = l_5 \to \mathtt{x}\geq 1}_{\tau_1}\right)
+		\right) 
+			\to\left(\underbrace{\pc'(T) = l_5 \to \mathtt{x}' \geq 1}_{\tau_1'}\right)\\\\
+	\]
+		This formula is valid because $\pc(T) = l_4 \neq l_5$ thus the $\tau'_1$ is true.
+
+	\[
+		\left(
+			\underbrace{\pc(T) = l_4 \andcond \pc'(T) = l_5 \andcond \mathtt{f}' = \mathtt{f*x} \andcond \mathtt{x'=x}}_{\psi_1} \andcond \left(\underbrace{\pc(T) = l_5 \to \mathtt{x}\geq 1}_{\tau_1}\right)
+		\right) 
+			\to\left(\underbrace{\pc'(T) = l_5 \to \mathtt{x}' \geq 1}_{\tau_1'}\right)\\\\
+	\]
+
+	This formula is equivalent (applying resolution) to
+
+	\[
+		\left(
+			\mathtt{x'=x} \andcond  \mathtt{x}\geq 1
+		\right) 
+		\to \left(\mathtt{x}'\geq 1)
+	\]
+
+	Which is valid because of equality congruence.
+
+	\[
+		\left(
+			\underbrace{\pc(T) = l_5 \andcond \pc'(T) = l_3 \andcond \mathtt{f'=f} \andcond \mathtt{x'=x-1}}_{\psi_1} \andcond \left(\underbrace{\pc(T) = l_5 \to \mathtt{x}\geq 1}_{\tau_1}\right)
+		\right) 
+			\to\left(\underbrace{\pc'(T) = l_5 \to \mathtt{x}' \geq 1}_{\tau_1'}\right)\\\\
+	\]
+
+	This formula is valid because $\pc(T) = l_3 \neq l_5$ thus the $\tau'_1$ is true.
+
+	\[
+		\left(
+			\underbrace{\pc(T) = l_3 \andcond \pc'(T) = l_7 \andcond \mathtt{f'=f} \andcond \mathtt{x<1}}_{\psi_1} \andcond \underbrace{\pc(T) = l_5 \to \mathtt{x} \geq 1}_{\tau_1}
+		\right) 
+			\to \left(\underbrace{\pc'(T) = l_5 \to \mathtt{x}' \geq 1}_{\tau_1'}\right)\\\\
+	\]
+
+	This formula is valid because $\pc(T) = l_7 \neq l_5$ thus the $\tau'_1$ is true.
+
+
+\paragraph{Conclusion:} we have proven that $\pc(T) = l_5 \to x \geq 1$. 
+%
+This is called an \concept[Invariant]{invariant} because it is true during all the execution. 
+%
+This transition has been chosen specially because it is needed in the proof of $\tau_2$.
+
+\begin{center}\rule{4cm}{0.4pt}  $\tau_2$  \rule{4cm}{0.4pt}\end{center}
+
+	\[
+		\left(
+			\underbrace{\pc(T) = l_1 \andcond \pc'(T) = l_2 \andcond \mathtt{f'=f} \andcond \mathtt{x}' = 10}_{\psi_1} \andcond \underbrace{\mathtt{x} \geq 0}_{\tau_2}
+		\right) 
+				\to  \underbrace{\mathtt{x}' \geq 0}_{\tau_2'}\\\\
+	\]
+
+	This formula is valid because $x'=10 \to x'\geq 0$.
+
+	\[
+		\left(
+			\underbrace{\pc(T) = l_2 \andcond \pc'(T) = l_3 \andcond \mathtt{f}' = 1 \andcond x'=x}_{\psi_1} \andcond \underbrace{\mathtt{x} \geq 0}_{\tau_2}
+		\right) 
+			\to \underbrace{\mathtt{x}' \geq 0}_{\tau_2'}\\\\
+	\]
+
+
+	This formula is valid because of the congruence of equality used in  $x'=x \andcond x\geq 0 \to x'\geq 0$ 
+
+	\[
+		\left(
+			\underbrace{\pc(T) = l_3 \andcond \pc'(T) = l_4 \andcond \mathtt{f'=f} \andcond x'\geq 1}_{\psi_1} \andcond \underbrace{\mathtt{x} \geq 0}_{\tau_2}
+		\right) 
+			\to \underbrace{\mathtt{x}' \geq 0}_{\tau_2'}\\\\
+	\]
+
+	This formula is valid because $x'\geq 1 \to x'\geq 0$.
+
+	\[
+		\left(
+			\underbrace{\pc(T) = l_4 \andcond \pc'(T) = l_5 \andcond \mathtt{f}' = \mathtt{f*x} \andcond \mathtt{x'=x}}_{\psi_1} \andcond \underbrace{\mathtt{x} \geq 0}_{\tau_2}
+		\right) 
+			\to \underbrace{\mathtt{x}' \geq 0}_{\tau_2'}\\\\
+	\]
+
+	This formula is valid because of the congruence of equality used in  $x'=x \andcond x\geq 0 \to x'\geq 0$ 
+
+	\[
+		\left(
+			\underbrace{\pc(T) = l_5 \andcond \pc'(T) = l_3 \andcond \mathtt{f'=f} \andcond \mathtt{x'=x-1}}_{\psi_1} \andcond \underbrace{\mathtt{x} \geq 0}_{\tau_2}
+		\right) 
+			\to \underbrace{\mathtt{x}' \geq 0}_{\tau_2'}\\\\
+	\]
+
+	This formula has some more difficulty. 
+	%
+	Because we are inside the loop $x$ should be greater than 1.
+	%
+	However, we don't have that information in the formula.
+	
+	The solution is use some \concept{support}.
+	%
+	A support formula is a formula added to the precedent of an implication to give more information. 
+	%
+	This addition does not change the validity of the formula.
+	%
+	We could equivalently prove
+
+	\[
+		\psi_i \andcond \tau_1 \andcond \tau_2 \to \tau_2' \leftrightarrow \psi_i\andcond \tau_2\to\tau_2'
+	\]
+
+	And this is exactly the solution to proof this \gls{VC}
+
+	\[
+		\left(
+			\underbrace{\pc(T) = l_5 \andcond \pc'(T) = l_3 \andcond \mathtt{f'=f} \andcond \mathtt{x'=x-1}}_{\psi_1} \andcond \underbrace{\mathtt{x} \geq 0}_{\tau_2} \andcond \underbrace{\pc(T) = l_5 \to \mathtt{x} \geq 1}_{\tau_1}
+		\right) 
+			\to \underbrace{\mathtt{x}' \geq 0}_{\tau_2'}\\\\
+	\]
+
+	And this formula is valid. Applying resolution we get an equivalent valid formula:
+
+	\[
+		\left( \mathtt{x'=x-1} \andcond \mathtt{x'}\geq 1\right) \to \mathtt{x} \geq 0
+	\]
+
+
+
+	\[
+		\left(
+			\underbrace{\pc(T) = l_3 \andcond \pc'(T) = l_7 \andcond \mathtt{f'=f} \andcond \mathtt{x<1} \andcond \mathtt{x'=x} }_{\psi_1} \andcond \underbrace{\mathtt{x} \geq 0}_{\tau_2}
+		\right) 
+			\to \underbrace{\mathtt{x}' \geq 0}_{\tau_2'}\\\\
+	\]
+
+	This formula has some more difficulty too.
+	%
+	One can think that the unique possible value of $x$ should be $0$ because of the content of the loop.
+	%
+	However, that information is not within the formula.
+	%
+	As we did before, some support is needed to prove this formula.
+	%
+	The support needed is $\tau_3 \equiv \pc(T) = l_3 \to \mathtt{x} \geq 0$.
+	%
+	The proof of this invariant is not included because it does not give new relevant information. 
+	%
+	Using this invariant, we have:
+
+	\[
+
+		\left(
+			\underbrace{\pc(T) = l_3 \andcond \pc'(T) = l_7 \andcond \mathtt{f'=f} \andcond \mathtt{x<1} \andcond \mathtt{x'=x}}_{\psi_1} \andcond \underbrace{\mathtt{x} \geq 0}_{\tau_2} \andcond \underbrace{\pc(T) = l_3 \to \mathtt{x}\geq 0 }_{\tau_3}
+		\right) 
+			\to \underbrace{\mathtt{x}' \geq 0}_{\tau_2'}\\\\
+	\]
+	
+	And this formula is valid. Applying resolution we get an equivalent valid formula:
+
+	\[
+		\left(
+			\mathtt{x'=x}  \andcond \mathtt{x}\geq 0 \to \mathtt{x'}\geq 0
+		\right)
+	\]
+
+
 \end{example}
 
 \begin{example}

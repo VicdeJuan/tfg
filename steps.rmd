@@ -15,3 +15,8 @@
 ·) Introduction
 	- Write abstract.
 	- Structure of the document.
+
+
+TO CONTINUE AT:
+
+factorial problem, proving partial correctness.
