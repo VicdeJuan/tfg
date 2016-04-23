@@ -6,11 +6,10 @@
 One can consider a program as a series of state changes. There are some variables, we execute one line of the program and some of those variables changes and some others don't. Thus, we can consider any program as a graph of states with some ways. For example, lets take a very simple program:
 
 \begin{center}
-\caption{Simple example.}
 \begin{lstlisting}
 (1) -- x = -2;
 (2) -- if (x<0) 
-(3) --     x = 2·x 
+(3) --     x = 2x 
 (4) --
 \end{lstlisting}
 \label{simple:example}
@@ -18,27 +17,13 @@ One can consider a program as a series of state changes. There are some variable
 
 This simple program doesn't do anything interesting, but it is useful to illustrate. This is the directed graph of states.
 
-\begin{center}
-\todo{Direct}
-\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
-                    thick,main node/.style={circle,draw,font=\sffamily\Large\bfseries}]
 
-  \node[main node] (1) {1};
-  \node[main node] (2) [below of=1] {2};
-  \node[main node] (3) [below right of=2] {3};
-  \node[main node] (4) [below left of=2] {4};
-  
+\begin{figure}[hbtp]
+\centering
+\includegraphics[scale=0.6]{graphics/simpleExample.png}
+\caption{Directed graph of the program \ref{simple:example}}
+\end{figure}
 
-  \path[every node/.style={font=\sffamily\small}]
-    (1) edge node[left,->] {} (2)
-    (2) edge node[->] {} (3)
-    	edge node[->] {} (4)
-    (3) edge node [right] {} (4)
-    (4) 
-\end{tikzpicture}
-
-\caption{State graph correspondent to program \ref{simple:example}}
-\end{center}
 
 In the execution of this program, it is not possible to execute line 3 just after line 1 skipping line 2. We need to go line by line, respecting the execution flow. 
 This is represented by the variable \pc (\concept{Program\IS counter}). This variable indicates the line to execute next.
