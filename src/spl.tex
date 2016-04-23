@@ -5,18 +5,19 @@
 
 One can consider a program as a series of state changes. There are some variables, we execute one line of the program and some of those variables changes and some others don't. Thus, we can consider any program as a graph of states with some ways. For example, lets take a very simple program:
 
-\begin{center}
-\begin{lstlisting}
-(1) -- x = -2;
-(2) -- if (x<0) 
-(3) --     x = 2x 
-(4) --
-\end{lstlisting}
+\[
+	\begin{array}{l@{\hspace{0.3em}}c@{\hspace{1em}}l}
+	\hline
+		l_1 & : & \mathtt{x := -2} \\
+		l_2 & : & \mathtt{\textbf{if } (x<0)} \\
+		l_3 & : & \mathtt{\;\;x = 2x} \\
+		l_4 & : & \mathtt{\textbf{...}}\\
+	\hline
+	\end{array}
+\]
 \label{simple:example}
-\end{center}
 
 This simple program doesn't do anything interesting, but it is useful to illustrate. This is the directed graph of states.
-
 
 \begin{figure}[hbtp]
 \centering
@@ -57,12 +58,12 @@ The next step could be
 \pc = 2 \andcond x'=x \andcond 	\pc'=?
 \]
 
-The value of pc depends on the validity of the \textit{if}. 
+Where \? depends on the validity of the \textit{if} condition. 
 
 This steps we have illustrated are called transition relations.
 
 \begin{defn}[Transition relation]
-A transition relation is the formula that define the step from one line of the program to another.  
+A transition relation is the formula that define the step from one step of the program to another.  
 \end{defn}
 
 With this simple example, we have shown what a program counter and what a transition relation are. Now we can define the possible instructions a program may have.\footnote{We have just took the set of instructions the programs we are going to proof have.}
