@@ -40,6 +40,9 @@
 \usepackage{definitions}
 \usepackage{breqn}
 \usepackage{hyperref}
+
+\RequirePackage{ltlfonts}
+
 \usetikzlibrary{arrows}
 \tikzset{every node/.append style={minimum size=0.5cm, draw,circle,font=\sffamily\Large\bfseries,inner sep=0.05cm}}%
 
@@ -1247,3 +1250,25 @@
 \newcommand{\phiNonNorm}{\ensuremath{\varphi_{\mathsf{nonNorm}}}\xspace}
 \newcommand{\pers}[1]{\textsf{\textbf{#1}}}
 \newcommand{\cyr}[1]{\fontencoding{T2A}\selectfont{#1}\fontencoding{T1}\selectfont}
+
+
+\newcommand{\Always}{\square}
+\newcommand{\Var}{\mathit{Var}}
+\newcommand{\Premise}[1]{\ensuremath{\mathsf{#1}}\xspace}
+
+\newcommand{\SigmaParam}{\ensuremath{\Sigma_{\textsf{param}}}\xspace}
+\newcommand{\VParam}{\ensuremath{V_{\textsf{param}}}\xspace}
+\newcommand{\VbaseParam}{\ensuremath{V_{\textsf{bsp}}}\xspace} 
+\newcommand{\ThetaParam}{\ensuremath{\Theta_{\textsf{param}}}\xspace}
+\newcommand{\TauParam}{\ensuremath{\Tau_{\textsf{param}}}\xspace}
+%\newcommand{\TParam}{\ensuremath{T_{\textit{param}}}\xspace}
+\newcommand{\FParam}{\ensuremath{F_{\textsf{param}}}\xspace}
+\newcommand{\Param}{\ensuremath{\mathcal{P}}\xspace}
+\newcommand{\ParamP}{\ensuremath{\mathcal{P}_P}\xspace}
+
+\newcommand{\ModelA}{\mathcal{A}}
+\newcommand{\ModelB}{\mathcal{B}}
+\newcommand{\Img}{\textit{Img}\xspace}
+
+\newcommand{\supports}{\mathrel{\rhd}}
+\newcommand{\Into}{\mathrel{\rightarrow}} %% ce (function definition)
