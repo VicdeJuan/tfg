@@ -10,17 +10,54 @@ Finally, we will cover the axioms we needed to prove all the intermediate and th
 \section{Methodology used}
 
 
-\subsection{Small formula $\rightarrow$ big formula (not as a subsec)}
 
 \subsection{Tools}
 
 \subsubsection{Spass}
 
+\spass (\citeapos{spass}) is an automated theorem prover for first-order logic with equality. 
+%
+\spass receives a \gls{FOL} formula to prove. 
+Running SPASS on such a formula results in the final output \textit{SPASS beiseite: Proof found.} if the formula is valid or  \textit{SPASS beiseite: Completion found.} if the formula is not valid.
+Because validity in first-order logic is undecidable, SPASS may run forever without producing any final result.
+%
+This last comment is a very important issue because some proofs has taken hours and one could not know if \spass will eventually stop or run forever.
+%
+As a curiosity, the longest time \spass was left running was 82 hours and it stopped because a proof was found.
+
+
 \subsubsection{Leap}
 
-\subsubsection{Python - master}
+\leap is a tool for the verification of concurrent datatypes and parametrized systems composed by an unbounded number of threads that manipulate infinite data.
+
+Leap receives as input a concurrent program description and a specification and automatically generates a finite set of verification conditions which are then discharged to specialized decision procedures. 
+%
+The validity of all discharged verification conditions implies that the program executed by any number of threads satisfies the specification. 
+%
+Currently, Leap includes not only decision procedures for integers and Booleans, but it also implements specific theories for heap memory layouts such as linked-lists and skiplists.
+
+\leap uses decision procedures, based in model searching while \spass does automatic reasoning. 
+
+
+
+\subsubsection{\gandalf}
+
+\gandalf is the implemented tool to prove \gls{VC} with \spass. 
+%
+The process of converting the \leap-generated verification condition to \spass syntax, splitting different conjunctions in different files, calling \spass to try to prove and process and storing the results has been automatized basically in python combined with bash.
+Plus, \spass reads prefix syntax while leap has prefix and infix syntax.
+
+Additionally, \gandalf does some reduction of the formulas so \spass can finish in a reasonable time.
+%
+
+
+\subsection{Small formula $\rightarrow$ big formula (not as a subsec)}
+
+
+
 
 \subsubsection{Ocaml - parser}
+
 
 
 \section{Linked list}
@@ -40,7 +77,7 @@ There are a lot of secondary axioms needed by \spass that have been omitted.
 The omitted axioms refer to the sorting (\spass is not multi-sorted as the theory we work with), to constants (\spass does not include arithmetic, so $0$,$1$,... must be defined as unique 0-ary functions). 
 %
 The set of axioms is:
-
+		
 \begin{description}
 \input{src/axioms}
 \end{description}
