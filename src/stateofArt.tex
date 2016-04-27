@@ -144,29 +144,30 @@ The \gls{SOL} is a very powerful tool in order to express formulas.
 However, because it is not possible to reason automatically in theories of second order, we haven't used any second-order logic and we won't get deeper into it. 
 
 
+\subsection{Temporal logic}
+\input{src/subsrc/ltl.tex}
 
 \section{Program correctness}
+
 
 We are finally ready to apply this concepts to a real word problem. In this \thisworkm we apply those concepts to prove some properties of programs.
 %
 The remaining task is to define the framework and the conventions we use to prove formally properties of programs.
 
-There are two forms of proving properties. 
+There are two forms of proving correctness. 
 %
-\concept{Partial\IS correctness} which assert that certain states can not occur during an execution (typically error states) or 
-\concept{Total\IS correctness} which assert that some state is eventually reached during any execution. 
+\textbf{Partial correctness} by proving safety properties (\ref{def::safety}).
 %
-For total correctness we will have to introduce what \textbf{temporal logic} is and its quantifiers \textit{always} and \textit{eventually}. 
+\textbf{Total correctness} by including liveness properties, such as \textit{the program always finishes} (\ref{def::liveness}). 
 %
-We will not go deep into temporal logic, because we will focus on partial correctness.
-
+We will cover each concept in a section of this chapter.
 
 
 
 \label{def:SPL}
 \input{src/spl}
 
-% TODO: Mention the assume.
+
 \subsection{Partial correctness (Safety)}
 
 A function (or the whole program) is \textbf{partially correct} if when the function's precondition is satisfied on entry, its postcondition is satisfied when the function returns (if it ever does).
@@ -202,60 +203,10 @@ Some examples are studied next to clarify the procedure.
 
 \subsection{Total correctness (Lifeness)}
 
-\todo{Complete with Césars Book}
-What is proving lifeness, for what we need temporal logic.
+\todo{Book}
 
 
-
-\subsubsection{Temporal logic}
-
-\begin{defn}[\gls{Lineal Temporal Logic}]
-
-\end{defn}
-
-Temporal logic studies problems like the one exposed below.
-
-\begin{example}
-\label{Collatz:conjecture}
-
-Let $f$ be the following function.
-
-\[
-f(n) = \left\{
-	\begin{array}{cc}
-		\rfrac{n}{2} & \text{ if } (n\text{ mod } 2) \equiv 0\\
-		3n+1 & \text{ if } (n\text{ mod } 2) \equiv 1
-	\end{array}
-\right.
-\]
-
-We can form a sequence applying repeatedly $f$. If we take the sequence starting in $n=13$ we get:
-
-\[ 
-	13 \overset{\displaystyle\;\; 3n+1\;\;}{\longrightarrow}
-	40 \overset{\displaystyle\;\;\rfrac{n}{2}\;\;}{\longrightarrow}
-	20 \overset{\displaystyle\;\;\rfrac{n}{2}\;\;}{\longrightarrow}
-	10 \overset{\displaystyle\;\;\rfrac{n}{2}\;\;}{\longrightarrow}
-	5 \overset{\displaystyle\;\; 3n+1\;\;}{\longrightarrow}
-	16 \overset{\displaystyle\;\;\rfrac{n}{2}\;\;}{\longrightarrow}
-	8 \overset{\displaystyle\;\;\rfrac{n}{2}\;\;}{\longrightarrow}
-	4 \overset{\displaystyle\;\;\rfrac{n}{2}\;\;}{\longrightarrow}
-	2 \overset{\displaystyle\;\;\rfrac{n}{2}\;\;}{\longrightarrow}
-	1
-\]
-
-One could ask if this sequence eventually stops regardless the integer chosen to begin. This question is called \concept{Collatz conjecture} and has not been solved yet. 
-For the moment, an infinite sequence has not been found, but the temporal logic problem has not been proven either.
-
-The temporal formula for this problem is:
-
-\todo{Formula of conjecture}
-
-
-\end{example}
-
-
-\subsection{Parametrized systems}
+\section{Parametrized systems}
 
 The correctness of just one thread executing a program it is an easy problem because it runs sequentiality.
 %
@@ -272,11 +223,8 @@ We are going to study those cases.
 To do so, we need to parametrize the program executed by multiple threads.
 %
 Typically the threads would be $i$,$j$,$k_0$,$k_1$,... 
-
-
-
+%
 \subsubsection{Arbitrary number of threads}
-
 
 For example, the web servers may not have a bound of the number of clients they can accept.
 %
@@ -345,7 +293,5 @@ We will refer to $\Premise{S1}$ as \textit{initiation}, to $\Premise{S2}$ self-c
 
 \begin{example}
 \todo{example}
-
-
 \end{example}
 

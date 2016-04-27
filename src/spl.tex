@@ -1,5 +1,5 @@
 % -*- root: ../main.tex -*-
-\subsection{Representing a program in logic}
+\subsection{Formal representation of a program}
 
 \subsubsection{Preliminaries (Notation, definition)}
 
@@ -29,7 +29,7 @@ This simple program doesn't do anything interesting, but it is useful to illustr
 In the execution of this program, it is not possible to execute line 3 just after line 1 skipping line 2. We need to go line by line, respecting the execution flow. 
 This is represented by the variable \pc (\concept{Program\IS counter}). This variable indicates the line to execute next.
 
-So the state of the program at the begining is 
+So the state of the program at the beginning is 
 
 \[ \pc = 1\]
 
@@ -67,9 +67,6 @@ A transition relation is the formula that define the step from one step of the p
 \end{defn}
 
 With this simple example, we have shown what a program counter and what a transition relation are. Now we can define the possible instructions a program may have.\footnote{We have just took the set of instructions the programs we are going to proof have.}
-
-
-\todo{heap, cell}
 
 \subsubsection{Possible instructions}
 As we are going to work with programs used by more than one thread, we need one program counter for each thread executing. 
