@@ -9,10 +9,6 @@ Once the theory we are working with is defined, we will expose the goals we inte
 
 \subsection{Description}
 
-\todo{Types of variables used.}
-
-% Introduction and description of the theory used and what we achieve to prove.
-
 \begin{defn}[Lock-coupling linked list]
 A lock-coupling concurrent list~\cite{herlihy08art,vafeiadis06proving} is 
 a concurrent data type that implements a set by maintaining in the heap an 
@@ -59,8 +55,12 @@ Where:
 We assume that the operating system provides the atomic operations \fLock 
 and \fUnlock. 
 
+\concept{Ghost variable} are variables which are not properly in the program but are added to 
+achieve the verification needed.
 
-Our implementation of concurrent lock-coupling lists has 4 global variables. Two of them are
+Our implementation of concurrent lock-coupling lists has 4 global variables.
+%
+Two of them are
 global addresses \head and \tail, and the other two are ghost global variables \region 
 and \elements:
 %
@@ -103,13 +103,80 @@ In figure \ref{fig:listcode} we present the program we are going to use, written
 		\label{fig:listcode}
 \end{figure}
 
+
 \subsection{TL3}
+\todo{This section should be removed?}
 
-\emph{Theory of Linked Lists with Locks} \TLLpL, is the theory we use for describing linked-list heap memory layout. \TLLpL is a multi-sorted first-order theory.
+\emph{Theory of Linked Lists with Locks} \TLLpL, is the theory we use for describing linked-list heap memory layout.
+%
+\TLLpL is a multi-sorted first-order theory.
 
-Its definition can be found in \citeapos{paperAle} and \citep[6.2]{thesisAle}
+In this section \TLLpL is defined with the purpose we have. 
+%
+A more complete definition of \TLLpL can be found in \citeapos{paperAle} and \citep[6.2]{thesisAle}.
+
+\paragraph{Theories: } The theories used in \TLLlP, informally: 
+$\Sigma_{cells}$ models \emph{cells}, 
+	structures containing an element (data), an address (pointer) and a lock owner,
+		which represents a node in a linked list.
+%
+$\Sigma_{mem}$ models the memory.
+%
+$\Sigma_{setaddr}$ models sets of addresses.
+%
+$\Sigma_{settid}$ models sets of thread identifiers.
+%
+$\Sigma_{setelem}$ models sets of elements.
+%
+$\Sigma_{reach}$ models finite sequences of non-repeating addresses,
+to represent acyclic paths in memory.
+%
+Finally, $\Sigma_{Bridge}$ is a \emph{bridge theory} containing auxiliary
+functions, for example, that allow to map paths of addresses to set of 
+addresses, or to obtain the set of addresses reachable from a given 
+address following a chain of \fNext fields.
+
 
 
 \subsection{Invariants of the implementation}
 
+\subsubsection{Goal}
+
+We achieve to prove that this implementation of a linked list always preserves the list structure. 
+%
+There are some conditions to assure that a set of nodes is a list.
+%
+An order has to be preserved, \head and \tail must keep the properties of its definition. 
+%
+We gather all the necessary conditions in the formula:
+
+
+\[
+	\begin{align*}
+	  	\invPreserve & \overset{\mbox{def}}{=} \formulaFullListReducedBody
+	\end{align*}
+\]
+
+(L1) establishes that \fNull is to \region and that \region is
+exactly the set of addresses reachable in the \heap starting from
+\head, which ensures that the list is not circular.
+%
+(L2) and (L3) express some sanity properties of the sentinel nodes
+\head and \tail.
+%
+(L4) establishes that \elements is the set of elements in cells 
+referenced by addresses in \region, except for the element at the cell 
+pointed by \fNull.
+%
+Finally, (L5) express the fact that the list is ordered.
+
+We claim \invPreserve is an invariant of this implementation and the proof can be found later in \ref{proof:Preserve}. 
+%
+Although this may seem easy, human ingenuity makes it hard. 
+%
+As \citeapos{tempVerifLinkedList} has proven, this is not and inductive invariant. 
+%
+We need others invariants as support.
+
+\todo{List of invariants}
 

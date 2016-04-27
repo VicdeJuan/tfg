@@ -9,16 +9,37 @@ Finally, we will cover the axioms we needed to prove all the intermediate and th
 
 \section{Methodology used}
 
+
 \subsection{Small formula $\rightarrow$ big formula (not as a subsec)}
 
 \subsection{Tools}
 
+\subsubsection{Spass}
+
+\subsubsection{Leap}
+
+\subsubsection{Python - master}
+
+\subsubsection{Ocaml - parser}
+
+
 \section{Linked list}
+\label{proof:Preserve}
+
+With everything exposed before we have been able to prove the invariance of \invPreserve invariant.
+%
+\todo{Difficult to write}
+
 
 \subsection{Axioms}
 
-
-The axioms are
+The set of relevant axioms needed to prove all the invariants is presented in this part.
+%
+There are a lot of secondary axioms needed by \spass that have been omitted. 
+%
+The omitted axioms refer to the sorting (\spass is not multi-sorted as the theory we work with), to constants (\spass does not include arithmetic, so $0$,$1$,... must be defined as unique 0-ary functions). 
+%
+The set of axioms is:
 
 \begin{description}
 \input{src/axioms}

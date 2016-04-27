@@ -722,3 +722,23 @@
 \newcommand{\lastLocked}{\ensuremath{\mathsf{leader}}\xspace}
 \newcommand{\isMinTicket}{\ensuremath{\mathsf{isMin}}\xspace}
 \newcommand{\inserting}{\ensuremath{\mathsf{inserting}}\xspace}
+
+
+\newcommand{\formulaFullListReducedBody}{
+  \left\{
+    \begin{array}{l>{\hspace{0.5em}}l>{\hspace{0.5em}}c}
+      \fNull \in \region \andcond
+      \region = \fAddrToSet(\heap, \head) \andcond
+      \head \neq \tail & \andcond & \text{(L1)} \\
+      \heap[\tail].\fNext = \fNull \andcond
+      \tail \neq \fNull \andcond
+      \head \neq \fNull & \andcond & \text{(L2)} \\
+      \heap[\head].\fData = -\infty \andcond
+      \heap[\tail].\fData = +\infty & \andcond & \text{(L3)} \\
+			\elements = \fSetToElemSet (\heap, \region \setminus \{ \fNull \}) & \andcond & \text{(L4)} \\
+			\Ordered (\heap, \head, \tail) && \text{(L5)}
+    \end{array}
+  \right.
+}
+
+\newcommand{\spass}{Spass}
