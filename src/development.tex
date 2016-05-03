@@ -25,6 +25,7 @@ This last comment is a very important issue because some proofs has taken hours 
 %
 As a curiosity, the longest time \spass was left running was 82 hours and it stopped because a proof was found.
 
+\todo{Spass example structure file}
 
 \subsubsection{Leap}
 
@@ -49,14 +50,127 @@ Plus, \spass reads prefix syntax while leap has prefix and infix syntax.
 
 Additionally, \gandalf does some reduction of the formulas so \spass can finish in a reasonable time.
 %
+This is needed because \spass does not have information nor tactics about which axiom should be used first.
 
 
-\subsection{Small formula $\rightarrow$ big formula (not as a subsec)}
+
+\subsubsection{Process}
+
+Once the tools have been described, we can explain the process. 
+%
+The process followed is shown in the figure \ref{fig:process}
+
+\todo{Figure Process}
+
+The first step consists on translate the program given to its \gls{VC}. 
+%
+This is done by \leap. 
+%
+In the case of this problem, \leap generates at least 2 \gls{VC} for each transition of the program. 
+%
+The first \gls{VC} corresponds to the self-consecution \gls{VC} and the second corresponds to the others-consecution \gls{VC}. The initial transition is also generated.
+%
+This is done 6 times, one for each existing invariant of the problem (\ref{invariants}).
+
+Once the \gls{VC} have been generated, the goal is to prove all of them using \spass. 
+%
+As \spass syntax (\cite{spasssyntax}) it is not \leap syntax (\cite{leapsyntax}) some parsing is needed. 
+%
+For example, \spass uses prefix notation while \leap uses infix notation for binary functions.
+%
+In order to solve this, it was necessary to learn Ocaml using \citeapos{ocamlbook}.
+%
+\leap was forked so it could write the \gls{VC} in prefix notation.
+%
+Some other \leap functionalities had to be changed to make compatible \leap output with \spass input.
+
+In addition, one \spass problem has to be created for each \gls{VC}. 
+%
+The axiom list for each problem is determined as an argument. 
+%
+This is explained further in section \ref{sec:axiomgraph} inside chapter \ref{chap:results}.
+
+Because of \spass lack of tactics and the size of the axiom list, some very easy transitions could take too much time.
+%
+Transitions which can be proven using \pc reasoning \spass could take minutes. 
+%
+In order to improve \spass performance, the problem is divided.
+
+Let $\varphi$ be the \gls{VC} to prove. For the explanation, 
+	\[
+		\varphi \equiv \pc(i) = l_j \to \head \not = \tail
+	\]
+While proving the \gls{VC} for the thread $i$, $\pc(i)$ has a value which may be $l_j$ or not. 
+%
+In both cases, resolution can be applied to prove equivalently
+	\[
+		\psi \equiv \head \not = \tail
+	\]
+This resolution can be applied in self-consecution and in others-consecution. 
+%
+This resolution step is done by \gandalf. 
+%
+Some other obvious resolution is done, such as $\top \andcond \top \equiv \top$ and other tautologies.
+
+Now \spass can prove a simpler problem and it takes \doubt{little time}.
+%
+To assure this is equivalent, another \spass problem is generated. 
+%
+This \spass problem aims to prove $\psi \to \varphi$.
+%
+In order to prove $\varphi$, modus ponens is used:
+\[
+	\begin{array}{c}
+		\psi\\
+		\psi \to \varphi\\\hline
+		\varphi
+	\end{array}
+\]
+
+Despite 2 \spass problems have to be solved instead of 1, in \ref{sec:timeanalysis} the reader can see the benefits of applying this \doubt{workaround}.
+%
+And this is a logic consequence. $\varphi$ is a complex problem for \spass. 
+%
+However, $\psi$ is a much simpler problem because it does not include any reasoning about the program counter. 
+% How to express:
+%%%%    I didn't check that is tautologic in every transition, but i am pretty sure it is.
+In addition, the problem $\psi \to \varphi$ is tautologic in most of the transitions because it adds conjectures in the precedent of an implication, which can't make invalid a valid formula.
+%
+Plus, the list of axioms needed to prove this problem is small in compare to the axiom list needed to prove the original problem.
+
+$\psi$ \spass problem should not have $\pc$ involved. How can the $\pc$ be removed while proving others-consecution?
+%
+Again, more \spass problems are generated. 
+%
+In this case, 55 new problems are generated and modus ponens is used:
+\[
+	\begin{array}{c}
+		\psi_1\\
+		\psi_2\\
+		\vdots\\
+		\psi_{55}\\
+		(\bigwedge_i \psi_i) \to \varphi\\\hline
+		\varphi
+	\end{array}
+\]
+%%%%    I didn't check that is tautologic in every transition, but i am pretty sure it is.
+In this case, the \spass problem $(\bigwedge_i \psi_i) \to \varphi$ is tautologic most of the time, but \spass takes much more time than before because of the problem size.
 
 
 
 
 \subsubsection{Ocaml - parser}
+\todo{Proof axioms with leap}
+In order to improve Ocaml skills needed, a parser was implemented. 
+%
+This parser translates from \spass or \leap syntax to human syntax. 
+%
+The idea of this parser came at the 5th time the list of axioms seemed finished. 
+%
+The axiom list needed to be supervised because it is the basis of all the problem. 
+%%Rewrite
+
+
 
 
 

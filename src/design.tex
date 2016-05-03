@@ -115,7 +115,7 @@ In this section \TLLpL is defined with the purpose we have.
 %
 A more complete definition of \TLLpL can be found in \citeapos{paperAle} and \citep[6.2]{thesisAle}.
 
-\paragraph{Theories: } The theories used in \TLLlP, informally: 
+\paragraph{Theories: } The theories used in \TLLpL, informally: 
 $\Sigma_{cells}$ models \emph{cells}, 
 	structures containing an element (data), an address (pointer) and a lock owner,
 		which represents a node in a linked list.
@@ -151,11 +151,9 @@ An order has to be preserved, \head and \tail must keep the properties of its de
 We gather all the necessary conditions in the formula:
 
 
-\[
 	\begin{align*}
 	  	\invPreserve & \overset{\mbox{def}}{=} \formulaFullListReducedBody
 	\end{align*}
-\]
 
 (L1) establishes that \fNull is to \region and that \region is
 exactly the set of addresses reachable in the \heap starting from
@@ -179,4 +177,5 @@ As \citeapos{tempVerifLinkedList} has proven, this is not and inductive invarian
 We need others invariants as support.
 
 \todo{List of invariants}
+\label{invariants}
 
