@@ -11,7 +11,7 @@ Finally, we will cover the axioms we needed to prove all the intermediate and th
 
 
 
-\subsection{Tools}
+\subsection{Process, tools used \& tools developed}
 
 \subsubsection{Spass}
 
@@ -78,7 +78,7 @@ As \spass syntax (\cite{spasssyntax}) it is not \leap syntax (\cite{leapsyntax})
 %
 For example, \spass uses prefix notation while \leap uses infix notation for binary functions.
 %
-In order to solve this, it was necessary to learn Ocaml using \citeapos{ocamlbook}.
+In order to solve this, it was necessary to learn \ocaml using \citeapos{ocamlbook}.
 %
 \leap was forked so it could write the \gls{VC} in prefix notation.
 %
@@ -88,7 +88,7 @@ In addition, one \spass problem has to be created for each \gls{VC}.
 %
 The axiom list for each problem is determined as an argument. 
 %
-This is explained further in section \ref{sec:axiomgraph} inside chapter \ref{chap:results}.
+This is explained further in section \ref{sec:axiomgraph}.
 
 Because of \spass lack of tactics and the size of the axiom list, some very easy transitions could take too much time.
 %
@@ -120,7 +120,7 @@ This \spass problem aims to prove $\psi \to \varphi$.
 %
 In order to prove $\varphi$, modus ponens is used:
 \[
-	\begin{array}{c}
+	\begin{array}{l}
 		\psi\\
 		\psi \to \varphi\\\hline
 		\varphi
@@ -138,13 +138,16 @@ In addition, the problem $\psi \to \varphi$ is tautologic in most of the transit
 %
 Plus, the list of axioms needed to prove this problem is small in compare to the axiom list needed to prove the original problem.
 
+
+$\psi$ problem will be called \textbf{\reducedProblem} and $\psi \to \varphi$ will be called \textbf{\smallToBig}. $\varphi$ problem will be called \textbf{\originalProblem}
+
 $\psi$ \spass problem should not have $\pc$ involved. How can the $\pc$ be removed while proving others-consecution?
 %
 Again, more \spass problems are generated. 
 %
 In this case, 55 new problems are generated and modus ponens is used:
 \[
-	\begin{array}{c}
+	\begin{array}{l}
 		\psi_1\\
 		\psi_2\\
 		\vdots\\
@@ -159,27 +162,73 @@ In this case, the \spass problem $(\bigwedge_i \psi_i) \to \varphi$ is tautologi
 
 
 
-\subsubsection{Ocaml - parser}
-\todo{Proof axioms with leap}
-In order to improve Ocaml skills needed, a parser was implemented. 
+\subsection{Auxiliary tools}
+\subsubsection{\ocaml - parser}
+All the process described before needs an axiom list. 
 %
-This parser translates from \spass or \leap syntax to human syntax. 
+Getting the axioms needed to prove all the transitions was the most difficult work. 
 %
-The idea of this parser came at the 5th time the list of axioms seemed finished. 
+More than once, an axiom list was written and all the \gls{VC} proven. In the process of checking the generated proofs to verify they were correct, inconsistencies were found. 
 %
-The axiom list needed to be supervised because it is the basis of all the problem. 
-%%Rewrite
+This inconsistencies were always consequence of false axioms. 
+%
+Because of human ingenuity, it was very difficult to assure absolute validity of the axioms.\footnote{Axioms should be universally valid (not just valid in \TLLpL theory) so they could be used for other theories \leap work with.}
+%
+In order to solve this, it was decided that every axiom must be validated with \leap. 
+%
+This procedure does not assure absolute validity to the axioms but helped a lot to find incomplete axioms.
 
-
+As there are several axioms, a parser was implemented to automatize the parsing files from \spass syntax to \leap. 
+%
+The parser was implemented in \ocaml so \ocaml skills could be improved. Additionally, \citetool{ocamllex} and \citetool{ocamlyacc}, \ocaml variants of the \mbox{C} tools studied during the bachelor degree (\textit{Proyecto de Autómatas y Lenguajes}) have been used to implement the parsing.
+%
+The \doubt{functionality of translating} from \spass syntax to \LaTeX syntax has also been included to generate the axiom list \ref{ax::fulllist}
 
 
 
 \section{Linked list}
 \label{proof:Preserve}
 
-With everything exposed before we have been able to prove the invariance of \invPreserve invariant.
+
+We achieve to prove that this implementation of a linked list always preserves the list structure. 
 %
-\todo{Difficult to write}
+There are some conditions to assure that a set of nodes is a list.
+%
+An order has to be preserved, \head and \tail must keep the properties of its definition. 
+%
+We gather all the necessary conditions in the formula:
+
+
+	\begin{align*}
+	  	\invPreserve & \overset{\mbox{def}}{=} \formulaFullListReducedBody
+	\end{align*}
+
+(L1) establishes that \fNull is to \region and that \region is
+exactly the set of addresses reachable in the \heap starting from
+\head, which ensures that the list is not circular.
+%
+(L2) and (L3) express some sanity properties of the sentinel nodes
+\head and \tail.
+%
+(L4) establishes that \elements is the set of elements in cells 
+referenced by addresses in \region, except for the element at the cell 
+pointed by \fNull.
+%
+Finally, (L5) express the fact that the list is ordered.
+
+We claim \invPreserve is an invariant of this implementation and the proof can be found later in \ref{proof:Preserve}. 
+%
+Although this may seem easy, human ingenuity makes it hard. 
+%
+As \citeapos{tempVerifLinkedList} has proven, this is not an inductive invariant. 
+%
+We need others invariants as support.
+
+\subsubsection{Invariants of the implementation}
+
+\todo{List of invariants}
+\label{invariants}
+
 
 
 \subsection{Axioms}
@@ -188,11 +237,12 @@ The set of relevant axioms needed to prove all the invariants is presented in th
 %
 There are a lot of secondary axioms needed by \spass that have been omitted. 
 %
-The omitted axioms refer to the sorting (\spass is not multi-sorted as the theory we work with), to constants (\spass does not include arithmetic, so $0$,$1$,... must be defined as unique 0-ary functions). 
+The omitted axioms refer to the sorting (\spass is not multi-sorted as the theory we work with), to constants (\spass does not include arithmetic, so $0$,$1$,... must be defined as unique 0-ary functions) ...
 %
 The set of axioms is:
 		
 \begin{description}
+\label{ax::fulllist}
 \input{src/axioms}
 \end{description}
 

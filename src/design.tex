@@ -136,46 +136,5 @@ functions, for example, that allow to map paths of addresses to set of
 addresses, or to obtain the set of addresses reachable from a given 
 address following a chain of \fNext fields.
 
-
-
-\subsection{Invariants of the implementation}
-
-\subsubsection{Goal}
-
-We achieve to prove that this implementation of a linked list always preserves the list structure. 
-%
-There are some conditions to assure that a set of nodes is a list.
-%
-An order has to be preserved, \head and \tail must keep the properties of its definition. 
-%
-We gather all the necessary conditions in the formula:
-
-
-	\begin{align*}
-	  	\invPreserve & \overset{\mbox{def}}{=} \formulaFullListReducedBody
-	\end{align*}
-
-(L1) establishes that \fNull is to \region and that \region is
-exactly the set of addresses reachable in the \heap starting from
-\head, which ensures that the list is not circular.
-%
-(L2) and (L3) express some sanity properties of the sentinel nodes
-\head and \tail.
-%
-(L4) establishes that \elements is the set of elements in cells 
-referenced by addresses in \region, except for the element at the cell 
-pointed by \fNull.
-%
-Finally, (L5) express the fact that the list is ordered.
-
-We claim \invPreserve is an invariant of this implementation and the proof can be found later in \ref{proof:Preserve}. 
-%
-Although this may seem easy, human ingenuity makes it hard. 
-%
-As \citeapos{tempVerifLinkedList} has proven, this is not and inductive invariant. 
-%
-We need others invariants as support.
-
-\todo{List of invariants}
-\label{invariants}
+\todo{Desctiption of functions: getpath, addr2set, ...}
 

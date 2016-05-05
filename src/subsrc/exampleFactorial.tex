@@ -31,12 +31,12 @@ First, we reduce the program to its \VC.
 
 \[
 	\begin{array}{l}
-		 \psi_1 \equiv\pc(T) = l_1 \andcond \pc'(T) = l_2 \andcond \mathtt{f'=f} \andcond \mathtt{x}' = 10\\
-		 \psi_2 \equiv\pc(T) = l_2 \andcond \pc'(T) = l_3 \andcond \mathtt{f}' = 1 \andcond x'=x\\
-		 \psi_3 \equiv\pc(T) = l_3 \andcond \pc'(T) = l_4 \andcond \mathtt{f'=f} \andcond x'\geq 1\\
-		 \psi_4 \equiv\pc(T) = l_4 \andcond \pc'(T) = l_5 \andcond \mathtt{f}' = \mathtt{f*x} \andcond \mathtt{x'=x}\\
-		 \psi_5 \equiv\pc(T) = l_5 \andcond \pc'(T) = l_3 \andcond \mathtt{f'=f} \andcond \mathtt{x'=x-1}\\
-		 \psi_6 \equiv\pc(T) = l_3 \andcond \pc'(T) = l_7 \andcond \mathtt{f'=f} \andcond \mathtt{x<1}
+		 \psi_1 \equiv\pc(T) = l_1 \andcond \pc\prime (T) = l_2 \andcond \mathtt{f\prime =f} \andcond \mathtt{x}\prime  = 10\\
+		 \psi_2 \equiv\pc(T) = l_2 \andcond \pc\prime (T) = l_3 \andcond \mathtt{f}\prime  = 1 \andcond x\prime =x\\
+		 \psi_3 \equiv\pc(T) = l_3 \andcond \pc\prime (T) = l_4 \andcond \mathtt{f\prime =f} \andcond x\prime \geq 1\\
+		 \psi_4 \equiv\pc(T) = l_4 \andcond \pc\prime (T) = l_5 \andcond \mathtt{f}\prime  = \mathtt{f*x} \andcond \mathtt{x\prime =x}\\
+		 \psi_5 \equiv\pc(T) = l_5 \andcond \pc\prime (T) = l_3 \andcond \mathtt{f\prime =f} \andcond \mathtt{x\prime =x-1}\\
+		 \psi_6 \equiv\pc(T) = l_3 \andcond \pc\prime (T) = l_7 \andcond \mathtt{f\prime =f} \andcond \mathtt{x<1}
 	\end{array}
 \]
 
@@ -45,63 +45,63 @@ We need to prove, for $i=1,2$:
 \[
 	\left\{
 		\begin{array}{lr}
-			\psi_1 \andcond \tau_i \to \tau_i' &
-			\psi_2 \andcond \tau_i \to \tau_i'\\
-			\psi_3 \andcond \tau_i \to \tau_i' &
-			\psi_4 \andcond \tau_i \to \tau_i'\\
-			\psi_5 \andcond \tau_i \to \tau_i' &
-			\psi_6 \andcond \tau_i \to \tau_i'
+			\psi_1 \andcond \tau_i \to \tau_i\prime  &
+			\psi_2 \andcond \tau_i \to \tau_i\prime \\
+			\psi_3 \andcond \tau_i \to \tau_i\prime  &
+			\psi_4 \andcond \tau_i \to \tau_i\prime \\
+			\psi_5 \andcond \tau_i \to \tau_i\prime  &
+			\psi_6 \andcond \tau_i \to \tau_i\prime 
 		\end{array}
 	\right.
 \]
 
 \begin{center}\rule{4cm}{0.4pt}  $\tau_1$  \rule{4cm}{0.4pt}\end{center}
 	
-	 $\psi_1 \andcond \tau_1 \to \tau_1'$:
+	 $\psi_1 \andcond \tau_1 \to \tau_1\prime $:
 %	\begin{dmath*}[indentstep={0em}]
 	\begin{equation*}
 		(
-			\underbrace{\pc(T) = l_1 \andcond \pc'(T) = l_2 \andcond \mathtt{f'=f} \andcond \mathtt{x}' = 10}_{\psi_1} \andcond (\underbrace{\pc(T) = l_5 \to \mathtt{x}\geq 1}_{\tau_1})
+			\underbrace{\pc(T) = l_1 \andcond \pc\prime (T) = l_2 \andcond \mathtt{f\prime =f} \andcond \mathtt{x}\prime  = 10}_{\psi_1} \andcond (\underbrace{\pc(T) = l_5 \to \mathtt{x}\geq 1}_{\tau_1})
 		) 
-				\to(\underbrace{\pc'(T) = l_5 \to \mathtt{x}' \geq 1}_{\tau_1'})\\\\
+				\to(\underbrace{\pc\prime (T) = l_5 \to \mathtt{x}\prime  \geq 1}_{\tau_1\prime })\\\\
 	\end{equation*}
 %	\end{dmath*}
 
 
-	The formula is valid because $\pc(T) = l_2 \neq l_5$ thus the $\tau'_1$ is true.
+	The formula is valid because $\pc(T) = l_2 \neq l_5$ thus the $\tau\prime _1$ is true.
 
-	 $\psi_2 \andcond \tau_1 \to \tau_1'$:
+	 $\psi_2 \andcond \tau_1 \to \tau_1\prime $:
 %	\begin{dmath*}[indentstep={0em}]
 	\begin{equation*}
 		(
-			\underbrace{\pc(T) = l_2 \andcond \pc'(T) = l_3 \andcond \mathtt{f}' = 1 \andcond x'=x}_{\psi_2} \andcond (\underbrace{\pc(T) = l_5 \to \mathtt{x}\geq 1}_{\tau_1})
+			\underbrace{\pc(T) = l_2 \andcond \pc\prime (T) = l_3 \andcond \mathtt{f}\prime  = 1 \andcond x\prime =x}_{\psi_2} \andcond (\underbrace{\pc(T) = l_5 \to \mathtt{x}\geq 1}_{\tau_1})
 		) 
-			\to(\underbrace{\pc'(T) = l_5 \to \mathtt{x}' \geq 1}_{\tau_1'})\\\\
+			\to(\underbrace{\pc\prime (T) = l_5 \to \mathtt{x}\prime  \geq 1}_{\tau_1\prime })\\\\
 	\end{equation*}
 %	\end{dmath*}
 
 
-	The formula is valid because $\pc(T) = l_3 \neq l_5$ thus the $\tau'_1$ is true.
+	The formula is valid because $\pc(T) = l_3 \neq l_5$ thus the $\tau\prime _1$ is true.
 
-	 $\psi_3 \andcond \tau_1 \to \tau_1'$:
+	 $\psi_3 \andcond \tau_1 \to \tau_1\prime $:
 %	\begin{dmath*}[indentstep={0em}]
 	\begin{equation*}
 		(
-			\underbrace{\pc(T) = l_3 \andcond \pc'(T) = l_4 \andcond \mathtt{f'=f} \andcond x'\geq 1}_{\psi_3} \andcond (\underbrace{\pc(T) = l_5 \to \mathtt{x}\geq 1}_{\tau_1})
+			\underbrace{\pc(T) = l_3 \andcond \pc\prime (T) = l_4 \andcond \mathtt{f\prime =f} \andcond x\prime \geq 1}_{\psi_3} \andcond (\underbrace{\pc(T) = l_5 \to \mathtt{x}\geq 1}_{\tau_1})
 		) 
-			\to(\underbrace{\pc'(T) = l_5 \to \mathtt{x}' \geq 1}_{\tau_1'})\\\\
+			\to(\underbrace{\pc\prime (T) = l_5 \to \mathtt{x}\prime  \geq 1}_{\tau_1\prime })\\\\
 	\end{equation*}
 %	\end{dmath*}
 
-		The formula is valid because $\pc(T) = l_4 \neq l_5$ thus the $\tau'_1$ is true.
+		The formula is valid because $\pc(T) = l_4 \neq l_5$ thus the $\tau\prime _1$ is true.
 
-	 \;$\psi_4 \andcond \tau_1 \to \tau_1'$: 
+	 \;$\psi_4 \andcond \tau_1 \to \tau_1\prime $: 
 %	\begin{dmath*}[indentstep={0em}]
 	\begin{equation*}
 		(
-			\underbrace{\pc(T) = l_4 \andcond \pc'(T) = l_5 \andcond \mathtt{f}' = \mathtt{f*x} \andcond \mathtt{x'=x}}_{\psi_4} \andcond (\underbrace{\pc(T) = l_5 \to \mathtt{x}\geq 1}_{\tau_1})
+			\underbrace{\pc(T) = l_4 \andcond \pc\prime (T) = l_5 \andcond \mathtt{f}\prime  = \mathtt{f*x} \andcond \mathtt{x\prime =x}}_{\psi_4} \andcond (\underbrace{\pc(T) = l_5 \to \mathtt{x}\geq 1}_{\tau_1})
 		) 
-			\to(\underbrace{\pc'(T) = l_5 \to \mathtt{x}' \geq 1}_{\tau_1'})\\\\
+			\to(\underbrace{\pc\prime (T) = l_5 \to \mathtt{x}\prime  \geq 1}_{\tau_1\prime })\\\\
 	\end{equation*}
 %	\end{dmath*}
 
@@ -110,40 +110,40 @@ We need to prove, for $i=1,2$:
 %	\begin{dmath*}[indentstep={0em}]
 	\begin{equation*}
 		(
-			\mathtt{x'=x} \andcond  \mathtt{x}\geq 1
+			\mathtt{x\prime =x} \andcond  \mathtt{x}\geq 1
 		) 
-		\to (\mathtt{x}'\geq 1)
+		\to (\mathtt{x}\prime \geq 1)
 	\end{equation*}
 %	\end{dmath*}
 
 
 	Which is valid because of equality congruence.
 
-	 $\psi_5 \andcond \tau_1 \to \tau_1'$:
+	 $\psi_5 \andcond \tau_1 \to \tau_1\prime $:
 %	\begin{dmath*}[indentstep={0em}]
 	\begin{equation*}
 		(
-			\underbrace{\pc(T) = l_5 \andcond \pc'(T) = l_3 \andcond \mathtt{f'=f} \andcond \mathtt{x'=x-1}}_{\psi_5} \andcond (\underbrace{\pc(T) = l_5 \to \mathtt{x}\geq 1}_{\tau_1})
+			\underbrace{\pc(T) = l_5 \andcond \pc\prime (T) = l_3 \andcond \mathtt{f\prime =f} \andcond \mathtt{x\prime =x-1}}_{\psi_5} \andcond (\underbrace{\pc(T) = l_5 \to \mathtt{x}\geq 1}_{\tau_1})
 		) 
-			\to(\underbrace{\pc'(T) = l_5 \to \mathtt{x}' \geq 1}_{\tau_1'})\\\\
+			\to(\underbrace{\pc\prime (T) = l_5 \to \mathtt{x}\prime  \geq 1}_{\tau_1\prime })\\\\
 	\end{equation*}
 %	\end{dmath*}
 
 
-	The formula is valid because $\pc(T) = l_3 \neq l_5$ thus the $\tau'_1$ is true.
+	The formula is valid because $\pc(T) = l_3 \neq l_5$ thus the $\tau\prime _1$ is true.
 
-	 $\psi_6 \andcond \tau_1 \to \tau_1'$:
+	 $\psi_6 \andcond \tau_1 \to \tau_1\prime $:
 %	\begin{dmath*}[indentstep={0em}]
 	\begin{equation*}
 		(
-			\underbrace{\pc(T) = l_3 \andcond \pc'(T) = l_7 \andcond \mathtt{f'=f} \andcond \mathtt{x<1}}_{\psi_6} \andcond \underbrace{\pc(T) = l_5 \to \mathtt{x} \geq 1}_{\tau_1}
+			\underbrace{\pc(T) = l_3 \andcond \pc\prime (T) = l_7 \andcond \mathtt{f\prime =f} \andcond \mathtt{x<1}}_{\psi_6} \andcond \underbrace{\pc(T) = l_5 \to \mathtt{x} \geq 1}_{\tau_1}
 		) 
-			\to (\underbrace{\pc'(T) = l_5 \to \mathtt{x}' \geq 1}_{\tau_1'})\\\\
+			\to (\underbrace{\pc\prime (T) = l_5 \to \mathtt{x}\prime  \geq 1}_{\tau_1\prime })\\\\
 	\end{equation*}
 %	\end{dmath*}
 
 
-	The formula is valid because $\pc(T) = l_7 \neq l_5$ thus the $\tau'_1$ is true.
+	The formula is valid because $\pc(T) = l_7 \neq l_5$ thus the $\tau\prime _1$ is true.
 
 
 \paragraph{Conclusion:} we have proven that $\pc(T) = l_5 \to x \geq 1$. 
@@ -154,74 +154,74 @@ This transition has been chosen specially because it is needed in the proof of $
 
 \begin{center}\rule{4cm}{0.4pt}  $\tau_2$  \rule{4cm}{0.4pt}\end{center}
 
-	\; $\psi_1 \andcond \tau_2 \to \tau_2'$:	
+	\; $\psi_1 \andcond \tau_2 \to \tau_2\prime $:	
 %	\begin{dmath*}[indentstep={0em}]
 	\begin{equation*}
 		(
-			\underbrace{\pc(T) = l_1 \andcond \pc'(T) = l_2 \andcond \mathtt{f'=f} \andcond \mathtt{x}' = 10}_{\psi_1} \andcond \underbrace{\mathtt{x} \geq 0}_{\tau_2}
+			\underbrace{\pc(T) = l_1 \andcond \pc\prime (T) = l_2 \andcond \mathtt{f\prime =f} \andcond \mathtt{x}\prime  = 10}_{\psi_1} \andcond \underbrace{\mathtt{x} \geq 0}_{\tau_2}
 		) 
-				\to  \underbrace{\mathtt{x}' \geq 0}_{\tau_2'}\\\\
+				\to  \underbrace{\mathtt{x}\prime  \geq 0}_{\tau_2\prime }\\\\
 	\end{equation*}
 %	\end{dmath*}
 
 
-	The formula is valid because $x'=10 \to x'\geq 0$.
+	The formula is valid because $x\prime =10 \to x\prime \geq 0$.
 
-	\; $\psi_2 \andcond \tau_2 \to \tau_2'$:	
+	\; $\psi_2 \andcond \tau_2 \to \tau_2\prime $:	
 %	\begin{dmath*}[indentstep={0em}]
 	\begin{equation*}
 		(
-			\underbrace{\pc(T) = l_2 \andcond \pc'(T) = l_3 \andcond \mathtt{f}' = 1 \andcond x'=x}_{\psi_2} \andcond \underbrace{\mathtt{x} \geq 0}_{\tau_2}
+			\underbrace{\pc(T) = l_2 \andcond \pc\prime (T) = l_3 \andcond \mathtt{f}\prime  = 1 \andcond x\prime =x}_{\psi_2} \andcond \underbrace{\mathtt{x} \geq 0}_{\tau_2}
 		) 
-			\to \underbrace{\mathtt{x}' \geq 0}_{\tau_2'}\\\\
+			\to \underbrace{\mathtt{x}\prime  \geq 0}_{\tau_2\prime }\\\\
 	\end{equation*}
 %	\end{dmath*}
 
 
 
-	The formula is valid because of the congruence of equality used in  $x'=x \andcond x\geq 0 \to x'\geq 0$ 
+	The formula is valid because of the congruence of equality used in  $x\prime =x \andcond x\geq 0 \to x\prime \geq 0$ 
 
-	\; $\psi_3 \andcond \tau_2 \to \tau_2'$:
+	\; $\psi_3 \andcond \tau_2 \to \tau_2\prime $:
 %	\begin{dmath*}[indentstep={0em}]
 	\begin{equation*}
 		(
-			\underbrace{\pc(T) = l_3 \andcond \pc'(T) = l_4 \andcond \mathtt{f'=f} \andcond x'\geq 1}_{\psi_3} \andcond \underbrace{\mathtt{x} \geq 0}_{\tau_2}
+			\underbrace{\pc(T) = l_3 \andcond \pc\prime (T) = l_4 \andcond \mathtt{f\prime =f} \andcond x\prime \geq 1}_{\psi_3} \andcond \underbrace{\mathtt{x} \geq 0}_{\tau_2}
 		) 
-			\to \underbrace{\mathtt{x}' \geq 0}_{\tau_2'}\\\\
+			\to \underbrace{\mathtt{x}\prime  \geq 0}_{\tau_2\prime }\\\\
 	\end{equation*}
 %	\end{dmath*}
 
 
-	The formula is valid because $x'\geq 1 \to x'\geq 0$.
-	\; $\psi_4 \andcond \tau_2 \to \tau_2'$:	
+	The formula is valid because $x\prime \geq 1 \to x\prime \geq 0$.
+	\; $\psi_4 \andcond \tau_2 \to \tau_2\prime $:	
 %	\begin{dmath*}[indentstep={0em}]
 	\begin{equation*}
 		(
-			\underbrace{\pc(T) = l_4 \andcond \pc'(T) = l_5 \andcond \mathtt{f}' = \mathtt{f*x} \andcond \mathtt{x'=x}}_{\psi_4} \andcond \underbrace{\mathtt{x} \geq 0}_{\tau_2}
+			\underbrace{\pc(T) = l_4 \andcond \pc\prime (T) = l_5 \andcond \mathtt{f}\prime  = \mathtt{f*x} \andcond \mathtt{x\prime =x}}_{\psi_4} \andcond \underbrace{\mathtt{x} \geq 0}_{\tau_2}
 		) 
-			\to \underbrace{\mathtt{x}' \geq 0}_{\tau_2'}\\\\
+			\to \underbrace{\mathtt{x}\prime  \geq 0}_{\tau_2\prime }\\\\
 	\end{equation*}
 %	\end{dmath*}
 
 
-	The formula is valid because of the congruence of equality used in  $x'=x \andcond x\geq 0 \to x'\geq 0$ 
+	The formula is valid because of the congruence of equality used in  $x\prime =x \andcond x\geq 0 \to x\prime \geq 0$ 
 
-	\; $\psi_5 \andcond \tau_2 \to \tau_2'$:	
+	\; $\psi_5 \andcond \tau_2 \to \tau_2\prime $:	
 %	\begin{dmath*}[indentstep={0em}]
 	\begin{equation*}
 		(
-			\underbrace{\pc(T) = l_5 \andcond \pc'(T) = l_3 \andcond \mathtt{f'=f} \andcond \mathtt{x'=x-1}}_{\psi_5} \andcond \underbrace{\mathtt{x} \geq 0}_{\tau_2}
+			\underbrace{\pc(T) = l_5 \andcond \pc\prime (T) = l_3 \andcond \mathtt{f\prime =f} \andcond \mathtt{x\prime =x-1}}_{\psi_5} \andcond \underbrace{\mathtt{x} \geq 0}_{\tau_2}
 		) 
-			\to \underbrace{\mathtt{x}' \geq 0}_{\tau_2'}\\\\
+			\to \underbrace{\mathtt{x}\prime  \geq 0}_{\tau_2\prime }\\\\
 	\end{equation*}
 %	\end{dmath*}
 
 
 	The formula has some more difficulty. 
 	%
-	Because we are inside the loop $x$ should be greater than 1.
+	Inside the loop $x$ should be greater than 1.
 	%
-	However, we don't have that information in the formula.
+	However, that information is not in the implication to prove.
 	
 	The solution is use some \concept{support}.
 	%
@@ -232,7 +232,7 @@ This transition has been chosen specially because it is needed in the proof of $
 	We could equivalently prove
 
 	\[
-		(\psi_5 \andcond \tau_1 \andcond \tau_2 \to \tau_2') rightarrow (\psi_5\andcond \tau_2\to\tau_2')
+		(\psi_5 \andcond \tau_1 \andcond \tau_2 \to \tau_2\prime ) rightarrow (\psi_5\andcond \tau_2\to\tau_2\prime )
 	\]
 
 	And this is exactly the solution to proof this \gls{VC}
@@ -242,9 +242,9 @@ This transition has been chosen specially because it is needed in the proof of $
 %	\begin{dmath*}[indentstep={0em}]
 	\begin{equation*}
 		(
-			\underbrace{\pc(T) = l_5 \andcond \pc'(T) = l_3 \andcond \mathtt{f'=f} \andcond \mathtt{x'=x-1}}_{\psi_5} \andcond \underbrace{\mathtt{x} \geq 0}_{\tau_2} \andcond \underbrace{\pc(T) = l_5 \to \mathtt{x} \geq 1}_{\tau_1}
+			\underbrace{\pc(T) = l_5 \andcond \pc\prime (T) = l_3 \andcond \mathtt{f\prime =f} \andcond \mathtt{x\prime =x-1}}_{\psi_5} \andcond \underbrace{\mathtt{x} \geq 0}_{\tau_2} \andcond \underbrace{\pc(T) = l_5 \to \mathtt{x} \geq 1}_{\tau_1}
 		) 
-			\to \underbrace{\mathtt{x}' \geq 0}_{\tau_2'}\\\\
+			\to \underbrace{\mathtt{x}\prime  \geq 0}_{\tau_2\prime }\\\\
 	\end{equation*}
 %	\end{dmath*}
 
@@ -252,17 +252,17 @@ This transition has been chosen specially because it is needed in the proof of $
 	And this formula is valid. Applying resolution we get an equivalent valid formula:
 
 	\[
-		( \mathtt{x'=x-1} \andcond \mathtt{x'}\geq 1) \to \mathtt{x} \geq 0
+		( \mathtt{x\prime =x-1} \andcond \mathtt{x\prime }\geq 1) \to \mathtt{x} \geq 0
 	\]
 
 
-	\; $\psi_6 \andcond \tau_2 \to \tau_2'$:
+	\; $\psi_6 \andcond \tau_2 \to \tau_2\prime $:
 %	\begin{dmath*}[indentstep={0em}]
 	\begin{equation*}
 		(
-			\underbrace{\pc(T) = l_3 \andcond \pc'(T) = l_7 \andcond \mathtt{f'=f} \andcond \mathtt{x<1} \andcond \mathtt{x'=x} }_{\psi_6} \andcond \underbrace{\mathtt{x} \geq 0}_{\tau_2}
+			\underbrace{\pc(T) = l_3 \andcond \pc\prime (T) = l_7 \andcond \mathtt{f\prime =f} \andcond \mathtt{x<1} \andcond \mathtt{x\prime =x} }_{\psi_6} \andcond \underbrace{\mathtt{x} \geq 0}_{\tau_2}
 		) 
-			\to \underbrace{\mathtt{x}' \geq 0}_{\tau_2'}\\\\
+			\to \underbrace{\mathtt{x}\prime  \geq 0}_{\tau_2\prime }\\\\
 	\end{equation*}
 %	\end{dmath*}
 
@@ -286,9 +286,9 @@ This transition has been chosen specially because it is needed in the proof of $
 %	\begin{dmath*}[indentstep={0em}]
 	\begin{equation*}
 		(
-			\underbrace{\pc(T) = l_3 \andcond \pc'(T) = l_7 \andcond \mathtt{f'=f} \andcond \mathtt{x<1} \andcond \mathtt{x'=x}}_{\psi_6} \andcond \underbrace{\mathtt{x} \geq 0}_{\tau_2} \andcond \underbrace{\pc(T) = l_3 \to \mathtt{x}\geq 0 }_{\tau_3}
+			\underbrace{\pc(T) = l_3 \andcond \pc\prime (T) = l_7 \andcond \mathtt{f\prime =f} \andcond \mathtt{x<1} \andcond \mathtt{x\prime =x}}_{\psi_6} \andcond \underbrace{\mathtt{x} \geq 0}_{\tau_2} \andcond \underbrace{\pc(T) = l_3 \to \mathtt{x}\geq 0 }_{\tau_3}
 		) 
-			\to \underbrace{\mathtt{x}' \geq 0}_{\tau_2'}\\\\
+			\to \underbrace{\mathtt{x}\prime  \geq 0}_{\tau_2\prime }\\\\
 	\end{equation*}
 %	\end{dmath*}
 
@@ -297,7 +297,7 @@ This transition has been chosen specially because it is needed in the proof of $
 
 	\[
 		(
-			\mathtt{x'=x}  \andcond \mathtt{x}\geq 0 \to \mathtt{x'}\geq 0
+			\mathtt{x\prime =x}  \andcond \mathtt{x}\geq 0 \to \mathtt{x\prime }\geq 0
 		)
 	\]
 
