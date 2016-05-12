@@ -13,14 +13,19 @@ We are finally ready to apply this concepts to a real word problem. In this \thi
 %
 The remaining task is to define the framework and the conventions we use to prove formally properties of programs.
 
-There are two forms of proving correctness. 
+The way of proving correctness is by proving properties. 
 %
-\textbf{Partial correctness} by proving safety properties (\ref{def::safety}).
+There are \concept{liveness}, \concept{safety} and \concept{functional} properties. 
 %
-\textbf{Total correctness} by including liveness properties, such as \textit{the program always finishes} (\ref{def::liveness}). 
+Safety properties refer, informally, to "bad things never happens". Proving \textit{ variable x is never 0 } is a safety property. 
 %
-We will cover each concept in a section of this chapter.
+Proving its validity can assure that a division by zero error does never occur. 
+%
+Whether a program finishes or not is a liveness property and receiving an output for a concrete input is a functional property. 
 
+This properties are written in some logic. Liveness properties need \gls{LTL} but \gls{FOL} is enough to prove safety properties. 
+%
+As the properties are expressed formally in logic, it is necessary to define a formal representation of a program.
 
 
 \label{def:SPL}
@@ -59,10 +64,6 @@ Some examples are studied next to clarify the procedure.
 \end{example}
 
 
-
-\subsection{Total correctness (Lifeness)}
-
-\todo{Book}
 
 
 \section{Parametrized systems}
@@ -145,13 +146,20 @@ then
 \end{itheorem}
 
 
+
 Using this powerful result, we have reduced an arbitrary number of processes sharing the same variables to a finite number of threads sharing the variable. 
 %
-We will refer to $\Premise{S1}$ as \textit{initiation}, to $\Premise{S2}$ self-consecution and to $\Premise{S3}$ others-consecution. 
+The proof of this result can be found in \citeapos{paperParametrizedInvariants}.
 %
+We will refer to $\Premise{S1}$ as \concept{initiation} because it depends on the initial condition.
+%
+$\Premise{S2}$ will be referred as \concept{self-consecution} because it depends on the execution of the one of the threads in the formula.
+%
+Finally, $\Premise{S3}$ will be referred as \concept{others-consecution} because it depends on the execution of threads which do not appear in the formula. 
+
 
 \begin{example}
-\todo{example}
+Threads sharing and array. Each thread has an index. How to assure no other thread writes in my index?
 \end{example}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -172,6 +180,21 @@ We will refer to $\Premise{S1}$ as \textit{initiation}, to $\Premise{S2}$ self-c
 
 \subsection{Description}
 
+In order to work with a linked list in a context with multiple thread using the same list 
+there are two approach. 
+%
+A thread could lock the entire list, work with it and then release it. 
+%
+There could be some optimizations in this approach, such as a writer-reader system.
+%
+However, this is extremely \doubt{unefficient} although it could more secure in terms of preventing deadlocks.
+%
+The other approach is locking and unlocking each node of the list, so multiple threads can work simultaneously using the same list while they don't need to use the same node.
+%
+This approach takes us to a lock-coupling linked list.
+
+
+
 \begin{defn}[Lock-coupling linked list]
 A lock-coupling concurrent list~\cite{herlihy08art,vafeiadis06proving} is 
 a concurrent data type that implements a set by maintaining in the heap an 
@@ -182,16 +205,19 @@ single thread can access a list node at the same time.
 %
 \end{defn}
 
-When a thread traverses the list, it acquires the lock of the node
-that it visits, and only releases this lock after the lock of the
-successor node has been successfully acquired.
+The way a thread iterates over the list is the following.
+%
+The thread acquires the lock of the node
+that it visits and after that tries to acquire the next node.
+The first lock is only released the lock of the
+second node has been successfully acquired.
 %
 This technique of protecting cells with locks (instead of protecting
 the whole data-structure with a single coarse-grain lock) is known as
-\emph{fine-grained locking}.
+\concept{fine-grained locking}.
 
-%
-Nodes of a concurrent lock-coupling list are instances of the following 
+
+The nodes of a concurrent lock-coupling list are instances of the following 
 \ListNode class:
 %
 \[
@@ -208,11 +234,11 @@ Nodes of a concurrent lock-coupling list are instances of the following
 %
 Where:
 \begin{itemize}
-		\item \fData, the value stored in the node, which is also used to keep 
-			the list ordered;
-		\item \fNext, a pointer that stores the address of the next node in 
-			the list; and
-		\item \fLock, which contains the lock protecting the node.
+		\item \fData: the value stored in the node, This value is used to keep 
+			the list ordered.
+		\item \fNext: a pointer that stores the address of the next node in 
+			the list.
+		\item \fLock: which contains the lock protecting the node.
 \end{itemize}
 
 We assume that the operating system provides the atomic operations \fLock 
@@ -220,31 +246,25 @@ and \fUnlock.
 
 \concept{Ghost variable} are variables which are not properly in the program but are added to 
 achieve the verification needed.
-
 Our implementation of concurrent lock-coupling lists has 4 global variables.
 %
-Two of them are
-global addresses \head and \tail, and the other two are ghost global variables \region 
-and \elements:
+Two of them are global addresses \head and \tail, and the other two are ghost global variables \region and \elements:
 %
 \begin{center}
 	\includegraphics[scale=\figscale]{graphics/_lists_classes}
 \end{center}
 %
 The declared global program variables are:
-%
-\begin{enumerate}
-		\item A variable \head, of type address, which points to the 
-			first node of the list which has the lowest possible value ($-\infty$).
-		\item A variable \tail, of type address, which points to the 
-			last node of the list  which has the lowest possible value ($+\infty$).
-		\item A ghost variable \region, of type set of addresses, which is 
-			used to keep track of the portion of the heap whose cells form the 
-			list.
-		\item A ghost variable \elements, of type set of elements, which 
-			represents the collection of elements stored in the list.
-\end{enumerate}
 
+\head, an address, which points to the first node of the list which has the lowest possible value ($-\infty$).
+
+\tail, an address, which points to the last node of the list  which has the lowest possible value ($+\infty$).
+
+\region, a set of addresses, which is used to keep track of the portion of the heap whose cells form the list.
+
+\elements, a set of elements, which represents the collection of elements stored in the list.
+
+In figure \ref{fig:listcode} we present the program we are going to use, written in \gls{SPL}, with . We can see there are three procedures, \Search, \Insert and \Remove. 
 
 We consider \head and \tail sentinel nodes which are neither removed nor 
 modified and we assume that the list is initialized with \head and \tail 
@@ -258,7 +278,6 @@ initially stored at the nodes pointed by \head and \tail.
 %
 There is also a function \concept{havocListElem}() which returns a random element. 
 
-In figure \ref{fig:listcode} we present the program we are going to use, written in \gls{SPL}, with the assume. We can see there are three procedures, \Search, \Insert and \Remove. 
 
 \begin{figure}[!htbp]
 		\myframe{\includegraphics[scale=0.4]{graphics/_listcode}}
@@ -268,20 +287,22 @@ In figure \ref{fig:listcode} we present the program we are going to use, written
 
 
 \subsection{TL3}
-\todo{This section should be removed?}
 
 \emph{Theory of Linked Lists with Locks} \TLLpL, is the theory we use for describing linked-list heap memory layout.
 %
 \TLLpL is a multi-sorted first-order theory.
+%
+It is multi-sorted because it has multiple types for its variables (address, element,...).
+%
+It is a first-order theory because only variables are quantifiable, as \gls{FOL}.
 
 In this section \TLLpL is defined with the purpose we have. 
 %
-A more complete definition of \TLLpL can be found in \citeapos{paperAle} and \citep[6.2]{thesisAle}.
+A more complete and formal definition of \TLLpL can be found in \citeapos{paperAle} and \citep[6.2]{thesisAle}.
 
-\paragraph{Theories: } The theories used in \TLLpL, informally: 
-$\Sigma_{cells}$ models \emph{cells}, 
-	structures containing an element (data), an address (pointer) and a lock owner,
-		which represents a node in a linked list.
+
+\TLLpL is a compound of theories. Informally,  
+$\Sigma_{cells}$ models \emph{cells}, structures containing an element (data), an address (pointer) and a lock owner, which represents a node in a linked list.
 %
 $\Sigma_{mem}$ models the memory.
 %
@@ -299,5 +320,4 @@ functions, for example, that allow to map paths of addresses to set of
 addresses, or to obtain the set of addresses reachable from a given 
 address following a chain of \fNext fields.
 
-\todo{Desctiption of functions: getpath, addr2set, ...}
-
+\todo{Complete with TL3}

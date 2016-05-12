@@ -9,22 +9,52 @@ We will discuss its scope and some details of the linked list most general clien
 
 \section{Motivation}
 
-Software verification is a very important problem.
-One need to be sure that the software being developed is correct, one would like it to work as expected with no bugs at all and every one would like its software to be perfect.
-There are some critical software as the ones developed for aeroplanes and spaceships which can't have any errors while there are some other software which can afford some errors.
+\label{Motivation}
+On May $\text{2}^{\text{nd}}$ a Japanese satellite was lost. This satellite cost \$248 million.
+%
+Research shows it was a software error \cite{japaneseSatellite}. 
+%
+Last year, another software error was found in boeing-787.
+%
+Apparently, the plane’s electrical generators fall into a failsafe mode if kept continuously powered on for 248 days. \cite{boein787}
+%
+Fortunately this software error was discovered without relevant economic or human consequences.
+%
+Between 1985 and 1987 6 people died because of a software malfunction of a x-ray machine. \cite{xraykill}.
+%
+This are just a few example to show that Software verification is a very important problem.
+%
+One needs to be sure that the software being developed is correct, one would like it to work as expected with no bugs at all and every one would like its software to be perfect.
+%
+There are some critical software as the ones developed for aeroplanes, spaceships, nuclear reactors which can't have any errors while there are some other software which can afford some errors.
 
-The usual approach its testing. The normal way to verify and validate a software is running test to find, whenever is possible, all the errors. 
+
+The usual approach its testing.
+% 
+The normal way to verify and validate a software is running test to find, whenever is possible, all the errors.
+% 
 When the software is finished (or even while it is being developed) one can test it to check it is correct.
+%
 How can one be sure that all functionalities have been proven? Maybe some test were missed and some bugs have not been found so the software is not correct.
+%
+As we said before, some systems can afford this issue but there are some others which can not.
 
 
 In the other hand, as a mathematician, I am very used to mathematical proofs of theorems and I know logic is a very powerful tool.
+%
 We wonder if it were possible to verify and validate Software using those powerful tools.
+%
 And the answer is affirmative.
-One can prove Software correctness in a formal way. Software correctness can be proven in the same way as the Gauss theorem can be proven.
+%
+One can prove Software correctness in a formal way.
+% 
+Software correctness can be proven in the same way as the Gauss theorem can be proven.
+%
 One just need the appropriate framework, tools and of course, knowledge.
 
+
 I have found this topic very useful and we wanted to explore a very formal verification of some theories.
+
 
 \section{Objectives}
 
@@ -164,5 +194,4 @@ The \gls{SOL} is a very powerful tool in order to express formulas.
 %
 However, because it is not possible to reason automatically in theories of second order, we haven't used any second-order logic and we won't get deeper into it. 
 
-\subsection{Temporal logic}
-\input{src/subsrc/ltl.tex}
+%\subsection{Temporal logic} \input{src/subsrc/ltl.tex}

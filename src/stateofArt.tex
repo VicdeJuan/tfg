@@ -15,14 +15,46 @@ done by \citep{thesisAle}.
 
 \section{The need of formal verification}
 
-\paragraph{Software bugs}
+As it was shown in the introduction \ref{Motivation} there are some systems in which software errors are totally inadmissible.
+%
+People developing software for critical systems need an effective way to check the correctness of the software.
+%
+In addition, they need some guarantee that the compiler they use really generates an executable which does \textbf{exactly} the same.
+%
+In order to solve this issues there are some tools which have been developed.
 
-Wikipedia list of Software bugs is very interesting. Some examples are explained here:
+\subsection{Solutions}
 
-	- 6 people dead http://sunnyday.mit.edu/papers/therac.pdf (1985)
-	- Plane almost crash https://www.theguardian.com/business/2015/may/01/us-aviation-authority-boeing-787-dreamliner-bug-could-cause-loss-of-control (2015)
+\subsubsection{Compcert}
 
-\paragraph{Misscompiling}
+School of Computing in the University of Utah claims \ref{CCompilerMotivation}
+
+\textit{We created a tool that generates random C programs, and then spent two and a half years using it to find compiler bugs. So far, we have reported more than 325 previously unknown bugs to compiler developers. Moreover, every compiler that we tested has been found to crash and also to silently generate wrong code when presented with valid inputs.}
+
+So there is a real need of a C verified compiler and that is what \concept{Compcert} is. 
+%
+Comcpert can compile programs using almost all of the ISO C90 / ANSI C. The project began in 03/2008 and is still under development. Last version was released in 12/2015.
+
+Other compilers \ref{Dargaye-these} are in process to be formally verified.
+
+
+\subsubsection{VCC}
+
+\gls{VCC} is a tool developed by Microsoft which 
+
+VCC: A Verifier for Concurrent C  http://research.microsoft.com/en-us/projects/vcc/
+VCC is sound -- if VCC verifies your program, it really is correct (modulo bugs in VCC itself)
+
+VCC: A Practical System for Verifying Concurrent C. Ernie Cohen, Markus Dahlweid, Mark Hillebrand, Dirk Leinenbach, Michał Moskal, Thomas Santen, Wolfram Schulte, Stephan Tobies. 22nd International Conference on Theorem Proving in Higher Order Logics (TPHOLs 2009). (LNCS 5674). http://research.microsoft.com/en-us/um/people/moskal/pdf/tphol2009.pdf (Provides a good overall system description of VCC; the paper to cite for VCC)
+
+
+\subsubsection{Spin}
+
+http://spinroot.com/spin/what.html
+
+Model checking, embedded C code
+
+Three examples of inspiring applications of Spin in the last few years include the verification of the control algorithms for the new flood control barrier built in the late nineties near Rotterdam in the Netherlands. The verification work was carried out by the Dutch firm CMG (Computer Management Group) in collaboration with the Formal Methods group at the University of Twente.
 
 
 \subsection{Types of formal verification}
@@ -45,32 +77,6 @@ Edition 1
 
 \subsubsection{Model checking}
 
-\subsection{Solutions}
-
-\subsubsection{Compcert}
-
-C verified compiler:  http://compcert.inria.fr/compcert-C.html
-
-http://compcert.inria.fr/motivations.html
-
-
-\paragraph{Other compilers} are in process to be formally verified.
-
-\subsubsection{VCC}
-
-VCC: A Verifier for Concurrent C  http://research.microsoft.com/en-us/projects/vcc/
-VCC is sound -- if VCC verifies your program, it really is correct (modulo bugs in VCC itself)
-
-VCC: A Practical System for Verifying Concurrent C. Ernie Cohen, Markus Dahlweid, Mark Hillebrand, Dirk Leinenbach, Michał Moskal, Thomas Santen, Wolfram Schulte, Stephan Tobies. 22nd International Conference on Theorem Proving in Higher Order Logics (TPHOLs 2009). (LNCS 5674). http://research.microsoft.com/en-us/um/people/moskal/pdf/tphol2009.pdf (Provides a good overall system description of VCC; the paper to cite for VCC)
-
-
-\subsubsection{Spin}
-
-http://spinroot.com/spin/what.html
-
-Model checking, embedded C code
-
-Three examples of inspiring applications of Spin in the last few years include the verification of the control algorithms for the new flood control barrier built in the late nineties near Rotterdam in the Netherlands. The verification work was carried out by the Dutch firm CMG (Computer Management Group) in collaboration with the Formal Methods group at the University of Twente.
 
 \subsubsection{Theorem prover}
 

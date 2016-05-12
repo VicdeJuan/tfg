@@ -1,6 +1,10 @@
 % -*- root: ../main.tex -*-
 \subsection{Formal representation of a program}
 
+This \gls{SPL} and its formal representation was first proposed by ... \todo{who?}. 
+%
+The basic definitions and concepts are included.
+
 \subsubsection{Preliminaries (Notation, definition)}
 
 One can consider a program as a series of state changes. There are some variables, we execute one line of the program and some of those variables changes and some others don't. Thus, we can consider any program as a graph of states with some ways. For example, lets take a very simple program:
@@ -17,9 +21,12 @@ One can consider a program as a series of state changes. There are some variable
 \]
 \label{simple:example}
 
-This simple program doesn't do anything interesting, but it is useful to illustrate. This is the directed graph of states.
+This simple program doesn't do anything interesting, but it is useful to illustrate.
+%
+In figure \ref{ex:simpleExample} the directed graph of states is shown.
 
 \begin{figure}[hbtp]
+\label{ex:simpleExample}
 \centering
 \includegraphics[scale=0.6]{graphics/simpleExample.png}
 \caption{Directed graph of the program \ref{simple:example}}
@@ -32,8 +39,9 @@ This is represented by the variable \pc (\concept{Program\IS counter}). This var
 So the state of the program at the beginning is 
 %
 \[ \pc = 1\]
-
-This formula give all the information we have of the execution state. We know the \pc and the state and value of all variables (there are no more variables than \pc).
+%
+This formula give all the information we have of the execution state. 
+We know the \pc\; and the state and value of all variables (there are no more variables than \pc).
 
 Now we need to define the step. 
 %
@@ -267,10 +275,8 @@ For this definitions we use the letter $T$ to refer a particular thread.
 			 \end{array}
 		\]
 %
-	\item [\fLock and \fUnlock:]
-	Even though these are not SPL statements, as they will be widely used in 
-	the rest of the chapters, we describe here the transition relation 
-	associated with these two functions.
+	\item [Lock and unlock:]
+	Even though these are not SPL statements, as they will be widely used, it is necessary to define theirs transition relations.
 %
 		\[
 			\begin{array}[t]{p{8em}@{\hspace{6em}}p{\longtablesize}}
@@ -297,5 +303,5 @@ For this definitions we use the letter $T$ to refer a particular thread.
 				 \end{array}$ \\ \hline
 			 \end{array}
 		\]
-
+%
 \end{description}

@@ -17,7 +17,8 @@ Finally, we will cover the axioms we needed to prove all the intermediate and th
 
 \spass (\citeapos{spass}) is an automated theorem prover for first-order logic with equality. 
 %
-\spass receives a \gls{FOL} formula to prove. 
+\spass receives a \gls{FOL} formula and tries to prove it.
+% 
 Running SPASS on such a formula results in the final output \textit{SPASS beiseite: Proof found.} if the formula is valid or  \textit{SPASS beiseite: Completion found.} if the formula is not valid.
 Because validity in first-order logic is undecidable, SPASS may run forever without producing any final result.
 %
@@ -29,7 +30,7 @@ As a curiosity, the longest time \spass was left running was 82 hours and it sto
 
 \subsubsection{Leap}
 
-\leap is a tool for the verification of concurrent datatypes and parametrized systems composed by an unbounded number of threads that manipulate infinite data.
+\leap is a tool for the verification of concurrent data types and parametrized systems composed by an unbounded number of threads that manipulate infinite data.
 
 Leap receives as input a concurrent program description and a specification and automatically generates a finite set of verification conditions which are then discharged to specialized decision procedures. 
 %
