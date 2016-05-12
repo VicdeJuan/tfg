@@ -20,3 +20,26 @@
 TO CONTINUE AT:
 
 factorial problem, proving partial correctness.
+
+
+
+To add at some point:
+
+·) Importance of axioms:
+The paper “Synchronizing clocks in the presence
+of faults” (Lamport & Melliar-Smith, JACM
+1985) introduced the Interactive Convergence
+Algorithm for clock synchronization, and
+presented a ‘proof’ of it.
+A later attempt to reproduce this by Rushby and
+von Henke in a mechanical theorem prover
+(EHDM) discovered serious flaws.
+The paper presented five supporting lemmas and
+one main correctness theorem.
+Lemmas 1, 2, and 3 were all false. Lemma 4 was
+false too, but only because of a minor
+typographical error. The proof of the main
+induction in the final theorem was wrong.
+(http://www.cl.cam.ac.uk/~jrh13/slides/types-04sep99/slides1.pdf)
+
+

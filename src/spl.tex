@@ -4,7 +4,7 @@
 \subsubsection{Preliminaries (Notation, definition)}
 
 One can consider a program as a series of state changes. There are some variables, we execute one line of the program and some of those variables changes and some others don't. Thus, we can consider any program as a graph of states with some ways. For example, lets take a very simple program:
-
+%
 \[
 	\begin{array}{l@{\hspace{0.3em}}c@{\hspace{1em}}l}
 	\hline
@@ -30,7 +30,7 @@ In the execution of this program, it is not possible to execute line 3 just afte
 This is represented by the variable \pc (\concept{Program\IS counter}). This variable indicates the line to execute next.
 
 So the state of the program at the beginning is 
-
+%
 \[ \pc = 1\]
 
 This formula give all the information we have of the execution state. We know the \pc and the state and value of all variables (there are no more variables than \pc).
@@ -44,7 +44,7 @@ We need to use \concept{post-state} variables.
 We define the prime version of any variable to refer that same variable after the execution of the line (transition). 
 %
 Going back to the example, we have:
-
+%
 \[
 \pc = 1 \andcond \pc'=2 \andcond x'=2 
 \]
@@ -63,7 +63,7 @@ Where ? depends on the validity of the \textit{if} condition.
 This steps we have illustrated are called transition relations.
 
 \begin{defn}[Transition relation]
-A transition relation is the formula that define the step from one step of the program to another.  
+A transition relation is the formula that define the step from one state of the program to another.  
 \end{defn}
 
 With this simple example, we have shown what a program counter and what a transition relation are. Now we can define the possible instructions a program may have.\footnote{We have just took the set of instructions the programs we are going to proof have.}
@@ -84,24 +84,25 @@ For this definitions we use the letter $T$ to refer a particular thread.
 		The transition relation for a variable assignment consists of the 
 		update of the program counter for the running thread and the 
 		corresponding modification to the variable being assigned.
-\[
-\begin{array}[t]{p{8em}@{\hspace{6em}}p{\longtablesize}}
-	\hline
-	Statement & Transition relation \\ \hline\hline
-	$\begin{array}[t]{l@{\hspace{0.3em}}c@{\hspace{1em}}l}
-		l_1 & : & \mathtt{v := 2} \\
-		l_2 & : & \mathtt{\cdots}
-	\end{array}$
-	&
-	$\begin{array}[t]{ll}
-		 \pc(T) = l_1 \andcond
-		 \pc'(T) = l_2 \andcond
-		 \mathtt{v}' = 2
-	 \end{array}$ \\ 
-	 \hline
-\end{array}
-\]
-
+%
+			\[
+			\begin{array}[t]{p{8em}@{\hspace{6em}}p{\longtablesize}}
+				\hline
+				Statement & Transition relation \\ \hline\hline
+				$\begin{array}[t]{l@{\hspace{0.3em}}c@{\hspace{1em}}l}
+					l_1 & : & \mathtt{v := 2} \\
+					l_2 & : & \mathtt{\cdots}
+				\end{array}$
+				&
+				$\begin{array}[t]{ll}
+					 \pc(T) = l_1 \andcond
+					 \pc'(T) = l_2 \andcond
+					 \mathtt{v}' = 2
+				 \end{array}$ \\ 
+				 \hline
+			\end{array}
+			\]
+%
 	\item [Pointer access:]
 		Cell fields are accessible through the pointer operator \pointsto.
 %
@@ -113,8 +114,6 @@ For this definitions we use the letter $T$ to refer a particular thread.
 		The first case corresponds to the access of a cell field through an 
 		address pointer.
 %
-
-
 \[
 \begin{array}[t]{p{8em}@{\hspace{6em}}p{\longtablesize}}
 	\hline
@@ -132,7 +131,7 @@ For this definitions we use the letter $T$ to refer a particular thread.
 	 \hline
 \end{array}
 \]
-
+%
 		The second case corresponds to the modification of a cell field using 
 		an address pointer.
 %
@@ -141,44 +140,25 @@ For this definitions we use the letter $T$ to refer a particular thread.
 %
 		Also, all fields of the cell pointed by $\mathtt{b}$ remain unmodified 
 		except for $\mathtt{field_n}$.
-
-\[
-\begin{array}[t]{p{8em}@{\hspace{6em}}p{\longtablesize}}
-				\hline
-				Statement & Transition relation \\ \hline\hline
-				$\begin{array}[t]{l@{\hspace{0.3em}}c@{\hspace{1em}}l}
-					\ell_1 & : & \mathtt{b \pointsto field_n := a} \\ \\ \\ \\
-					\ell_2 & : & \mathtt{\cdots}
-				\end{array}$
-				&
-				$\begin{array}[t]{ll}
-					\pc(T) = \ell_1 \andcond \pc'(T) = \ell_2 & \andcond \\
-					\heap' = \heap \{ \mathtt{b} \leftarrow c \} & \andcond \\
-					c.\mathtt{field_n} = \mathtt{a} & \andcond \\
-					\bigwedge\limits_{i \neq \mathtt{n}} c.\mathtt{field}_i = 
-					\heap[\mathtt{b}].\mathtt{field}_i
-				\end{array}$\\ \hline
-	\end{array}
-\]
-	\item [No operation:]
-		The no operation statement performs no change at all except from 
-		updating the program counter of the executing thread.
-
-\[
-\begin{array}[t]{p{8em}@{\hspace{6em}}p{\longtablesize}}
-	\hline
-	Statement & Transition relation \\ \hline\hline
-	$\begin{array}[t]{l@{\hspace{0.3em}}c@{\hspace{1em}}l}
-		\ell_1 & : & \mathtt{\SkipStm} \\
-		\ell_2 & : & \mathtt{\cdots}
-	\end{array}$
-	&
-	$\begin{array}[t]{ll}
-		 \pc(T) = \ell_1 \andcond
-		 \pc'(T) = \ell_2
-	 \end{array}$ \\ \hline
-\end{array}
-\]	
+%
+		\[
+		\begin{array}[t]{p{8em}@{\hspace{6em}}p{\longtablesize}}
+						\hline
+						Statement & Transition relation \\ \hline\hline
+						$\begin{array}[t]{l@{\hspace{0.3em}}c@{\hspace{1em}}l}
+							\ell_1 & : & \mathtt{b \pointsto field_n := a} \\ \\ \\ \\
+							\ell_2 & : & \mathtt{\cdots}
+						\end{array}$
+						&
+						$\begin{array}[t]{ll}
+							\pc(T) = \ell_1 \andcond \pc'(T) = \ell_2 & \andcond \\
+							\heap' = \heap \{ \mathtt{b} \leftarrow c \} & \andcond \\
+							c.\mathtt{field_n} = \mathtt{a} & \andcond \\
+							\bigwedge\limits_{i \neq \mathtt{n}} c.\mathtt{field}_i = 
+							\heap[\mathtt{b}].\mathtt{field}_i
+						\end{array}$\\ \hline
+			\end{array}
+		\]
 
 	\item [Conditionals:]
 		We present now the two possible kinds of conditional statements in 
@@ -186,7 +166,7 @@ For this definitions we use the letter $T$ to refer a particular thread.
 %
 		In the first case, if condition $c$ does not hold, the execution 
 		proceeds from the statement following the end of the conditional.
-
+%
 		\[
         \begin{array}[t]{p{8em}@{\hspace{6em}}p{\longtablesize}}
 				\hline
@@ -205,11 +185,11 @@ For this definitions we use the letter $T$ to refer a particular thread.
 				 \end{array}$ \\ \hline
 			 \end{array}
 		 \]
-
+%
 		In the second case, if condition $c$ does not hold, the execution 
 		continues at the first statement in the \textbf{else} section of the 
 		conditional statement.
-
+%
 		\[
 				\begin{array}[t]{p{8em}@{\hspace{6em}}p{\longtablesize}}
 				\hline
@@ -234,11 +214,11 @@ For this definitions we use the letter $T$ to refer a particular thread.
 				 \end{array}$ \\ \hline
 			\end{array}
 		\]
-
+%
 	\item [Loops:]
 		We consider the only loop statement available in SPL which executes 
 	the statements in the body as long as the loop condition holds.
-
+%
 		\[
 				\begin{array}[t]{p{8em}@{\hspace{6em}}p{\longtablesize}}
 				\hline
@@ -262,11 +242,11 @@ For this definitions we use the letter $T$ to refer a particular thread.
 				 \end{array}$ \\ \hline
 			 \end{array}
 		\]
-
+%
 			\item [Non deterministic choice:]
 		The transition relation for the non-deterministic choice statement can 
 		be expressed as follows:
-
+%
 		\[
 			\begin{array}[t]{p{8em}@{\hspace{6em}}p{\longtablesize}}
 				\hline
@@ -286,34 +266,12 @@ For this definitions we use the letter $T$ to refer a particular thread.
 				 \end{array}$ \\ \hline
 			 \end{array}
 		\]
-
-
-	\item [Wait on condition:]
-		When waiting on a condition, the program execution does not progress 
-		until the condition is satisfied.
-	
-		\[
-			\begin{array}[t]{p{8em}@{\hspace{6em}}p{\longtablesize}}
-				\hline
-				Statement & Transition relation \\ \hline\hline
-				$\begin{array}[t]{l@{\hspace{0.3em}}c@{\hspace{1em}}l}
-					\ell_1 & : & \mathtt{\Await c} \\
-					\ell_2 & : & \mathtt{\cdots}
-				\end{array}$
-				&
-				$\begin{array}[t]{ll}
-					\pc(T) = \ell_1 \andcond c \andcond \pc'(T) = \ell_2
-				 \end{array}$ \\ \hline
-			 \end{array}
-		\]
-
-	We can relate to this statement the \fLock and \fUnlock operations used 
-	over locks.
 %
+	\item [\fLock and \fUnlock:]
 	Even though these are not SPL statements, as they will be widely used in 
 	the rest of the chapters, we describe here the transition relation 
 	associated with these two functions.
-
+%
 		\[
 			\begin{array}[t]{p{8em}@{\hspace{6em}}p{\longtablesize}}
 				\hline

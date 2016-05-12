@@ -13,285 +13,43 @@ We include a brief logic of temporal logic needed for lifeness proving, but this
 Finally, we try to answer the question of parallelism. We will cover how can we prove safety for programs with multiple threads. We will describe some very important results used in this \thisworkm 
 done by \citep{thesisAle}.
 
-\section{First order logic}
 
-\paragraph{Notation}
-\label{def:notation}
-We assume the usual way of representing and working with \gls{FOL}, this is
-\begin{itemize}
-	\item \textbf{Symbols:} $\{),(, \implies, \dimplies, \orcond , \andcond \}$
-	\item \textbf{Quantifiers:} $\{\forall, \exists\}$
-	\item \textbf{Constants:} $\{\true,\false\}$
-	where we define $\true$ as \textit{true} and $\false$ as \textit{false}.
-\end{itemize}
 
-One could consider $\exists x(P(x))$  as an abbreviation of $\neg (\forall x(\neg P(x)))$, but for better understanding we would use both quantifiers when needed.
-We could also use $(a \orcond b)$ instead of $(\neg a \implies b)$ but, again, for the better understanding those abbreviations will be used.
-The same happens with $\true \equiv \neg \false$, but it is clearer when we use both symbols and not just one of them.
+\section{The need of formal verification}
 
+\paragraph{Software bugs}
 
-\paragraph{Definitions}
+Wikipedia list of Software bugs is very interesting. Some examples are explained here:
 
-We are going to define some very basic concepts, needed and used during the whole \thisworkmp.
+	- 6 people dead http://sunnyday.mit.edu/papers/therac.pdf (1985)
+	- Plane almost crash https://www.theguardian.com/business/2015/may/01/us-aviation-authority-boeing-787-dreamliner-bug-could-cause-loss-of-control (2015)
 
-We say a formula $F$ is \concept{satisfiable} \gls{iff} there exists an interpretation $I$ such that $I \vDash F$. 
-%
-We say a formula $F$ is \concept{valid} \gls{iff} for all interpretations $I$, $I\vDash F$.
-\label{def:validity}
-This 2 concepts are very important and they are very related. $F$ is valid \gls{iff} $\neg F$ is unsatisfiable. 
+\paragraph{Misscompiling}
 
 
-A first-order \concept{theory} is defined by the following components: 
-\begin{itemize}
-	\item Its \textbf{signature} $\Sigma$ is a set of constant, function and predicate symbols.
-	\item Its set of \textbf{axioms} $\axioms$ is a set of \gls{FOL} closed formula in which only elements from $\Sigma$ appear.
-\end{itemize}
+\subsection{Solutions}
 
+\subsubsection{Compcert}
 
+C verified compiler:  http://compcert.inria.fr/compcert-C.html
 
-There are some important properties than a theory may have. 
+http://compcert.inria.fr/motivations.html
 
-A theory $\Sigma$ is \concept[Completeness]{complete} \gls{iff} for every closed $\Sigma-$formula $\sigma$ we have $(\Sigma\vDash \sigma) \orcond (\Sigma\neg\vDash \sigma) $
 
-A theory $\Sigma$ is \concept[Consistency]{consistent} if there is at least one $\Sigma-$interpretation.	Equivalently, a theory $\Sigma$ is consistent if $\Sigma \not\vDash \false$
+\paragraph{Other compilers} are in process to be formally verified.
 
-If our theory is not consistent, we can have a formal proof of anything we want to prove. 
-%
-We can prove contradictions. 
-%
-We could prove that some program is both correct and incorrect, which gives us no information. 
-%
-Thus consistency is a fundamental property for this \thisworkm.
+\subsubsection{VCC}
 
-In the other hand, completeness is very desirable, but may not be possible to achieve because of the incompleteness theorem of Gödel.
+VCC: A Verifier for Concurrent C  http://research.microsoft.com/en-us/projects/vcc/
+VCC is sound -- if VCC verifies your program, it really is correct (modulo bugs in VCC itself)
 
+VCC: A Practical System for Verifying Concurrent C. Ernie Cohen, Markus Dahlweid, Mark Hillebrand, Dirk Leinenbach, Michał Moskal, Thomas Santen, Wolfram Schulte, Stephan Tobies. 22nd International Conference on Theorem Proving in Higher Order Logics (TPHOLs 2009). (LNCS 5674). http://research.microsoft.com/en-us/um/people/moskal/pdf/tphol2009.pdf (Provides a good overall system description of VCC; the paper to cite for VCC)
 
-\begin{itheorem}[Gödel's\IS incompleteness theorem]
 
+\subsubsection{Spin}
 
-For any formal effectively generated theory T including basic arithmetical truths and also certain truths about formal provability, if T includes a statement of its own consistency then T is inconsistent.
+http://spinroot.com/spin/what.html
 
+Model checking, embedded C code
 
-\textit{Obtained from \citeapos{Godel}}
-\end{itheorem}
-
-% TODO: 
-\todo{Conclusions}
-
-
-
-It is not possible to have a complete and consistent theory while including basic arithmetical truths. 
-%
-One could expect that the theory needed to proof programs correctness wouldn't be complete. 
-%
-In that case, we will not be able to proof the incorrectness of a program.
-%
-Normally, consistency is basic while completeness is only desirable.
-
-Another property of theories is the \textbf{decidability}. We say a theory $\Sigma$ is \concept{decidable} if $\Sigma \vDash F$ is decidable, for every $\Sigma-$formula 
-and 
-$F$ a $\Sigma-$formula is decidable if there is an \textbf{algorithm} that \textbf{always terminates} with ``yes'' if $F$ is valid in $\Sigma$ ($\Sigma$-valid) or ``no'' if $F$ is not $\Sigma-$valid.
-
-
-Decidability is a stronger property of a theory than completeness. 
-%
-As completeness, decidability is a very desirable property but because \gls{FOL} (the theory with no axioms) is undecidable in general, we may not have decidability in the theory we are working on.
-
-
-
-\begin{example}
-\concept{Theory\IS of equality}
-
-\label{theory:equality}
-
-We are going to define the theory of equality, because it is the simplest first-order theory.
-
-The signature of the theory is:
-
-\[\Sigma_e:\{=,a,b,c,...\}\]
-
-and it's axioms are:
-
-\begin{description}
-	\item[Reflexivity:	] $\forall x, x=X$
-	\item[Symmetry:	] $\forall x,y x=y \implies y=x$
-	\item[Transitivity:	] $\forall x,y,z x=y \andcond y=z \implies x=z$
-	\item[Function congruence:] For each function $f$
-	\[\forall \gor{x},\gor{y} \left( \bigwedge_{i=1}^n x_i = y_i \right) \implies f(\gor{x}) = f(\gor{y})\]
-	\item[Predicate congruence:]  For each predicate $P$
-	\[\forall \gor{x},\gor{y} \left( \bigwedge_{i=1}^n x_i = y_i \right) \implies f(\gor{x}) \dimplies f(\gor{y})\]
-
-	This 2 ``axioms'' are not axioms but an \concept[Axioms schema]{axiom schema}, because there is one axiom for each function $f$ or predicate $p$.
-\end{description}
-
-\gls{FOL} with equality is a decidable theory as Leopold Löwenheim proved in 1915 \cite{EqualityIsDecidable}. It is consistent and complete.
-\end{example}
-
-
-\subsection{Second-order logic (SOL)}
-
-In \gls{SOL} the quantifiers can be used related to functions and/or predicates. This gives lot of possibilities to reason about the universe and problems but adds lot of complexity. 
-
-In the theory of equality (\ref{theory:equality}) we could have defined axioms of congruence by:
-
-\[\forall f \left( \forall \gor{x},\gor{y} \left( \bigwedge_{i=1}^n x_i = y_i \right) \implies f(\gor{x}) = f(\gor{y}) \right)\]
-\[\forall P \left( \forall \gor{x},\gor{y} \left( \bigwedge_{i=1}^n x_i = y_i \right) \implies P(\gor{x}) \dimplies P(\gor{y}) \right)\]
-
-This is a simpler way of writing but a more complex way of reasoning.
-
-The \gls{SOL} is a very powerful tool in order to express formulas. 
-%
-However, because it is not possible to reason automatically in theories of second order, we haven't used any second-order logic and we won't get deeper into it. 
-
-
-\subsection{Temporal logic}
-\input{src/subsrc/ltl.tex}
-
-\section{Program correctness}
-
-
-We are finally ready to apply this concepts to a real word problem. In this \thisworkm we apply those concepts to prove some properties of programs.
-%
-The remaining task is to define the framework and the conventions we use to prove formally properties of programs.
-
-There are two forms of proving correctness. 
-%
-\textbf{Partial correctness} by proving safety properties (\ref{def::safety}).
-%
-\textbf{Total correctness} by including liveness properties, such as \textit{the program always finishes} (\ref{def::liveness}). 
-%
-We will cover each concept in a section of this chapter.
-
-
-
-\label{def:SPL}
-\input{src/spl}
-
-
-\subsection{Partial correctness (Safety)}
-
-A function (or the whole program) is \textbf{partially correct} if when the function's precondition is satisfied on entry, its postcondition is satisfied when the function returns (if it ever does).
-%
-We present the \textbf{inductive assertion method} for proving partial correctness.
-
-
-Let $\tau$ be the \gls{FOL} property to study. 
-%
-The procedure is the following:
-%
-First each function is reduced to a finite set of \gls{FOL} formulae called \concept[Verification condition]{\gls{VC}}.
-%
-\footnote{This reduction is done with the basic reducing cases we studied in \ref{def:SPL}.}
-%
-We achieve to prove that $\tau$ is valid in every state of the execution.
-%
-\textbf{Induction} is the methodology used.
-%
-First, we assert $\tau$ is valid before the program starts (induction base).
-%
-Then, we assume $\tau$ in the precondition and prove $\tau'$ valid.
-
-
-
-Some examples are studied next to clarify the procedure.
-
-\begin{example}
-\input{src/subsrc/exampleFactorial.tex}
-\end{example}
-
-
-
-\subsection{Total correctness (Lifeness)}
-
-\todo{Book}
-
-
-\section{Parametrized systems}
-
-The correctness of just one thread executing a program it is an easy problem because it runs sequentiality.
-%
-Multiple threads executing the same program is a different and more difficult problem to solve.
-%
-If the number of threads executing is not bounded is another important and difficult step.
-%
-If the number of threads is bound, one could unroll the formula for all the threads in the problem and try to prove it. 
-%
-This is why we focus the unbounded case, which is the usual scenario.
-
-We are going to study those cases. 
-%
-To do so, we need to parametrize the program executed by multiple threads.
-%
-Typically the threads would be $i$,$j$,$k_0$,$k_1$,... 
-%
-\subsubsection{Arbitrary number of threads}
-
-For example, the web servers may not have a bound of the number of clients they can accept.
-%
-Can we prove correctness when an unbounded number of processes are using the same global variabless?
-
-A recent research \citeapos{paperParametrizedInvariants} has proven a very important result. 
-%
-We will enunciate it and discuss it because it is fundamental for this work. 
-%
-We will not prove any of the results proven in \citep{paperParametrizedInvariants}.
-
-Before we enunciate the theorem, we need some previous concepts.
-%
-We need to extend the concept of support to parametrized formulas.
-
-
-\begin{defn}[Support]
-  Let $\psi$, $A$ and $B$ be parametrized formulas, and let $S$ be the
-  set of possible substitutions from the set of parametrized variables in $\psi$ ($\Var(\psi)$) into the set of parametrized variables of $(A\Into B)$ ($\Var(A\Into B)$).
-%
-  We say that $\psi$ supports $(A\Into B)$, whenever
-%
-  \[ \big( (\bigwedge_{\sigma\in S} \sigma(\psi)\big) \andcond A\big) \Into B \hspace{4em} \text{is valid} \]
-%
-  We use $\psi\supports(A\Into B)$ as a short notation for
-  $\big((\bigwedge_{\sigma\in S} \sigma(\psi)) \andcond A\big) \Into B$.  
-\end{defn}
-
-Note that if $S'\subseteq S$ is a subset of the substitutions, and 
-%
-  \[ \big( (\bigwedge_{\sigma\in S'} \sigma(\psi)\big) \andcond A\big) \Into B \hspace{4em} \text{is valid} \]
-%
-then
-%
-  \[ \big( (\bigwedge_{\sigma\in S} \sigma(\psi)\big) \andcond A\big) \Into B \hspace{4em} \text{is also valid} \]
-%
-  Essentially, if one is successful proving the validity of a formula obtained by removing some of the conjuncts from the antecedent, the validity of the full formula holds.
-%
-  Hence, in practice, it is enough to consider only some of the partial substitutions to show that a support formula is valid.
-
-
-\begin{itheorem}[Bound an arbitrary number of threads]
-	Let $\varphi$ be a thread-parametrized formula, where $\overline{k}=\Var(\varphi)$. 
-	%
-	Let $\tau$ be a transition of $P$ and $\ThetaParam$ the initial condition.
-
-	To show that $P$ satisfies $\Always\varphi$:
-	\hspace{-1em}
-	\[ 
-		\begin{array}{r@{\;\;}lr@{\;}@{\;}cl@{\hspace{1em}}l}
-			\Premise{S1}. & & \ThetaParam(\overline{k}) &\supports & \varphi & \\
-
-			\Premise{S2}. & \varphi \supports & \tau^{(i)} &\Into& \varphi'  & \text{forall $\tau$ and all $i\in \overline{k}$}\\
-			\Premise{S3}. & \varphi\supports & \big(\bigwedge\limits_{x\in\Var(\varphi)} j\neq x \andcond \tau^{(j)} &\Into& \varphi' \big)& \text{forall $\tau$ and one fresh $j\notin\overline{k}$}\\ \hline
-			& \multicolumn{4}{c}{\hspace{3em} \Always \varphi} &
-		\end{array}
-	\]
-\label{thm:biggest}
-\end{itheorem}
-
-
-Using this powerful result, we have reduced an arbitrary number of processes sharing the same variables to a finite number of threads sharing the variable. 
-%
-We will refer to $\Premise{S1}$ as \textit{initiation}, to $\Premise{S2}$ self-consecution and to $\Premise{S3}$ others-consecution. 
-%
-
-\begin{example}
-\todo{example}
-\end{example}
-
+Three examples of inspiring applications of Spin in the last few years include the verification of the control algorithms for the new flood control barrier built in the late nineties near Rotterdam in the Netherlands. The verification work was carried out by the Dutch firm CMG (Computer Management Group) in collaboration with the Formal Methods group at the University of Twente.

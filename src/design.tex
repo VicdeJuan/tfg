@@ -5,6 +5,169 @@
 
 Once the theory we are working with is defined, we will expose the goals we intend to prove and which are the intermediate steps to prove the safety of this theory.
 
+
+\section{Program correctness}
+
+
+We are finally ready to apply this concepts to a real word problem. In this \thisworkm we apply those concepts to prove some properties of programs.
+%
+The remaining task is to define the framework and the conventions we use to prove formally properties of programs.
+
+There are two forms of proving correctness. 
+%
+\textbf{Partial correctness} by proving safety properties (\ref{def::safety}).
+%
+\textbf{Total correctness} by including liveness properties, such as \textit{the program always finishes} (\ref{def::liveness}). 
+%
+We will cover each concept in a section of this chapter.
+
+
+
+\label{def:SPL}
+\input{src/spl}
+
+
+\subsection{Partial correctness (Safety)}
+
+A function (or the whole program) is \textbf{partially correct} if when the function's precondition is satisfied on entry, its postcondition is satisfied when the function returns (if it ever does).
+%
+We present the \textbf{inductive assertion method} for proving partial correctness.
+
+
+Let $\tau$ be the \gls{FOL} property to study. 
+%
+The procedure is the following:
+%
+First each function is reduced to a finite set of \gls{FOL} formulae called \concept[Verification condition]{\gls{VC}}.
+%
+\footnote{This reduction is done with the basic reducing cases we studied in \ref{def:SPL}.}
+%
+We achieve to prove that $\tau$ is valid in every state of the execution.
+%
+\textbf{Induction} is the methodology used.
+%
+First, we assert $\tau$ is valid before the program starts (induction base).
+%
+Then, we assume $\tau$ in the precondition and prove $\tau'$ valid.
+
+
+
+Some examples are studied next to clarify the procedure.
+
+\begin{example}
+\input{src/subsrc/exampleFactorial.tex}
+\end{example}
+
+
+
+\subsection{Total correctness (Lifeness)}
+
+\todo{Book}
+
+
+\section{Parametrized systems}
+
+The correctness of just one thread executing a program it is an easy problem because it runs sequentiality.
+%
+Multiple threads executing the same program is a different and more difficult problem to solve.
+%
+If the number of threads executing is not bounded is another important and difficult step.
+%
+If the number of threads is bound, one could unroll the formula for all the threads in the problem and try to prove it. 
+%
+This is why we focus the unbounded case, which is the usual scenario.
+
+We are going to study those cases. 
+%
+To do so, we need to parametrize the program executed by multiple threads.
+%
+Typically the threads would be $i$,$j$,$k_0$,$k_1$,... 
+%
+\subsubsection{Arbitrary number of threads}
+
+For example, the web servers may not have a bound of the number of clients they can accept.
+%
+Can we prove correctness when an unbounded number of processes are using the same global variabless?
+
+A recent research \citeapos{paperParametrizedInvariants} has proven a very important result. 
+%
+We will enunciate it and discuss it because it is fundamental for this work. 
+%
+We will not prove any of the results proven in \citep{paperParametrizedInvariants}.
+
+Before we enunciate the theorem, we need some previous concepts.
+%
+We need to extend the concept of support to parametrized formulas.
+
+
+\begin{defn}[Support]
+  Let $\psi$, $A$ and $B$ be parametrized formulas, and let $S$ be the
+  set of possible substitutions from the set of parametrized variables in $\psi$ ($\Var(\psi)$) into the set of parametrized variables of $(A\Into B)$ ($\Var(A\Into B)$).
+%
+  We say that $\psi$ supports $(A\Into B)$, whenever
+%
+  \[ \big( (\bigwedge_{\sigma\in S} \sigma(\psi)\big) \andcond A\big) \Into B \hspace{4em} \text{is valid} \]
+%
+  We use $\psi\supports(A\Into B)$ as a short notation for
+  $\big((\bigwedge_{\sigma\in S} \sigma(\psi)) \andcond A\big) \Into B$.  
+\end{defn}
+
+Note that if $S'\subseteq S$ is a subset of the substitutions, and 
+%
+  \[ \big( (\bigwedge_{\sigma\in S'} \sigma(\psi)\big) \andcond A\big) \Into B \hspace{4em} \text{is valid} \]
+%
+then
+%
+  \[ \big( (\bigwedge_{\sigma\in S} \sigma(\psi)\big) \andcond A\big) \Into B \hspace{4em} \text{is also valid} \]
+%
+  Essentially, if one is successful proving the validity of a formula obtained by removing some of the conjuncts from the antecedent, the validity of the full formula holds.
+%
+  Hence, in practice, it is enough to consider only some of the partial substitutions to show that a support formula is valid.
+
+
+\begin{itheorem}[Bound an arbitrary number of threads]
+	Let $\varphi$ be a thread-parametrized formula, where $\overline{k}=\Var(\varphi)$. 
+	%
+	Let $\tau$ be a transition of $P$ and $\ThetaParam$ the initial condition.
+
+	To show that $P$ satisfies $\Always\varphi$:
+	\hspace{-1em}
+	\[ 
+		\begin{array}{r@{\;\;}lr@{\;}@{\;}cl@{\hspace{1em}}l}
+			\Premise{S1}. & & \ThetaParam(\overline{k}) &\supports & \varphi & \\
+
+			\Premise{S2}. & \varphi \supports & \tau^{(i)} &\Into& \varphi'  & \text{forall $\tau$ and all $i\in \overline{k}$}\\
+			\Premise{S3}. & \varphi\supports & \big(\bigwedge\limits_{x\in\Var(\varphi)} j\neq x \andcond \tau^{(j)} &\Into& \varphi' \big)& \text{forall $\tau$ and one fresh $j\notin\overline{k}$}\\ \hline
+			& \multicolumn{4}{c}{\hspace{3em} \Always \varphi} &
+		\end{array}
+	\]
+\label{thm:biggest}
+\end{itheorem}
+
+
+Using this powerful result, we have reduced an arbitrary number of processes sharing the same variables to a finite number of threads sharing the variable. 
+%
+We will refer to $\Premise{S1}$ as \textit{initiation}, to $\Premise{S2}$ self-consecution and to $\Premise{S3}$ others-consecution. 
+%
+
+\begin{example}
+\todo{example}
+\end{example}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Linked list theory}
 
 \subsection{Description}
