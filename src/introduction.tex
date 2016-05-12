@@ -50,7 +50,106 @@ After this introduction, we will define some necessary concepts to understand de
 
 \section{Preliminaries}
 
-\subsubsection{Second-order logic (SOL)}
+\subsection{First order logic}
+
+\paragraph{Notation}
+\label{def:notation}
+We assume the usual way of representing and working with \gls{FOL}, this is
+\begin{itemize}
+	\item \textbf{Symbols:} $\{),(, \implies, \dimplies, \orcond , \andcond \}$
+	\item \textbf{Quantifiers:} $\{\forall, \exists\}$
+	\item \textbf{Constants:} $\{\true,\false\}$
+	where we define $\true$ as \textit{true} and $\false$ as \textit{false}.
+\end{itemize}
+
+One could consider $\exists x(P(x))$  as an abbreviation of $\neg (\forall x(\neg P(x)))$, but for better understanding we would use both quantifiers when needed.
+We could also use $(a \orcond b)$ instead of $(\neg a \implies b)$ but, again, for the better understanding those abbreviations will be used.
+The same happens with $\true \equiv \neg \false$, but it is clearer when we use both symbols and not just one of them.
+
+
+\paragraph{Definitions}
+
+We are going to define some very basic concepts, needed and used during the whole \thisworkmp.
+
+We say a formula $F$ is \concept{satisfiable} \gls{iff} there exists an interpretation $I$ such that $I \vDash F$. 
+%
+We say a formula $F$ is \concept{valid} \gls{iff} for all interpretations $I$, $I\vDash F$.
+\label{def:validity}
+This 2 concepts are very important and they are very related. $F$ is valid \gls{iff} $\neg F$ is unsatisfiable. 
+
+
+A first-order \concept{theory} is defined by the following components: 
+\begin{itemize}
+	\item Its \textbf{signature} $\Sigma$ is a set of constant, function and predicate symbols.
+	\item Its set of \textbf{axioms} $\axioms$ is a set of \gls{FOL} closed formula in which only elements from $\Sigma$ appear.
+\end{itemize}
+
+
+There are some important properties than a theory may have. 
+
+A theory $\Sigma$ is \concept[Completeness]{complete} \gls{iff} for every closed $\Sigma-$formula $\sigma$ we have $(\Sigma\vDash \sigma) \orcond (\Sigma\neg\vDash \sigma) $
+
+A theory $\Sigma$ is \concept[Consistency]{consistent} if there is at least one $\Sigma-$interpretation.	Equivalently, a theory $\Sigma$ is consistent if $\Sigma \not\vDash \false$
+
+If our theory is not consistent, we can have a formal proof of anything we want to prove. 
+%
+We can prove contradictions. 
+%
+We could prove that some program is both correct and incorrect, which gives us no information. 
+%
+Thus consistency is a fundamental property for this \thisworkm.
+
+In the other hand, completeness is very desirable, but may not be possible to achieve because of the incompleteness theorem of Gödel.
+
+
+It is not possible to have a complete and consistent theory while including basic arithmetical truths. 
+%
+One could expect that the theory needed to proof programs correctness wouldn't be complete. 
+%
+In that case, we will not be able to proof the incorrectness of a program.
+%
+Normally, consistency is basic while completeness is only desirable.
+
+Another property of theories is the \textbf{decidability}. We say a theory $\Sigma$ is \concept{decidable} if $\Sigma \vDash F$ is decidable, for every $\Sigma-$formula 
+and 
+$F$ a $\Sigma-$formula is decidable if there is an \textbf{algorithm} that \textbf{always terminates} with ``yes'' if $F$ is valid in $\Sigma$ ($\Sigma$-valid) or ``no'' if $F$ is not $\Sigma-$valid.
+
+
+Decidability is a stronger property of a theory than completeness. 
+%
+As completeness, decidability is a very desirable property but because \gls{FOL} (the theory with no axioms) is undecidable in general, we may not have decidability in the theory we are working on.
+
+
+
+\begin{example}
+\concept{Theory\IS of equality}
+
+\label{theory:equality}
+
+We are going to define the theory of equality, because it is the simplest first-order theory.
+
+The signature of the theory is:
+
+\[\Sigma_e:\{=,a,b,c,...\}\]
+
+and it's axioms are:
+
+\begin{description}
+	\item[Reflexivity:	] $\forall x, x=X$
+	\item[Symmetry:	] $\forall x,y x=y \implies y=x$
+	\item[Transitivity:	] $\forall x,y,z x=y \andcond y=z \implies x=z$
+	\item[Function congruence:] For each function $f$
+	\[\forall \gor{x},\gor{y} \left( \bigwedge_{i=1}^n x_i = y_i \right) \implies f(\gor{x}) = f(\gor{y})\]
+	\item[Predicate congruence:]  For each predicate $P$
+	\[\forall \gor{x},\gor{y} \left( \bigwedge_{i=1}^n x_i = y_i \right) \implies f(\gor{x}) \dimplies f(\gor{y})\]
+
+	This 2 ``axioms'' are not axioms but an \concept[Axioms schema]{axiom schema}, because there is one axiom for each function $f$ or predicate $p$.
+\end{description}
+
+\gls{FOL} with equality is a decidable theory as Leopold Löwenheim proved in 1915 \cite{EqualityIsDecidable}. It is consistent and complete.
+\end{example}
+
+\subsection{Second-order logic (SOL)}
 
 In \gls{SOL} the quantifiers can be used related to functions and/or predicates. This gives lot of possibilities to reason about the universe and problems but adds lot of complexity. 
 
@@ -65,6 +164,5 @@ The \gls{SOL} is a very powerful tool in order to express formulas.
 %
 However, because it is not possible to reason automatically in theories of second order, we haven't used any second-order logic and we won't get deeper into it. 
 
-
-\subsubsection{Temporal logic}
+\subsection{Temporal logic}
 \input{src/subsrc/ltl.tex}
