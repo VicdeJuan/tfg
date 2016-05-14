@@ -281,7 +281,7 @@ There is also a function \concept{havocListElem}() which returns a random elemen
 
 \begin{figure}[!htbp]
 		\myframe{\includegraphics[scale=0.4]{graphics/_listcode}}
-		\caption{ Concurrent lock-coupling lists implementation.}
+		\caption{Concurrent lock-coupling lists implementation.}
 		\label{fig:listcode}
 \end{figure}
 
@@ -300,24 +300,237 @@ In this section \TLLpL is defined with the purpose we have.
 %
 A more complete and formal definition of \TLLpL can be found in \citeapos{paperAle} and \citep[6.2]{thesisAle}.
 
+Although some functions are originally defined \citep{thesisAle} in suffix notation (\fNext field for instance), preffix-notation has been used to described the theory. 
+%
+The reason for this modification is to be consistent with \spass syntax.
+%
+Furthermore, a subset of \TLLpL has been used. 
+%
+In the same way \gls{FOL} can be expressed with $\neg,\vee$ but sometimes $\implies$ is included but $\dimplies$ is not,
+%
+few functions have not been used because they can be expressed using others functions in the theory. 
+%
+We proceed to describe \TLLpL.
 
-\TLLpL is a compound of theories. Informally,  
-$\Sigma_{cells}$ models \emph{cells}, structures containing an element (data), an address (pointer) and a lock owner, which represents a node in a linked list.
+
+\TLLpL is a compound of theories. The \textbf{sorts} used among this theories are: 
 %
-$\Sigma_{mem}$ models the memory.
+\cell (representing the nodes of the list),
 %
-$\Sigma_{setaddr}$ models sets of addresses.
+\elem (representing elements),
 %
-$\Sigma_{settid}$ models sets of thread identifiers.
+\addr (representing address),
 %
-$\Sigma_{setelem}$ models sets of elements.
+\tid (representing thread id),
 %
-$\Sigma_{reach}$ models finite sequences of non-repeating addresses,
-to represent acyclic paths in memory.
+\mem (representing the memory also called heap. It is represented as maps of \addr to \cell ),
 %
-Finally, $\Sigma_{Bridge}$ is a \emph{bridge theory} containing auxiliary
+\path (representing a finite sequence of address),
+%
+\sSetWhatever (representing a set of \tid,\addr or \elem).
+
+For each sort, there is a theory containing its constants, functions and predicates. 
+%
+There is one more theory, $\Sigma_{Bridge}$ is a \emph{bridge theory} containing auxiliary
 functions, for example, that allow to map paths of addresses to set of 
 addresses, or to obtain the set of addresses reachable from a given 
 address following a chain of \fNext fields.
 
-\todo{Complete with TL3}
+
+
+\subsection{Signature}
+
+We proceed to describe the signature of each theory, listing the sorts used and explaining its functions, predicates and constants. 
+%
+Every theory includes the equality theory \ref{theory:equality} 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%					TID 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center}\rule{4cm}{0.4pt} $\Sigma_{\tid}$ \rule{4cm}{0.4pt}\end{center}
+%
+The sort used is \tid. The "no-thread" value is represented with \fNoThread.
+%
+Apart from the equality theory, this theory does not have any other predicates or functions.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%					ELEM
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{center}\rule{4cm}{0.4pt} $\Sigma_{\elem}$ \rule{4cm}{0.4pt}\end{center}
+%
+The sort used is \elem. 
+%
+There is a total order which allows to order every set of \elem.
+%
+In addition, this sort is upper and lower bounded.
+%
+The signature is described \doubt{in/at} table \ref{table:elem_signature}.
+
+
+\begin{table}[hbtp]
+\centering
+\begin{tabular}{rrl}
+\fHighest & \elem & Maximum value an \elem can take.\\
+\fLowest & \elem & Minimum value an \elem can take.\\
+\hline\hline
+\fLselem & \elem$\times$\elem & Total order relation between \elem.
+\end{tabular}
+\caption{\textbf{Signature of $\Sigma_{\ensuremath{\mathit{elem}}}$.} Top block contains functions, lower block contains predicates.}
+\label{table:elem_signature}
+\end{table}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%					CELL
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{center}\rule{4cm}{0.4pt} $\Sigma_{\cell}$ \rule{4cm}{0.4pt}\end{center}
+%
+The sorts used are \cell,\elem,\addr,\tid.
+%
+The signature is described \doubt{in/at} table \ref{table:cell_signature}.
+
+\begin{table}[hbtp]
+\begin{tabular}{rrl}
+\fMkcell & $\elem\times\addr\times\tid \to \cell$ & Constructor\\
+\fNext & $\cell \to \addr$ & Getter of \fNext field \\ 
+\fData & $\cell \to \elem$ & Getter of \fData field \\ 
+\fLockID & $\cell \to \tid$ & Getter of \fLockID field \\ 
+\fLock & $\cell\times\tid\to\cell$ & Construct a new \cell with \fData and \fNext \\
+&&\;\;\;								values of the given \cell, \\
+&&\;\;\;				using the \tid for the \fLockID field.\\
+\fError & $\cell$ & Constant value used to model \\ 
+&&\;\;\;				incorrect memory deference.
+\end{tabular}
+\caption{\textbf{Functions of $\Sigma_{\cell}$} theory.}
+\label{table:cell_signature}
+\end{table}
+
+The function \fUnlock could be considered. Actually, \cite{thesisAle} includes it in the theory but it has not been included in this work.
+%
+The reason is justified because to \fUnlock a \cell is equivalent to \fLock a \cell with \fNoThread value.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%					MEMORY
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{center}\rule{4cm}{0.4pt} $\Sigma_{\mem}$ \rule{4cm}{0.4pt}\end{center}
+%
+The sorts used are \mem,\cell and \addr. 
+%
+The functions are described \doubt{in/at} table \ref{table:memory_signature}.
+
+\begin{table}[hbtp]
+\begin{tabular}{rrl}
+\fNull & $\addr$ & Null address \\
+\fRd & $\mem\times\addr\to\cell$ & Models memory deference. \\
+&&								\;\;\; Returns the value from the \mem the \cell \\
+&&								\;\;\; stored in the \addr.\\
+\fUpd & $\mem\times\addr\times\cell\to\mem$ & Creates a new \mem from the given one
+\end{tabular}
+\caption{\textbf{Functions of $\Sigma_{\mem}$} theory}
+\label{table:memory_signature}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%					SETADDR
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{center}\rule{4cm}{0.4pt} $\Sigma_{\sSetAddr}$ \rule{4cm}{0.4pt}\end{center}
+%
+It models the usual set theory. 
+%
+Preffix version of each function and predicate has been preferred to be consistent with \ref{ax::fulllist}.
+%
+The signature is described \doubt{in/at} table \ref{table:setaddr_signature}.
+
+Intersection function and subset predicate has not been included despite \citep{thesisAle} uses them. 
+%
+They were not used because they were unnecessary.
+
+\begin{table}[hbtp]
+\begin{tabular}{rrl}
+\fEmptyset & \sSetAddr & Empty set\\
+\fSingl & $\addr\to\sSetAddr $& Constructor of a single-element set.\\
+\fUnion & $\sSetAddr\times\sSetAddr\to\sSetAddr$&\\
+\fSetdiff & $\sSetAddr\times\sSetAddr\to\sSetAddr$&\\
+\hline\hline
+\pIn & $\sAddr\times\sSetAddr $& \\
+\end{tabular}
+\caption{\textbf{Signature of $\Sigma_{\sSetAddr}$.} Top block contains functions, lower block contains predicates.}
+\label{table:setaddr_signature}
+\end{table}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%					SETELEM
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{center}\rule{4cm}{0.4pt} $\Sigma_{\sSetElem}$ \rule{4cm}{0.4pt}\end{center}
+%
+
+Again, it models the usual set theory.
+%
+The signature is described \doubt{in/at} table \ref{table:setelem_signature}.
+
+\begin{table}[hbtp]
+\begin{tabular}{rrl}
+\fEmptysetElem & $\sSet $& Empty set\\
+\fSinglElem & $\elem\to\sSet $& Constructor of a single-element set.\\
+\fUnionElem & $\sSet\times\sSet\to\sSet$&\\
+\fSetdiffElem & $\sSet\times\sSet\to\sSet$&\\
+\hline\hline
+\pInElem & $\sAddr\times\sSet $& \\
+\end{tabular}
+\caption{\textbf{Signature of $\Sigma_{\sSet}$.} Top block contains functions, lower block contains predicates.}
+\label{table:setelem_signature}
+\end{table}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%					SETTID
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{center}\rule{4cm}{0.4pt} $\Sigma_{\sSetTid}$ \rule{4cm}{0.4pt}\end{center}
+%
+
+
+The signature is described \doubt{in/at} table \ref{table:settid_signature}.
+
+\begin{table}[hbtp]
+\begin{tabular}{rrl}
+\fEmptysetTid & $\sSetAddr $& Empty set\\
+\fSinglTid & $\addr\to\sSetAddr $& Constructor of a single-element set.\\
+\fUnionTid & $\sSetAddr\times\sSetAddr\to\sSetAddr$&\\
+\fSetdiffTid & $\sSetAddr\times\sSetAddr\to\sSetAddr$&\\
+\hline\hline
+\pInTid & $\sAddr\times\sSetAddr$ &\\
+\end{tabular}
+\caption{\textbf{Signature of $\Sigma_{\sSetAddr}$.} Top block contains functions, lower block contains predicates.}
+\label{table:settid_signature}
+\end{table}
+

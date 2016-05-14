@@ -217,10 +217,13 @@
 %% Theory names
 \newcommand{\addr}{\ensuremath{\mathsf{addr}}\xspace}
 \newcommand{\elem}{\ensuremath{\mathsf{elem}}\xspace}
+\newcommand{\tid}{\ensuremath{\mathsf{tid}}\xspace}
 \newcommand{\thId}{\ensuremath{\mathsf{tid}}\xspace}
+\newcommand{\cell}{\ensuremath{\mathsf{cell}}\xspace}
 \newcommand{\cells}{\ensuremath{\mathsf{cell}}\xspace}
 \newcommand{\cellsK}{\ensuremath{\mathsf{cell}_{\mathsf{K}}}\xspace}
 \newcommand{\memory}{\ensuremath{\mathsf{mem}}\xspace}
+\newcommand{\mem}{\ensuremath{\mathsf{mem}}\xspace}
 \newcommand{\memoryK}{\ensuremath{\mathsf{mem}_{\mathsf{K}}}\xspace}
 %\newcommand{\reach}{\ensuremath{\mathsf{reachability}}\xspace}
 \newcommand{\reach}{\ensuremath{\mathsf{reach}}\xspace}
@@ -245,6 +248,11 @@
 \newcommand{\sMem}{\ensuremath{\mathsf{mem}}\xspace}
 \newcommand{\sMemK}{\ensuremath{\memoryK}\xspace}
 \newcommand{\sPath}{\ensuremath{\mathsf{path}}\xspace}
+\newcommand{\sWhatever}{\ensuremath{\mathsf{\_}}\xspace}
+\newcommand{\sSetWhatever}{\ensuremath{\mathsf{set}}\sWhatever\xspace}
+\newcommand{\sSetAddr}{\ensuremath{\mathsf{setaddr}}\xspace}
+\newcommand{\sSetElem}{\ensuremath{\mathsf{setelem}}\xspace}
+\newcommand{\sSetTid}{\ensuremath{\mathsf{settid}}\xspace}
 \newcommand{\sSet}{\ensuremath{\mathsf{setaddr}}\xspace}
 \newcommand{\sSetE}{\ensuremath{\mathsf{setelem}}\xspace}
 \newcommand{\sSetT}{\ensuremath{\mathsf{settid}}\xspace}
@@ -335,6 +343,29 @@
 \newcommand{\pContAtLevel}{\ensuremath{\mathit{contAtLevel}}\xspace}
 \newcommand{\fPair}[2]{\ensuremath{\langle{#1},{#2}\rangle}\xspace}
 
+\newcommand{\fSingl}{\ensuremath{\mathit{singl}}\xspace}
+\newcommand{\fUnion}{\ensuremath{\mathit{Union}}\xspace}
+\newcommand{\fSetdiff}{\ensuremath{\mathit{setDiff}}\xspace}
+\newcommand{\fEmptyset}{\ensuremath{\mathit{emptyset}}\xspace}
+\newcommand{\pIn}{\ensuremath{\mathit{in}}\xspace}
+
+\newcommand{\fSinglElem}{\ensuremath{\mathit{singlElem}}\xspace}
+\newcommand{\fUnionElem}{\ensuremath{\mathit{UnionElem}}\xspace}
+\newcommand{\fSetdiffElem}{\ensuremath{\mathit{setDiffElem}}\xspace}
+\newcommand{\fEmptysetElem}{\ensuremath{\mathit{emptysetElem}}\xspace}
+\newcommand{\pInElem}{\ensuremath{\mathit{inElem}}\xspace}
+
+\newcommand{\fSinglTid}{\ensuremath{\mathit{singlTh}}\xspace}
+\newcommand{\fUnionTid}{\ensuremath{\mathit{UnionTh}}\xspace}
+\newcommand{\fSetdiffTid}{\ensuremath{\mathit{setDiffTh}}\xspace}
+\newcommand{\fEmptysetTid}{\ensuremath{\mathit{emptysetTh}}\xspace}
+\newcommand{\pInTid}{\ensuremath{\mathit{inTh}}\xspace}
+
+\newcommand{\fHighest}{\ensuremath{\mathit{highestElem}}\xspace}
+\newcommand{\fLowest}{\ensuremath{\mathit{lowestElem}}\xspace}
+\newcommand{\fLselem}{\ensuremath{\mathit{ls\_elem}}\xspace}
+
+
 %% Operations for the generic array manipulation
 \newcommand{\fArrayRd}[2]
 		{\ensuremath{{#1} \lbrack {#2} \rbrack}\xspace}
@@ -374,6 +405,7 @@
 \newcommand{\pInTidPair}{\ensuremath{\mathit{inTidPair}}\xspace}
 \newcommand{\pUniqueInt}{\ensuremath{\mathit{uniqueInt}}\xspace}
 \newcommand{\pUniqueTid}{\ensuremath{\mathit{uniqueTid}}\xspace}
+
 
 
 %% Signatures
