@@ -66,7 +66,7 @@ data(mkcell(e,a,t)) = e
 \label{ax::next__def}
 
 \begin{dmath}
-mkcell(e,a,t).next = a
+next(mkcell(e,a,t)) = a
 \end{dmath}
 
 \textcolor{red}{Auto-generated}
@@ -82,7 +82,7 @@ mkcell(e,a,t).lockid = t
 \label{ax::next_error__is__null}
 
 \begin{dmath}
-error.next = null
+next(error) = null
 \end{dmath}
 
 \textcolor{red}{Auto-generated}
@@ -90,7 +90,7 @@ error.next = null
 \label{ax::equality_bt_cell}
 
 \begin{dmath}
-(c1 = c2 \implies (data(c1) = data(c2) \wedge c1.lockid = c2.lockid \wedge c1.next = c2.next))
+(c1 = c2 \implies (data(c1) = data(c2) \wedge c1.lockid = c2.lockid \wedge next(c1) = next(c2)))
 \end{dmath}
 
 \textcolor{red}{Auto-generated}
@@ -178,7 +178,7 @@ rd(m,null) = error
 \label{ax::nextreg}
 
 \begin{dmath}
-((in(a,se) \wedge se = addr2set(m,b) \wedge c = rd(m,a).next \wedge (\neg  a = null)) \implies in(c,se))
+((in(a,se) \wedge se = addr2set(m,b) \wedge c = next(rd(m,a)) \wedge (\neg  a = null)) \implies in(c,se))
 \end{dmath}
 
 \textcolor{red}{Auto-generated}
@@ -186,7 +186,7 @@ rd(m,null) = error
 \label{ax::lock_keeps_addr2set}
 
 \begin{dmath}
-(hp_p = upd(hp,a,mkcell(data(rd(hp,a)),rd(hp,a).next,t)) \implies addr2set(hp,hd) = addr2set(hp_p,hd))
+(hp_p = upd(hp,a,mkcell(data(rd(hp,a)),next(rd(hp,a)),t)) \implies addr2set(hp,hd) = addr2set(hp_p,hd))
 \end{dmath}
 
 \textcolor{red}{Auto-generated}
@@ -194,7 +194,7 @@ rd(m,null) = error
 \label{ax::lock_keeps_heap__data}
 
 \begin{dmath}
-(hp_p = upd(hp,a,mkcell(data(rd(hp,a)),rd(hp,a).next,t)) \implies data(rd(hp,a)) = data(rd(hp_p,a)))
+(hp_p = upd(hp,a,mkcell(data(rd(hp,a)),next(rd(hp,a)),t)) \implies data(rd(hp,a)) = data(rd(hp_p,a)))
 \end{dmath}
 
 \textcolor{red}{Auto-generated}
@@ -202,7 +202,7 @@ rd(m,null) = error
 \label{ax::lock_keeps_heap__next}
 
 \begin{dmath}
-(hp_p = upd(hp,a,mkcell(data(rd(hp,a)),rd(hp,a).next,t)) \implies rd(hp,a).next = rd(hp_p,a).next)
+(hp_p = upd(hp,a,mkcell(data(rd(hp,a)),next(rd(hp,a)),t)) \implies next(rd(hp,a)) = next(rd(hp_p,a)))
 \end{dmath}
 
 \textcolor{red}{Auto-generated}
@@ -218,7 +218,7 @@ rd(m,null) = error
 \label{ax::addr2set_primim}
 
 \begin{dmath}
-((data(rd(hp,hd)) < data(rd(hp,tl)) \wedge rd(hp,hd).next = tl \wedge rd(hp,tl).next = null) \implies addr2set(hp,hd) = union(union({ hd },{ tl }),{ null }))
+((data(rd(hp,hd)) < data(rd(hp,tl)) \wedge next(rd(hp,hd)) = tl \wedge next(rd(hp,tl)) = null) \implies addr2set(hp,hd) = union(union({ hd },{ tl }),{ null }))
 \end{dmath}
 
 \textcolor{red}{Auto-generated}
@@ -226,7 +226,7 @@ rd(m,null) = error
 \label{ax::insert__keeps_addr2set}
 
 \begin{dmath}
-((reg = addr2set(hp,hd) \wedge union(reg,{ aux }) = reg_p \wedge rd(hp,prev).next = curr \wedge (\neg  prev = curr) \wedge rd(hp,aux).next = curr \wedge (\neg  aux = null) \wedge (\neg  prev = null) \wedge (\neg  curr = null) \wedge in(prev,addr2set(hp,hd)) \wedge hp_p = upd(hp,prev,mkcell(data(rd(hp,prev)),aux,rd(hp,prev).lockid))) \implies reg_p = addr2set(hp_p,hd))
+((reg = addr2set(hp,hd) \wedge union(reg,{ aux }) = reg_p \wedge next(rd(hp,prev)) = curr \wedge (\neg  prev = curr) \wedge next(rd(hp,aux)) = curr \wedge (\neg  aux = null) \wedge (\neg  prev = null) \wedge (\neg  curr = null) \wedge in(prev,addr2set(hp,hd)) \wedge hp_p = upd(hp,prev,mkcell(data(rd(hp,prev)),aux,rd(hp,prev).lockid))) \implies reg_p = addr2set(hp_p,hd))
 \end{dmath}
 
 \textcolor{red}{Auto-generated}
@@ -234,7 +234,7 @@ rd(m,null) = error
 \label{ax::remove__keeps_addr2set}
 
 \begin{dmath}
-((rd(hp,curr).next = aux \wedge rd(hp,prev).next = curr \wedge (\neg  aux = rd(hp,prev).next) \wedge hp_p = upd(hp,prev,mkcell(data(rd(hp,prev)),aux,rd(hp,prev).lockid)) \wedge (\neg  aux = null) \wedge in(curr,addr2set(hp,hd)) \wedge in(null,addr2set(hp,hd)) \wedge in(prev,addr2set(hp,hd))) \implies diff(addr2set(hp,hd),{ curr }) = addr2set(hp_p,hd))
+((next(rd(hp,curr)) = aux \wedge next(rd(hp,prev)) = curr \wedge (\neg  aux = next(rd(hp,prev))) \wedge hp_p = upd(hp,prev,mkcell(data(rd(hp,prev)),aux,rd(hp,prev).lockid)) \wedge (\neg  aux = null) \wedge in(curr,addr2set(hp,hd)) \wedge in(null,addr2set(hp,hd)) \wedge in(prev,addr2set(hp,hd))) \implies diff(addr2set(hp,hd),{ curr }) = addr2set(hp_p,hd))
 \end{dmath}
 
 \textcolor{red}{Auto-generated}
@@ -242,7 +242,7 @@ rd(m,null) = error
 \label{ax::addr2set_rec_def}
 
 \begin{dmath}
-addr2set(m,a) = union({ a },addr2set(m,rd(m,a).next))
+addr2set(m,a) = union({ a },addr2set(m,next(rd(m,a))))
 \end{dmath}
 
 \textcolor{red}{Auto-generated}
@@ -258,7 +258,7 @@ addr2set(m,null) = { null }
 \label{ax::next_is_not_same__if_ordered}
 
 \begin{dmath}
-((in(a,addr2set(hp,hd)) \wedge in(tl,addr2set(hp,hd)) \wedge (\neg  hd = null) \wedge (\neg  tl = null) \wedge (\neg  a = null) \wedge rd(hp,tl).next = null) \implies (\neg  rd(hp,a).next = a))
+((in(a,addr2set(hp,hd)) \wedge in(tl,addr2set(hp,hd)) \wedge (\neg  hd = null) \wedge (\neg  tl = null) \wedge (\neg  a = null) \wedge next(rd(hp,tl)) = null) \implies (\neg  next(rd(hp,a)) = a))
 \end{dmath}
 
 \textcolor{red}{Auto-generated}
@@ -266,7 +266,7 @@ addr2set(m,null) = { null }
 \label{ax::just_tail__points__null}
 
 \begin{dmath}
-((in(tl,addr2set(hp,hd)) \wedge (\neg  hd = null) \wedge (\neg  tl = null) \wedge rd(hp,tl).next = null \wedge (\neg  d = null) \wedge rd(hp,d).next = null \wedge in(d,addr2set(hp,hd))) \implies d = tl)
+((in(tl,addr2set(hp,hd)) \wedge (\neg  hd = null) \wedge (\neg  tl = null) \wedge next(rd(hp,tl)) = null \wedge (\neg  d = null) \wedge next(rd(hp,d)) = null \wedge in(d,addr2set(hp,hd))) \implies d = tl)
 \end{dmath}
 
 \textcolor{red}{Auto-generated}
