@@ -41,8 +41,16 @@
 \usepackage{breqn}
 \usepackage{hyperref}
 
+\usepackage{babel}
+
 \usetikzlibrary{arrows}
-\tikzset{every node/.append style={minimum size=0.5cm, draw,circle,font=\sffamily\Large\bfseries,inner sep=0.05cm}}%
+\tikzset{
+every picture/.append style={
+  execute at begin picture={\deactivatequoting},
+  execute at end picture={\activatequoting}
+  }
+}
+%\tikzset{every node/.append style={minimum size=0.5cm, draw,circle,font=\sffamily\Large\bfseries,inner sep=0.05cm}}%
 
 
 

@@ -1,0 +1,122 @@
+\tikzset{
+    vertex/.style = {
+        circle,
+        fill            = black,
+        outer sep = 2pt,
+        inner sep = 1pt,
+    }
+}
+
+\begin{tikzpicture}[scale=2]
+\newcommand{\initiation}{Initiation}
+\newcommand{\selfconsec}{Self consecution}
+\newcommand{\otherconsec}{Others consecution}
+\newcommand{\valid}{Valid}
+  % Dialectics
+  \node[draw] (Program) at (1.5,1.5) {Program};
+  
+  \node[draw,minimum width=1.2cm, minimum height=0.7cm] (VC1) at (3,3.5) {$VC_1$};
+  \node[draw,minimum width=1.2cm, minimum height=0.7cm] (VC2) at (3,2) {$VC_2$};
+  \node[draw,minimum width=1.2cm, minimum height=0.7cm] (VC3) at (3,0.5) {$\vdots$};
+  \node[draw,minimum width=1.2cm, minimum height=0.7cm] (VCn) at (3,-0.8) {$VC_n$};
+
+  \node[draw,text=white,fill=gray,minimum width=4.2cm, minimum height=0.9cm] (Ax) at (7.4,5) {\large{\textbf{List of axioms}}};
+  \node[draw,text=black,fill=green] (AxCons) at (4,5) {\textbf{Consistent}};
+  \draw[-] (Ax) to node[above] {parser \& leap} (AxCons);
+  %\draw[->] (Ax) to node[above] {parser and leap} (AxCons);
+
+  %%%%%%%%%%%%%%%%% Gandalf Generation
+  \node[draw,minimum width=4.7cm,minimum height = 0.7cm] (SP11) at (5.5,4.2) {$\tau_1$ - \initiation};
+  \node[draw,minimum width=4.7cm,minimum height = 0.7cm] (SP12) at (5.5,3.6) {$\tau_1$ - \selfconsec};
+  \node[draw,minimum width=4.7cm,minimum height = 0.7cm] (SP1n) at (5.5,3.0) {$\tau_1$ - \otherconsec};
+  \node[draw,minimum width=4.7cm,minimum height = 0.7cm] (SP21) at (5.5,2.4) {$\tau_2$ - \initiation};
+  \node[draw,minimum width=4.7cm,minimum height = 0.7cm] (SP22) at (5.5,1.8) {$\tau_2$ - \selfconsec};
+  \node[draw,minimum width=4.7cm,minimum height = 0.7cm] (SP2n) at (5.5,1.2) {$\tau_2$ - \otherconsec};
+  \node[draw,minimum width=4.7cm,minimum height = 0.7cm] (SP31) at (5.5,0.5) {$...$};
+  \node[draw,minimum width=4.7cm,minimum height = 0.7cm] (SPn1) at (5.5,-0.2) {$\tau_n$ - \initiation};
+  \node[draw,minimum width=4.7cm,minimum height = 0.7cm] (SPn2) at (5.5,-0.8) {$\tau_n$ - \selfconsec};
+  \node[draw,minimum width=4.7cm,minimum height = 0.7cm] (SPnn) at (5.5,-1.4) {$\tau_n$ - \otherconsec};
+  
+
+  %%%%%%%%%%%%%%%% TRUE NODES 
+  \node[draw,fill=green] (True11) at (8,4.2) {\valid};
+  \node[draw,fill=green] (True12) at (8,3.6) {\valid};
+  \node[draw,fill=green] (True1n) at (8,3.0) {\valid};
+  \node[draw,fill=green] (True21) at (8,2.4) {\valid};
+  \node[draw,fill=green] (True22) at (8,1.8) {\valid};
+  \node[draw,fill=green] (True2n) at (8,1.2) {\valid};
+  \node[draw,fill=green] (True31) at (8,0.5) {\valid};
+  \node[draw,fill=green] (Truen1) at (8,-0.2) {\valid};
+  \node[draw,fill=green] (Truen2) at (8,-0.8) {\valid};
+  \node[draw,fill=green] (Truenn) at (8,-1.4) {\valid};
+  
+  
+  %%%%%%%%%%%%%%%%%%%%%% 			 %%%%%%%%%%%%%%%%%%%%%%   
+  %%%%%%%%%%%%%%%%%%%%%% TRANSITIONS %%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%% 			 %%%%%%%%%%%%%%%%%%%%%% 
+
+  \draw[->,draw=blue] (Program) to node[pos=0.4,above] {\leap} (VC1);
+  \draw[->,draw=blue] (Program) to node[pos=0.4,above] {} (VC2);
+  \draw[->,draw=blue] (Program) to node[pos=0.4,above] {} (VC3);
+  \draw[->,draw=blue] (Program) to node[pos=0.4,above] {} (VCn);
+  
+ 	
+ 	\draw[->,draw=blue] (VC1) to node[above,pos=0.4] {\gandalf} (SP11);
+	\draw[->,draw=blue] (VC1) to node[above,pos=0.4] {} (SP12);
+	\draw[->,draw=blue] (VC1) to node[above,pos=0.4] {} (SP1n);
+ 	
+ 	\draw[->,draw=blue] (VC2) to node[above,pos=0.4] {\gandalf} (SP21);
+	\draw[->,draw=blue] (VC2) to node[above,pos=0.4] {} (SP22);
+	\draw[->,draw=blue] (VC2) to node[above,pos=0.4] {} (SP2n);
+	
+ 	\draw[->,draw=blue] (VC3) to node[above,pos=0.4] {\gandalf} (SP31);
+	
+ 	\draw[->,draw=blue] (VCn) to node[above,pos=0.4] {\gandalf} (SPn1);
+	\draw[->,draw=blue] (VCn) to node[above,pos=0.4] {} (SPn2);
+	\draw[->,draw=blue] (VCn) to node[above,pos=0.4] {} (SPnn);
+	
+
+	
+
+  	
+  	\draw[->] (SP11) to node[above,pos=0.4] {\textbf{\spass}} (True11);
+  	\draw[->] (SP12) to node[above,pos=0.4] {\textbf{\spass}} (True12);
+  	\draw[->] (SP1n) to node[above,pos=0.4] {\textbf{\spass}} (True1n);
+  	
+  	\draw[->] (SP21) to node[above,pos=0.4] {\textbf{\spass}} (True21);
+  	\draw[->] (SP22) to node[above,pos=0.4] {\textbf{\spass}} (True22);
+  	\draw[->] (SP2n) to node[above,pos=0.4] {\textbf{\spass}} (True2n);
+  	
+  	\draw[->] (SP31) to node[above,pos=0.4] {\textbf{\spass}} (True31);
+  	
+  	\draw[->] (SPn1) to node[above,pos=0.4] {\textbf{\spass}} (Truen1);
+  	\draw[->] (SPn2) to node[above,pos=0.4] {\textbf{\spass}} (Truen2);
+  	\draw[->] (SPnn) to node[above,pos=0.4] {\textbf{\spass}} (Truenn);
+  
+
+  \draw[-,draw=blue](Ax) to (7.4,-1.4);	
+
+  	\draw node[vertex] (Joint) at (7.4,4.2) {};
+  	\draw node[vertex] (Joint) at (7.4,3.6) {};
+  	\draw node[vertex] (Joint) at (7.4,3.0) {};
+  	\draw node[vertex] (Joint) at (7.4,2.4) {};
+  	\draw node[vertex] (Joint) at (7.4,1.8) {};
+  	\draw node[vertex] (Joint) at (7.4,1.2) {};
+  	\draw node[vertex] (Joint) at (7.4,0.5) {};
+  	\draw node[vertex] (Joint) at (7.4,-0.2) {};
+  	\draw node[vertex] (Joint) at (7.4,-0.8) {};
+  	\draw node[vertex] (Joint) at (7.4,-1.4) {};
+
+
+  %\draw[->,draw=blue] (Joint) to (Synthesis);
+  %\draw[->,draw=blue] (Synthesis) to[in=180,out=180] (Thesis);
+  
+  \draw[-,thick] (1,-2) -- (8,-2);
+    \node (Program2) at (4.5,-2.5) {Program};
+    \node[fill=green] (Final) at (5.5,-2.5) {\valid};
+    \node (equiv) at (5,-2.5) {$\equiv$};
+     
+
+
+  
+  \end{tikzpicture}
