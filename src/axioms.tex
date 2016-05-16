@@ -1,203 +1,272 @@
-\item[union-def] 
+\item[union-def]
 \label{ax::union_def}
 
 \begin{dmath}
 ((in(x,se) \vee in(x,se2)) \dimplies in(x,union(se,se2)))
 \end{dmath}
 
-\item[Intr-def] 
-\label{ax::Intr_def}
+\textcolor{red}{Auto-generated}
+\item[union-conmutative]
+\label{ax::union_conmutative}
 
 \begin{dmath}
-((in(x,se) \wedge in(x,se2)) \dimplies in(x,intr(se,se2)))
+union(se,se2) = union(se2,se)
 \end{dmath}
 
-\item[SetDiff-def] 
-\label{ax::SetDiff_def}
-
-\begin{dmath}
-((in(x,se) \wedge (\neg  (in(x,se2)))) \dimplies in(x,diff(se,se2)))
-\end{dmath}
-
-\item[in-set--def] 
+\textcolor{red}{Auto-generated}
+\item[in-set--def]
 \label{ax::in_set__def}
 
 \begin{dmath}
-((\neg  (in(a,se))) \implies in(b,se) \implies (\neg  (b = a)))
+((\neg  in(a,se)) \implies in(b,se) \implies (\neg  b = a))
 \end{dmath}
 
-\item[a--in--singl-a] 
+\textcolor{red}{Auto-generated}
+\item[a--in--singl-a]
 \label{ax::a__in__singl_a}
 
 \begin{dmath}
-(((\neg  (a = b)) \implies (\neg  (in(b,{ a })))) \wedge in(a,{ a }))
+(((\neg  a = b) \implies (\neg  in(b,{ a }))) \wedge in(a,{ a }))
 \end{dmath}
 
-\item[a-not--in-se-dif-a] 
+\textcolor{red}{Auto-generated}
+\item[emptySet-is-empty]
+\label{ax::emptySet_is_empty}
+
+\begin{dmath}
+(\neg  in(a,empty))
+\end{dmath}
+
+\textcolor{red}{Auto-generated}
+\item[SetDiff-def]
+\label{ax::SetDiff_def}
+
+\begin{dmath}
+((in(x,se) \wedge (\neg  in(x,se2))) \dimplies in(x,diff(se,se2)))
+\end{dmath}
+
+\textcolor{red}{Auto-generated}
+\item[a-not--in-se-dif-a]
 \label{ax::a_not__in_se_dif_a}
 
 \begin{dmath}
-(in(a,se) \implies (\neg  (in(a,diff(se,{ a })))))
+(in(a,se) \implies (\neg  in(a,diff(se,{ a }))))
 \end{dmath}
 
-\item[nextreg] 
-\label{ax::nextreg}
-
-\begin{dmath}
-((in(a,se) \wedge se = addr2set(m,b) \wedge c = rd(m,a).next \wedge (\neg  (a = null))) \implies in(c,se))
-\end{dmath}
-
-\item[data--def] 
+\textcolor{red}{Auto-generated}
+\item[data--def]
 \label{ax::data__def}
 
 \begin{dmath}
-mkcell(e,a,t).data = e
+data(mkcell(e,a,t)) = e
 \end{dmath}
 
-\item[next--def] 
+\textcolor{red}{Auto-generated}
+\item[next--def]
 \label{ax::next__def}
 
 \begin{dmath}
 mkcell(e,a,t).next = a
 \end{dmath}
 
-\item[lockid--def] 
+\textcolor{red}{Auto-generated}
+\item[lockid--def]
 \label{ax::lockid__def}
 
 \begin{dmath}
 mkcell(e,a,t).lockid = t
 \end{dmath}
 
-\item[next-error--is--null] 
+\textcolor{red}{Auto-generated}
+\item[next-error--is--null]
 \label{ax::next_error__is__null}
 
 \begin{dmath}
 error.next = null
 \end{dmath}
 
-\item[equality-bt-cell] 
+\textcolor{red}{Auto-generated}
+\item[equality-bt-cell]
 \label{ax::equality_bt_cell}
 
 \begin{dmath}
-(c1 = c2 \implies (c1.data = c2.data \wedge c1.lockid = c2.lockid \wedge c1.next = c2.next))
+(c1 = c2 \implies (data(c1) = data(c2) \wedge c1.lockid = c2.lockid \wedge c1.next = c2.next))
 \end{dmath}
 
-\item[upd--def--not-null] 
+\textcolor{red}{Auto-generated}
+\item[equality-on-read]
+\label{ax::equality_on_read}
+
+\begin{dmath}
+(a = b \implies rd(m,a) = rd(m,b))
+\end{dmath}
+
+\textcolor{red}{Auto-generated}
+\item[upd--def--not-null]
 \label{ax::upd__def__not_null}
 
 \begin{dmath}
-((\neg  (a = null)) \implies upd(m,a,c) = m2 \implies rd(m2,a) = c)
+((\neg  a = null) \implies upd(m,a,c) = m2 \implies rd(m2,a) = c)
 \end{dmath}
 
-\item[upd--def--null] 
-\label{ax::upd__def__null}
-
-\begin{dmath}
-(a = null \implies upd(m,a,c) = m2 \implies m2 = m)
-\end{dmath}
-
-\item[upd--def--one-at-the-time] 
+\textcolor{red}{Auto-generated}
+\item[upd--def--one-at-the-time]
 \label{ax::upd__def__one_at_the_time}
 
 \begin{dmath}
-(((\neg  (a = null)) \wedge (\neg  (a = b))) \implies upd(m,a,c) = m2 \implies rd(m,b) = rd(m2,b))
+(((\neg  a = null) \wedge (\neg  a = b)) \implies upd(m,a,c) = m2 \implies rd(m,b) = rd(m2,b))
 \end{dmath}
 
-\item[rd-mem--def] 
+\textcolor{red}{Auto-generated}
+\item[rd-mem--def]
 \label{ax::rd_mem__def}
 
 \begin{dmath}
 rd(m,null) = error
 \end{dmath}
 
-\item[lowest--less-than-highest] 
+\textcolor{red}{Auto-generated}
+\item[lowest--less-than-highest]
 \label{ax::lowest__less_than_highest}
 
 \begin{dmath}
-(\neg  (lowestElem = highestElem))
+(\neg  lowestElem = highestElem)
 \end{dmath}
 
-\item[less-total] 
+\textcolor{red}{Auto-generated}
+\item[lowestElem--def-tll]
+\label{ax::lowestElem__def_tll}
+
+\begin{dmath}
+(e = lowestElem \vee lowestElem < e)
+\end{dmath}
+
+\textcolor{red}{Auto-generated}
+\item[highestElem--def-tll]
+\label{ax::highestElem__def_tll}
+
+\begin{dmath}
+(e = highestElem \vee e < highestElem)
+\end{dmath}
+
+\textcolor{red}{Auto-generated}
+\item[less-trans]
+\label{ax::less_trans}
+
+\begin{dmath}
+((x < y \wedge y < z) \implies x < z)
+\end{dmath}
+
+\textcolor{red}{Auto-generated}
+\item[less-total]
 \label{ax::less_total}
 
 \begin{dmath}
-(\neg  ((x < y \wedge y < x)))
+(\neg  (x < y \wedge y < x))
 \end{dmath}
 
-\item[ls-xy--not-ls-yx] 
+\textcolor{red}{Auto-generated}
+\item[ls-xy--not-ls-yx]
 \label{ax::ls_xy__not_ls_yx}
 
 \begin{dmath}
-(x < y \implies (\neg  (y < x)))
+(x < y \dimplies ((\neg  x = y) \wedge (\neg  y < x)))
 \end{dmath}
 
-\item[addr2set--def] 
-\label{ax::addr2set__def}
+\textcolor{red}{Auto-generated}
+\item[nextreg]
+\label{ax::nextreg}
 
 \begin{dmath}
-(in(b,addr2set(m,a)) \dimplies reach(m,a,b,getp(m,a,b)))
+((in(a,se) \wedge se = addr2set(m,b) \wedge c = rd(m,a).next \wedge (\neg  a = null)) \implies in(c,se))
 \end{dmath}
 
-\item[addr2set-null--is--singl-null] 
+\textcolor{red}{Auto-generated}
+\item[lock-keeps-addr2set]
+\label{ax::lock_keeps_addr2set}
+
+\begin{dmath}
+(hp_p = upd(hp,a,mkcell(data(rd(hp,a)),rd(hp,a).next,t)) \implies addr2set(hp,hd) = addr2set(hp_p,hd))
+\end{dmath}
+
+\textcolor{red}{Auto-generated}
+\item[lock-keeps-heap--data]
+\label{ax::lock_keeps_heap__data}
+
+\begin{dmath}
+(hp_p = upd(hp,a,mkcell(data(rd(hp,a)),rd(hp,a).next,t)) \implies data(rd(hp,a)) = data(rd(hp_p,a)))
+\end{dmath}
+
+\textcolor{red}{Auto-generated}
+\item[lock-keeps-heap--next]
+\label{ax::lock_keeps_heap__next}
+
+\begin{dmath}
+(hp_p = upd(hp,a,mkcell(data(rd(hp,a)),rd(hp,a).next,t)) \implies rd(hp,a).next = rd(hp_p,a).next)
+\end{dmath}
+
+\textcolor{red}{Auto-generated}
+\item[not-in-region--not-change-heap-addr]
+\label{ax::not_in_region__not_change_heap_addr}
+
+\begin{dmath}
+((\neg  in(a,addr2set(hp,hd))) \implies addr2set(hp,hd) = addr2set(upd(hp,a,c),hd))
+\end{dmath}
+
+\textcolor{red}{Auto-generated}
+\item[addr2set-primim]
+\label{ax::addr2set_primim}
+
+\begin{dmath}
+((data(rd(hp,hd)) < data(rd(hp,tl)) \wedge rd(hp,hd).next = tl \wedge rd(hp,tl).next = null) \implies addr2set(hp,hd) = union(union({ hd },{ tl }),{ null }))
+\end{dmath}
+
+\textcolor{red}{Auto-generated}
+\item[insert--keeps-addr2set]
+\label{ax::insert__keeps_addr2set}
+
+\begin{dmath}
+((reg = addr2set(hp,hd) \wedge union(reg,{ aux }) = reg_p \wedge rd(hp,prev).next = curr \wedge (\neg  prev = curr) \wedge rd(hp,aux).next = curr \wedge (\neg  aux = null) \wedge (\neg  prev = null) \wedge (\neg  curr = null) \wedge in(prev,addr2set(hp,hd)) \wedge hp_p = upd(hp,prev,mkcell(data(rd(hp,prev)),aux,rd(hp,prev).lockid))) \implies reg_p = addr2set(hp_p,hd))
+\end{dmath}
+
+\textcolor{red}{Auto-generated}
+\item[remove--keeps-addr2set]
+\label{ax::remove__keeps_addr2set}
+
+\begin{dmath}
+((rd(hp,curr).next = aux \wedge rd(hp,prev).next = curr \wedge (\neg  aux = rd(hp,prev).next) \wedge hp_p = upd(hp,prev,mkcell(data(rd(hp,prev)),aux,rd(hp,prev).lockid)) \wedge (\neg  aux = null) \wedge in(curr,addr2set(hp,hd)) \wedge in(null,addr2set(hp,hd)) \wedge in(prev,addr2set(hp,hd))) \implies diff(addr2set(hp,hd),{ curr }) = addr2set(hp_p,hd))
+\end{dmath}
+
+\textcolor{red}{Auto-generated}
+\item[addr2set-rec-def]
+\label{ax::addr2set_rec_def}
+
+\begin{dmath}
+addr2set(m,a) = union({ a },addr2set(m,rd(m,a).next))
+\end{dmath}
+
+\textcolor{red}{Auto-generated}
+\item[addr2set-null--is--singl-null]
 \label{ax::addr2set_null__is__singl_null}
 
 \begin{dmath}
 addr2set(m,null) = { null }
 \end{dmath}
 
-\item[if--addr2set--then--reach-getp] 
-\label{ax::if__addr2set__then__reach_getp}
+\textcolor{red}{Auto-generated}
+\item[next-is-not-same--if-ordered]
+\label{ax::next_is_not_same__if_ordered}
 
 \begin{dmath}
-(se = addr2set(m,a) \implies (in(b,se) \dimplies reach(m,a,b,getp(m,a,b))))
+((in(a,addr2set(hp,hd)) \wedge in(tl,addr2set(hp,hd)) \wedge (\neg  hd = null) \wedge (\neg  tl = null) \wedge (\neg  a = null) \wedge rd(hp,tl).next = null) \implies (\neg  rd(hp,a).next = a))
 \end{dmath}
 
-\item[reach--a-a-epsilon--true] 
-\label{ax::reach__a_a_epsilon__true}
+\textcolor{red}{Auto-generated}
+\item[just-tail--points--null]
+\label{ax::just_tail__points__null}
 
 \begin{dmath}
-reach(m,a,a,epsilon)
+((in(tl,addr2set(hp,hd)) \wedge (\neg  hd = null) \wedge (\neg  tl = null) \wedge rd(hp,tl).next = null \wedge (\neg  d = null) \wedge rd(hp,d).next = null \wedge in(d,addr2set(hp,hd))) \implies d = tl)
 \end{dmath}
 
-\item[getp--same-addr--i-epsilon] 
-\label{ax::getp__same_addr__i_epsilon}
-
-\begin{dmath}
-getp(m,a,a) = epsilon
-\end{dmath}
-
-\item[getp--recursive--base] 
-\label{ax::getp__recursive__base}
-
-\begin{dmath}
-((\neg  (a = rd(m,a).next)) \implies getp(m,a,rd(m,a).next) = [ a ])
-\end{dmath}
-
-\item[getp--recursive--step] 
-\label{ax::getp__recursive__step}
-
-\begin{dmath}
-(((\neg  (getp(m,a,b) = epsilon)) \wedge (\neg  (a = b)) \wedge (\neg  (rd(m,a).next = b))) \implies append([ a ],getp(m,rd(m,a).next,b),getp(m,a,b)))
-\end{dmath}
-
-\item[path2set-epsilon--is--empty] 
-\label{ax::path2set_epsilon__is__empty}
-
-\begin{dmath}
-path2set(epsilon) = empty
-\end{dmath}
-
-\item[path2set-recursive--def--base] 
-\label{ax::path2set_recursive__def__base}
-
-\begin{dmath}
-path2set([ a ]) = { a }
-\end{dmath}
-
-\item[path2set-recursive--def--step] 
-\label{ax::path2set_recursive__def__step}
-
-\begin{dmath}
-(\neg  (getp(m,a,b) = epsilon)) \implies (path2set(getp(m,a,b)) = union({ a },path2set(getp(m,rd(m,a).next,b))))
-\end{dmath}
-
+\textcolor{red}{Auto-generated}
