@@ -5,8 +5,36 @@
 
 Finally, the we will compare the timings of using automatic theorem provers versus model searching done by \citetool{leap}.
 
+\section{Axioms}
+
+The set of relevant axioms needed to prove all the invariants is presented now.
+%
+There are a lot of secondary axioms needed by \spass that have been omitted. 
+%
+The omitted axioms refer: 
+%
+to the sorting (\spass is not multi-sorted as the theory we work with. It is necessary to define that an \addr is not an \elem, an \elem is not an \addr, etc), to constants (\spass does not include arithmetic, so $0$,$1$,... must be defined as unique 0-ary functions specifying that $0\not\eq 1,0\not\eq 2$,...); 
+%
+to the local and global variables of the program (\leap is quantifier free but \spass need to quantify every variable)
+%
+The set of axioms is:
+		
+\begin{description}
+\label{ax::fulllist}
+\input{src/axioms}
+\end{description}
+
+
+The full list of axioms has been included in appendix \ref{spass:syntax_file}.
+
+We claim that there is no need of more axioms than the ones defined at \ref{ax::fulllist}. 
+%
+The next section will present which axioms are needed for which invariants.
+
 \section{Analysis of generated proofs}
+\label{proof:Preserve}
 \label{sec:axiomgraph}
+
 
 \subsection{Which axioms are the most used}
 

@@ -1,9 +1,12 @@
 % -*- root: ../main.tex -*-
 \subsection{Formal representation of a program}
 
-This \gls{SPL} and its formal representation was first proposed by ... \todo{who?}. 
+This \gls{SPL} and its formal representation is the language chosen to write the programs to be formally verified.
 %
-The basic definitions and concepts are included.
+It has been chosen by \citep{thesisAle} because its simplicity and \doubt{expressiveness} in order to write concurrent programs. 
+%
+Because its simplicity it is a great option to do formal verification with it.
+
 
 \subsubsection{Preliminaries (Notation, definition)}
 
@@ -59,7 +62,7 @@ Going back to the example, we have:
 
 We have a post-state program counter ($\pc'=2$) and some post-state variables. 
 %
-As the execution of the assignment the variable $x$ takes a value (independently of the value in the pre-state), then $x'=2$ (regardless what value $x$ has). 
+As the execution of the assignment the variable $x$ takes a value (independently of the value in the pre-state), then $x'=2$ (regardless what value $x$ had). 
 
 The next step could be
 \[
@@ -112,14 +115,14 @@ For this definitions we use the letter $T$ to refer a particular thread.
 			\]
 %
 	\item [Pointer access:]
-		Cell fields are accessible through the pointer operator \pointsto.
+		Structure fields are accessible through the pointer operator \pointsto.
 %
 		There are two possible scenarios for the use of pointers, depending on 
-		whether the statement accesses or modifies a cell field.
+		whether the statement accesses or modifies a structure field.
 %
 		We present now the semantics for both cases.
 %
-		The first case corresponds to the access of a cell field through an 
+		The first case corresponds to the access of a structure field through an 
 		address pointer.
 %
 \[
@@ -140,13 +143,13 @@ For this definitions we use the letter $T$ to refer a particular thread.
 \end{array}
 \]
 %
-		The second case corresponds to the modification of a cell field using 
+		The second case corresponds to the modification of a structure field using 
 		an address pointer.
 %
-		Note how, in the second case, all cells (except the one pointed by 
+		Note how, in the second case, all structures (except the one pointed by 
 		$\mathtt{b}$) remain unchanged.
 %
-		Also, all fields of the cell pointed by $\mathtt{b}$ remain unmodified 
+		Also, all fields of the structure pointed by $\mathtt{b}$ remain unmodified 
 		except for $\mathtt{field_n}$.
 %
 		\[

@@ -46,19 +46,18 @@ The procedure is the following:
 %
 First each function is reduced to a finite set of \gls{FOL} formulae called \concept[Verification condition]{\gls{VC}}.
 %
-\footnote{This reduction is done with the basic reducing cases we studied in \ref{def:SPL}.}
+This reduction is done with the basic reducing cases we studied in \ref{def:SPL}.
 %
-We achieve to prove that $\tau$ is valid in every state of the execution.
+The goal is to prove that $\tau$ is valid in every state of the execution.
 %
 \textbf{Induction} is the methodology used.
 %
 First, we assert $\tau$ is valid before the program starts (induction base).
 %
-Then, we assume $\tau$ in the precondition and prove $\tau'$ valid.
+Then, we assume $\tau$ in the precondition and prove $\tau'$ valid (induction step) for every possible transition.
 
 
-
-Some examples are studied next to clarify the procedure.
+An example is presented to clarify the method.
 
 \begin{example}
 \input{src/subsrc/exampleFactorial.tex}
@@ -161,20 +160,15 @@ Finally, $\Premise{S3}$ will be referred as \concept{others-consecution} because
 
 \begin{example}
 Threads sharing and array. Each thread has an index. How to assure no other thread writes in my index?
+\todo{\;\;\;Is this example needed?}
 \end{example}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Linked list theory}
@@ -182,7 +176,7 @@ Threads sharing and array. Each thread has an index. How to assure no other thre
 \subsection{Description}
 
 In order to work with a linked list in a context with multiple thread using the same list 
-there are two approach. 
+there are two possible approaches. 
 %
 A thread could lock the entire list, work with it and then release it. 
 %
@@ -278,17 +272,19 @@ Similarly, the set \elements is initialized containing only the elements
 initially stored at the nodes pointed by \head and \tail.
 %
 There is also a function \concept{havocListElem}() which returns a random element. 
-
-
+%
+%
+%
 \begin{figure}[!htbp]
 		\myframe{\includegraphics[scale=0.4]{graphics/_listcode}}
 		\caption{Concurrent lock-coupling lists implementation.}
 		\label{fig:listcode}
 \end{figure}
+%
 
 
 \subsection{TL3}
-
+%
 \emph{Theory of Linked Lists with Locks} \TLLpL, is the theory we use for describing linked-list heap memory layout.
 %
 \TLLpL is a multi-sorted first-order theory.
@@ -344,6 +340,8 @@ address following a chain of \fNext fields.
 We proceed to describe the signature of each theory, listing the sorts used and explaining its functions, predicates and constants. 
 %
 Every theory includes the equality theory \ref{theory:equality} 
+
+\todo{\;\;Maybe\;\;these \text{      tables}\;\;should \text{    be reformatted.}}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
