@@ -5,4 +5,4 @@ tid j
 
 \paragraph{invariant [disjoint] :}
 
-(i != j $\wedge$ @after_malloc(i). $\wedge$ @after_malloc(j).) $\to$ insert::aux(i) != insert::aux(j)
+(i != j $\wedge$ \@after_malloc(i). $\wedge$ \@after_malloc(j).) $\to$ insert::aux(i) != insert::aux(j)

@@ -7,14 +7,14 @@ tid i
    rd(heap, head).data = lowestElem
    rd(heap, tail).data = highestElem
 
-   @main_e(i). -> (main::e(i) != lowestElem $\wedge$ main::e(i) != highestElem)
-   @search_body(i). -> (search::e(i) != lowestElem $\wedge$ search::e(i) != highestElem)
+   @main_e(i). $\to$ (main::e(i) != lowestElem $\wedge$ main::e(i) != highestElem)
+   @search_body(i). $\to$ (search::e(i) != lowestElem $\wedge$ search::e(i) != highestElem)
 
 #insert_bounded_e:
-   @insert_body(i). -> (insert::e(i) != lowestElem $\wedge$ insert::e(i) != highestElem)
+   @insert_body(i). $\to$ (insert::e(i) != lowestElem $\wedge$ insert::e(i) != highestElem)
 
 #remove_bounded_e:
-   @remove_body(i). -> (remove::e(i) != lowestElem $\wedge$ remove::e(i) != highestElem)
+   @remove_body(i). $\to$ (remove::e(i) != lowestElem $\wedge$ remove::e(i) != highestElem)
 
 
 
@@ -22,39 +22,39 @@ tid i
 
 
 #search_curr_bounded:
-   @sch_after_lookup(i). ->
+   @sch_after_lookup(i). $\to$
       (rd(heap,search::curr(i)).data > search::e(i) $\vee$
        rd(heap,search::curr(i)).data = search::e(i))
 
-   @sch_prev_def(i). -> (rd(heap, search::prev(i)).data < rd(heap, tail).data $\vee$
+   @sch_prev_def(i). $\to$ (rd(heap, search::prev(i)).data < rd(heap, tail).data $\vee$
                          rd(heap, search::prev(i)).data = rd(heap, tail).data)
-   @sch_while_begins(i). -> rd(heap, search::curr(i)).data < search::e(i)
+   @sch_while_begins(i). $\to$ rd(heap, search::curr(i)).data < search::e(i)
 
 #search_prev_lower:
-   @sch_prev_lower(i). -> rd(heap, search::prev(i)).data < search::e(i)
+   @sch_prev_lower(i). $\to$ rd(heap, search::prev(i)).data < search::e(i)
 
 
 
 ///////  Insert   /////////////////////////
 
 
-   @ins_curr_def(i). -> (rd(heap, insert::curr(i)).data < rd(heap, tail).data $\vee$
+   @ins_curr_def(i). $\to$ (rd(heap, insert::curr(i)).data < rd(heap, tail).data $\vee$
                          rd(heap, insert::curr(i)).data = rd(heap, tail).data)
-   @ins_prev_def(i). -> (rd(heap, insert::prev(i)).data < rd(heap, tail).data $\vee$
+   @ins_prev_def(i). $\to$ (rd(heap, insert::prev(i)).data < rd(heap, tail).data $\vee$
                          rd(heap, insert::prev(i)).data = rd(heap, tail).data)
-   @ins_while_begins(i). -> rd(heap, insert::curr(i)).data < insert::e(i)
+   @ins_while_begins(i). $\to$ rd(heap, insert::curr(i)).data < insert::e(i)
 
 #insert_prev_lower:
-   @ins_prev_lower(i). -> rd(heap, insert::prev(i)).data < insert::e(i)
+   @ins_prev_lower(i). $\to$ rd(heap, insert::prev(i)).data < insert::e(i)
 
 #insert_curr_higher:
-   @ins_insert(i). -> rd(heap, insert::curr(i)).data > insert::e(i)
+   @ins_insert(i). $\to$ rd(heap, insert::curr(i)).data > insert::e(i)
 
 #insert_aux_is_e:
-   @after_malloc(i). -> rd(heap, insert::aux(i)).data = insert::e(i)
+   @after_malloc(i). $\to$ rd(heap, insert::aux(i)).data = insert::e(i)
 
 #insert_curr_bounded:
-   @ins_final_conditional(i). ->
+   @ins_final_conditional(i). $\to$
       (rd(heap,insert::curr(i)).data > insert::e(i) $\vee$
        rd(heap,insert::curr(i)).data = insert::e(i))
 
@@ -63,16 +63,16 @@ tid i
 
 
 #remove_curr_is_e:
-   @rem_remove(i). -> rd(heap, remove::curr(i)).data = remove::e(i)
+   @rem_remove(i). $\to$ rd(heap, remove::curr(i)).data = remove::e(i)
 
 #remove_curr_bounded:
-   @rem_final_conditional(i). ->
+   @rem_final_conditional(i). $\to$
       (rd(heap,remove::curr(i)).data > remove::e(i) $\vee$
        rd(heap,remove::curr(i)).data = remove::e(i))
 
-   @rem_prev_def(i). -> (rd(heap, remove::prev(i)).data < rd(heap, tail).data $\vee$
+   @rem_prev_def(i). $\to$ (rd(heap, remove::prev(i)).data < rd(heap, tail).data $\vee$
                          rd(heap, remove::prev(i)).data = rd(heap, tail).data)
-   @rem_while_begins(i). -> rd(heap, remove::curr(i)).data < remove::e(i)
+   @rem_while_begins(i). $\to$ rd(heap, remove::curr(i)).data < remove::e(i)
 
 #remove_prev_lower:
-   @rem_prev_lower(i). -> rd(heap, remove::prev(i)).data < remove::e(i)
+   @rem_prev_lower(i). $\to$ rd(heap, remove::prev(i)).data < remove::e(i)
