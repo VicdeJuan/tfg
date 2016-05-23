@@ -26,7 +26,7 @@ This last comment is a very important issue because some proofs has taken hours 
 %
 As a curiosity, the longest time \spass was left running was 82 hours and it stopped because a proof was found.
 
-\todo{Spass example structure file}
+At appendix \ref{spass:syntax_file} an example of a complete \spass file can be found.
 
 \subsubsection{Leap}
 
@@ -247,7 +247,7 @@ The omitted axioms refer:
 %
 to the sorting (\spass is not multi-sorted as the theory we work with. It is necessary to define tha an \addr is not an \elem, an \elem is not an \addr, etc), to constants (\spass does not include arithmetic, so $0$,$1$,... must be defined as unique 0-ary functions specifying that $0\not\eq 1,0\not\eq 2$,...); 
 %
-to the local and global variables of the program (\leap is quantifier free but \spass need to quantify every variable, so )
+to the local and global variables of the program (\leap is quantifier free but \spass need to quantify every variable)
 %
 The set of axioms is:
 		
@@ -256,3 +256,5 @@ The set of axioms is:
 \input{src/axioms}
 \end{description}
 
+
+The full list of axioms has been included in appendix \ref{spass:syntax_file}.
