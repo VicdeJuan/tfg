@@ -1,9 +1,10 @@
 % -*- root: ../main.tex -*-
 \chapter{Results\label{chap:results}}
 
-\paragraph{Abstract} In this chapter we will expose the structure of the generated proofs. We will mention some of the most relevant and difficult intermediate steps that we needed to prove.
+\paragraph{Abstract}
+% In this chapter we will expose the structure of the generated proofs. We will mention some of the most relevant and difficult intermediate steps that we needed to prove.
 
-Finally, the we will compare the timings of using automatic theorem provers versus model searching done by \citetool{leap}.
+%Finally, the we will compare the timings of using automatic theorem provers versus model searching done by \citetool{leap}.
 
 \section{Axioms}
 
@@ -25,7 +26,9 @@ The set of axioms is:
 \end{description}
 
 
-The full list of axioms has been included in appendix \ref{spass:syntax_file}.
+The full list of axioms has been included as an appendix at \ref{spass:syntax_file}. 
+
+%
 
 We claim that there is no need of more axioms than the ones defined at \ref{ax::fulllist}. 
 %
@@ -35,16 +38,106 @@ The next section will present which axioms are needed for which invariants.
 \label{proof:Preserve}
 \label{sec:axiomgraph}
 
+\paragraph{Example}
+Lets take \invDisjoint as an example because its simplicity.
+%
+To prove \invDisjoint valid
+%
+(\footnote{Its full definition is at \ref{inv::full:disjoint}})
+%
+there are only needed 3 axioms: the axiom which states that numbers are different and the 2 axioms which states $i$ and $j$ are threads. 
+%
+With this 3 axiom, \spass can prove valid all the \spass problems associated with \invDisjoint.
 
-\subsection{Which axioms are the most used}
+
+To clarify the process described \doubt{in/at} \ref{ProcessDescription} we expose all the \spass problems generated to prove \invDisjoint.
+%
+There are 362 \spass problems. Half of them correspond to the \reducedProblem and the other half to the \smallToBig problem.
+%
+For each half, there are 181 \spass problems:
+%
+For \textbf{\instantiation} there is one problem. 
+%
+For self-consecution there are 60 \spass problems (the program has 55 lines, so there is a \gls{VC} for each line except for \textit{while} and \textit{if} which have 2 \gls{VC} associated depending on the validity of the condition. As there are 3 while and 2 if, we have) for each thread. 
+%
+As \invDisjoint involves 2 threads, there are \textbf{120 self-consecution \spass problems}.
+%
+Finally for \textbf{Others consecution} there are \textbf{60} \spass problems.
+
+\paragraph{Analysis}
+
+Most of the transitions (\numTransitionsProvedWithPC in \numTotalTransitions) are proven without any relevant axiom. 
+%
+Some of them don't even need any axiom. 
+%
+\smallToBig problems usually don't need any axiom, because there are simple but big \gls{FOL} formulas.
+
+Table \ref{table:analysisProofs}  contains some global information about the prove of each invariant.
+%
+It is important to mention that every invariant has 2 problems of \instantiation. 
+
+\begin{table}[hbtp]
+\centering
+\begin{tabular}{ccccc}
+Invariant & Self-consecution & Others consecution & Total & Number of axioms used\\
+\input{src/tex/analysisTable.tex}
+\end{tabular}
+\label{table:analysisProofs}
+\caption{Global statistics of each invariant.}
+\end{table}
+
+
+In terms of number of axioms, it is interesting to see that \_\_\_\_\_\_\_\_ is the most complicated, followed by \_\_\_\_\_\_\_\_. 
+%
+The differences on the number of other-consecution problem is caused by the splitting on complex \spass problems. 
+%
+To prove \orderInv all other-consecution problems have been splat, but for \lockInv and \nextInv just 21 other consecution problems have been splat.
+%
+Despite that fact, \orderInv is not very complex in terms of number of axioms. 
+
 
 \subsection{Special transitions}
+
+Due to the limited space, we just present the deep analysis of two important transitions.
 
 \section{Time analysis}
 \label{sec:timeanalysis}
 
 \subsection{Proof generation}
 
+All the times shown refer to the time \spass has needed to prove the problem. 
+%
+Previous parsing and creating the \spass problem has been ignored.
+
+
+
 \subsection{Proof checking}
 
+One of the greatest consequences of this method is the possibility to refute the generated proofs to double check they are valid.
+%
+It has been developed that for each \spass problem there are 3 files generated. The \spass output (storing the information of which axioms had been used and the time), the \spass proof in \spass format and the \spass proof in \gls{tptp} syntax.
+%
+By generating a tptp proof for each \spass problem we made possible to check this proofs with any other theorem prover as \citetool{vampire} or \citetool{isabelle}.
+
+Another advantage of the generation of this files is the reduced amount of time needed to check the validity of the fine-grained-linked-list implementation. 
+%
+There is no need to regenerate all the verification conditions and regenerate all the \spass files and let \spass running until it finds the proof for every problem. 
+%
+One can just run \spass on the generated proofs and will save lot of time.
+%
+Lets see the amount of time needed to check the proofs in stead of generate them.
+
+
 \subsection{Leap times}
+
+In table \ref{anaylisis::bigtimetable} one can find the
+
+\begin{table}[hbtp]
+\centering
+\begin{tabular}{cccc}
+Invariant & Leap & Generate Proofs & Check proofs\\
+
+\end{tabular}
+\caption{Compare of the times.}
+\label{anaylsis:bigtimetable}
+\end{table}

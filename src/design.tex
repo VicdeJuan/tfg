@@ -440,11 +440,20 @@ The functions are described \doubt{in/at} table \ref{table:memory_signature}.
 \fRd & $\mem\times\addr\to\cell$ & Models memory deference. \\
 &&								\;\;\; Returns the value from the \mem the \cell \\
 &&								\;\;\; stored in the \addr.\\
-\fUpd & $\mem\times\addr\times\cell\to\mem$ & Creates a new \mem from the given one
+\fUpd & $\mem\times\addr\times\cell\to\mem$ & Creates a new \mem from the given one\\
 \end{tabular}
 \caption{\textbf{Functions of $\Sigma_{\mem}$} theory}
 \label{table:memory_signature}
 \end{table}
+
+A function related with \mem theory is \fMalloc, used in \insertprg procedure.
+%
+\fMalloc is a function which does not belongs to \gls{SPL} nor \TLLpL but it can be translated as a conjecture of assignations and assignations are allowed in both theories.
+%
+\fMalloc returns a new fresh address different to every other address in use, so the \freshaddr returned by \fMalloc is not equal to \head, nor \tail, etc.
+%
+\fMalloc formal representation correspond to a big conjecture of all the formulas stating \freshaddr is not equal to \addr, for all \addr appearing in the formula (except itself).
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

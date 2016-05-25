@@ -1,8 +1,8 @@
-\paragraph{vars:}
+vars:
 
 tid i
 tid j
 
-\paragraph{invariant [disjoint] :}
+invariant [disjoint] :
 
 (i != j $\wedge$ \@after_malloc(i). $\wedge$ \@after_malloc(j).) $\to$ insert::aux(i) != insert::aux(j)

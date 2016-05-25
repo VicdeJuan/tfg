@@ -56,6 +56,7 @@ This is needed because \spass does not have information nor tactics about which 
 
 \subsubsection{Process}
 
+\label{ProcessDescription}
 Once the tools have been described, we can explain the process. 
 %
 The process followed is shown in the figure \ref{fig:process}
@@ -239,25 +240,25 @@ the full formula of each invariant is at \ref{appendix::inv:full}.
 %
 %
 %
-\paragraph{Disjoint:}
+\paragraph{\invDisjoint:}
 This invariants provides the information needed when inserting a new element.
 %
 Two different malloc return 2 different addresses, so there is not possible to insert the same address twice in the list.
 %
-\paragraph{Region:}
+\paragraph{\invRegion:}
 This invariants refers to the information related to which addresses are in \region var, i.e., which addresses are reachable from \head.
 %
-\paragraph{Locks:}
+\paragraph{\invLock:}
 This invariants refers to the information provided by the locks. 
 %
 The \fLock acquired at line $l_i$ is not unlocked until line $l_{i+j}$, so at lines $l_{k}\; k\in(i,i+j)$ the \fLock should be locked.
 %
 This is a very important invariant because it assures that concurrency is possible and it is well mplemented.
 %
-\paragraph{Order:}
+\paragraph{\invOrder:}
 This invariants refers to the information related to the order of the list. 
 %
-\paragraph{Nexts:}
+\paragraph{\invNext:}
 This invariants refers to the information provided by \fNext statements. 
 %
 If at $l_i$, $\curr := \prev\to\fNext()$,  $\curr$ still has $\prev$ value until a new assignment to $\curr$ is done.

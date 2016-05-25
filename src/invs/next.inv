@@ -1,8 +1,8 @@
-\paragraph{vars:}
+vars:
 
 tid j
 
-\paragraph{invariant [nexts] :}
+invariant [nexts] :
 
 
     rd(heap, head).next != head

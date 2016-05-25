@@ -1,8 +1,8 @@
-\paragraph{vars:}
+vars:
 
 tid i
 
-\paragraph{invariant [region] :}
+invariant [region] :
 
 
    in (head, region)

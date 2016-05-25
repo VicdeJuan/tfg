@@ -1,8 +1,8 @@
-\paragraph{vars:}
+vars:
 
 tid i
 
-\paragraph{invariant [locks] :}
+invariant [locks] :
 
 #search_owns_prev:
    (@sch_owns_prev(i). $\to$ rd(heap, search::prev(i)).lockid = i)
