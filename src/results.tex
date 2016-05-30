@@ -98,7 +98,20 @@ Despite that fact, \orderInv is not very complex in terms of number of axioms.
 
 \subsection{Special transitions}
 
-Due to the limited space, we just present the deep analysis of two important transitions.
+Due to the limited space, we just present the deep analysis of some important transitions.
+
+The offending transitions of \preserveInv are $35$ and $51$, the ones where the list is really modified while inserting and removing, respectively.
+%
+All the other transitions generate simple \spass problem which are proven easily.
+%
+For this two special transition some expert knowledge had been needed, because of some limitation \spass has.
+%
+This limitation is that \spass does not know how to choose the axioms to use, leading into an unnecessary branch of the proof. 
+%
+If \spass could know that, it would be much more efficient. 
+%
+On the other side, the great advantage of \spass is its generality which allows to use it to solve very different problems. 
+
 
 \section{Time analysis}
 \label{sec:timeanalysis}
@@ -128,16 +141,103 @@ One can just run \spass on the generated proofs and will save lot of time.
 Lets see the amount of time needed to check the proofs in stead of generate them.
 
 
-\subsection{Leap times}
+\subsection{Comparing times}
 
-In table \ref{anaylisis::bigtimetable} one can find the
+In order to use formal verification in real environments, a time analysis is fundamental. 
+%
+The more time it takes, the more useless formal verification can be.
+%
+How much time does it takes to generate all the proofs for this linked-list implementation? 
+%
+And more importantly,  How much time does it takes to check the generated proofs? 
+
+In table \ref{anaylisis::bigtimetable} one can find the summary of the timing according to 4 different times. The first column refers to the time that \leap takes to proof the invariant (obtained from \cite{paperParametrizedInvariants}). 
+%
+The second column, \textit{Full process}, refers to the time the whole process takes \footnote{The full process is described \doubt{in/at} \ref{ProcessDescription}}. 
+%
+This is, generating the verification conditions, creating all the \spass problems and letting \spass work to solve each problem.
+%
+The third column, \textit{Sum of \spass time}, refers to the amount of time that \spass takes to solve all the problems of each invariant.
+%
+This column shows the real time necessary to generate the proofs, from the already generated files.
+%
+Finally, the last column shows very important information.
+%
+The amount of time needed to check that the proofs are correct is less than every other method. 
+%
+This method reduces significantly the time spent in checking the formal verification of a problem.
+
 
 \begin{table}[hbtp]
 \centering
-\begin{tabular}{cccc}
-Invariant & Leap & Generate Proofs & Check proofs\\
-
+\begin{tabular}{c|cccc}
+Invariant 		& Leap 	& Full process 		& Sum of \spass time 	& Check proofs 	\\
+\invPreserve 	& 12:85	&					& 10:56.56				&		\\
+\invOrder		& 1:20	&					& 62:32.89				&  		\\
+\invLock		& 0:50	& 					& 13:34.0  				& 1:53.94		\\
+\invNext 		& 1:76	&					& 100:40.08				& 		\\
+\invRegion		& 25:67	& 					& 1:14.68				& 0:19.14		\\
+\invDisj 		& 0:22 	& 2:13.3 			& 1:17.15 				& 0:26.4		\\
+Total: 			& 		& 					& 						&  				\\
 \end{tabular}
 \caption{Compare of the times.}
 \label{anaylsis:bigtimetable}
 \end{table}
+
+
+There are some very relevant issues with the measures of the \textit{Full process} time and the \textit{Sum of \spass time}.
+
+\paragraph{About full process}
+In order to improve performance, all \spass problems are first considered as if they were the simplest. 
+%
+If it took too much time to \spass (according to a timeout) to find a proof for a problem, then it would be divided.
+%
+This allows to prove very fast the simple problems, such as the majority of \invDisj transitions for example. 
+%
+When a problem is not so simple (again, according to the timeout), then it is divided and some time has been wasted because the initial attempt to prove the problem is terminated.
+%
+The value of this timeout is not trivial to be setted.
+%
+There are transitions which do not need any axioms. 
+%
+This is caused because they are transitions of the form $(false \to something)$.
+%
+For this transitions, it is usual that \spass takes less than one second to prove them. 
+%
+Thus, we could set the timeout to one second. 
+%
+If a transition is taking more than one seconds, then it may need more axioms and or it should be divided.
+%
+But we may incur into dividing a problem which does not need to be divided. 
+%
+Others consecution for transition 33 in \lockInv takes 1 second and a half, but does not need to be divided because it is of the form $(false \to something)$.
+%
+A timeout of 1 second would make \gandalf to divided this transition, but a timeout of 2 seconds second would cause a waste of 1 second in each not simple \spass problem.
+%
+The timeout had been setted to 100 seconds because it was preferable in order to generate less \spass problems, and consequently less proofs.
+
+The problem explained before acquires more relevance in another context.
+%
+\spass does not have an expert knowledge about which axioms should be used first because they are relevant and which should not.
+%
+No arithmetic axiom is needed to prove \invRegion and \spass does not neither need any axiom about the order relation between elements. 
+%
+There is a subset of axioms for each invariant.
+%
+Including unnecessary axioms may cause \spass to take more time searching for the proof in a branch where the proof can not be found. 
+%
+It may not cause any delay because it finds the proof without exploring all the branches.
+%
+We show an example of this reality.
+%
+Transition 11 of the \invPreserve takes 23 seconds to \spass when all the axioms are included but it takes 0.44 seconds when only used axioms are included. 
+%
+This difference has been an important challenge, because when \spass could not find a proof it did not necessary mean that the problem was unsatisfiable. 
+%
+It could mean that too many unnecessary axiom had been included or that the problem needed to be divided.
+%
+Thus, the third column shows the real amount of time that \spass has needed to generate the proofs. 
+%
+This time is not the lowest bound one could get, but as one can see, it is less than the whole process.
+%
+For the transition mentioned before, \spass takes 0.11 seconds to check that the proof is correct.
