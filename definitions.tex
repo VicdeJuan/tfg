@@ -1333,10 +1333,13 @@ every picture/.append style={
 \newcommand{\numTransitionsProvedWithPC}{180\xspace}
 \newcommand{\numTotalTransitions}{40000000\xspace}
 
+\newenvironment{formula}{\begin{dmath}}{\end{dmath}}
+\newcommand{\explanation}[1]{\textit{#1}}
+
 \newenvironment{axiomdescription}[1][\unskip]{
-	\textbf{#1}
-		\begin{dmath}
+	\begin{center}\rule{4cm}{0.4pt} #1 \;\;\;\;\;\;\rule{2cm}{0.4pt}\end{center}
+	\vskip -1.5cm
 	}
 	{
-		\end{dmath}
+	\vskip -1cm
 	}

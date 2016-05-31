@@ -511,7 +511,7 @@ The signature is described \doubt{in/at} table \ref{table:setelem_signature}.
 \hline\hline
 \pInElem & $\sAddr\times\sSet $& \\
 \end{tabular}
-\caption{\textbf{Signature of $\Sigma_{\sSet}$.} Top block contains functions, lower block contains predicates.}
+\caption{\textbf{Signature of $\Sigma_{\sSetElem}$.} Top block contains functions, lower block contains predicates.}
 \label{table:setelem_signature}
 \end{table}
 
@@ -541,4 +541,34 @@ The signature is described \doubt{in/at} table \ref{table:settid_signature}.
 \caption{\textbf{Signature of $\Sigma_{\sSetAddr}$.} Top block contains functions, lower block contains predicates.}
 \label{table:settid_signature}
 \end{table}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%					BRIDGE
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{center}\rule{4cm}{0.4pt} $\Sigma_{Bridge}$ \rule{4cm}{0.4pt}\end{center}
+%
+
+This theory is much more extensive \doubt{in/on/at} \cite{thesisAle}. 
+%
+However, aiming to simplicity, not every function and predicate described there has been used in our proofs.
+%
+We include in the signature described \doubt{in/at} table \ref{table:bridge_signature} the functions and predicates used in the proofs.
+
+\begin{table}[hbtp]
+\begin{tabular}{rrl}
+\fAddrToSet & $\mem\times\addr\to\sSetAddr $& Returns the set of \addr reachable from the \addr given.\\
+\hline\hline
+\end{tabular}
+\caption{\textbf{Signature of $\Sigma_{\sSetAddr}$.}}
+\label{table:bridge_signature}
+\end{table}
+
+
 

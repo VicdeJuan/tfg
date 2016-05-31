@@ -18,7 +18,9 @@ to the sorting (\spass is not multi-sorted as the theory we work with. It is nec
 %
 to the local and global variables of the program (\leap is quantifier free but \spass need to quantify every variable)
 %
-The set of axioms is:
+The set of axioms has been divided in 9 groups. 
+%
+This division 
 		
 \label{ax::fulllist}
 \input{src/axioms}
@@ -89,16 +91,16 @@ In terms of number of axioms, it is interesting to see that \_\_\_\_\_\_\_\_ is 
 %
 The differences on the number of other-consecution problem is caused by the splitting on complex \spass problems. 
 %
-To prove \orderInv all other-consecution problems have been splat, but for \lockInv and \nextInv just 21 other consecution problems have been splat.
+To prove \invOrder all other-consecution problems have been splat, but for \invLock and \invNext just 21 other consecution problems have been splat.
 %
-Despite that fact, \orderInv is not very complex in terms of number of axioms. 
+Despite that fact, \invOrder is not very complex in terms of number of axioms. 
 
 
 \subsection{Special transitions}
 
 Due to the limited space, we just present the deep analysis of some important transitions.
 
-The offending transitions of \preserveInv are $35$ and $51$, the ones where the list is really modified while inserting and removing, respectively.
+The offending transitions of \invPreserve are $35$ and $51$, the ones where the list is really modified while inserting and removing, respectively.
 %
 All the other transitions generate simple \spass problem which are proven easily.
 %
@@ -175,7 +177,7 @@ Invariant 		& Leap 	& Full process 		& Sum of \spass time 	& Check proofs 	\\
 \invLock		& 0:50	& 					& 13:34.0  				& 1:53.94		\\
 \invNext 		& 1:76	&					& 100:40.08				& 		\\
 \invRegion		& 25:67	& 					& 1:14.68				& 0:19.14		\\
-\invDisj 		& 0:22 	& 2:13.3 			& 1:17.15 				& 0:26.4		\\
+\invDisjoint 	& 0:22 	& 2:13.3 			& 1:17.15 				& 0:26.4		\\
 Total: 			& 		& 					& 						&  				\\
 \end{tabular}
 \caption{Compare of the times.}
@@ -190,7 +192,7 @@ In order to improve performance, all \spass problems are first considered as if 
 %
 If it took too much time to \spass (according to a timeout) to find a proof for a problem, then it would be divided.
 %
-This allows to prove very fast the simple problems, such as the majority of \invDisj transitions for example. 
+This allows to prove very fast the simple problems, such as the majority of \invDisjoint transitions for example. 
 %
 When a problem is not so simple (again, according to the timeout), then it is divided and some time has been wasted because the initial attempt to prove the problem is terminated.
 %
@@ -208,7 +210,7 @@ If a transition is taking more than one seconds, then it may need more axioms an
 %
 But we may incur into dividing a problem which does not need to be divided. 
 %
-Others consecution for transition 33 in \lockInv takes 1 second and a half, but does not need to be divided because it is of the form $(false \to something)$.
+Others consecution for transition 33 in \invLock takes 1 second and a half, but does not need to be divided because it is of the form $(false \to something)$.
 %
 A timeout of 1 second would make \gandalf to divided this transition, but a timeout of 2 seconds second would cause a waste of 1 second in each not simple \spass problem.
 %
