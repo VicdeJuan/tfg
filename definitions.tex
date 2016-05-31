@@ -1333,12 +1333,10 @@ every picture/.append style={
 \newcommand{\numTransitionsProvedWithPC}{180\xspace}
 \newcommand{\numTotalTransitions}{40000000\xspace}
 
-
-
-
-
-
-
-
-
-
+\newenvironment{axiomdescription}[1][\unskip]{
+	\textbf{#1}
+		\begin{dmath}
+	}
+	{
+		\end{dmath}
+	}

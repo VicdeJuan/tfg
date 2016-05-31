@@ -1,0 +1,66 @@
+COMMON:
+	type_?_is_not_other_type_tllign
+	vars declaration
+	threads
+	cells
+	equality_on_read
+	equality_bt_cell
+	next_error__is__null
+
+ARITH:
+	nums_are_different
+	def_i_tllign
+	no_negative_numbers
+
+SET:
+	union_?_def
+	union_conmutative
+	in_set__?_def
+	a__in__singl_a
+	emptySet_?_is_empty
+	set_?_equal {{{ [\nexists a  (in(a,se2) \dimplies in(a,se1))] \dimplies se1 = se2 }}}
+
+SET_EXTEN:
+	set_exten_? {{{ se1 = se2 \implies (\forall a in(a,se1) \dimplies in(a,se2)) }}}
+	set_exten_inv_? {{{ (\forall a in(a,se1) \dimplies in(a,se2)) \implies se1=se2 }}}
+	set_diff
+	a_not__in_se_dif_a
+
+UPD: 
+	upd__def__not_null
+	upd__def__one_at_the_time
+	rd_mem__def
+
+
+ELEM_ARITH:
+	lowest__less_than_highest
+	lowestElem__def_tll
+	highestElem__def_tll
+	less_trans
+	less_total
+	ls_xy__not_ls_yx
+
+ADDR2SET:
+		nextreg
+		addr2set_rec_def
+		addr2set_null__is__singl_null
+
+LOCK_KEEPS:
+		lock_keeps_addr2set
+		lock_keeps_orderlist
+		lock_keeps_heap__data
+		lock_keeps_heap__next	
+
+IMPORTANT:
+		not_in_region__not_change_heap_addr
+		not_in_region__not_change_heap_list
+		order_primim
+		addr2set_primim
+		insert__keeps_addr2set
+		remove__keeps_addr2set
+
+		next_injective__if_ordered
+		next_is_not_same__if_ordered
+		just_tail__points__null
+		insert__keeps_orderlist
+		remove__keeps_orderlist

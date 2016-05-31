@@ -20,10 +20,8 @@ to the local and global variables of the program (\leap is quantifier free but \
 %
 The set of axioms is:
 		
-\begin{description}
 \label{ax::fulllist}
 \input{src/axioms}
-\end{description}
 
 
 The full list of axioms has been included as an appendix at \ref{spass:syntax_file}. 
@@ -172,8 +170,8 @@ This method reduces significantly the time spent in checking the formal verifica
 \centering
 \begin{tabular}{c|cccc}
 Invariant 		& Leap 	& Full process 		& Sum of \spass time 	& Check proofs 	\\
-\invPreserve 	& 12:85	&					& 10:56.56				&		\\
-\invOrder		& 1:20	&					& 62:32.89				&  		\\
+\invPreserve 	& 12:85	&					& 10:56.56				& 0:52.19		\\
+\invOrder		& 1:20	&					& 62:32.89				& 7:41.17 		\\
 \invLock		& 0:50	& 					& 13:34.0  				& 1:53.94		\\
 \invNext 		& 1:76	&					& 100:40.08				& 		\\
 \invRegion		& 25:67	& 					& 1:14.68				& 0:19.14		\\
@@ -187,7 +185,7 @@ Total: 			& 		& 					& 						&  				\\
 
 There are some very relevant issues with the measures of the \textit{Full process} time and the \textit{Sum of \spass time}.
 
-\paragraph{About full process}
+\paragraph{About measuring the full process}
 In order to improve performance, all \spass problems are first considered as if they were the simplest. 
 %
 If it took too much time to \spass (according to a timeout) to find a proof for a problem, then it would be divided.

@@ -1,272 +1,265 @@
-\item[union-def]
-\label{ax::union_def}
-
-\begin{dmath}
-((in(x,se) \vee in(x,se2)) \dimplies in(x,union(se,se2)))
-\end{dmath}
-
-%\textcolor{red}{Auto-generated}
-\item[union-conmutative]
-\label{ax::union_conmutative}
-
-\begin{dmath}
-union(se,se2) = union(se2,se)
-\end{dmath}
-
-%\textcolor{red}{Auto-generated}
-\item[in-set--def]
-\label{ax::in_set__def}
-
-\begin{dmath}
-((\neg  in(a,se)) \implies in(b,se) \implies (\neg  b = a))
-\end{dmath}
-
-%\textcolor{red}{Auto-generated}
-\item[a--in--singl-a]
-\label{ax::a__in__singl_a}
-
-\begin{dmath}
-(((\neg  a = b) \implies (\neg  in(b,{ a }))) \wedge in(a,{ a }))
-\end{dmath}
-
-%\textcolor{red}{Auto-generated}
-\item[emptySet-is-empty]
-\label{ax::emptySet_is_empty}
-
-\begin{dmath}
-(\neg  in(a,empty))
-\end{dmath}
-
-%\textcolor{red}{Auto-generated}
-\item[SetDiff-def]
-\label{ax::SetDiff_def}
-
-\begin{dmath}
-((in(x,se) \wedge (\neg  in(x,se2))) \dimplies in(x,diff(se,se2)))
-\end{dmath}
-
-%\textcolor{red}{Auto-generated}
-\item[a-not--in-se-dif-a]
-\label{ax::a_not__in_se_dif_a}
-
-\begin{dmath}
-(in(a,se) \implies (\neg  in(a,diff(se,{ a }))))
-\end{dmath}
-
-%\textcolor{red}{Auto-generated}
-\item[data--def]
-\label{ax::data__def}
-
-\begin{dmath}
-data(mkcell(e,a,t)) = e
-\end{dmath}
-
-%\textcolor{red}{Auto-generated}
-\item[next--def]
-\label{ax::next__def}
-
-\begin{dmath}
-next(mkcell(e,a,t)) = a
-\end{dmath}
-
-%\textcolor{red}{Auto-generated}
-\item[lockid--def]
-\label{ax::lockid__def}
-
-\begin{dmath}
-mkcell(e,a,t).lockid = t
-\end{dmath}
-
-%\textcolor{red}{Auto-generated}
-\item[next-error--is--null]
-\label{ax::next_error__is__null}
-
-\begin{dmath}
-next(error) = null
-\end{dmath}
-
-%\textcolor{red}{Auto-generated}
-\item[equality-bt-cell]
-\label{ax::equality_bt_cell}
-
-\begin{dmath}
-(c1 = c2 \implies (data(c1) = data(c2) \wedge c1.lockid = c2.lockid \wedge next(c1) = next(c2)))
-\end{dmath}
-
-%\textcolor{red}{Auto-generated}
-\item[equality-on-read]
-\label{ax::equality_on_read}
-
-\begin{dmath}
-(a = b \implies rd(m,a) = rd(m,b))
-\end{dmath}
-
-%\textcolor{red}{Auto-generated}
-\item[upd--def--not-null]
-\label{ax::upd__def__not_null}
-
-\begin{dmath}
-((\neg  a = null) \implies upd(m,a,c) = m2 \implies rd(m2,a) = c)
-\end{dmath}
-
-%\textcolor{red}{Auto-generated}
-\item[upd--def--one-at-the-time]
-\label{ax::upd__def__one_at_the_time}
-
-\begin{dmath}
-(((\neg  a = null) \wedge (\neg  a = b)) \implies upd(m,a,c) = m2 \implies rd(m,b) = rd(m2,b))
-\end{dmath}
-
-%\textcolor{red}{Auto-generated}
-\item[rd-mem--def]
-\label{ax::rd_mem__def}
-
-\begin{dmath}
-rd(m,null) = error
-\end{dmath}
-
-%\textcolor{red}{Auto-generated}
-\item[lowest--less-than-highest]
-\label{ax::lowest__less_than_highest}
-
-\begin{dmath}
-(\neg  lowestElem = highestElem)
-\end{dmath}
-
-%\textcolor{red}{Auto-generated}
-\item[lowestElem--def-tll]
-\label{ax::lowestElem__def_tll}
-
-\begin{dmath}
-(e = lowestElem \vee lowestElem < e)
-\end{dmath}
-
-%\textcolor{red}{Auto-generated}
-\item[highestElem--def-tll]
-\label{ax::highestElem__def_tll}
-
-\begin{dmath}
-(e = highestElem \vee e < highestElem)
-\end{dmath}
-
-%\textcolor{red}{Auto-generated}
-\item[less-trans]
-\label{ax::less_trans}
-
-\begin{dmath}
-((x < y \wedge y < z) \implies x < z)
-\end{dmath}
-
-%\textcolor{red}{Auto-generated}
-\item[less-total]
-\label{ax::less_total}
-
-\begin{dmath}
-(\neg  (x < y \wedge y < x))
-\end{dmath}
-
-%\textcolor{red}{Auto-generated}
-\item[ls-xy--not-ls-yx]
-\label{ax::ls_xy__not_ls_yx}
-
-\begin{dmath}
-(x < y \dimplies ((\neg  x = y) \wedge (\neg  y < x)))
-\end{dmath}
 
-%\textcolor{red}{Auto-generated}
-\item[nextreg]
-\label{ax::nextreg}
 
-\begin{dmath}
-((in(a,se) \wedge se = addr2set(m,b) \wedge c = next(rd(m,a)) \wedge (\neg  a = null)) \implies in(c,se))
-\end{dmath}
+\paragraph{Common}
+
+	\begin{axiomdescription}[equality-bt-cell]
+		(c1 = c2 \implies (data(c1) = data(c2) \wedge c1.lockid = c2.lockid \wedge next(c1) = next(
+		\label{ax::equality_bt_cell}c2)))
+	\end{axiomdescription}
+
+	\begin{axiomdescription}[equality-on-read]
+		(a = b \implies rd(m,a) = rd(m,b))
+		\label{ax::equality_on_read}
+	\end{axiomdescription}
+
+	\begin{axiomdescription}[next-error--is--null]
+		next(error) = null
+		\label{ax::next_error__is__null}
+	\end{axiomdescription}
+	%\textcolor{red}{Auto-generated}
+	%
+%[data--def]
+%\label{ax::data__def}
+	%\begin{axiomdescription}
+		%data(mkcell(e,a,t)) = e
+	%\end{axiomdescription}
+	%\textcolor{red}{Auto-generated}
+	%
+%[next--def]
+%\label{ax::next__def}
+	%\begin{axiomdescription}
+		%next(mkcell(e,a,t)) = a
+	%\end{axiomdescription}
+	%\textcolor{red}{Auto-generated}
+	%
+%\label{ax::lockid__def}
+	%\begin{axiomdescription}
+	%\axiomName{lockid--def}
+		%mkcell(e,a,t).lockid = t
+	%\end{axiomdescription}
+	%\textcolor{red}{Auto-generated}
+
+
+\paragraph{Arithmetic}
+
+	\begin{axiomdescription}[nums-are-different]
+	\label{ax::nums_are_different}
+		(0 \neq 1) \andcond (0 \neq 2) \andcond ... \andcond (1\neq 2) \andcond ... (54 \neq 55)
+	\end{axiomdescription}
+
+
+\paragraph{Set theory}
+
+	\begin{axiomdescription}[union-def]
+	\label{ax::union_def}
+		((in(x,se) \vee in(x,se2)) \dimplies in(x,union(se,se2)))
+	\end{axiomdescription}
+
+	\begin{axiomdescription}[union-conmutative]
+	\label{ax::union_conmutative}
+		union(se,se2) = union(se2,se)
+	\end{axiomdescription}
+
+	\begin{axiomdescription}[in-set--def]
+	\label{ax::in_set__def}
+		((\neg  in(a,se)) \implies in(b,se) \implies (\neg  b = a))
+	\end{axiomdescription}
+
+	\begin{axiomdescription}[a--in--singl-a]
+	\label{ax::a__in__singl_a}
+		(((\neg  a = b) \implies (\neg  in(b,{ a }))) \wedge in(a,{ a }))
+	\end{axiomdescription}
+
+	\begin{axiomdescription}[emptySet-is-empty]
+	\label{ax::emptySet_is_empty}
+		(\neg  in(a,empty))
+	\end{axiomdescription}
+
+	\begin{axiomdescription}[set-equal]
+	\label{ax::set_equal}
+		[\nexists a  (in(a,se2) \dimplies in(a,se1))] \dimplies se1 = se2
+	\end{axiomdescription}
+
+
+\paragraph{Set extension}
+
+	\begin{axiomdescription}[set-exten]
+	\label{ax::set_exten}
+		se1 = se2 \implies (\forall a in(a,se1) \dimplies in(a,se2))
+	\end{axiomdescription}
+
+	\begin{axiomdescription}[set-exten-inv]
+	\label{ax::set_exten_inv}
+		(\forall a in(a,se1) \dimplies in(a,se2)) \implies se1=se2
+	\end{axiomdescription}
+
+	\begin{axiomdescription}[SetDiff-def]
+	\label{ax::SetDiff_def}
+		((in(x,se) \wedge (\neg  in(x,se2))) \dimplies in(x,diff(se,se2)))
+	\end{axiomdescription}
+
+	\begin{axiomdescription}[a-not--in-se-dif-a]
+	\label{ax::a_not__in_se_dif_a}
+		(in(a,se) \implies (\neg  in(a,diff(se,{ a }))))
+	\end{axiomdescription}
 
-%\textcolor{red}{Auto-generated}
-\item[lock-keeps-addr2set]
-\label{ax::lock_keeps_addr2set}
 
-\begin{dmath}
-(hp_p = upd(hp,a,mkcell(data(rd(hp,a)),next(rd(hp,a)),t)) \implies addr2set(hp,hd) = addr2set(hp_p,hd))
-\end{dmath}
+\paragraph{Update}
 
-%\textcolor{red}{Auto-generated}
-\item[lock-keeps-heap--data]
-\label{ax::lock_keeps_heap__data}
+	\begin{axiomdescription}[upd--def--not-null]
+	\label{ax::upd__def__not_null}
+		((\neg  a = null) \implies upd(m,a,c) = m2 \implies rd(m2,a) = c)
+	\end{axiomdescription}
 
-\begin{dmath}
-(hp_p = upd(hp,a,mkcell(data(rd(hp,a)),next(rd(hp,a)),t)) \implies data(rd(hp,a)) = data(rd(hp_p,a)))
-\end{dmath}
+	\begin{axiomdescription}[upd--def--one-at-the-time]
+	\label{ax::upd__def__one_at_the_time}
+		(((\neg  a = null) \wedge (\neg  a = b)) \implies upd(m,a,c) = m2 \implies rd(m,b) = rd(m2,b))
+	\end{axiomdescription}
 
-%\textcolor{red}{Auto-generated}
-\item[lock-keeps-heap--next]
-\label{ax::lock_keeps_heap__next}
+	\begin{axiomdescription}[rd-mem--def]
+	\label{ax::rd_mem__def}
+		rd(m,null) = error
+	\end{axiomdescription}
 
-\begin{dmath}
-(hp_p = upd(hp,a,mkcell(data(rd(hp,a)),next(rd(hp,a)),t)) \implies next(rd(hp,a)) = next(rd(hp_p,a)))
-\end{dmath}
 
-%\textcolor{red}{Auto-generated}
-\item[not-in-region--not-change-heap-addr]
-\label{ax::not_in_region__not_change_heap_addr}
+\paragraph{Element arithmetic}
 
-\begin{dmath}
-((\neg  in(a,addr2set(hp,hd))) \implies addr2set(hp,hd) = addr2set(upd(hp,a,c),hd))
-\end{dmath}
+	\begin{axiomdescription}[lowest--less-than-highest]
+	\label{ax::lowest__less_than_highest}
+		ls_elem(lowestElem,highestElem)
+	\end{axiomdescription}
 
-%\textcolor{red}{Auto-generated}
-\item[addr2set-primim]
-\label{ax::addr2set_primim}
-
-\begin{dmath}
-((data(rd(hp,hd)) < data(rd(hp,tl)) \wedge next(rd(hp,hd)) = tl \wedge next(rd(hp,tl)) = null) \implies addr2set(hp,hd) = union(union({ hd },{ tl }),{ null }))
-\end{dmath}
-
-%\textcolor{red}{Auto-generated}
-\item[insert--keeps-addr2set]
-\label{ax::insert__keeps_addr2set}
-
-\begin{dmath}
-((reg = addr2set(hp,hd) \wedge union(reg,{ aux }) = reg_p \wedge next(rd(hp,prev)) = curr \wedge (\neg  prev = curr) \wedge next(rd(hp,aux)) = curr \wedge (\neg  aux = null) \wedge (\neg  prev = null) \wedge (\neg  curr = null) \wedge in(prev,addr2set(hp,hd)) \wedge hp_p = upd(hp,prev,mkcell(data(rd(hp,prev)),aux,rd(hp,prev).lockid))) \implies reg_p = addr2set(hp_p,hd))
-\end{dmath}
-
-%\textcolor{red}{Auto-generated}
-\item[remove--keeps-addr2set]
-\label{ax::remove__keeps_addr2set}
-
-\begin{dmath}
-((next(rd(hp,curr)) = aux \wedge next(rd(hp,prev)) = curr \wedge (\neg  aux = next(rd(hp,prev))) \wedge hp_p = upd(hp,prev,mkcell(data(rd(hp,prev)),aux,rd(hp,prev).lockid)) \wedge (\neg  aux = null) \wedge in(curr,addr2set(hp,hd)) \wedge in(null,addr2set(hp,hd)) \wedge in(prev,addr2set(hp,hd))) \implies diff(addr2set(hp,hd),{ curr }) = addr2set(hp_p,hd))
-\end{dmath}
-
-%\textcolor{red}{Auto-generated}
-\item[addr2set-rec-def]
-\label{ax::addr2set_rec_def}
-
-\begin{dmath}
-addr2set(m,a) = union({ a },addr2set(m,next(rd(m,a))))
-\end{dmath}
-
-%\textcolor{red}{Auto-generated}
-\item[addr2set-null--is--singl-null]
-\label{ax::addr2set_null__is__singl_null}
-
-\begin{dmath}
-addr2set(m,null) = { null }
-\end{dmath}
-
-%\textcolor{red}{Auto-generated}
-\item[next-is-not-same--if-ordered]
-\label{ax::next_is_not_same__if_ordered}
-
-\begin{dmath}
-((in(a,addr2set(hp,hd)) \wedge in(tl,addr2set(hp,hd)) \wedge (\neg  hd = null) \wedge (\neg  tl = null) \wedge (\neg  a = null) \wedge next(rd(hp,tl)) = null) \implies (\neg  next(rd(hp,a)) = a))
-\end{dmath}
-
-%\textcolor{red}{Auto-generated}
-\item[just-tail--points--null]
-\label{ax::just_tail__points__null}
-
-\begin{dmath}
-((in(tl,addr2set(hp,hd)) \wedge (\neg  hd = null) \wedge (\neg  tl = null) \wedge next(rd(hp,tl)) = null \wedge (\neg  d = null) \wedge next(rd(hp,d)) = null \wedge in(d,addr2set(hp,hd))) \implies d = tl)
-\end{dmath}
-
-%\textcolor{red}{Auto-generated}
+	\begin{axiomdescription}[lowestElem--def-tll]
+	\label{ax::lowestElem__def_tll}
+		\forall \elem(e) (e = lowestElem \vee lowestElem < e)
+	\end{axiomdescription}
+
+	\begin{axiomdescription}[highestElem--def-tll]
+	\label{ax::highestElem__def_tll}
+		\forall \elem(e) (e = highestElem \vee e < highestElem)
+	\end{axiomdescription}
+
+	\begin{axiomdescription}[less-trans]
+	\label{ax::less_trans}
+		((x < y \wedge y < z) \implies x < z)
+	\end{axiomdescription}
+
+	\begin{axiomdescription}[less-total]
+	\label{ax::less_total}
+		(\neg  (x < y \wedge y < x))
+	\end{axiomdescription}
+
+	\begin{axiomdescription}[ls-xy--not-ls-yx]
+	\label{ax::ls_xy__not_ls_yx}
+		(x < y \dimplies ((\neg  x = y) \wedge (\neg  y < x)))
+	\end{axiomdescription}
+
+
+\paragraph{Addr2set}
+
+	\begin{axiomdescription}[nextreg]
+		\label{ax::nextreg}
+		((in(a,se) \wedge se = addr2set(m,b) \wedge c = next(rd(m,a)) \	wedge (\neg  a = null))\implies in(c,se))
+	\end{axiomdescription}
+
+	\begin{axiomdescription}[lock-keeps-addr2set]
+		\label{ax::lock_keeps_addr2set}
+	(hp_p = upd(hp,a,mkcell(data(rd(hp,a)),next(rd(hp,a)),t)) \implies addr2set(p,hd) = addr2set(		hp_p,hd))
+	\end{axiomdescription}
+
+	\begin{axiomdescription}[addr2set-null-is-singl-null]
+		\label{ax::addr2set_null__is__singl_null}
+		addr2set(m,null) = null
+	\end{axiomdescription}
+
+
+\paragraph{Lock_keeps}
+
+	\begin{axiomdescription}[lock-keeps-heap--data]
+		\label{ax::lock_keeps_heap__data}
+		(hp_p = upd(hp,a,mkcell(data(rd(hp,a)),next(rd(hp,	a)),t)) \implies data(r(hp,a)) = data(rd(		hp_p,a)))
+	\end{axiomdescription}
+
+	\begin{axiomdescription}[lock-keeps-heap--next]
+		\label{ax::lock_keeps_heap__next}
+		(hp_p = upd(hp,a,mkcell(data(rd(hp,a)),next(rd(hp,a)),t)) \implies next(r(hp,a)) = next(rd(hp_p,a)))
+	\end{axiomdescription}
+
+	\begin{axiomdescription}[lock-keeps-heap--data]
+		\label{ax::lock_keeps_heap__data}
+		hp_p = upd(hp,a,mkcell(data(rd(hp,a)),next(rd(hp,a)),t)) \implies data(r(hp,a)) = data(rd(hp_p,a))
+	\end{axiomdescription}
+
+	\begin{axiomdescription}[lock-keeps-heap--next]
+		\label{ax::lock_keeps_heap__next}
+		hp_p = upd(hp,a,mkcell(data(rd(hp,a)),next(rd(hp,a)),t)) \implies next(r(hp,a)) = next(rd(		hp_p,a))
+	\end{axiomdescription}
+
+
+\paragraph{Important}
+
+	\begin{axiomdescription}[addr2set-rec-def]
+	\label{ax::addr2set_rec_def}
+		addr2set(m,a) = union({ a },addr2set(m,next(rd(m,a))))
+	\end{axiomdescription}
+
+	\begin{axiomdescription}[addr2set-null--is--singl-null]
+	\label{ax::addr2set_null__is__singl_null}
+		addr2set(m,null) = { null }
+	\end{axiomdescription}
+
+	\begin{axiomdescription}[not-in-region--not-change-heap-addr]
+	\label{ax::not_in_region__not_change_heap_addr}
+		((\neg  in(a,addr2set(hp,hd))) \implies addr2set(hp,hd) = addr2set(upd(hp,a,c),hd))
+	\end{axiomdescription}
+
+	\begin{axiomdescription}[not-in-region--not-change-heap-list]
+	\label{ax::not_in_region__not_change_heap_list}
+		((\neg  in(a,addr2set(hp,hd))) \implies orderlist(hp,hd) = orderlist(upd(hp,a,c),hd))
+	\end{axiomdescription}
+
+	\begin{axiomdescription}[addr2set-primim]
+	\label{ax::addr2set_primim}
+		((data(rd(hp,hd)) < data(rd(hp,tl)) \wedge next(rd(hp,hd)) = tl \wedge next(r(hp,tl)) = null) \implies addr2set(hp,hd) = union(union({ hd },{ tl }),{ null }))
+	\end{axiomdescription}
+
+	\begin{axiomdescription}[order-primim]
+	\label{ax::order_primim}
+		(ls_elem(data(rd(hp,hd)),data(rd(hp,tl))) \andcond tl = next(rd(hp,hd)) \andcond net(rd(hp,tl)) = nl ) \implies orderlist(hp,hd,tl) 
+	\end{axiomdescription}
+
+	\begin{axiomdescription}[insert--keeps-addr2set]
+	\label{ax::insert__keeps_addr2set}
+		((reg = addr2set(hp,hd) \wedge union(reg,{ aux }) = reg_p \wedge next(rd(p,
+prev)) = curr \wedge (\neg  prev = curr) \wedge next(rd(hp,aux)) = curr \wedge (\neg  aux = null) \wedge (\neg  prev = null) \wedge (\neg  curr = null) \wedge in(prev,addr2set(hp,hd)) \wedge hp_p = upd(hp,prev,mkcell(data(rd(hp,prev)),aux,rd(hp,prev).lockid))) \implies reg_p = addr2set(hp_p,hd))
+	\end{axiomdescription}
+
+	\begin{axiomdescription}[remove--keeps-addr2set]
+	\label{ax::remove__keeps_addr2set}
+		((next(rd(hp,curr)) = aux \wedge next(rd(hp,prev)) = curr \wedge (\neg  aux = next(rd(hp,prev))) \wedge hp_p = upd(hp,prev,mkcell(data(rd(hp,prev)),aux,rd(hp,prev).lockid)) \wedge (\neg  aux = null) \wedge in(curr,addr2set(hp,hd)) \wedge in(null,addr2set(hp,hd)) \wedge in(prev,addr2set(hp,hd))) \implies diff(addr2set(hp,hd),{ curr }) = addr2set(hp_p,hd))
+	\end{axiomdescription}
+
+	\begin{axiomdescription}[next-injective--if-ordered]
+	\label{ax::next_injective__if_ordered}
+		((orderlist(hp,hd,tl) \wedge in(a,addr2set(hp,hd)) \wedge in(b,addr2set(hp,hd)) \wedge in(c,addr2set(hp,hd)) \wedge in(d,addr2set(hp,hd)) \wedge (\neg  tl = null) \wedge null = next(rd(hp,tl)) \wedge (\neg  c = null) \wedge (\neg  d = null) \wedge (\neg  a = null) \wedge (\neg  b = null) \wedge (\neg  a = tl) \wedge (\neg  b = tl) \wedge next(rd(hp,c)) = a \wedge next(rd(hp,d)) = b) \implies a = b \implies c = d)
+	\end{axiomdescription}
+
+	\begin{axiomdescription}[next-is-not-same--if-ordered]
+	\label{ax::next_is_not_same__if_ordered}
+		((in(a,addr2set(hp,hd)) \wedge in(tl,addr2set(hp,hd)) \wedge (\neg  hd = null) \wedge (\neg  tl = null) \wedge (\neg  a = null) \wedge next(rd(hp,tl)) = null) \implies (\neg  next(rd(hp,a)) = a))
+	\end{axiomdescription}
+
+	\begin{axiomdescription}[just-tail--points--null]
+	\label{ax::just_tail__points__null}
+		((in(tl,addr2set(hp,hd)) \wedge (\neg  hd = null) \wedge (\neg  tl = null) \wedge next(rd(hp,tl)) = null \wedge (\neg  d = null) \wedge next(rd(hp,d)) = null \wedge in(d,addr2set(hp,hd))) \implies d = tl)
+	\end{axiomdescription}
+
+	\begin{axiomdescription}[insert--keeps-orderlist]
+	\label{ax::insert__keeps_orderlist}
+		((orderlist(hp,hd,tl) \wedge (\neg  tl = null) \wedge next(rd(hp,tl)) = null \wedge data(rd(hp,prev)) < data(rd(hp,aux)) \wedge data(rd(hp,aux)) < data(rd(hp,curr)) \wedge next(rd(hp,aux)) = curr \wedge next(rd(hp,prev)) = curr \wedge hp_p = upd(hp,prev,mkcell(data(rd(hp,prev)),aux,rd(hp,prev).lockid))) \implies orderlist(hp_p,hd,tl))
+	\end{axiomdescription}
+
+	\begin{axiomdescription}[remove--keeps-orderlist]
+	\label{ax::remove__keeps_orderlist}
+		((aux = next(rd(hp,curr)) \wedge curr = next(rd(hp,prev)) \wedge (\neg  aux = null) \wedge null = next(rd(hp,tl)) \wedge (\neg  aux = next(rd(hp,prev))) \wedge hp_p = upd(hp,prev,mkcell(data(rd(hp,prev)),aux,rd(hp,prev).lockid)) \wedge in(prev,addr2set(hp,hd)) \wedge in(curr,addr2set(hp,hd)) \wedge in(null,addr2set(hp,hd)) \wedge in(aux,addr2set(hp,hd)) \wedge orderlist(hp,hd,tl)) \implies orderlist(hp_p,hd,tl))
+	\end{axiomdescription}
