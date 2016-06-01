@@ -1,5 +1,6 @@
 
 
+\todo{No break page on each axiom.}
 \paragraph{Common}
 
 	\begin{axiomdescription}[equality-bt-cell]
@@ -368,6 +369,21 @@
 		\end{formula}
 	\end{axiomdescription}
 
+	\begin{axiomdescription}[addr2set-primim]
+		\label{ax::addr2set_primim}
+		\explanation{
+			\paragraph{Interpretation:}
+			This axiom is the base of the recursion in the definition of \fAddrToSet. 
+		}
+		\begin{formula}
+			((data(rd(hp,hd)) < data(rd(hp,tl)) \wedge next(rd(hp,hd)) = tl \wedge next(r(hp,tl)) = null) \implies addr2set(hp,hd) = union(union({ hd },{ tl }),\fSingl(\fNull)))
+		\end{formula}
+	\end{axiomdescription}
+
+
+
+
+
 
 	\begin{axiomdescription}[not-in-region--not-change-heap-addr]
 		\label{ax::not_in_region__not_change_heap_addr}
@@ -379,6 +395,85 @@
 		}
 		\begin{formula}
 			((\neg\;  in(a,addr2set(hp,hd))) \implies addr2set(hp,hd) = addr2set(upd(hp,a,c),hd))
+		\end{formula}
+	\end{axiomdescription}
+
+
+
+	\begin{axiomdescription}[insert--keeps-addr2set]
+		\label{ax::insert__keeps_addr2set}
+		\explanation{
+			\paragraph{Interpretation:}
+			This axiom allows to \fUpd a \mem preserving the \fAddrToSe.
+			%
+			This \fUpd correspond to an insertion in the list.
+			
+			Let $hp$ be the \mem. Let $hd$ be an \addr (the \head of the list would be this \addr).
+			%
+			We call \reg to the \fAddrToSet reachable from $hd$.
+			%
+			Let $prev$ and \addr reachable from $hd$ (in the \fAddrToSet of $hp,hd$) and $curr,aux$ two \addr. 
+			%
+			It is needed that the 3 address ($prev,curr,aux$) are different one another and all of them are not null.
+
+			If prev points curr, aux points curr, then making prev point to aux has one unique effect on the \reg: aux now is in the \reg so every reachable address before the \fUpd is still reachable and aux is reachable too.
+		}
+		\begin{formula}
+			((reg = addr2set(hp,hd) \wedge union(reg,{ aux }) = reg_p \wedge next(rd(hp,prev)) = curr \wedge (\neg\;  prev = curr) \wedge next(rd(hp,aux)) = curr \wedge (\neg\;  aux = null) \wedge (\neg\;  prev = null) \wedge (\neg\;  curr = null) \wedge in(prev,addr2set(hp,hd)) \wedge hp_p = upd(hp,prev,mkcell(data(rd(hp,prev)),aux,rd(hp,prev).lockid))) \implies reg_p = addr2set(hp_p,hd))
+		\end{formula}
+	\end{axiomdescription}
+
+	\begin{axiomdescription}[remove--keeps-addr2set]
+		\label{ax::remove__keeps_addr2set}
+		\explanation{
+			\paragraph{Interpretation:}
+			In a similar way \ref{ax::insert__keeps_addr2set}, this axioms allows to \fUpd a \mem preserving the \fAddrToSet, but this \fUpd would correspond to a removal in the list.
+			
+			Let $hp$ be the \mem. Let $hd$ be an \addr (the \head of the list would be this \addr).
+			%
+			We call \reg to the \fAddrToSet reachable from $hd$.
+			%
+			Let $prev$ and \addr reachable from $hd$ (in the \fAddrToSet of $hp,hd$) and $curr,aux$ two \addr. 
+			%
+			It is needed that the 3 address ($prev,curr,aux$) are different one another and all of them are not null.
+
+			If prev points curr, aux points curr, then making prev point to aux has one unique effect in the \reg: curr is now not reachable but every \addr reachable before the \fUpd is still reachable.
+
+		}
+		\begin{formula}
+			((next(rd(hp,curr)) = aux \wedge next(rd(hp,prev)) = curr \wedge (\neg\;  aux = next(rd(hp,prev))) \wedge hp_p = upd(hp,prev,mkcell(data(rd(hp,prev)),aux,rd(hp,prev).lockid)) \wedge (\neg\;  aux = null) \wedge in(curr,addr2set(hp,hd)) \wedge in(null,addr2set(hp,hd)) \wedge in(prev,addr2set(hp,hd))) \implies diff(addr2set(hp,hd),\fSingl(curr)) = addr2set(hp_p,hd))
+		\end{formula}
+	\end{axiomdescription}
+
+
+	\begin{axiomdescription}[order-primim]
+		\label{ax::order_primim}
+		\explanation{
+			\paragraph{Interpretation:}
+			This axiom is the base of the recursion in the definition of \fOrderlist. 
+		}
+		\begin{formula}
+			(ls\_elem(data(rd(hp,hd)),data(rd(hp,tl))) \andcond tl = next(rd(hp,hd)) \andcond next(rd(hp,tl)) = nl ) \implies orderlist(hp,hd,tl) 
+		\end{formula}
+	\end{axiomdescription}
+
+	\begin{axiomdescription}[insert--keeps-orderlist]
+		\label{ax::insert__keeps_orderlist}
+		\explanation{
+			\paragraph{Interpretation:}
+		}
+		\begin{formula}
+			((orderlist(hp,hd,tl) \wedge (\neg\;  tl = null) \wedge next(rd(hp,tl)) = null \wedge data(rd(hp,prev)) < data(rd(hp,aux)) \wedge data(rd(hp,aux)) < data(rd(hp,curr)) \wedge next(rd(hp,aux)) = curr \wedge next(rd(hp,prev)) = curr \wedge hp_p = upd(hp,prev,mkcell(data(rd(hp,prev)),aux,rd(hp,prev).lockid))) \implies orderlist(hp_p,hd,tl))
+		\end{formula}
+	\end{axiomdescription}
+
+	\begin{axiomdescription}[remove--keeps-orderlist]
+		\label{ax::remove__keeps_orderlist}
+		\explanation{
+			\paragraph{Interpretation:}
+		}
+		\begin{formula}
+			((aux = next(rd(hp,curr)) \wedge curr = next(rd(hp,prev)) \wedge (\neg\;  aux = null) \wedge null = next(rd(hp,tl)) \wedge (\neg\;  aux = next(rd(hp,prev))) \wedge hp_p = upd(hp,prev,mkcell(data(rd(hp,prev)),aux,rd(hp,prev).lockid)) \wedge in(prev,addr2set(hp,hd)) \wedge in(curr,addr2set(hp,hd)) \wedge in(null,addr2set(hp,hd)) \wedge in(aux,addr2set(hp,hd)) \wedge orderlist(hp,hd,tl)) \implies orderlist(hp_p,hd,tl))
 		\end{formula}
 	\end{axiomdescription}
 
@@ -396,47 +491,8 @@
 		\end{formula}
 	\end{axiomdescription}
 
-	\begin{axiomdescription}[addr2set-primim]
-		\label{ax::addr2set_primim}
-		\explanation{
-			\paragraph{Interpretation:}
-			This axiom is the base of the recursion in the definition of \fAddrToSet. 
-		}
-		\begin{formula}
-			((data(rd(hp,hd)) < data(rd(hp,tl)) \wedge next(rd(hp,hd)) = tl \wedge next(r(hp,tl)) = null) \implies addr2set(hp,hd) = union(union({ hd },{ tl }),\fSingl(\fNull)))
-		\end{formula}
-	\end{axiomdescription}
 
-	\begin{axiomdescription}[order-primim]
-		\label{ax::order_primim}
-		\explanation{
-			\paragraph{Interpretation:}
-				\todo{Continue from here.}
-		}
-		\begin{formula}
-			(ls\_elem(data(rd(hp,hd)),data(rd(hp,tl))) \andcond tl = next(rd(hp,hd)) \andcond next(rd(hp,tl)) = nl ) \implies orderlist(hp,hd,tl) 
-		\end{formula}
-	\end{axiomdescription}
 
-	\begin{axiomdescription}[insert--keeps-addr2set]
-		\label{ax::insert__keeps_addr2set}
-		\explanation{
-			\paragraph{Interpretation:}
-		}
-		\begin{formula}
-			((reg = addr2set(hp,hd) \wedge union(reg,{ aux }) = reg_p \wedge next(rd(p,prev)) = curr \wedge (\neg\;  prev = curr) \wedge next(rd(hp,aux)) = curr \wedge (\neg\;  aux = null) \wedge (\neg\;  prev = null) \wedge (\neg\;  curr = null) \wedge in(prev,addr2set(hp,hd)) \wedge hp_p = upd(hp,prev,mkcell(data(rd(hp,prev)),aux,rd(hp,prev).lockid))) \implies reg_p = addr2set(hp_p,hd))
-		\end{formula}
-	\end{axiomdescription}
-
-	\begin{axiomdescription}[remove--keeps-addr2set]
-		\label{ax::remove__keeps_addr2set}
-		\explanation{
-			\paragraph{Interpretation:}
-		}
-		\begin{formula}
-			((next(rd(hp,curr)) = aux \wedge next(rd(hp,prev)) = curr \wedge (\neg\;  aux = next(rd(hp,prev))) \wedge hp_p = upd(hp,prev,mkcell(data(rd(hp,prev)),aux,rd(hp,prev).lockid)) \wedge (\neg\;  aux = null) \wedge in(curr,addr2set(hp,hd)) \wedge in(null,addr2set(hp,hd)) \wedge in(prev,addr2set(hp,hd))) \implies diff(addr2set(hp,hd),{ curr }) = addr2set(hp_p,hd))
-		\end{formula}
-	\end{axiomdescription}
 
 	\begin{axiomdescription}[next-injective--if-ordered]
 		\label{ax::next_injective__if_ordered}
@@ -468,22 +524,6 @@
 		\end{formula}
 	\end{axiomdescription}
 
-	\begin{axiomdescription}[insert--keeps-orderlist]
-		\label{ax::insert__keeps_orderlist}
-		\explanation{
-			\paragraph{Interpretation:}
-		}
-		\begin{formula}
-			((orderlist(hp,hd,tl) \wedge (\neg\;  tl = null) \wedge next(rd(hp,tl)) = null \wedge data(rd(hp,prev)) < data(rd(hp,aux)) \wedge data(rd(hp,aux)) < data(rd(hp,curr)) \wedge next(rd(hp,aux)) = curr \wedge next(rd(hp,prev)) = curr \wedge hp_p = upd(hp,prev,mkcell(data(rd(hp,prev)),aux,rd(hp,prev).lockid))) \implies orderlist(hp_p,hd,tl))
-		\end{formula}
-	\end{axiomdescription}
 
-	\begin{axiomdescription}[remove--keeps-orderlist]
-		\label{ax::remove__keeps_orderlist}
-		\explanation{
-			\paragraph{Interpretation:}
-		}
-		\begin{formula}
-			((aux = next(rd(hp,curr)) \wedge curr = next(rd(hp,prev)) \wedge (\neg\;  aux = null) \wedge null = next(rd(hp,tl)) \wedge (\neg\;  aux = next(rd(hp,prev))) \wedge hp_p = upd(hp,prev,mkcell(data(rd(hp,prev)),aux,rd(hp,prev).lockid)) \wedge in(prev,addr2set(hp,hd)) \wedge in(curr,addr2set(hp,hd)) \wedge in(null,addr2set(hp,hd)) \wedge in(aux,addr2set(hp,hd)) \wedge orderlist(hp,hd,tl)) \implies orderlist(hp_p,hd,tl))
-		\end{formula}
-	\end{axiomdescription}
+
+	\vskip 1cm
