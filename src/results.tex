@@ -2,9 +2,13 @@
 \chapter{Results\label{chap:results}}
 
 \paragraph{Abstract}
-% In this chapter we will expose the structure of the generated proofs. We will mention some of the most relevant and difficult intermediate steps that we needed to prove.
 
-%Finally, the we will compare the timings of using automatic theorem provers versus model searching done by \citetool{leap}.
+This chapter expose the set of axioms needed to prove the goal and the relevance of the axioms.
+%
+We will cover briefly the generated proofs and some complexity results.
+%
+Finally, a time analysis is done, comparing this \gls{ATP} to model checkers and the different inner steps of the methodology.
+
 
 \section{Axioms}
 
@@ -78,8 +82,8 @@ It is important to mention that every invariant has 2 problems of \instantiation
 
 \begin{table}[hbtp]
 \centering
-\begin{tabular}{ccccc}
-Invariant & Self-consecution & Others consecution & Total & Number of axioms used\\
+\begin{tabular}{c|cccc}
+Invariant & Self-consecution & Others consecution & Total & Number of axioms used\\\hline
 \input{src/tex/analysisTable.tex}
 \end{tabular}
 \label{table:analysisProofs}
@@ -170,15 +174,15 @@ This method reduces significantly the time spent in checking the formal verifica
 
 \begin{table}[hbtp]
 \centering
-\begin{tabular}{c|cccc}
-Invariant 		& Leap 	& Full process 		& Sum of \spass time 	& Check proofs 	\\
-\invPreserve 	& 12:85	&					& 10:56.56				& 0:52.19		\\
-\invOrder		& 1:20	&					& 62:32.89				& 7:41.17 		\\
-\invLock		& 0:50	& 					& 13:34.0  				& 1:53.94		\\
-\invNext 		& 1:76	&					& 100:40.08				& 		\\
-\invRegion		& 25:67	& 					& 1:14.68				& 0:19.14		\\
-\invDisjoint 	& 0:22 	& 2:13.3 			& 1:17.15 				& 0:26.4		\\
-Total: 			& 		& 					& 						&  				\\
+\begin{tabular}{r|rrrr}
+Invariant 		& Leap 	& Full process 		& Sum of \spass time 	& Check proofs 	\\\hline
+\invPreserve 	& 12:85	& 36:15.742			& 10:56.56				& 0:52.19		\\
+\invOrder		& 1:20	& 180:40.548		& 62:32.89				& 7:41.17 		\\
+\invLock		& 0:50	& 39:28.321			& 13:34.00 				& 1:53.94		\\
+\invNext 		& 1:76	& 352:17.839		& 123:37.73				& 17:06.12		\\
+\invRegion		& 25:67	& 7:34.425			& 1:14.68				& 0:19.14		\\
+\invDisjoint 	& 0:22 	& 4:13.300 			& 1:17.15 				& 0:26.40		\\
+%Total: 			& 		& 					& 						&  				\\
 \end{tabular}
 \caption{Compare of the times.}
 \label{anaylsis:bigtimetable}

@@ -1,7 +1,7 @@
 
 
 \todo{No break page on each axiom.}
-\paragraph{Common}
+\subsubsection{Common}
 
 	\begin{axiomdescription}[equality-bt-cell]
 		\label{ax::equality_bt_cell}
@@ -36,7 +36,7 @@
 	\end{axiomdescription}
 
 
-\paragraph{Arithmetic}
+\subsubsection{Arithmetic}
 
 	\begin{axiomdescription}[nums-are-different]
 		\label{ax::nums_are_different}
@@ -49,7 +49,7 @@
 	\end{axiomdescription}
 
 
-\paragraph{Set theory}
+\subsubsection{Set theory}
 
 	This axioms are replicated for $\Sigma_{\sSetAddr},\Sigma_{\sSetElem}$ and $\Sigma_{\sSetTid}$.
 
@@ -127,7 +127,7 @@
 
 
 
-\paragraph{Set extension}
+\subsubsection{Set extension}
 
 %	UNUSED
 %	\begin{axiomdescription}[set-exten]
@@ -178,13 +178,13 @@
 	\end{axiomdescription}
 
 
-\paragraph{Update}
+\subsubsection{Update}
 
 	\begin{axiomdescription}[upd--def--not-null]
 		\label{ax::upd__def__not_null}
 		\explanation{
 			\paragraph{Interpretation:}(Update definition)
-
+			\\
 			Let $a$ be an \addr not \fNull, $m$ a \mem and $c$ a \cell.We call $m2$ the result of the \fUpd statement.
 			%
 			Then, updating the value of $m$ stored \doubt{in} $a$ with any \cell $c$ implies that $c$ is the value returned when reading the stored \doubt{in} $a$ \doubt{at/on/of} the updated memory.
@@ -220,7 +220,7 @@
 	\end{axiomdescription}
 
 
-\paragraph{Element arithmetic}
+\subsubsection{Element arithmetic}
 
 	\begin{axiomdescription}[less-trans]
 		\label{ax::less_trans}
@@ -293,7 +293,7 @@
 
 
 
-\paragraph{Addr2set}
+\subsubsection{Addr2set}
 
 	\begin{axiomdescription}[nextreg]
 		\label{ax::nextreg}
@@ -335,7 +335,7 @@
 	\end{axiomdescription}
 
 
-\paragraph{Lock_keeps}
+\subsubsection{Lock_keeps}
 
 	\begin{axiomdescription}[lock-keeps-heap--data \& lock-keeps-heap--next]
 		\label{ax::lock_keeps_heap__data}\label{ax::lock_keeps_heap__next}
@@ -352,7 +352,7 @@
 
 
 
-\paragraph{Important}
+\subsubsection{Important}
 
 	\begin{axiomdescription}[addr2set-rec-def]
 		\label{ax::addr2set_rec_def}
@@ -407,7 +407,7 @@
 			This axiom allows to \fUpd a \mem preserving the \fAddrToSe.
 			%
 			This \fUpd correspond to an insertion in the list.
-			
+			\\
 			Let $hp$ be the \mem. Let $hd$ be an \addr (the \head of the list would be this \addr).
 			%
 			We call \reg to the \fAddrToSet reachable from $hd$.
@@ -415,7 +415,7 @@
 			Let $prev$ and \addr reachable from $hd$ (in the \fAddrToSet of $hp,hd$) and $curr,aux$ two \addr. 
 			%
 			It is needed that the 3 address ($prev,curr,aux$) are different one another and all of them are not null.
-
+			\\
 			If prev points curr, aux points curr, then making prev point to aux has one unique effect on the \reg: aux now is in the \reg so every reachable address before the \fUpd is still reachable and aux is reachable too.
 		}
 		\begin{formula}
@@ -428,7 +428,7 @@
 		\explanation{
 			\paragraph{Interpretation:}
 			In a similar way \ref{ax::insert__keeps_addr2set}, this axioms allows to \fUpd a \mem preserving the \fAddrToSet, but this \fUpd would correspond to a removal in the list.
-			
+			\\
 			Let $hp$ be the \mem. Let $hd$ be an \addr (the \head of the list would be this \addr).
 			%
 			We call \reg to the \fAddrToSet reachable from $hd$.
@@ -436,9 +436,8 @@
 			Let $prev$ and \addr reachable from $hd$ (in the \fAddrToSet of $hp,hd$) and $curr,aux$ two \addr. 
 			%
 			It is needed that the 3 address ($prev,curr,aux$) are different one another and all of them are not null.
-
+			%
 			If prev points curr, aux points curr, then making prev point to aux has one unique effect in the \reg: curr is now not reachable but every \addr reachable before the \fUpd is still reachable.
-
 		}
 		\begin{formula}
 			((next(rd(hp,curr)) = aux \wedge next(rd(hp,prev)) = curr \wedge (\neg\;  aux = next(rd(hp,prev))) \wedge hp_p = upd(hp,prev,mkcell(data(rd(hp,prev)),aux,rd(hp,prev).lockid)) \wedge (\neg\;  aux = null) \wedge in(curr,addr2set(hp,hd)) \wedge in(null,addr2set(hp,hd)) \wedge in(prev,addr2set(hp,hd))) \implies diff(addr2set(hp,hd),\fSingl(curr)) = addr2set(hp_p,hd))
@@ -468,7 +467,7 @@
 			This axioms allows to \fUpd a \mem preserving the \fOrderlist predicate. 
 			%
 			This update preserve the predicate if certain conditions are satisfied.
-
+			\\
 			Let $hp$ be a \mem,$hd,tl$ two \addr which satisfy $\fOrderlist(hp,hd,tl)$ and $tl$ is not \fNull, having $tl$ point to \fNull. Let $prev,aux,curr$ be \addr with ordered elements, i.e. the \elem stored in $hp$ at $prev$ is less than the one at $aux$, which is less than the one at $curr$. In addition, $curr$ is pointed by $aux$ and $prev$.
 			\textbf{Then}, updating $hp$ so that $prev$ points to $aux$ preserve \fOrderlist$(hp',hd,tl)$.
 		}
@@ -482,7 +481,7 @@
 		\explanation{
 			\paragraph{Interpretation:}
 			In a similar way \ref{ax::insert__keeps_orderlist}, this axioms allows to \fUpd a \mem preserving the \fOrderlist predicate, but this \fUpd would correspond to a removal in the list. This update preserve the predicate if certain conditions are satisfied.
-
+			\\
 			Let $hp$ be a \mem,$hd,tl$ two \addr which satisfy $\fOrderlist(hp,hd,tl)$ and $tl$ points to \fNull. Let $prev,aux,curr$ be \addr which satisfy that $aux$ is pointed by $curr$, which is pointed by $prev$. In addition, $curr,prev,aux$ must be reachable from $hd$.
 			\textbf{Then}, updating $hp$ so that $hp$ stores at $prev$ the same cell stored at $aux$ is an action that preserve \fOrderlist for the new $hp$ from $hd$ to $tl$.	
 
@@ -513,13 +512,13 @@
 		\explanation{
 			\paragraph{Interpretation:}
 			\fNext is biyective inside an orderlist, i.e., every node of the list has only another node of the list pointing to it.
-
+			\\
 			Let $hd,tl$ be \addr, sentinel nodes of an order list in the \mem $hp$.
 			%
 			As a sentinel node $tl$ points to \fNull.
 			%
 			Let $a,b,c,d$ be three \addr reachable from $hd$, every \addr different from \fNull and $a,c$ different from $tl$.
-
+			\\
 			If $c$ points to $a$, $d$ points to $a$ and $a=b$, \textbf{$c=d$}.
 		}
 		\begin{formula}
@@ -531,7 +530,6 @@
 		\label{ax::next_is_not_same__if_ordered}
 		\explanation{
 			\paragraph{Interpretation:}
-
 			Let $hd,tl,a$ \addr reachable from $hd$ in the \mem $hp$, every \addr different from \fNull. 
 			%
 			In addition, $tl$ point to \fNull.
@@ -553,7 +551,7 @@
 			Independently of this axiom being redundant, it provides \spass a performance improvement.
 			%
 			As it has been stated, this set of axioms is not the minimum set of axioms but is a set sufficient to prove all the invariants.
-
+			\\
 			Let $hd,tl$ be \addr reachable from $hd$ in the \mem $hp$, both different from \fNull, and $tl$ pointing to \fNull.
 			%
 			Let $d$ be a not \fNull \addr which points to \fNull 
@@ -565,4 +563,4 @@
 
 
 
-	\vskip 1cm
+	%\vskip 1cm

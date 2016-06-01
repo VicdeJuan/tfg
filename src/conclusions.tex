@@ -1,15 +1,51 @@
 % -*- root: ../main.tex -*-
 \chapter{Conclusions\label{sec:conclusiones}}
 
-\paragraph{Abstract} We will conclude with an abstract of the information we discovered about the linked list theory.
+\paragraph{Abstract} We will conclude the thesis with an abstract of the information we discovered about the linked list theory.
+%
+Finally, we will discuss the scalability to production of this way of verifying programs.
+%
+Does this work worth it in any case? 
+%
+The advantages and disadvantages will be covered.
 
-Finally, we will discuss the scalability of this way of proving programs to production. Does this work worth it in any case? 
+\section{Linked list is valid}
 
-\section{Linked list theory axiomatizable}
+The main conclusion of this bachelor thesis is that the implementation of a fine grained lock coupling linked list shown at \ref{fig:listcode} is valid and has been verified. 
+%
+We can claim that that implementation always preserve its order and its structure of a list regardless the number of threads executing. 
+%
+There is no need of testing and it can not fail because some possible scenario which was not tested. 
+% 
+If we trust the axioms in which the proofs are based (which are not difficult to understand and trust because its simplicity), we must accept the conclusion that the order and list structure are preserved.
 
- 
+\subsection{Reproducible proofs}
 
-\section{Refutation worth it}
+Additionally, the generated proofs of that conclusion have been stored so any one can reproduce the proofs and double-check them with another theorem prover.
 
 
+\section{Discussion about formal verification}
 
+The amount of work needed to obtain the prove of the validity of the program may seem too much.
+%
+A whole bachelor thesis to prove something not very difficult to see looking carefully at the code and testing some of examples.
+
+There is a fact which should not be forgotten, before we discuss about formal verification. 
+%
+This work has been realized to explore the possibility of complementing \leap with first order proofs, to cover some lacks of \leap
+\footnote{The main lack is the impossibility to reproduce verification without rerunning all the test}.
+%
+Additionally, this work has been done from the basis of formalism and \spass has been used. 
+%
+We have seen along the thesis that \spass has some difficulties to select the best branch to explore during the proofs, and we fulfill this problem trying to reduce the number of axioms \spass could use, leading to try to prove twice the same problem. 
+%
+If another more specific prover were used then the proofs would have been found easier and rapidly.
+%
+Additionally, if the goal was to develop a verified tool, we would have chosen another path. 
+%
+We could have used \gls{VCC} and a C implementation of a fine-grained lock coupling linked list in order to put the implementation into production and it would have been a lot easier, but the goal was not just prove the implementation but research formal verification from the very begging of the process.
+
+
+Despite that fact, the certainty we have that this linked list is valid can not be obtained by testing. 
+%
+If one accept the axioms, then the validity must be accepted too with absolute certainty.

@@ -10,6 +10,62 @@
 	year = {2015}
 }
 
+
+
+@MISC{japaneseSatellite,
+title = {Software update destroys $286 million Japanese satellite},
+howpublished={http://hackaday.com/2016/05/02/software-update-destroys-286-million-japanese-satellite/}}
+
+@MISC{boein787,
+howpublished = {https://www.theguardian.com/business/2015/may/01/us-aviation-authority-boeing-787-dreamliner-bug-could-cause-loss-of-control},
+title = {Boeing 787 bug could cause 'loss of control'}}
+
+@MISC{xraykill,
+title = {Computer-controlled machine overdosed six people},
+howpublished = {http://sunnyday.mit.edu/papers/therac.pdf}}
+
+@MISC{wikipediaList,
+title = {List of software bugs},
+howpublished = {https://en.wikipedia.org/wiki/List_of_software_bugs}
+}
+
+@MISC{CCompilerMotivation,
+title={Finding and Understanding Bugs in C Compilers},
+author = {Xuejun Yang Yang Chen Eric Eide John Regehr},
+school = {University of Utah, School of Computing}
+}
+
+@PHDTHESIS{Dargaye-these,
+  author = {Zaynah Dargaye},
+  title = {Vérification formelle d'un compilateur pour langages fonctionnels},
+  school = {Université Paris 7 Diderot},
+  year = {2009},
+  month = {jul}
+}
+
+
+@MISC{VCC,
+  title = {A Practical System for Verifying Concurrent C.},
+  author = {Ernie Cohen, Markus Dahlweid, Mark Hillebrand, Dirk Leinenbach, Michał Moskal, Thomas Santen, Wolfram Schulte, Stephan Tobies.},
+  howpublished = {22nd International Conference on Theorem Proving in Higher Order Logics (TPHOLs 2009).},
+  content = {http://research.microsoft.com/en-us/um/people/moskal/pdf/tphol2009.pdf},
+  note = {Provides a good overall system description of VCC}
+ }
+
+ @BOOK{ModelChecking
+title = {Model Checking and Theorem Proving: a Unified Framework},
+author = {Sergey Berezin},
+date = {24th January 2002},
+ISBN = {CMU-CS-02-100}
+}
+@BOOK{ScalableTechniques
+title = {Scalable Techniques for Formal Verification},
+author = {Sandip Ray},
+publisher = {Springer},
+ISBN = {978-1-4419-5997-3}
+
+}
+
 % Optional fields: author, title, howpublished, month, year, note
 @MISC{spass,
 	title = {SPASS Version 3.5.},
@@ -17,7 +73,7 @@
 	year = {2009}, 
 	year = {22nd International Conference on Automated Deduction CADE 2009},
 	note = {LNCS 5663},
-  howpublihsed = {22nd International Conference on Automated Deduction. The original publication is available at www.springerlink.com},
+  howpublihsed = {22nd International Conference on Automated Deduction.},
   pages = {140.145},
 }
 
@@ -30,36 +86,12 @@
   howpublihsed = {} 
 }
 
-@MISC{isabelle,
+@MISC{issabelle,
   title = {Isabelle}
 }
 
 @MISC{vampire
   title = {Vampire}
-}
-
-@MISC{leap,
-  title = {Leap},
-  author = {\citeapos{thesisAle}},
-  howpublished = {26th International Conference on Computer Aided Verification (CAV)},
-  year = {2014}, 
-  note = {Tool developed to prove verification of multiple theories by model searching.}
-}
-
-@MISC{leapsyntax,
-	title = {},
-	author = {},
-  howpublished = {},
-	year = {}, 
-	note = {}
-}
-
-% Optional fields: volume/number, series, address, edition, month, note
-@BOOK{yellowbook,
-  author = {Bradley Mana},
-  title = {The Calculus of Computation},
-  publisher = {Springer},
-  year = {2007}
 }
 
 
@@ -77,27 +109,56 @@ note = {Apuntes UAM},
 %author = {Gödel, Kurt},
 %publisher = {Monatshefte für Mathematik},
 @ARTICLE{Godel,
-	author = {Gödel, Kurt },	
-	title = {{O}n {F}ormally {U}ndecidable {P}ropositions in {P}rincipia {M}athematica and {R}elated {S}ystems {I}},
-	journal = {Monatshefte fur Mathematik},
-	year = {1931}
+  author = {Gödel, Kurt },  
+  title = {{O}n {F}ormally {U}ndecidable {P}ropositions in {P}rincipia {M}athematica and {R}elated {S}ystems {I}},
+  journal = {Monatshefte fur Mathematik},
+  year = {1931}
 }
+
+
+% Optional fields: volume/number, series, address, edition, month, note
+@BOOK{yellowbook,
+  author = {Bradley Mana},
+  title = {The Calculus of Computation},
+  publisher = {Springer},
+  year = {2007}
+}
+
 
 % Optional fields: volume, number, pages, month, note
 @ARTICLE{paperAle,
-	author = {Sánchez, Alejandro},
-	title = {Paper 2},
-	journal = {},
-	year = {201n}
+  author = {Sánchez, Alejandro},
+  title = {Paper 2},
+  journal = {},
+  year = {201n}
 }
 
 % Optional fields: volume, number, pages, month, note
 @ARTICLE{paperParametrizedInvariants,
-	author = {Sánchez, Alejandro},
-	title = {Parametrized Invariants},
-	journal = {},
-	year = {2013}
+  author = {Sánchez, Alejandro},
+  title = {Parametrized Invariants},
+  journal = {},
+  year = {2013}
 }
+
+@ARTICLE{tempVerifLinkedList,
+  author =   {Alejandro Sánchez and César Sánchez},
+  title =    {Decision Procedures for the Temporal Verification of Concurrent Lists},
+  journal =    {},
+  year =   {2010}
+}
+
+
+@MISC{leap,
+  title = {Leap},
+  author = {\citeapos{thesisAle}},
+  howpublished = {26th International Conference on Computer Aided Verification (CAV)},
+  year = {2014}, 
+  note = {Tool developed to prove verification of multiple theories by model searching.}
+}
+
+
+
 % Optional fields: author, title, howpublished, month, year, note
 @MISC{EqualityIsDecidable,
 	 author= {Löwenheim, Leopold },
@@ -162,12 +223,7 @@ note = {Apuntes UAM},
   OPTannote =    {}
 }
 
-@ARTICLE{tempVerifLinkedList,
-  author = 	 {Alejandro Sánchez and César Sánchez},
-  title = 	 {Decision Procedures for the Temporal Verification of Concurrent Lists},
-  journal = 	 {},
-  year = 	 {2010}
-}
+
 
 @BOOK{ocamlbook,
   author = {Yaron Minsky, Anil Madhavapeddy, Jason Hickey},
@@ -191,39 +247,10 @@ note = {Apuntes UAM},
   year = {C1 2014} 
 }
 
-@MISC{japaneseSatellite,
-title = {Software update destroys $286 million Japanese satellite},
-howpublished={http://hackaday.com/2016/05/02/software-update-destroys-286-million-japanese-satellite/}}
-
-@MISC{boein787,
-howpublished = {https://www.theguardian.com/business/2015/may/01/us-aviation-authority-boeing-787-dreamliner-bug-could-cause-loss-of-control},
-title = {Boeing 787 bug could cause 'loss of control'}}
-
-@MISC{xraykill,
-title = {Computer-controlled machine overdosed six people},
-howpublished = {http://sunnyday.mit.edu/papers/therac.pdf}}
-
-@MISC{wikipediaList,
-title = {List of software bugs},
-howpublished = {https://en.wikipedia.org/wiki/List_of_software_bugs}
-}
-
-@MISC{CCompilerMotivation,
-title={Finding and Understanding Bugs in C Compilers},
-author = {Xuejun Yang Yang Chen Eric Eide John Regehr},
-school = {University of Utah, School of Computing}
-}
-
-@PHDTHESIS{Dargaye-these,
-  author = {Zaynah Dargaye},
-  title = {Vérification formelle d'un compilateur pour langages fonctionnels},
-  school = {Université Paris 7 Diderot},
-  year = {2009},
-  month = {jul}
-}
 
 @MISC{tptp,
   author = {www.tptp.org},
   title = {Thousands of Problems for Theorem Provers}
 }
+
 

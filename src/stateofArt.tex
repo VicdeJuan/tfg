@@ -4,14 +4,17 @@
 
 \paragraph{Abstract}
 
-We cover here some of the basics needed to understand the real thesis of this \thisworkm. We will describe some fundamentals of the first order logic (\gls{FOL}), about his undeciability and, of course, how we can use the \gls{FOL} to prove properties of a program. Just two general properties will be covered, such as safety and liveness.
+Formal verification is needed in some parts of the industry and this is a fact. 
+%
+Some examples are covered, in order to encourage the reader about formal verification.
 
-The thesis of this \thisworkm is the definition of a theory for linked list with which we can prove safety. Thus, we will define safety and some examples of how one can prove safety in simpler integer programs.
+There are some tools that aims to offer solutions to the need of formal verification. 
+%
+One of the tools covered is developed by Microsoft, which shows that this topic is not irrelevant.
+%
+Additionally, we cover the different ways this \textit{formal verification} can be achieved.
 
-We include a brief logic of temporal logic needed for lifeness proving, but this topic is not very important in this \thisworkm.
 
-Finally, we try to answer the question of parallelism. We will cover how can we prove safety for programs with multiple threads. We will describe some very important results used in this \thisworkm 
-done by \citep{thesisAle}.
 
 \section{The need of formal verification}
 
@@ -42,48 +45,83 @@ Other compilers \ref{Dargaye-these} are in process to be formally verified.
 
 \subsubsection{VCC}
 
-\gls{VCC} is a tool developed by Microsoft which
+\gls{VCC} is a tool developed by Microsoft which allows to develop Verified C Code \cite{VCC}. 
+%
+The aim is to offer a tool to critical developers in which the formal verification needed in critical software is integrated and is easy to use.
+%
+This project impulse the use of formal verification among the developers.
 
-VCC: A Verifier for Concurrent C  http://research.microsoft.com/en-us/projects/vcc/
-VCC is sound -- if VCC verifies your program, it really is correct (modulo bugs in VCC itself)
+VCC is sound, which means that if VCC verifies a program, it really is correct, with 2 possible problems.
+%
+VCC is not verified itself, which means it can have bugs, so the program is correct modulo bugs in VCC itself.
+%
+Additionally, a verified C compiler should be used in order to have a verified executable, because if the compiler is not correct and inserts a bug, then the verified program may fail.
+%
+Microsoft has think of that, so that problem is solved in latest versions of VCC. 
 
-VCC: A Practical System for Verifying Concurrent C. Ernie Cohen, Markus Dahlweid, Mark Hillebrand, Dirk Leinenbach, Michał Moskal, Thomas Santen, Wolfram Schulte, Stephan Tobies. 22nd International Conference on Theorem Proving in Higher Order Logics (TPHOLs 2009). (LNCS 5674). http://research.microsoft.com/en-us/um/people/moskal/pdf/tphol2009.pdf (Provides a good overall system description of VCC; the paper to cite for VCC)
+This tool can be downloaded at \href{http://research.microsoft.com/en-us/projects/vcc/}{reseach.microsoft.com}
 
+
+
+
+
+\section{Types of formal verification}
+
+There are basically two different ways of formally verify a program. 
+%
+Both of the consist on translating the program into logic a formula and try to prove it valid \cite{ScalableTechniques}.
+\todo{I didn't read the book but it looks interesting}
+%
+The first way is search models and the other one is try to obtain a formal proof. 
+%
+Model searching is easily automatizable but formal proofs can not be automatized for some logic, as \gls{SOL}.
+
+
+\subsection{Model checking}
+
+The approach of model checking is the one used in \citeapos{thesisAle}. 
+%
+Another tool that is based on model checking is Spin.
 
 \subsubsection{Spin}
 
-http://spinroot.com/spin/what.html
-
-Model checking, embedded C code
-
-Three examples of inspiring applications of Spin in the last few years include the verification of the control algorithms for the new flood control barrier built in the late nineties near Rotterdam in the Netherlands. The verification work was carried out by the Dutch firm CMG (Computer Management Group) in collaboration with the Formal Methods group at the University of Twente.
-
-
-\subsection{Types of formal verification}
-
+Spin targets the efficient verification of multi-threaded software. 
+%
+The tool checks the logical consistency of a specification and reports on deadlocks, race conditions, different types of incompleteness, and unwarranted assumptions about the relative speeds of processes.
+%
+Spin provides direct support to C code by including a tool which translate C code to \gls{PROMELA}.
+%
+Spin also provides a \gls{LTL} model checking system.
 
 
-References:
+Two examples of inspiring applications of Spin in the last few years are the verification of the control algorithms for the new flood control barrier built near Rotterdam. 
+%
+The verification work was carried out by the Dutch firm CMG (Computer Management Group) in collaboration with the Formal Methods group at the University of Twente.
 
-1) Model Checking and Theorem Proving:
-a Unified Framework
-Sergey Berezin
-24th January 2002
-CMU-CS-02-100
+\subsection{Formal proof}
 
+The other approach is to use an \gls{ATP} which allows automatic proving. 
+%
+With the theory and the formula, the \gls{ATP} tries to find a proof. 
+%
+As it was explained \doubt{in/at} \ref{intr:consistency}, we may need to use a theory which is not decidable. 
+%
+This makes this way hard. 
+%
+The \gls{ATP} may be searching for the proof for ever.
 
-2) Scalable Techniques for Formal Verification
-Sandip Ray
-Springer US
-978-1-4419-5997-3
-Edition 1
+This is the approach we have taken in this bachelor thesis.
+%
+There are different \gls{ATP}, but in all of them, a framework must be build in order to use them.
+%
+Essentially, they are theorem prover with no interface difference apart from the syntax. 
+%
+Internally, they search the proofs in different ways.
 
+Some examples of \gls{ATP} are Vampire\cite{vampire}, Issabelle \cite{issabelle} and \spass \cite{spass}
 
-\subsubsection{Model checking}
+You build your own framework using Issabelle(https://isabelle.in.tum.de/), 
 
-
-\subsubsection{Theorem prover}
-
-You build your own framework using Issabelle(https://isabelle.in.tum.de/), Spass (ref) or others.
+Spass (ref) or others.
 
 

@@ -1333,13 +1333,15 @@ every picture/.append style={
 \newcommand{\numTransitionsProvedWithPC}{180\xspace}
 \newcommand{\numTotalTransitions}{40000000\xspace}
 
-\newenvironment{formula}{\begin{dmath}}{\end{dmath}}
+\newenvironment{formula}{\\Here we present the formula: \begin{dmath}}{\end{dmath}}
 \newcommand{\explanation}[1]{\textit{#1}}
 
-\newenvironment{axiomdescription}[1][\unskip]{
-	\begin{center}\rule{4cm}{0.4pt} #1 \;\;\;\;\;\;\rule{2cm}{0.4pt}\end{center}
-	\vskip -1.5cm
-	}
-	{
+\newenvironment{axiomdescription}[1][\skip]{
+	%\begin{center}\rule{4cm}{0.4pt}\;\;\;\;\;\; #1 \;\;\;\;\;\;\rule{2cm}{0.4pt}\end{center}
+	\textbf{Axiom #1:}
 	\vskip -1cm
 	}
+	{
+	%\vskip -1cm
+	}
+
