@@ -451,6 +451,10 @@
 		\explanation{
 			\paragraph{Interpretation:}
 			This axiom is the base of the recursion in the definition of \fOrderlist. 
+			%
+			Let $hp$ be a \mem, $hd,tl$ two \addr. 
+			%
+			If the \elem stored in $hp$ at $hd$ is less than the \elem stored in $hp$ at $tl$ and $hd$ point to $tl$, then the list formed by $hd,tl$ is ordered.
 		}
 		\begin{formula}
 			(ls\_elem(data(rd(hp,hd)),data(rd(hp,tl))) \andcond tl = next(rd(hp,hd)) \andcond next(rd(hp,tl)) = nl ) \implies orderlist(hp,hd,tl) 
@@ -461,6 +465,12 @@
 		\label{ax::insert__keeps_orderlist}
 		\explanation{
 			\paragraph{Interpretation:}
+			This axioms allows to \fUpd a \mem preserving the \fOrderlist predicate. 
+			%
+			This update preserve the predicate if certain conditions are satisfied.
+
+			Let $hp$ be a \mem,$hd,tl$ two \addr which satisfy $\fOrderlist(hp,hd,tl)$ and $tl$ is not \fNull, having $tl$ point to \fNull. Let $prev,aux,curr$ be \addr with ordered elements, i.e. the \elem stored in $hp$ at $prev$ is less than the one at $aux$, which is less than the one at $curr$. In addition, $curr$ is pointed by $aux$ and $prev$.
+			\textbf{Then}, updating $hp$ so that $prev$ points to $aux$ preserve \fOrderlist$(hp',hd,tl)$.
 		}
 		\begin{formula}
 			((orderlist(hp,hd,tl) \wedge (\neg\;  tl = null) \wedge next(rd(hp,tl)) = null \wedge data(rd(hp,prev)) < data(rd(hp,aux)) \wedge data(rd(hp,aux)) < data(rd(hp,curr)) \wedge next(rd(hp,aux)) = curr \wedge next(rd(hp,prev)) = curr \wedge hp_p = upd(hp,prev,mkcell(data(rd(hp,prev)),aux,rd(hp,prev).lockid))) \implies orderlist(hp_p,hd,tl))
@@ -471,25 +481,29 @@
 		\label{ax::remove__keeps_orderlist}
 		\explanation{
 			\paragraph{Interpretation:}
+			In a similar way \ref{ax::insert__keeps_orderlist}, this axioms allows to \fUpd a \mem preserving the \fOrderlist predicate, but this \fUpd would correspond to a removal in the list. This update preserve the predicate if certain conditions are satisfied.
+
+			Let $hp$ be a \mem,$hd,tl$ two \addr which satisfy $\fOrderlist(hp,hd,tl)$ and $tl$ points to \fNull. Let $prev,aux,curr$ be \addr which satisfy that $aux$ is pointed by $curr$, which is pointed by $prev$. In addition, $curr,prev,aux$ must be reachable from $hd$.
+			\textbf{Then}, updating $hp$ so that $hp$ stores at $prev$ the same cell stored at $aux$ is an action that preserve \fOrderlist for the new $hp$ from $hd$ to $tl$.	
+
 		}
 		\begin{formula}
 			((aux = next(rd(hp,curr)) \wedge curr = next(rd(hp,prev)) \wedge (\neg\;  aux = null) \wedge null = next(rd(hp,tl)) \wedge (\neg\;  aux = next(rd(hp,prev))) \wedge hp_p = upd(hp,prev,mkcell(data(rd(hp,prev)),aux,rd(hp,prev).lockid)) \wedge in(prev,addr2set(hp,hd)) \wedge in(curr,addr2set(hp,hd)) \wedge in(null,addr2set(hp,hd)) \wedge in(aux,addr2set(hp,hd)) \wedge orderlist(hp,hd,tl)) \implies orderlist(hp_p,hd,tl))
 		\end{formula}
 	\end{axiomdescription}
 
-	\begin{axiomdescription}[not-in-region--not-change-heap-list]
-		\label{ax::not_in_region__not_change_heap_list}
-		\explanation{
-			\paragraph{Interpretation:}
-			\paragraph{Interpretation:}
-			Let $hp$ be an \addr and $hp$ a \mem. 
-			%
-			Then, modifying a \mem in an \addr which is not reachable from $hp$ preserves the order of the elements in the list.
-		}
-		\begin{formula}
-			((\neg\;  in(a,addr2set(hp,hd))) \implies orderlist(hp,hd) = orderlist(upd(hp,a,c),hd))
-		\end{formula}
-	\end{axiomdescription}
+%	\begin{axiomdescription}[not-in-region--not-change-heap-list]
+%		\label{ax::not_in_region__not_change_heap_list}
+%		\explanation{
+%			\paragraph{Interpretation:}
+%			Let $hp$ be an \addr and $hp$ a \mem. 
+%			%
+%			Then, modifying a \mem in an \addr which is not reachable from $hp$ preserves the order of the elements in the list.
+%		}
+%		\begin{formula}
+%			((\neg\;  in(a,addr2set(hp,hd))) \implies orderlist(hp,hd) = orderlist(upd(hp,a,c),hd))
+%		\end{formula}
+%	\end{axiomdescription}
 
 
 
@@ -498,6 +512,15 @@
 		\label{ax::next_injective__if_ordered}
 		\explanation{
 			\paragraph{Interpretation:}
+			\fNext is biyective inside an orderlist, i.e., every node of the list has only another node of the list pointing to it.
+
+			Let $hd,tl$ be \addr, sentinel nodes of an order list in the \mem $hp$.
+			%
+			As a sentinel node $tl$ points to \fNull.
+			%
+			Let $a,b,c,d$ be three \addr reachable from $hd$, every \addr different from \fNull and $a,c$ different from $tl$.
+
+			If $c$ points to $a$, $d$ points to $a$ and $a=b$, \textbf{$c=d$}.
 		}
 		\begin{formula}
 			((orderlist(hp,hd,tl) \wedge in(a,addr2set(hp,hd)) \wedge in(b,addr2set(hp,hd)) \wedge in(c,addr2set(hp,hd)) \wedge in(d,addr2set(hp,hd)) \wedge (\neg\;  tl = null) \wedge null = next(rd(hp,tl)) \wedge (\neg\;  c = null) \wedge (\neg\;  d = null) \wedge (\neg\;  a = null) \wedge (\neg\;  b = null) \wedge (\neg\;  a = tl) \wedge (\neg\;  b = tl) \wedge next(rd(hp,c)) = a \wedge next(rd(hp,d)) = b) \implies a = b \implies c = d)
@@ -508,6 +531,11 @@
 		\label{ax::next_is_not_same__if_ordered}
 		\explanation{
 			\paragraph{Interpretation:}
+
+			Let $hd,tl,a$ \addr reachable from $hd$ in the \mem $hp$, every \addr different from \fNull. 
+			%
+			In addition, $tl$ point to \fNull.
+			\textbf{Then} a can not point to itselt.
 		}
 		\begin{formula}
 			((in(a,addr2set(hp,hd)) \wedge in(tl,addr2set(hp,hd)) \wedge (\neg\;  hd = null) \wedge (\neg\;  tl = null) \wedge (\neg\;  a = null) \wedge next(rd(hp,tl)) = null) \implies (\neg\;  next(rd(hp,a)) = a))
@@ -518,6 +546,17 @@
 		\label{ax::just_tail__points__null}
 		\explanation{
 			\paragraph{Interpretation:}
+			The only node of the list pointing to \fNull is the sentinel node \tail. 
+			%
+			One may think that this axiom do not give new any new truth to the axiom set, because of the two previous ones.
+			%
+			Independently of this axiom being redundant, it provides \spass a performance improvement.
+			%
+			As it has been stated, this set of axioms is not the minimum set of axioms but is a set sufficient to prove all the invariants.
+
+			Let $hd,tl$ be \addr reachable from $hd$ in the \mem $hp$, both different from \fNull, and $tl$ pointing to \fNull.
+			%
+			Let $d$ be a not \fNull \addr which points to \fNull 
 		}
 		\begin{formula}
 			((in(tl,addr2set(hp,hd)) \wedge (\neg\;  hd = null) \wedge (\neg\;  tl = null) \wedge next(rd(hp,tl)) = null \wedge (\neg\;  d = null) \wedge next(rd(hp,d)) = null \wedge in(d,addr2set(hp,hd))) \implies d = tl)
