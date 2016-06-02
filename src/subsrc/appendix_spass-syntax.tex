@@ -68,7 +68,7 @@
 
 %%   %%  setelem
 
-(emptySetElem,0),(unionElem,2),(setDiffElem,2),(singlElem,1),(set2elem,2),
+(emptySetElem,0),(unionElem,2),(setDiffElem,2),(singlElem,1)
 
 %%   %%  cell
 
@@ -249,8 +249,6 @@ formula(forall([setelem(set\_e),setelem(set\_e1)],setelem(unionElem(set\_e,set\_
 formula(forall([setelem(set\_e),setelem(set\_e1)],setelem(setDiffElem(set\_e,set\_e1))),setDiffElem\_\_is\_\_setelem\_tllign).
 
 formula(forall([elem(e)],setelem(singlElem(e))),singlElem\_\_is\_\_setelem\_tllign).
-
-formula(forall([setaddr(set\_a),mem(h)],setelem(set2elem(set\_a,h))),set2elem\_\_is\_\_setelem\_tllign).
 
 %%   %% cell
 
