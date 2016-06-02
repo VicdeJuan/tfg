@@ -1,0 +1,122 @@
+
+%	\begin{axiomdescription}[equality-bt-cell]
+%		\label{ax::equality_bt_cell}
+%		\explanation{
+%			\paragraph{Interpretation:}
+%			Let c1,c2 be cells. We claim 2 cells are equal if all their fields are equal.
+%		}
+%		\begin{formula}
+%			(c1 = c2 \implies (data(c1) = data(c2) \wedge c1.lockid = c2.lockid \wedge next(c1) = next(c2)))
+%		\end{formula}
+%	\end{axiomdescription}
+
+%	\begin{axiomdescription}[equality-on-read]
+%		\label{ax::equality_on_read}
+%		\explanation{
+%			\paragraph{Interpretation:}
+%			Let a,b be addresses and m a memory. Then, reading \doubt{on/in} a memory two equal addresses return the same cell.
+%		}
+%		\begin{formula}
+%			(a = b \implies rd(m,a) = rd(m,b))
+%		\end{formula}
+%	\end{axiomdescription}
+
+
+%	UNUSED
+%	\begin{axiomdescription}[set-exten]
+%		\label{ax::set_exten}
+%		\explanation{
+%			\paragraph{Interpretation:}
+%
+%		}
+%		\begin{formula}
+%			se1 = se2 \implies (\forall a in(a,se1) \dimplies in(a,se2))
+%		\end{formula}
+%	\end{axiomdescription}
+
+
+%	UNUSED
+%	\begin{axiomdescription}[SetDiff-def]
+%		\label{ax::SetDiff_def}
+%		\explanation{
+%			\paragraph{Interpretation:}
+%			Difference of set definition.
+%			%
+%			A generic element is not in the difference of any set with $\fSingl(a)$
+%		}
+%		\begin{formula}
+%			((in(x,se) \wedge (\neg\;  in(x,se2))) \dimplies in(x,diff(se,se2)))
+%		\end{formula}
+%	\end{axiomdescription}
+
+
+
+
+
+%	UNUSED
+%	\begin{axiomdescription}[less-total]
+%		\label{ax::less_total}
+%		\explanation{
+%			\paragraph{Interpretation:}
+%			The order relation \doubt{between/among} \elem is total.
+%		}
+%		\begin{formula}
+%			(\neg\;  (x < y \wedge y < x))
+%		\end{formula}
+%	\end{axiomdescription}
+
+
+%	\begin{axiomdescription}[not-in-region--not-change-heap-list]
+%		\label{ax::not_in_region__not_change_heap_list}
+%		\explanation{
+%			\paragraph{Interpretation:}
+%			Let $hp$ be an \addr and $hp$ a \mem. 
+%			%
+%			Then, modifying a \mem in an \addr which is not reachable from $hp$ preserves the order of the elements in the list.
+%		}
+%		\begin{formula}
+%			((\neg\;  in(a,addr2set(hp,hd))) \implies orderlist(hp,hd) = orderlist(upd(hp,a,c),hd))
+%		\end{formula}
+%	\end{axiomdescription}
+
+
+	\begin{axiomdescription}[just-tail--points--null]
+		\label{ax::just_tail__points__null}
+		\explanation{
+			\paragraph{Interpretation:}
+			The only node of the list pointing to \fNull is the sentinel node \tail. 
+			%
+			One may think that this axiom do not give new any new truth to the axiom set, because of the two previous ones.
+			%
+			Independently of this axiom being redundant, it provides \spass a performance improvement.
+			%
+			As it has been stated, this set of axioms is not the minimum set of axioms but is a set sufficient to prove all the invariants.
+			\\
+			Let $hd,tl$ be \addr reachable from $hd$ in the \mem $hp$, both different from \fNull, and $tl$ pointing to \fNull.
+			%
+			Let $d$ be a not \fNull \addr which points to \fNull 
+		}
+		\begin{formula}
+			((in(tl,addr2set(hp,hd)) \wedge (\neg\;  hd = null) \wedge (\neg\;  tl = null) \wedge next(rd(hp,tl)) = null \wedge (\neg\;  d = null) \wedge next(rd(hp,d)) = null \wedge in(d,addr2set(hp,hd))) \implies d = tl)
+		\end{formula}
+	\end{axiomdescription}
+
+
+	\begin{axiomdescription}[next-injective--if-ordered]
+		\label{ax::next_injective__if_ordered}
+		\explanation{
+			\paragraph{Interpretation:}
+			\fNext is biyective inside an orderlist, i.e., every node of the list has only another node of the list pointing to it.
+			\\
+			Let $hd,tl$ be \addr, sentinel nodes of an order list in the \mem $hp$.
+			%
+			As a sentinel node $tl$ points to \fNull.
+			%
+			Let $a,b,c,d$ be three \addr reachable from $hd$, every \addr different from \fNull and $a,c$ different from $tl$.
+			\\
+			If $c$ points to $a$, $d$ points to $a$ and $a=b$, \textbf{$c=d$}.
+		}
+		\begin{formula}
+			((orderlist(hp,hd,tl) \wedge in(a,addr2set(hp,hd)) \wedge in(b,addr2set(hp,hd)) \wedge in(c,addr2set(hp,hd)) \wedge in(d,addr2set(hp,hd)) \wedge (\neg\;  tl = null) \wedge null = next(rd(hp,tl)) \wedge (\neg\;  c = null) \wedge (\neg\;  d = null) \wedge (\neg\;  a = null) \wedge (\neg\;  b = null) \wedge (\neg\;  a = tl) \wedge (\neg\;  b = tl) \wedge next(rd(hp,c)) = a \wedge next(rd(hp,d)) = b) \implies a = b \implies c = d)
+		\end{formula}
+	\end{axiomdescription}

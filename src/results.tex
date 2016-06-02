@@ -87,18 +87,28 @@ Invariant & Self-consecution & Others consecution & Total & Number of axioms use
 \input{src/tex/analysisTable.tex}
 \end{tabular}
 \label{table:analysisProofs}
-\caption{Global statistics of each invariant.}
+\caption{Number of \spass problems by invariant.}
 \end{table}
 
 
-In terms of number of axioms, it is interesting to see that \_\_\_\_\_\_\_\_ is the most complicated, followed by \_\_\_\_\_\_\_\_. 
+
+In terms of number of axioms needed, it is interesting to see that \invLock is the most complicated, followed by \invNext.  
 %
+The easiest is \invDisjoint, which only uses \textit{nums-are-different} (\ref{ax::nums_are_different}) and axioms related with sorts (there are 2 threads involved in the formula which are different one another.)
+\\
 The differences on the number of other-consecution problem is caused by the splitting on complex \spass problems. 
 %
 To prove \invOrder all other-consecution problems have been splat, but for \invLock and \invNext just 21 other consecution problems have been splat.
 %
 Despite that fact, \invOrder is not very complex in terms of number of axioms. 
 
+
+\begin{figure}[hbtp]
+\centering
+\includegraphics[scale=0.8]{graphics/frequencyAxioms.png}
+\caption{Number of problems solved against number of axiom needed.}
+\label{fig:frequencyAxioms}
+\end{figure}
 
 \subsection{Special transitions}
 

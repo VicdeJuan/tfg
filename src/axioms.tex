@@ -1,29 +1,12 @@
 
 
 \todo{No break page on each axiom.}
+
 \subsubsection{Common}
+	This are common axioms, included in every \spass problem generated. 
 
-	\begin{axiomdescription}[equality-bt-cell]
-		\label{ax::equality_bt_cell}
-		\explanation{
-			\paragraph{Interpretation:}
-			Let c1,c2 be cells. We claim 2 cells are equal if all their fields are equal.
-		}
-		\begin{formula}
-			(c1 = c2 \implies (data(c1) = data(c2) \wedge c1.lockid = c2.lockid \wedge next(c1) = next(c2)))
-		\end{formula}
-	\end{axiomdescription}
+	In table \ref{table:axioms_common} is gathered the uses of each axiom in each invariant.
 
-	\begin{axiomdescription}[equality-on-read]
-		\label{ax::equality_on_read}
-		\explanation{
-			\paragraph{Interpretation:}
-			Let a,b be addresses and m a memory. Then, reading \doubt{on/in} a memory two equal addresses return the same cell.
-		}
-		\begin{formula}
-			(a = b \implies rd(m,a) = rd(m,b))
-		\end{formula}
-	\end{axiomdescription}
 
 	\begin{axiomdescription}[next-error--is--null]
 		\label{ax::next_error__is__null}
@@ -35,8 +18,25 @@
 		\end{formula}
 	\end{axiomdescription}
 
+	\begin{table}[hbtp]
+		\centering
+		\begin{tabular}{c|cccccc}
+			axiom & disjoint & locks & nexts & order & preserve & region 
+			\\\hline
+			next-error--is--null & 0 & 1 & 194 & 142 & 0 & 8 
+			\\
+		\end{tabular}
+		\label{table:axioms_common}
+		\caption{Uses of the common subset of axioms.}
+	\end{table}
+
+
 
 \subsubsection{Arithmetic}
+	
+	This subset of axioms refers to the arithmetical axioms needed at the proofs.
+	
+	In table \ref{table:axioms_arithmetic} is gathered the uses of each axiom in each invariant.
 
 	\begin{axiomdescription}[nums-are-different]
 		\label{ax::nums_are_different}
@@ -49,9 +49,24 @@
 	\end{axiomdescription}
 
 
+	\begin{table}[hbtp]
+		\centering
+		\begin{tabular}{c|cccccc}
+		axiom & disjoint & locks & nexts & order & preserve & region 
+		\\\hline
+				nums-are-different & 118 & 1 & 109 & 1 & 0 & 44 
+				\\
+		\end{tabular}
+		\caption{Uses of the arithmetic subset of axioms.}
+		\label{table:axiom_arithmetic}
+	\end{table}
+
+
 \subsubsection{Set theory}
 
-	This axioms are replicated for $\Sigma_{\sSetAddr},\Sigma_{\sSetElem}$ and $\Sigma_{\sSetTid}$.
+	This set of axioms model the set theory. As there are 3 types of set, this subset of axioms are replicated for $\Sigma_{\sSetAddr},\Sigma_{\sSetElem}$ and $\Sigma_{\sSetTid}$.
+	
+	In table \ref{table:axiom_set} is gathered the uses of each group of 3 axioms in each invariant.
 
 	\begin{axiomdescription}[union-def]
 		\label{ax::union_def}
@@ -126,21 +141,6 @@
 
 
 
-
-\subsubsection{Set extension}
-
-%	UNUSED
-%	\begin{axiomdescription}[set-exten]
-%		\label{ax::set_exten}
-%		\explanation{
-%			\paragraph{Interpretation:}
-%
-%		}
-%		\begin{formula}
-%			se1 = se2 \implies (\forall a in(a,se1) \dimplies in(a,se2))
-%		\end{formula}
-%	\end{axiomdescription}
-
 	\begin{axiomdescription}[set-exten-inv]
 		\label{ax::set_exten_inv}
 		\explanation{
@@ -152,19 +152,6 @@
 		\end{formula}
 	\end{axiomdescription}
 
-%	UNUSED
-%	\begin{axiomdescription}[SetDiff-def]
-%		\label{ax::SetDiff_def}
-%		\explanation{
-%			\paragraph{Interpretation:}
-%			Difference of set definition.
-%			%
-%			A generic element is not in the difference of any set with $\fSingl(a)$
-%		}
-%		\begin{formula}
-%			((in(x,se) \wedge (\neg\;  in(x,se2))) \dimplies in(x,diff(se,se2)))
-%		\end{formula}
-%	\end{axiomdescription}
 
 	\begin{axiomdescription}[a-not--in-se-dif-a]
 		\label{ax::a_not__in_se_dif_a}
@@ -177,8 +164,50 @@
 		\end{formula}
 	\end{axiomdescription}
 
+	\begin{table}[hbtp]
+		\centering
+		\begin{tabular}{c|cccccc}
+		axiom & disjoint & locks & nexts & order & preserve & region 
+		\\\hline
+				union-def & 0 & 1 & 223 & 0 & 1 & 15 
+				\\
+%				set-equal & 0 & 0 & 0 & 0 & 0 & 0 
+%				\\
+				union-conmutative & 0 & 1 & 2 & 0 & 0 & 1 
+				\\
+%				in-set--def & 0 & 0 & 0 & 0 & 0 & 0 
+%				\\
+				a--in--singl-a & 0 & 1 & 778 & 16 & 0 & 71 
+				\\
+				emptySet-is-empty & 0 & 1 & 139 & 0 & 0 & 2 
+				\\
+				% EXTENSION:
+				set-exten-inv & 0 & 1 & 136 & 0 & 0 & 0 
+				\\
+				a-not--in-se-dif-a & 0 & 1 & 47 & 0 & 0 & 12 
+				\\
+		\end{tabular}
+		\label{table:axiom_set}
+		\caption{Uses of the set subset of axioms.}
+	\end{table}
 
-\subsubsection{Update}
+
+\subsubsection{Memory}
+
+	This set of axiom models $\Sigma_{\mem}$, i.e., the axioms related with the updates of a \mem
+	%
+	In table \ref{table:axiom_upd} is gathered the uses of each axiom in each invariant.
+
+	\begin{axiomdescription}[rd-mem--def]
+		\label{ax::rd_mem__def}
+		\explanation{
+			\paragraph{Interpretation:}
+			The \cell returned when reading the position \fNull of any memory $m$ is the \fError \cell.
+		}
+		\begin{formula}
+			rd(m,null) = error
+		\end{formula}
+	\end{axiomdescription}
 
 	\begin{axiomdescription}[upd--def--not-null]
 		\label{ax::upd__def__not_null}
@@ -188,7 +217,6 @@
 			Let $a$ be an \addr not \fNull, $m$ a \mem and $c$ a \cell.We call $m2$ the result of the \fUpd statement.
 			%
 			Then, updating the value of $m$ stored \doubt{in} $a$ with any \cell $c$ implies that $c$ is the value returned when reading the stored \doubt{in} $a$ \doubt{at/on/of} the updated memory.
-			
 		}
 		\begin{formula}
 			((\neg\;  a = null) \implies upd(m,a,c) = m2 \implies rd(m2,a) = c)
@@ -208,19 +236,28 @@
 		\end{formula}
 	\end{axiomdescription}
 
-	\begin{axiomdescription}[rd-mem--def]
-		\label{ax::rd_mem__def}
-		\explanation{
-			\paragraph{Interpretation:}
-			The \cell returned when reading the position \fNull of any memory $m$ is the \fError \cell.
-		}
-		\begin{formula}
-			rd(m,null) = error
-		\end{formula}
-	\end{axiomdescription}
+	\begin{table}[hbtp]
+			\centering
+			\begin{tabular}{c|cccccc}
+			axiom & disjoint & locks & nexts & order & preserve & region 
+			\\\hline
+					rd-mem--def & 0 & 1 & 194 & 1729 & 1 & 8 
+					\\
+					upd--def--not-null & 0 & 1 & 283 & 1729 & 17 & 6 
+					\\
+					upd--def--one-at-the-time & 0 & 1 & 451 & 1803 & 19 & 10 
+					\\
+			\end{tabular}
+		\label{table:axiom_upd}
+		\caption{Uses of the subset of update axioms.}
+	\end{table}
 
 
 \subsubsection{Element arithmetic}
+
+	This set of axiom models $\Sigma_{\elem}$, i.e., the axioms related with the arithmetic of the \elem.
+	%
+	In table \ref{table:axiom_elemarith} is gathered the uses of each axiom in each invariant.
 
 	\begin{axiomdescription}[less-trans]
 		\label{ax::less_trans}
@@ -233,24 +270,13 @@
 		\end{formula}
 	\end{axiomdescription}
 
-%	UNUSED
-%	\begin{axiomdescription}[less-total]
-%		\label{ax::less_total}
-%		\explanation{
-%			\paragraph{Interpretation:}
-%			The order relation \doubt{between/among} \elem is total.
-%		}
-%		\begin{formula}
-%			(\neg\;  (x < y \wedge y < x))
-%		\end{formula}
-%	\end{axiomdescription}
+
 
 	\begin{axiomdescription}[ls-xy--not-ls-yx]
 		\label{ax::ls_xy__not_ls_yx}
 		\explanation{
 			\paragraph{Interpretation:}
 			The order relation \doubt{between/among} \elem is total.
-
 		}
 		\begin{formula}
 			(x < y \dimplies ((\neg\;  x = y) \wedge (\neg\;  y < x)))
@@ -292,6 +318,26 @@
 
 
 
+	\begin{table}
+	        \centering
+	        \begin{tabular}{c|cccccc}
+	        axiom & disjoint & locks & nexts & order & preserve & region 
+	        \\\hline
+	                less-trans & 0 & 1 & 0 & 1271 & 0 & 0 
+	                \\
+	                ls-xy--not-ls-yx & 0 & 1 & 6 & 1513 & 0 & 0 
+	                \\
+	                lowest--less-than-highest & 0 & 1 & 0 & 1535 & 0 & 0 
+	                \\
+	                lowestElem--def-tll & 0 & 1 & 13 & 1164 & 0 & 0 
+	                \\
+	                highestElem--def-tll & 0 & 1 & 6 & 1554 & 0 & 0 
+	                \\
+	        \end{tabular}
+	\label{table:axiom_elemarith}
+	\caption{Uses of the subset of the element arithmetic axioms.}
+	\end{table}
+
 
 \subsubsection{Addr2set}
 
@@ -299,9 +345,12 @@
 		\label{ax::nextreg}
 		\explanation{
 			\paragraph{Interpretation:}
+			Let $a$ be an \addr reachable from another \addr $b$. 
+			%
+			If $a$ is not \fNull, then the node pointed by $a$ is also reachable from $b$.
 		}
 		\begin{formula}
-			((in(a,se) \wedge se = addr2set(m,b) \wedge c = next(rd(m,a)) \	wedge (\neg\;  a = null))\implies in(c,se))
+			((in(a,se) \wedge se = addr2set(m,b) \wedge c = next(rd(m,a)) \wedge (\neg\;  a = null))\implies in(c,se))
 		\end{formula}
 	\end{axiomdescription}
 
@@ -325,23 +374,51 @@
 		\label{ax::addr2set_null__is__singl_null}
 		\explanation{
 			\paragraph{Interpretation:}
-			The set of \addr reachable from \fNull is the \setaddr with just the \addr \fNull.
+			The set of \addr reachable from \fNull is the \sSetAddr with just the \addr \fNull.
 			%
-			This is true as a consequence of \ref{ax::next_error__is__null}, because the \fNext of \fError is \fNull for every memory.
+			This is true as a consequence of previous axioms, because the \fNext of \fError is \fNull for every memory.
 		}
 		\begin{formula}
 			addr2set(m,null) = \fSingl(null)
 		\end{formula}
 	\end{axiomdescription}
 
+	\begin{table}
+        \centering
+        \begin{tabular}{c|cccccc}
+        axiom & disjoint & locks & nexts & order & preserve & region 
+        \\\hline
+                nextreg & 0 & 1 & 112 & 0 & 1 & 68 
+                \\
+                lock-keeps-addr2set & 0 & 0 & 0 & 0 & 17 & 0 
+                \\
+%                addr2set-null-is-singl-null & 0 & 0 & 0 & 0 & 0 & 0 
+ %               \\
+        \end{tabular}
+	\label{table:axiom_addr2set}
+	\caption{Uses of the subset of axioms related with $\Sigma_{\path}$, i.e., the reachability of the \addr.}
+	\end{table}
 
-\subsubsection{Lock_keeps}
+
+\subsubsection{Important}
+
+\todo{Rewrite}
+
+	This are the important axioms. 
+	%
+	All the previous subsets are well-known and generic. 
+	%
+	The subset of axiom presented now are the specific of this theory axioms.
+	
+
+	In table \ref{table:axiom_elemarith} is gathered the uses of each axiom in each invariant. 
+
 
 	\begin{axiomdescription}[lock-keeps-heap--data \& lock-keeps-heap--next]
 		\label{ax::lock_keeps_heap__data}\label{ax::lock_keeps_heap__next}
 		\explanation{
 			\paragraph{Interpretation:}
-			In the same way a \fLock statement preserve the \setaddr reachable from any \addr $hd$, the same states for some other functions apart from \fAddrToSet.
+			In the same way a \fLock statement preserve the \sSetAddr reachable from any \addr $hd$, the same states for some other functions apart from \fAddrToSet.
 			%
 			A \fLock statement does not change the \fData and \fNext values of a \cell (which is obvious).
 		}
@@ -351,16 +428,13 @@
 	\end{axiomdescription}
 
 
-
-\subsubsection{Important}
-
 	\begin{axiomdescription}[addr2set-rec-def]
 		\label{ax::addr2set_rec_def}
 		\explanation{
 			\paragraph{Interpretation:}
 			Recursive definition of \fAddrToSet.
 			%
-			As the \fAddrToSet is used to get the reachable \addr from another \addr $a$, it is to expect that the \fAddrToSet of the \fNext of $a$ would be the same \setaddr excluding $a$.
+			As the \fAddrToSet is used to get the reachable \addr from another \addr $a$, it is to expect that the \fAddrToSet of the \fNext of $a$ would be the same \sSetAddr excluding $a$.
 			%
 			This definition states that an \addr is reachable from itself.
 		}
@@ -380,18 +454,13 @@
 		\end{formula}
 	\end{axiomdescription}
 
-
-
-
-
-
 	\begin{axiomdescription}[not-in-region--not-change-heap-addr]
 		\label{ax::not_in_region__not_change_heap_addr}
 		\explanation{
 			\paragraph{Interpretation:}
 			Let $hp$ be an \addr and $hp$ a \mem. 
 			%
-			Then, modifying a \mem in an \addr which is not reachable from $hp$ preserves the \setaddr of reachable \addr from $hp$.
+			Then, modifying a \mem in an \addr which is not reachable from $hp$ preserves the \sSetAddr of reachable \addr from $hp$.
 		}
 		\begin{formula}
 			((\neg\;  in(a,addr2set(hp,hd))) \implies addr2set(hp,hd) = addr2set(upd(hp,a,c),hd))
@@ -404,19 +473,19 @@
 		\label{ax::insert__keeps_addr2set}
 		\explanation{
 			\paragraph{Interpretation:}
-			This axiom allows to \fUpd a \mem preserving the \fAddrToSe.
+			This axiom allows to \fUpd a \mem preserving the \fAddrToSet.
 			%
 			This \fUpd correspond to an insertion in the list.
 			\\
 			Let $hp$ be the \mem. Let $hd$ be an \addr (the \head of the list would be this \addr).
 			%
-			We call \reg to the \fAddrToSet reachable from $hd$.
+			We call \region to the \fAddrToSet reachable from $hd$.
 			%
 			Let $prev$ and \addr reachable from $hd$ (in the \fAddrToSet of $hp,hd$) and $curr,aux$ two \addr. 
 			%
 			It is needed that the 3 address ($prev,curr,aux$) are different one another and all of them are not null.
 			\\
-			If prev points curr, aux points curr, then making prev point to aux has one unique effect on the \reg: aux now is in the \reg so every reachable address before the \fUpd is still reachable and aux is reachable too.
+			If prev points curr, aux points curr, then making prev point to aux has one unique effect on the \region: aux now is in the \region so every reachable address before the \fUpd is still reachable and aux is reachable too.
 		}
 		\begin{formula}
 			((reg = addr2set(hp,hd) \wedge union(reg,{ aux }) = reg_p \wedge next(rd(hp,prev)) = curr \wedge (\neg\;  prev = curr) \wedge next(rd(hp,aux)) = curr \wedge (\neg\;  aux = null) \wedge (\neg\;  prev = null) \wedge (\neg\;  curr = null) \wedge in(prev,addr2set(hp,hd)) \wedge hp_p = upd(hp,prev,mkcell(data(rd(hp,prev)),aux,rd(hp,prev).lockid))) \implies reg_p = addr2set(hp_p,hd))
@@ -431,13 +500,13 @@
 			\\
 			Let $hp$ be the \mem. Let $hd$ be an \addr (the \head of the list would be this \addr).
 			%
-			We call \reg to the \fAddrToSet reachable from $hd$.
+			We call \region to the \fAddrToSet reachable from $hd$.
 			%
 			Let $prev$ and \addr reachable from $hd$ (in the \fAddrToSet of $hp,hd$) and $curr,aux$ two \addr. 
 			%
 			It is needed that the 3 address ($prev,curr,aux$) are different one another and all of them are not null.
 			%
-			If prev points curr, aux points curr, then making prev point to aux has one unique effect in the \reg: curr is now not reachable but every \addr reachable before the \fUpd is still reachable.
+			If prev points curr, aux points curr, then making prev point to aux has one unique effect in the \region: curr is now not reachable but every \addr reachable before the \fUpd is still reachable.
 		}
 		\begin{formula}
 			((next(rd(hp,curr)) = aux \wedge next(rd(hp,prev)) = curr \wedge (\neg\;  aux = next(rd(hp,prev))) \wedge hp_p = upd(hp,prev,mkcell(data(rd(hp,prev)),aux,rd(hp,prev).lockid)) \wedge (\neg\;  aux = null) \wedge in(curr,addr2set(hp,hd)) \wedge in(null,addr2set(hp,hd)) \wedge in(prev,addr2set(hp,hd))) \implies diff(addr2set(hp,hd),\fSingl(curr)) = addr2set(hp_p,hd))
@@ -484,47 +553,12 @@
 			\\
 			Let $hp$ be a \mem,$hd,tl$ two \addr which satisfy $\fOrderlist(hp,hd,tl)$ and $tl$ points to \fNull. Let $prev,aux,curr$ be \addr which satisfy that $aux$ is pointed by $curr$, which is pointed by $prev$. In addition, $curr,prev,aux$ must be reachable from $hd$.
 			\textbf{Then}, updating $hp$ so that $hp$ stores at $prev$ the same cell stored at $aux$ is an action that preserve \fOrderlist for the new $hp$ from $hd$ to $tl$.	
-
 		}
 		\begin{formula}
 			((aux = next(rd(hp,curr)) \wedge curr = next(rd(hp,prev)) \wedge (\neg\;  aux = null) \wedge null = next(rd(hp,tl)) \wedge (\neg\;  aux = next(rd(hp,prev))) \wedge hp_p = upd(hp,prev,mkcell(data(rd(hp,prev)),aux,rd(hp,prev).lockid)) \wedge in(prev,addr2set(hp,hd)) \wedge in(curr,addr2set(hp,hd)) \wedge in(null,addr2set(hp,hd)) \wedge in(aux,addr2set(hp,hd)) \wedge orderlist(hp,hd,tl)) \implies orderlist(hp_p,hd,tl))
 		\end{formula}
 	\end{axiomdescription}
-
-%	\begin{axiomdescription}[not-in-region--not-change-heap-list]
-%		\label{ax::not_in_region__not_change_heap_list}
-%		\explanation{
-%			\paragraph{Interpretation:}
-%			Let $hp$ be an \addr and $hp$ a \mem. 
-%			%
-%			Then, modifying a \mem in an \addr which is not reachable from $hp$ preserves the order of the elements in the list.
-%		}
-%		\begin{formula}
-%			((\neg\;  in(a,addr2set(hp,hd))) \implies orderlist(hp,hd) = orderlist(upd(hp,a,c),hd))
-%		\end{formula}
-%	\end{axiomdescription}
-
-
-
-
-	\begin{axiomdescription}[next-injective--if-ordered]
-		\label{ax::next_injective__if_ordered}
-		\explanation{
-			\paragraph{Interpretation:}
-			\fNext is biyective inside an orderlist, i.e., every node of the list has only another node of the list pointing to it.
-			\\
-			Let $hd,tl$ be \addr, sentinel nodes of an order list in the \mem $hp$.
-			%
-			As a sentinel node $tl$ points to \fNull.
-			%
-			Let $a,b,c,d$ be three \addr reachable from $hd$, every \addr different from \fNull and $a,c$ different from $tl$.
-			\\
-			If $c$ points to $a$, $d$ points to $a$ and $a=b$, \textbf{$c=d$}.
-		}
-		\begin{formula}
-			((orderlist(hp,hd,tl) \wedge in(a,addr2set(hp,hd)) \wedge in(b,addr2set(hp,hd)) \wedge in(c,addr2set(hp,hd)) \wedge in(d,addr2set(hp,hd)) \wedge (\neg\;  tl = null) \wedge null = next(rd(hp,tl)) \wedge (\neg\;  c = null) \wedge (\neg\;  d = null) \wedge (\neg\;  a = null) \wedge (\neg\;  b = null) \wedge (\neg\;  a = tl) \wedge (\neg\;  b = tl) \wedge next(rd(hp,c)) = a \wedge next(rd(hp,d)) = b) \implies a = b \implies c = d)
-		\end{formula}
-	\end{axiomdescription}
+	
 
 	\begin{axiomdescription}[next-is-not-same--if-ordered]
 		\label{ax::next_is_not_same__if_ordered}
@@ -540,27 +574,42 @@
 		\end{formula}
 	\end{axiomdescription}
 
-	\begin{axiomdescription}[just-tail--points--null]
-		\label{ax::just_tail__points__null}
-		\explanation{
-			\paragraph{Interpretation:}
-			The only node of the list pointing to \fNull is the sentinel node \tail. 
-			%
-			One may think that this axiom do not give new any new truth to the axiom set, because of the two previous ones.
-			%
-			Independently of this axiom being redundant, it provides \spass a performance improvement.
-			%
-			As it has been stated, this set of axioms is not the minimum set of axioms but is a set sufficient to prove all the invariants.
-			\\
-			Let $hd,tl$ be \addr reachable from $hd$ in the \mem $hp$, both different from \fNull, and $tl$ pointing to \fNull.
-			%
-			Let $d$ be a not \fNull \addr which points to \fNull 
-		}
-		\begin{formula}
-			((in(tl,addr2set(hp,hd)) \wedge (\neg\;  hd = null) \wedge (\neg\;  tl = null) \wedge next(rd(hp,tl)) = null \wedge (\neg\;  d = null) \wedge next(rd(hp,d)) = null \wedge in(d,addr2set(hp,hd))) \implies d = tl)
-		\end{formula}
-	\end{axiomdescription}
 
+\begin{table}
+        \centering
+        \begin{tabular}{c|cccccc}
+        axiom & disjoint & locks & nexts & order & preserve & region 
+        \\\hline
+                lock-keeps-heap--data & 0 & 0 & 0 & 98 & 0 & 0 
+                \\
+                lock-keeps-heap--next & 0 & 1 & 2749 & 0 & 0 & 1 
+                \\
+                addr2set-rec-def & 0 & 1 & 63 & 0 & 1 & 4 
+                \\
+                addr2set-primin & 0 & 0 & 0 & 0 & 1 & 0 
+                \\
+                not-in-region--not-change-heap-addr & 0 & 1 & 7 & 16 & 2 & 0 
+                \\
+                insert--keeps-addr2set & 0 & 1 & 52 & 0 & 0 & 53 
+                \\
+                remove--keeps-addr2set & 0 & 1 & 0 & 0 & 0 & 6 
+                \\
+  	            order-primin & 0 & 0 & 0 & 0 & 1 & 0 
+                \\
+                insert--keeps-orderlist & 0 & 1 & 5 & 0 & 0 & 5
+                \\
+                remove--keeps-orderlist & 0 & 1 & 5 & 0 & 0 & 5 
+                \\
+%                next-injective-if-ordered & 0 & 0 & 0 & 0 & 0 & 0 
+ %               \\
+                next-is-not-same--if-ordered & 0 & 1 & 7 & 0 & 0 & 0 
+                \\
+%                just-tail--points-null & 0 & 0 & 0 & 0 & 0 & 0 
+ %               \\
+        \end{tabular}
+\label{table:axiom_important}
+\caption{Uses of the important subset of axioms}
+\end{table}
 
 
 	%\vskip 1cm
