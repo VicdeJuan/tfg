@@ -19,8 +19,6 @@ invariant [preserve] :
    head != tail
 
 #elements:
-   elements = set2elem(heap, diff(region, {null}))
-
    rd(heap, head).data = lowestElem
    rd(heap, tail).data = highestElem
 
