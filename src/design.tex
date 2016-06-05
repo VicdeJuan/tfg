@@ -17,17 +17,19 @@ We are finally ready to apply this concepts to a real word problem. In this \thi
 %
 The remaining task is to define the framework and the conventions we use to prove formally properties of programs.
 
-The way of proving correctness is by proving properties. 
+The way we approach to prove correctness is by proving properties. 
 %
 There are \concept{liveness}, \concept{safety} and \concept{functional} properties. 
 %
 Safety properties refer, informally, to "bad things never happens". Proving \textit{ variable x is never 0 } is a safety property. 
 %
-Proving its validity can assure that a division by zero error does never occur. 
+Proving valid this property can assure that a division by zero error does never occur. 
 %
 Whether a program finishes or not is a liveness property and receiving an output for a concrete input is a functional property. 
 
-This properties are written in some logic. Liveness properties need \gls{LTL} but \gls{FOL} is enough to prove safety properties. 
+This properties are written in some logic. 
+%
+Liveness properties need \gls{LTL} but we aim to use just \gls{FOL} to prove safety properties.
 %
 As the properties are expressed formally in logic, it is necessary to define a formal representation of a program.
 
@@ -40,7 +42,7 @@ As the properties are expressed formally in logic, it is necessary to define a f
 
 A function (or the whole program) is \textbf{partially correct} if when the function's precondition is satisfied on entry, its postcondition is satisfied when the function returns (if it ever does).
 %
-We present the \textbf{inductive assertion method} for proving partial correctness.
+We present the \concept{inductive assertion method} for proving partial correctness.
 
 
 Let $\tau$ be the \gls{FOL} property to study. 
@@ -59,13 +61,9 @@ First, we assert $\tau$ is valid before the program starts (induction base).
 %
 Then, we assume $\tau$ in the precondition and prove $\tau'$ valid (induction step) for every possible transition.
 
-
-An example is presented to clarify the method.
-
-\begin{example}
-\input{src/subsrc/exampleFactorial.tex}
-\end{example}
-
+This method is not complex to understand but it requires a lot of work even for simple programs. 
+%
+In case the method is not fully understand, an example is proposed as an appendix in \ref{app:exampleFactorial}.
 
 
 
@@ -75,11 +73,11 @@ The correctness of just one thread executing a program it is an easy problem bec
 %
 Multiple threads executing the same program is a different and more difficult problem to solve.
 %
-If the number of threads executing is not bounded is another important and difficult step.
+An unbounded number of threads executing is another important and difficult step.
 %
 If the number of threads is bound, one could unroll the formula for all the threads in the problem and try to prove it. 
 %
-This is why we focus the unbounded case, which is the usual scenario.
+As this is the usual scenario, we focus the unbounded case.
 
 We are going to study those cases. 
 %
@@ -161,10 +159,9 @@ $\Premise{S2}$ will be referred as \concept{self-consecution} because it depends
 Finally, $\Premise{S3}$ will be referred as \concept{others-consecution} because it depends on the execution of threads which do not appear in the formula. 
 
 
-\begin{example}
-Threads sharing and array. Each thread has an index. How to assure no other thread writes in my index?
-\todo{\;\;\;Is this example needed?}
-\end{example}
+The example included as an appendix in \ref{app:exampleFactorial} also includes the concept of support. 
+%
+Although it is just shown for self-consecution, it is replicable for the other two cases.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -219,15 +216,11 @@ The nodes of a concurrent lock-coupling list are instances of the following
 \ListNode class:
 %
 \[
-  \begin{array}{ll}
-	  \class & \Node  \;\{\\
-	  		&\begin{array}{l}
-				Elem \:\;\; data; \;\\
-				Addr \:\;\; next; \;\\
+	  \class \;\Node  \;\left\{
+				Elem \:\;\; data; \;
+				Addr \:\;\; next; \;
 				Lock \:\;\; lock; \;
-			\end{array}\\
-		&\}
-  \end{array}
+		\right\}
 \]
 %
 Where:
@@ -244,50 +237,29 @@ and \fUnlock.
 
 \concept{Ghost variable} are variables which are not properly in the program but are added to 
 achieve the verification needed.
-Our implementation of concurrent lock-coupling lists has 4 global variables.
+Our implementation of concurrent lock-coupling lists has 3 global variables.
 %
-Two of them are global addresses \head and \tail, and the other two are ghost global variables \region and \elements:
-%
-\begin{center}
-	\includegraphics[scale=\figscale]{graphics/_lists_classes}
-\end{center}
-%
-The declared global program variables are:
-
+Two of them are global addresses \head and \tail, and one ghost global variable \region:
+%%
 \head, an address, which points to the first node of the list which has the lowest possible value ($-\infty$).
-
+%
 \tail, an address, which points to the last node of the list  which has the lowest possible value ($+\infty$).
-
+%
 \region, a set of addresses, which is used to keep track of the portion of the heap whose cells form the list.
 
-\elements, a set of elements, which represents the collection of elements stored in the list.
 
-In figure \ref{fig:listcode} we present the program we are going to use, written in \gls{SPL}, with . We can see there are three procedures, \Search, \Insert and \Remove. 
 
-We consider \head and \tail sentinel nodes which are neither removed nor 
-modified and we assume that the list is initialized with \head and \tail 
-already set.
+In appendix \ref{app:code} we present the program we are going to use, written in \gls{SPL}. 
 %
-The set \region is initialized containing solely the addresses of \head 
-and \tail.
-%
-Similarly, the set \elements is initialized containing only the elements 
-initially stored at the nodes pointed by \head and \tail.
-%
-There is also a function \concept{havocListElem}() which returns a random element. 
-%
-%
-%
-\begin{figure}[!htbp]
-		\myframe{\includegraphics[scale=0.4]{graphics/_listcode}}
-		\caption{Concurrent lock-coupling lists implementation.}
-		\label{fig:listcode}
-\end{figure}
-%
+There are three procedures, \Search, \Insert and \Remove which traverses through the list the way it was explained.
+
 
 
 \subsection{TL3}
+Once the method and the program are defined, the theory to use is needed. 
 %
+We need need a theory to work with and axioms in order to prove \gls{FOL} formulas.
+
 \emph{Theory of Linked Lists with Locks} \TLLpL, is the theory we use for describing linked-list heap memory layout.
 %
 \TLLpL is a multi-sorted first-order theory.
@@ -300,7 +272,7 @@ In this section \TLLpL is defined with the purpose we have.
 %
 A more complete and formal definition of \TLLpL can be found in \citeapos{paperAle} and \citep[6.2]{thesisAle}.
 
-Although some functions are originally defined \citep{thesisAle} in suffix notation (\fNext field for instance), preffix-notation has been used to described the theory. 
+Although some functions are originally defined \citep{thesisAle} in suffix notation (\fNext,\fData and \fLock fields), preffix-notation has been used to described the theory. 
 %
 The reason for this modification is to be consistent with \spass syntax.
 %
@@ -310,7 +282,7 @@ In the same way \gls{FOL} can be expressed with $\neg,\vee$ but sometimes $\impl
 %
 few functions have not been used because they can be expressed using others functions in the theory. 
 %
-We proceed to describe \TLLpL.
+We proceed to describe the used subset of \TLLpL.
 
 
 \TLLpL is a compound of theories. The \textbf{sorts} used among this theories are: 
@@ -344,15 +316,13 @@ We proceed to describe the signature of each theory, listing the sorts used and 
 %
 Every theory includes the equality theory \ref{theory:equality} 
 
-\todo{\;\;Maybe\;\;these \text{      tables}\;\;should \text{    be reformatted.}}
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %					TID 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{center}\rule{4cm}{0.4pt} $\Sigma_{\tid}$ \rule{4cm}{0.4pt}\end{center}
+%\begin{center}\rule{4cm}{0.4pt} $\Sigma_{\tid}$ \rule{4cm}{0.4pt}\end{center}
+\paragraph{$\Sigma_{\tid}$ : }
 %
 The sort used is \tid. The "no-thread" value is represented with \fNoThread.
 %
@@ -366,7 +336,8 @@ Apart from the equality theory, this theory does not have any other predicates o
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\begin{center}\rule{4cm}{0.4pt} $\Sigma_{\elem}$ \rule{4cm}{0.4pt}\end{center}
+%\begin{center}\rule{4cm}{0.4pt} $\Sigma_{\elem}$ \rule{4cm}{0.4pt}\end{center}
+\paragraph{$\Sigma_{\elem}$ : }
 %
 The sort used is \elem. 
 %
@@ -374,16 +345,19 @@ There is a total order which allows to order every set of \elem.
 %
 In addition, this sort is upper and lower bounded.
 %
-The signature is described \doubt{in/at} table \ref{table:elem_signature}.
+The signature is described in table \ref{table:elem_signature}.
 
 
 \begin{table}[hbtp]
 \centering
-\begin{tabular}{rrl}
+\centering
+\begin{tabular}{|rrl|}
+  \hline
 \fHighest & \elem & Maximum value an \elem can take.\\
 \fLowest & \elem & Minimum value an \elem can take.\\
 \hline\hline
 \fLselem & \elem$\times$\elem & Total order relation between \elem.
+\\\hline
 \end{tabular}
 \caption{\textbf{Signature of $\Sigma_{\ensuremath{\mathit{elem}}}$.} Top block contains functions, lower block contains predicates.}
 \label{table:elem_signature}
@@ -396,14 +370,17 @@ The signature is described \doubt{in/at} table \ref{table:elem_signature}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{center}\rule{4cm}{0.4pt} $\Sigma_{\cell}$ \rule{4cm}{0.4pt}\end{center}
+%\begin{center}\rule{4cm}{0.4pt} $\Sigma_{\cell}$ \rule{4cm}{0.4pt}\end{center}
+\paragraph{$\Sigma_{\cell}$ : }
 %
 The sorts used are \cell,\elem,\addr,\tid.
 %
-The signature is described \doubt{in/at} table \ref{table:cell_signature}.
+The signature is described in table \ref{table:cell_signature}.
 
 \begin{table}[hbtp]
-\begin{tabular}{rrl}
+\centering
+\begin{tabular}{|rrl|}
+  \hline
 \fMkcell & $\elem\times\addr\times\tid \to \cell$ & Constructor\\
 \fNext & $\cell \to \addr$ & Getter of \fNext field \\ 
 \fData & $\cell \to \elem$ & Getter of \fData field \\ 
@@ -413,6 +390,7 @@ The signature is described \doubt{in/at} table \ref{table:cell_signature}.
 &&\;\;\;				using the \tid for the \fLockID field.\\
 \fError & $\cell$ & Constant value used to model \\ 
 &&\;\;\;				incorrect memory deference.
+\\\hline
 \end{tabular}
 \caption{\textbf{Functions of $\Sigma_{\cell}$} theory.}
 \label{table:cell_signature}
@@ -431,19 +409,23 @@ The reason is justified because to \fUnlock a \cell is equivalent to \fLock a \c
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\begin{center}\rule{4cm}{0.4pt} $\Sigma_{\mem}$ \rule{4cm}{0.4pt}\end{center}
+%\begin{center}\rule{4cm}{0.4pt} $\Sigma_{\mem}$ \rule{4cm}{0.4pt}\end{center}
+\paragraph{$\Sigma_{\mem}$ : }
 %
 The sorts used are \mem,\cell and \addr. 
 %
-The functions are described \doubt{in/at} table \ref{table:memory_signature}.
+The functions are described in table \ref{table:memory_signature}.
 
 \begin{table}[hbtp]
-\begin{tabular}{rrl}
+\centering
+\begin{tabular}{|rrl|}
+  \hline
 \fNull & $\addr$ & Null address \\
 \fRd & $\mem\times\addr\to\cell$ & Models memory deference. \\
 &&								\;\;\; Returns the value from the \mem the \cell \\
 &&								\;\;\; stored in the \addr.\\
-\fUpd & $\mem\times\addr\times\cell\to\mem$ & Creates a new \mem from the given one\\
+\fUpd & $\mem\times\addr\times\cell\to\mem$ & Creates a new \mem from the given one
+\\\hline
 \end{tabular}
 \caption{\textbf{Functions of $\Sigma_{\mem}$} theory}
 \label{table:memory_signature}
@@ -465,26 +447,30 @@ A function related with \mem theory is \fMalloc, used in \insertprg procedure.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\begin{center}\rule{4cm}{0.4pt} $\Sigma_{\sSetAddr}$ \rule{4cm}{0.4pt}\end{center}
+%\begin{center}\rule{4cm}{0.4pt} $\Sigma_{\sSetAddr}$ \rule{4cm}{0.4pt}\end{center}
+\paragraph{$\Sigma_{\sSetAddr}$ : }
 %
 It models the usual set theory. 
 %
 Preffix version of each function and predicate has been preferred to be consistent with \ref{ax::fulllist}.
 %
-The signature is described \doubt{in/at} table \ref{table:setaddr_signature}.
+The signature is described in table \ref{table:setaddr_signature}.
 
 Intersection function and subset predicate has not been included despite \citep{thesisAle} uses them. 
 %
 They were not used because they were unnecessary.
 
 \begin{table}[hbtp]
-\begin{tabular}{rrl}
+\centering
+\begin{tabular}{|rrl|}
+  \hline
 \fEmptyset & \sSetAddr & Empty set\\
 \fSingl & $\addr\to\sSetAddr $& Constructor of a single-element set.\\
 \fUnion & $\sSetAddr\times\sSetAddr\to\sSetAddr$&\\
 \fSetdiff & $\sSetAddr\times\sSetAddr\to\sSetAddr$&\\
 \hline\hline
-\pIn & $\sAddr\times\sSetAddr $& \\
+\pIn & $\sAddr\times\sSetAddr $& 
+\\\hline
 \end{tabular}
 \caption{\textbf{Signature of $\Sigma_{\sSetAddr}$.} Top block contains functions, lower block contains predicates.}
 \label{table:setaddr_signature}
@@ -498,21 +484,24 @@ They were not used because they were unnecessary.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\begin{center}\rule{4cm}{0.4pt} $\Sigma_{\sSetElem}$ \rule{4cm}{0.4pt}\end{center}
+%\begin{center}\rule{4cm}{0.4pt} $\Sigma_{\sSetElem}$ \rule{4cm}{0.4pt}\end{center}
+\paragraph{$\Sigma_{\sSetElem}$ : }
 %
-
 Again, it models the usual set theory.
 %
-The signature is described \doubt{in/at} table \ref{table:setelem_signature}.
+The signature is described in table \ref{table:setelem_signature}.
 
 \begin{table}[hbtp]
-\begin{tabular}{rrl}
+\centering
+\begin{tabular}{|rrl|}
+  \hline
 \fEmptysetElem & $\sSet $& Empty set\\
 \fSinglElem & $\elem\to\sSet $& Constructor of a single-element set.\\
 \fUnionElem & $\sSet\times\sSet\to\sSet$&\\
 \fSetdiffElem & $\sSet\times\sSet\to\sSet$&\\
 \hline\hline
-\pInElem & $\sAddr\times\sSet $& \\
+\pInElem & $\sAddr\times\sSet $& 
+\\\hline
 \end{tabular}
 \caption{\textbf{Signature of $\Sigma_{\sSetElem}$.} Top block contains functions, lower block contains predicates.}
 \label{table:setelem_signature}
@@ -526,20 +515,22 @@ The signature is described \doubt{in/at} table \ref{table:setelem_signature}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\begin{center}\rule{4cm}{0.4pt} $\Sigma_{\sSetTid}$ \rule{4cm}{0.4pt}\end{center}
+%\begin{center}\rule{4cm}{0.4pt} $\Sigma_{\sSetTid}$ \rule{4cm}{0.4pt}\end{center}
+\paragraph{$\Sigma_{\sSetTid}$ : }
 %
-
-
-The signature is described \doubt{in/at} table \ref{table:settid_signature}.
+The signature is described in table \ref{table:settid_signature}.
 
 \begin{table}[hbtp]
-\begin{tabular}{rrl}
+\centering
+\begin{tabular}{|rrl|}
+  \hline
 \fEmptysetTid & $\sSetAddr $& Empty set\\
 \fSinglTid & $\addr\to\sSetAddr $& Constructor of a single-element set.\\
 \fUnionTid & $\sSetAddr\times\sSetAddr\to\sSetAddr$&\\
 \fSetdiffTid & $\sSetAddr\times\sSetAddr\to\sSetAddr$&\\
 \hline\hline
-\pInTid & $\sAddr\times\sSetAddr$ &\\
+\pInTid & $\sAddr\times\sSetAddr$ &
+\\\hline
 \end{tabular}
 \caption{\textbf{Signature of $\Sigma_{\sSetAddr}$.} Top block contains functions, lower block contains predicates.}
 \label{table:settid_signature}
@@ -555,19 +546,21 @@ The signature is described \doubt{in/at} table \ref{table:settid_signature}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\begin{center}\rule{4cm}{0.4pt} $\Sigma_{Bridge}$ \rule{4cm}{0.4pt}\end{center}
+%\begin{center}\rule{4cm}{0.4pt} $\Sigma_{Bridge}$ \rule{4cm}{0.4pt}\end{center}
+\paragraph{$\Sigma_{Bridge}$ : }
 %
-
 This theory is much more extensive \doubt{in/on/at} \cite{thesisAle}. 
 %
 However, aiming to simplicity, not every function and predicate described there has been used in our proofs.
 %
-We include in the signature described \doubt{in/at} table \ref{table:bridge_signature} the functions and predicates used in the proofs.
+We include in the signature described in table \ref{table:bridge_signature} the functions and predicates used in the proofs.
 
 \begin{table}[hbtp]
-\begin{tabular}{rrl}
+\centering
+\begin{tabular}{|rrl|}
+  \hline
 \fAddrToSet & $\mem\times\addr\to\sSetAddr $& Returns the set of \addr reachable from the \addr given.\\
-\hline\hline
+\hline
 \end{tabular}
 \caption{\textbf{Signature of $\Sigma_{\sSetAddr}$.}}
 \label{table:bridge_signature}

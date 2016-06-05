@@ -1,38 +1,46 @@
 % This file was created with JabRef 2.10.
 % Encoding: Cp1252
 
+@string{lncs="LNCS"}
+@string{springer="Springer-Verlag"}
+@string{icfem10="Proceedings of the 12th International Conference on Formal Engineering Methods (ICFEM'10)"}
+@string{ppopp06="Proceedings of the {ACM} SIGPLAN Symposium on Principles and Practice of Parallel Programming (PPoPP'06)"}
+@string{acm="{ACM}"}
+@string{nfm11="Proceedings of the 3rd International Symposium on {NASA} Formal Methods (NFM'11)"}
 
 % Optional fields: type, address, month, note
 @PHDTHESIS{thesisAle,
 	author = {Alejandro Sánchez},
-	title = {Thesis Title},
+	title = {Formal Verification of Temporal Properties for Parametrized Concurrent Programs and Concurrent Data Structures},
 	school = {Universidad Politécina de Madrid},
 	year = {2015}
 }
 
-
-
 @MISC{japaneseSatellite,
-title = {Software update destroys $286 million Japanese satellite},
-howpublished={http://hackaday.com/2016/05/02/software-update-destroys-286-million-japanese-satellite/}}
+  title = {Software update destroys \$286 million Japanese satellite},
+  howpublished={\href{http://hackaday.com/2016/05/02/software-update-destroys-286-million-japanese-satellite/}{hackaday.com}}
+}
 
 @MISC{boein787,
-howpublished = {https://www.theguardian.com/business/2015/may/01/us-aviation-authority-boeing-787-dreamliner-bug-could-cause-loss-of-control},
-title = {Boeing 787 bug could cause 'loss of control'}}
+  howpublished = {\href{https://www.theguardian.com/business/2015/may/01/us-aviation-authority-boeing-787-dreamliner-bug-could-cause-loss-of-control}}{theguardian.com},
+  title = {Boeing 787 bug could cause loss of control}
+}
 
 @MISC{xraykill,
-title = {Computer-controlled machine overdosed six people},
-howpublished = {http://sunnyday.mit.edu/papers/therac.pdf}}
+  title = {Computer-controlled machine overdosed six people},
+  howpublished = {\href{http://sunnyday.mit.edu/papers/therac.pdf}{sunnyday.mit.edu}}
+}
+
 
 @MISC{wikipediaList,
-title = {List of software bugs},
-howpublished = {https://en.wikipedia.org/wiki/List_of_software_bugs}
+  title = {List of software bugs},
+  howpublished = {\href{Wikipedia.org}{https://en.wikipedia.org/wiki/List_of_software_bugs}}
 }
 
 @MISC{CCompilerMotivation,
-title={Finding and Understanding Bugs in C Compilers},
-author = {Xuejun Yang Yang Chen Eric Eide John Regehr},
-school = {University of Utah, School of Computing}
+  title={Finding and Understanding Bugs in C Compilers},
+  author = {Xuejun, Yang and Yang, Chen and Eric, Eide and John Regehr},
+  school = {University of Utah, School of Computing}
 }
 
 @PHDTHESIS{Dargaye-these,
@@ -40,80 +48,76 @@ school = {University of Utah, School of Computing}
   title = {Vérification formelle d'un compilateur pour langages fonctionnels},
   school = {Université Paris 7 Diderot},
   year = {2009},
-  month = {jul}
+  month = {July}
 }
 
 
 @MISC{VCC,
   title = {A Practical System for Verifying Concurrent C.},
-  author = {Ernie Cohen, Markus Dahlweid, Mark Hillebrand, Dirk Leinenbach, Michał Moskal, Thomas Santen, Wolfram Schulte, Stephan Tobies.},
+  author = {Ernie, Cohen and Markus, Dahlweid and Mark, Hillebrand and Dirk, Leinenbach and Michał, Moskal and Thomas, Santen and Wolfram, Schulte and Stephan, Tobies.},
   howpublished = {22nd International Conference on Theorem Proving in Higher Order Logics (TPHOLs 2009).},
-  content = {http://research.microsoft.com/en-us/um/people/moskal/pdf/tphol2009.pdf},
+  content = {\href{Content at Microsoft.com}{http://research.microsoft.com/en-us/um/people/moskal/pdf/tphol2009.pdf}},
   note = {Provides a good overall system description of VCC}
  }
 
- @BOOK{ModelChecking
-title = {Model Checking and Theorem Proving: a Unified Framework},
-author = {Sergey Berezin},
-date = {24th January 2002},
-ISBN = {CMU-CS-02-100}
+@BOOK{ModelChecking,
+  title = {Model Checking and Theorem Proving: a Unified Framework},
+  author = {Sergey Berezin},
+  date = {24th January 2002},
+  publisher = {Springer},
+  ISBN = {CMU-CS-02-100}
 }
-@BOOK{ScalableTechniques
-title = {Scalable Techniques for Formal Verification},
-author = {Sandip Ray},
-publisher = {Springer},
-ISBN = {978-1-4419-5997-3}
+@BOOK{ScalableTechniques,
+  title = {Scalable Techniques for Formal Verification},
+  author = {Sandip Ray},
+  publisher = {Springer},
+  ISBN = {978-1-4419-5997-3}
 
 }
 
 % Optional fields: author, title, howpublished, month, year, note
 @MISC{spass,
-	title = {SPASS Version 3.5.},
-	author = {Weidenbach C., Dimova D., Fietzke A., Kumar R., Suda M. and Wischnewski P.},
-	year = {2009}, 
-	year = {22nd International Conference on Automated Deduction CADE 2009},
-	note = {LNCS 5663},
+  title = {SPASS Version 3.5.},
+  author = {Weidenbach C. and Dimova D. and Fietzke A. and Kumar R. and Suda M. and Wischnewski P.},
+  year = {22nd International Conference on Automated Deduction CADE 2009},
+  note = {LNCS 5663},
   howpublihsed = {22nd International Conference on Automated Deduction.},
   pages = {140.145},
 }
 
 @MISC{spasssyntax,
-  title = {},
-  author = {},
-  year = {}, 
-  year = {},
-  note = {},
-  howpublihsed = {} 
+  title = {Description of spass syntax},
+  howpublihsed = {\url{http://www.spass-prover.org}}
 }
 
 @MISC{issabelle,
   title = {Isabelle}
 }
 
-@MISC{vampire
+@MISC{vampire,
   title = {Vampire}
 }
 
 
 % Optional fields: author, title, howpublished, month, year, note
 @MISC{ApuntesRual,
-title = {Apuntes {L}ógica matemática},
-author = {Ruiz Álvarez, Guillermo},
-howpublished = {\url{http://github.com/Vicdejuan/Apuntes}},
-year = {2015},
-note = {Apuntes UAM},
+  title = {Apuntes {L}ógica matemática},
+  author = {Ruiz Álvarez, Guillermo},
+  howpublished = {\url{http://github.com/Vicdejuan/Apuntes}},
+  year = {2015},
+  note = {Apuntes UAM}
 }
-
+  
 
 % Optional fields: volume/number, series, address, edition, month, note
 %author = {Gödel, Kurt},
-%publisher = {Monatshefte für Mathematik},
-@ARTICLE{Godel,
-  author = {Gödel, Kurt },  
-  title = {{O}n {F}ormally {U}ndecidable {P}ropositions in {P}rincipia {M}athematica and {R}elated {S}ystems {I}},
-  journal = {Monatshefte fur Mathematik},
-  year = {1931}
-}
+  %publisher = {Monatshefte für Mathematik},
+  @ARTICLE{Godel,
+    author = {Gödel, Kurt},  
+    title = {{O}n {F}ormally {U}ndecidable {P}ropositions in {P}rincipia {M}athematica and {R}elated {S}ystems {I}},
+    journal = {Monatshefte fur Mathematik},
+    year = {1931}
+  }
 
 
 % Optional fields: volume/number, series, address, edition, month, note
@@ -125,85 +129,127 @@ note = {Apuntes UAM},
 }
 
 
-% Optional fields: volume, number, pages, month, note
-@ARTICLE{paperAle,
-  author = {Sánchez, Alejandro},
-  title = {Paper 2},
-  journal = {},
-  year = {201n}
+
+@Article{paperParametrizedInvariants,
+  title     = {Parametrized Invariance for Infinite State Processes},
+  author    = {Alejandro S{\'a}nchez and
+               C{\'e}sar S{\'a}nchez},
+  OPTcrossref =  {},
+  OPTkey =   {},
+  journal   = {CoRR},
+  OPTpages =   {},
+  year =   {2013},
+  OPTeditor =  {},
+  Volume =   {abs/1312.4043},
+  OPTnumber =    {},
+  OPTseries =  {},
+  OPTaddress =   {},
+  OPTmonth =   {},
+  OPTorganization = {},
+  OPTpublisher = {},
+  OPTnote =    {},
+  OPTannote =    {}
 }
 
-% Optional fields: volume, number, pages, month, note
-@ARTICLE{paperParametrizedInvariants,
-  author = {Sánchez, Alejandro},
-  title = {Parametrized Invariants},
-  journal = {},
-  year = {2013}
+@Article{paperAle,
+  author =   {Alejandro S{\'a}nchez and C{\'e}sar S{\'a}nchez},
+  title =    {A Theory of Skiplists with Applications to the Verification
+          of Concurrent Datatypes},
+  OPTcrossref =  {},
+  OPTkey =   {},
+  booktitle = nfm11,
+  pages =    {343--358},
+  year =   {2011},
+  OPTeditor =    {},
+  volume =   {6617},
+  OPTnumber =    {},
+  series =   lncs,
+  OPTaddress =   {},
+  OPTmonth =   {},
+  OPTorganization = {},
+  publisher = springer,
+  OPTnote =    {},
+  OPTannote =    {}
 }
 
-@ARTICLE{tempVerifLinkedList,
-  author =   {Alejandro Sánchez and César Sánchez},
-  title =    {Decision Procedures for the Temporal Verification of Concurrent Lists},
-  journal =    {},
-  year =   {2010}
+
+@Article{tempVerifLinkedList,
+  author =   {Alejandro S\'{a}nchez and C\'{e}sar S\'{a}nchez},
+  title =    {Decision Procedures for the Temporal Verification of
+      Concurrent Lists},
+  booktitle =    icfem10,
+  year =   {2010},
+  OPTkey =   {},
+  volume =   {6447},
+  series =   lncs,
+  OPTnumber =    {},
+  pages =    {74--89},
+  OPTmonth =   {},
+  publisher =  springer,
+  OPTnote =    {},
+  OPTannote =    {}
 }
+
 
 
 @MISC{leap,
-  title = {Leap},
-  author = {\citeapos{thesisAle}},
-  howpublished = {26th International Conference on Computer Aided Verification (CAV)},
-  year = {2014}, 
-  note = {Tool developed to prove verification of multiple theories by model searching.}
-}
+    title = {Leap},
+    author = {\citeapos{thesisAle}},
+    howpublished = {26th International Conference on Computer Aided Verification (CAV)},
+    year = {2014}, 
+    note = {Tool developed to prove verification of multiple theories by model searching.}
+  }
 
 
 
 % Optional fields: author, title, howpublished, month, year, note
 @MISC{EqualityIsDecidable,
-	 author= {Löwenheim, Leopold },
-	 year = {1915}
+    author= {Löwenheim, Leopold },
+    title = {A Source Book in Mathematical Logic},
+    howpublised = {Harvard Univ. Press},
+    pages={228-251},
+    year = {1915}
 }
 
 
 
 @Book{herlihy08art,
-  author = 	 {Maurice Herlihy and Nir Shavit},
-  ALTeditor = 	 {},
-  title = 	 {The Art of Multiprocessor Programming},
-  publisher = 	 {Morgran-Kaufmann},
-  year = 	 {2008},
-  OPTkey = 	 {},
-  OPTvolume = 	 {},
-  OPTnumber = 	 {},
-  OPTseries = 	 {},
-  OPTaddress = 	 {},
-  OPTedition = 	 {},
-  OPTmonth = 	 {},
-  OPTnote = 	 {},
-  OPTannote = 	 {}
+  author =   {Maurice Herlihy and Nir Shavit},
+  ALTeditor =    {},
+  title =    {The Art of Multiprocessor Programming},
+  publisher =    {Morgran-Kaufmann},
+  year =   {2008},
+  OPTkey =   {},
+  OPTvolume =    {},
+  OPTnumber =    {},
+  OPTseries =    {},
+  OPTaddress =   {},
+  OPTedition =   {},
+  OPTmonth =   {},
+  OPTnote =    {},
+  OPTannote =    {}
 }
 
-@InProceedings{vafeiadis06proving,
-  author = 	 {Viktor Vafeiadis and Maurice Herlihy and Tony Hoare
-			and Marc Shapiro},
-  title = 	 {Proving Correctness of Highly-Concurrent Linearisable
-			Objects},
+@Article{vafeiadis06proving,
+  author =   {Viktor Vafeiadis and Maurice Herlihy and Tony Hoare
+      and Marc Shapiro},
+  title =    {Proving Correctness of Highly-Concurrent Linearisable
+      Objects},
   OPTcrossref =  {},
-  OPTkey = 	 {},
-  booktitle =	 ppopp06,
-  pages = 	 {129--136},
-  year = 	 {2006},
-  OPTeditor = 	 {},
-  OPTvolume = 	 {},
-  OPTnumber = 	 {},
-  OPTseries = 	 {},
-  OPTaddress = 	 {},
-  OPTmonth = 	 {},
+  OPTkey =   {},
+  booktitle =  ppopp06,
+  pages =    {129--136},
+  year =   {2006},
+  OPTeditor =    {},
+  OPTvolume =    {},
+  OPTnumber =    {},
+  OPTseries =    {},
+  OPTaddress =   {},
+  OPTmonth =   {},
   OPTorganization = {},
-  publisher =	 acm,
-  OPTnote = 	 {},
-  OPTannote = 	 {}
+  publisher =  acm,
+  OPTnote =    {},
+  OPTannote =    {}
 }
 
 @Book{manna95temporal,
@@ -233,18 +279,19 @@ note = {Apuntes UAM},
 }
 
 @MISC{ocamllex,
-  title = {Ocamllex},
-  howpublished = {chapter 16 \citeapos{ocamlbook}}
+    title = {Ocamllex},
+    howpublished = {chapter 16 \citeapos{ocamlbook}
+  }
 }
 
-@MISC{ocamlyacc,
-  title = {Ocamlyacc},
-  howpublished = {http://courses.softlab.ntua.gr/compilers/2015a/ocamlyacc-tutorial.pdf}
-}
+  @MISC{ocamlyacc,
+    title = {Ocamlyacc},
+    howpublished = {\url{http://courses.softlab.ntua.gr/compilers/2015a/ocamlyacc-tutorial.pdf}}
+  }
 
-@MISC{pautlen,
-  title = {Proyecto de Autómatas y Lenguajes},
-  year = {C1 2014} 
+  @MISC{pautlen,
+    title = {Proyecto de Autómatas y Lenguajes},
+    year = {C1 2014} 
 }
 
 

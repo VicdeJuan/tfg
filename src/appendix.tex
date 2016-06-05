@@ -1,6 +1,18 @@
 
 %\input{src/subsrc/appendix_spass-syntax}
 
+\chapter{Inductive Assertion Method}
+
+This example is proposed to fully comprehend the inductive assertion method. 
+%
+A simple program, which one can see it should work perfectly is verified manually applying the method.
+\label{app:exampleFactorial}
+\begin{example}
+\input{src/subsrc/exampleFactorial.tex}
+\end{example}
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -45,51 +57,117 @@
 
 
 
+
+
+\chapter{Code}
+\label{app:code}
+\lstdefinelanguage{SPL}{
+  keywords={global, new, true, false, data, next, lock, unlock, procedure , function, return, null, catch, switch, var, if, in, while, do, else, case, break,endchoice,endwhile,endif,end,begin,assume},
+  keywordstyle=\color{gray!70!blue}\bfseries,
+  ndkeywords={addr, ghost, elem, return},
+  ndkeywordstyle=\color{magenta!60!black!90!white}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{gray}\ttfamily,
+  stringstyle=\color{green!60!black}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+\lstdefinelanguage{leap}{
+	keywords={invariant,vars},
+	keywordstyle=\color{blue}\bfseries,
+	ndkeywords={preserve,locks,nexts,order,disjoint},
+  commentstyle=\color{magenta!90!black!70!yellow},
+  ndkeywordstyle=\color{magenta!60!black!90!white}\bfseries,
+  stringstyle=\color{green!60!black}\ttfamily,
+  morestring=[b]',
+  morestring=[b]",
+  comment=[l]{\#}
+}
+
+The code is shown with annotations and not with line numbers in order to better understanding of the invariants of the program.
+%
+This annotations are used to express the invariants. 
+%
+The lines of code wrapped by ':tag$\left[\right.$\;'  and ':tag$\left.\right]$\;' are used to define the preconditions of the invariants. 
+%
+In stead of: \textit{\pc(i) $\leq$ n $\wedge$ \pc(i) $\geq$ m  $\to$ ...} ; it is written: \textit{ @tag $\to$ }.
+%
+This way is clearer to read the invariants within the code.
+
+
+We consider \head and \tail sentinel nodes which are neither removed nor 
+modified and we assume that the list is initialized with \head and \tail 
+already set.
+%
+The set \region is initialized containing solely the addresses of \head 
+and \tail.
+%
+Similarly, the set \elements is initialized containing only the elements 
+initially stored at the nodes pointed by \head and \tail.
+%
+There is also a function \concept{havocListElem}() which returns a random element. 
+\lstinputlisting[mathescape,language=SPL,
+   backgroundcolor=\color{lightgray!70!white},
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b]{src/invs/annotation.tex}
 
 
 \chapter{Invariants}
 
+
 \label{appendix::inv:full}
+
+
 
 \begin{center}\rule{4cm}{0.4pt}  \textbf{Preserve}  \rule{4cm}{0.4pt}\end{center}
 \label{inv::full:preserve}
 \small{}
-\lstinputlisting[mathescape]{src/invs/preserve.inv}
+\lstinputlisting[mathescape,language=leap,backgroundcolor=\color{gray!10!white}]{src/invs/preserve.inv}
 \normalsize{}
 
 
 \begin{center}\rule{4cm}{0.4pt}  \textbf{Disjoint}  \rule{4cm}{0.4pt}\end{center}
 \label{inv::full:disjoint}
 \small{}
-\lstinputlisting[mathescape]{src/invs/disjoint.inv}
+\lstinputlisting[mathescape,language=leap,backgroundcolor=\color{gray!10!white}]{src/invs/disjoint.inv}
 \normalsize{}
 
 
 \begin{center}\rule{4cm}{0.4pt}  \textbf{Order}  \rule{4cm}{0.4pt}\end{center}
 \label{inv::full:order}
 \small{}
-\lstinputlisting[mathescape]{src/invs/order.inv}
+\lstinputlisting[mathescape,language=leap,backgroundcolor=\color{gray!10!white}]{src/invs/order.inv}
 \normalsize{}
 
 
 \begin{center}\rule{4cm}{0.4pt}  \textbf{Locks}  \rule{4cm}{0.4pt}\end{center}
 \label{inv::full:lock}
 \small{}
-\lstinputlisting[mathescape]{src/invs/lock.inv}
+\lstinputlisting[mathescape,language=leap,backgroundcolor=\color{gray!10!white}]{src/invs/lock.inv}
 \normalsize{}
 
 
 \begin{center}\rule{4cm}{0.4pt}  \textbf{Region}  \rule{4cm}{0.4pt}\end{center}
 \label{inv::full:region}
 \small{}
-\lstinputlisting[mathescape]{src/invs/region.inv}
+\lstinputlisting[mathescape,language=leap,backgroundcolor=\color{gray!10!white}]{src/invs/region.inv}
 \normalsize{}
 
 
 \begin{center}\rule{4cm}{0.4pt}  \textbf{Next}  \rule{4cm}{0.4pt}\end{center}
 \label{inv::full:next}
 \small{}
-\lstinputlisting[mathescape]{src/invs/next.inv}
+\lstinputlisting[mathescape,language=leap,backgroundcolor=\color{gray!10!white}]{src/invs/next.inv}
 \normalsize{}
 
 

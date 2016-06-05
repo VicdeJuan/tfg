@@ -54,7 +54,7 @@ there are only needed 3 axioms: the axiom which states that numbers are differen
 With this 3 axiom, \spass can prove valid all the \spass problems associated with \invDisjoint.
 
 
-To clarify the process described \doubt{in/at} \ref{ProcessDescription} we expose all the \spass problems generated to prove \invDisjoint.
+To clarify the process described in \ref{ProcessDescription} we expose all the \spass problems generated to prove \invDisjoint.
 %
 There are 362 \spass problems. Half of them correspond to the \reducedProblem and the other half to the \smallToBig problem.
 %
@@ -110,7 +110,7 @@ The graphic the number of problems solved normalized by the total amount of prob
 %
 As it was stated before, most of the problems can be proven without any axiom, or just with the axioms of sorts and nums are different which allows to reason with the \pc.
 %
-Looking \doubt{to/at} the figure, the difficulty of each axiom in terms of the axioms used in each problem is more precise. 
+Looking to the figure, the difficulty of each axiom in terms of the axioms used in each problem is more precise. 
 %
 \invOrder needs more axioms in general than the rest.
 
@@ -124,20 +124,21 @@ Looking \doubt{to/at} the figure, the difficulty of each axiom in terms of the a
 
 \subsection{Special transitions}
 
-Due to the limited space, we just present the deep analysis of some important transitions.
-
-The offending transitions of \invPreserve are $35$ and $51$, the ones where the list is really modified while inserting and removing, respectively.
+Due to the limited space, we can not explore deeply the proof of the invariants.
 %
-All the other transitions generate simple \spass problem which are proven easily.
+However, some we offer a brief analysis of the most complicated transitions for the important invariant: \invPreserve. The complicated transitions are the ones modifying the heap: \textit{locks}, \textit{insertion} and \textit{removal}. 
 %
-For this two special transition some expert knowledge had been needed, because of some limitation \spass has.
+\textit{locks} and \textit{unlocks} transitions can be proven easily with the axioms, because a \fLock does not modify the content nor the pointer; thus, it can not break the list nor disorder the list.
 %
-This limitation is that \spass does not know how to choose the axioms to use, leading into an unnecessary branch of the proof. 
+For the other transitions some expert knowledge had been needed, because of some limitation \spass has.
 %
+This limitation is that \spass does not know how to choose the axioms to use, leading into an unnecessary exploration of a branch of the proof. 
+%
+\label{infty:time}
 If \spass could know that, it would be much more efficient. 
 %
-On the other side, the great advantage of \spass is its generality which allows to use it to solve very different problems. 
-
+As a consequence, transitions 35 and 55 have been subdivided in more \spass problems and reducing manually the number of axioms, leaving the ones which could be relevant.
+%
 
 \section{Time analysis}
 \label{sec:timeanalysis}
@@ -156,7 +157,7 @@ One of the greatest consequences of this method is the possibility to refute the
 %
 It has been developed that for each \spass problem there are 3 files generated. The \spass output (storing the information of which axioms had been used and the time), the \spass proof in \spass format and the \spass proof in \gls{tptp} syntax.
 %
-By generating a tptp proof for each \spass problem we made possible to check this proofs with any other theorem prover as \citetool{vampire} or \citetool{isabelle}.
+By generating a tptp proof for each \spass problem we made possible to check this proofs with any other theorem prover as \citetool{vampire} or \citetool{issabelle}.
 
 Another advantage of the generation of this files is the reduced amount of time needed to check the validity of the fine-grained-linked-list implementation. 
 %
@@ -179,7 +180,7 @@ And more importantly,  How much time does it takes to check the generated proofs
 
 In table \ref{anaylisis::bigtimetable} one can find the summary of the timing according to 4 different times. The first column refers to the time that \leap takes to proof the invariant (obtained from \cite{paperParametrizedInvariants}). 
 %
-The second column, \textit{Full process}, refers to the time the whole process takes \footnote{The full process is described \doubt{in/at} \ref{ProcessDescription}}. 
+The second column, \textit{Full process}, refers to the time the whole process takes \footnote{The full process is described in \ref{ProcessDescription}}. 
 %
 This is, generating the verification conditions, creating all the \spass problems and letting \spass work to solve each problem.
 %
@@ -198,7 +199,7 @@ This method reduces significantly the time spent in checking the formal verifica
 \centering
 \begin{tabular}{r|rrrr}
 Invariant 		& Leap 	& Full process 		& Sum of \spass time 	& Check proofs 	\\\hline
-\invPreserve 	& 12:85	& 36:15.742			& 10:56.56				& 0:52.19		\\
+\invPreserve 	& 12:85	& $\infty$			& 10:56.56				& 0:52.19		\\
 \invOrder		& 1:20	& 180:40.548		& 62:32.89				& 7:41.17 		\\
 \invLock		& 0:50	& 39:28.321			& 13:34.00 				& 1:53.94		\\
 \invNext 		& 1:76	& 352:17.839		& 123:37.73				& 17:06.12		\\
@@ -267,3 +268,5 @@ Thus, the third column shows the real amount of time that \spass has needed to g
 This time is not the lowest bound one could get, but as one can see, it is less than the whole process.
 %
 For the transition mentioned before, \spass takes 0.11 seconds to check that the proof is correct.
+%
+For \invPreserve there are two transitions whose proof were completed manually, as we explained in \ref{infty:time}.

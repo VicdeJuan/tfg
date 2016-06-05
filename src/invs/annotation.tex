@@ -1,0 +1,183 @@
+   
+global
+   addr   head   
+   addr   tail   
+   ghost   addrSet   region   
+   ghost   elemSet   elements   
+   
+assume
+   region   =   union(union({head},{tail}),{null})   $\wedge$   
+   data(rd(heap,   head))   =   lowestElem   $\wedge$   
+   data(rd(heap,   tail))   =   highestElem   $\wedge$   
+   head   !=   tail   $\wedge$   
+   head   !=   null   $\wedge$   
+   tail   !=   null   $\wedge$   
+   head$\rightarrow$next   =   tail   $\wedge$   
+   tail$\rightarrow$next   =   null   
+   
+   
+//   -----   PROGRAM   BEGINS   --------------------------------------   
+                        
+                  procedure   main   ()   
+                     elem   e   
+                  begin   
+':main\_body['      while   (true)   do   
+                        //   Generate   random   e   
+                        e   :=   havocListElem();   
+':main\_e['             choice   
+                           call   search(e);   
+                           _or_   
+                           call   insert(e);   
+                           _or_   
+                           call   remove(e);   
+                        endchoice   
+                    endwhile   
+                    return   ();   
+':main\_e]'   
+':main\_body]'    end   
+   
+//   -----   SEARCH   ----------------------------------------------   
+   
+   
+                  procedure   search   (e:elem)   :   bool   
+                     addr   prev   
+                     addr   curr   
+                     addr   aux   
+                     bool   result   
+   
+                  begin   
+':search\_body['          prev   :=   head;   
+':sch\_prev\_lower['   
+':sch\_prev\_def['   
+':sch\_prev\_is\_head['   prev$\rightarrow$lock;   
+':sch\_owns\_prev['       curr   :=   prev$\rightarrow$next;   
+':sch\_curr\_def['   
+':sch\_follows['          curr$\rightarrow$lock;   
+':sch\_prev\_is\_head]'   
+':sch\_owns\_curr\_one['  while   (curr$\rightarrow$data   <   e)   do   
+':sch\_while\_begins['        aux   :=   prev;   
+':sch\_aux\_eq\_prev'         prev   :=   curr;   
+':sch\_equals['   
+':sch\_aux\_before\_prev'     aux$\rightarrow$unlock;   
+                              curr   :=   curr$\rightarrow$next;   
+':sch\_while\_begins]'   
+':sch\_equals]'   
+':sch\_owns\_curr\_one]'      curr$\rightarrow$lock;   
+':sch\_owns\_curr\_two['   endwhile   
+':sch\_after\_lookup'      result   :=   curr$\rightarrow$data   =   e;   
+':sch\_prev\_lower]'   
+':sch\_result\_set['   
+':sch\_diff['              prev$\rightarrow$unlock;   
+':sch\_owns\_prev]'   
+':sch\_follows]'   
+':sch\_prev\_def]'         curr$\rightarrow$unlock;   
+':sch\_owns\_curr\_two]'   
+':sch\_diff]'   
+':sch\_curr\_def]'         return   (result);   
+':sch\_result\_set]'   
+':search\_body]'      end   
+   
+//   -----   INSERT   ----------------------------------------------   
+   
+   
+                  procedure   insert   (e:elem)   
+                     addr   prev   
+                     addr   curr   
+                     addr   aux   
+   
+                  begin   
+':insert\_body['   
+':ins\_head\_next\_diff['   prev   :=   head;   
+':ins\_prev\_lower['   
+':ins\_prev\_def['   
+':ins\_prev\_is\_head['     prev$\rightarrow$lock;   
+':ins\_owns\_prev['         curr   :=   prev$\rightarrow$next;   
+':ins\_head\_next\_diff]'   
+':ins\_curr\_def['   
+':ins\_follows['            curr$\rightarrow$lock;   
+':ins\_prev\_is\_head]'   
+':ins\_owns\_curr\_one['   
+':ins\_lookup\_loop['   
+':ins\_lookup\_condition'   while   (curr$\rightarrow$data   <   e)   do   
+':ins\_while\_begins['   
+':ins\_while['                aux   :=   prev;   
+':ins\_aux\_eq\_prev'         prev   :=   curr;   
+':ins\_equals['   
+':ins\_aux\_before\_prev'     aux$\rightarrow$unlock;   
+                              curr   :=   curr$\rightarrow$next;   
+':ins\_while\_begins]'   
+':ins\_equals]'   
+':ins\_while]'   
+':ins\_owns\_curr\_one]'      curr$\rightarrow$lock;   
+':ins\_owns\_curr\_two['   endwhile   
+':ins\_lookup\_loop]'   
+':ins\_final\_conditional' if   (curr   !=   null   $\wedge$   curr$\rightarrow$data   >   e)   then   
+':ins\_insert['                aux   :=   malloc(e,   null,   #);   
+':after\_malloc['              aux$\rightarrow$next   :=   curr;   
+':ins\_aux\_before\_curr'   
+':ins\_diff['                  prev$\rightarrow$next   :=   aux                               
+                               region   :=   union   (region,   {aux});      
+':ins\_follows]'   
+':after\_malloc]'   
+':ins\_insert]'   
+':ins\_prev\_lower]'       endif   
+':ins\_elem\_inserted['    prev$\rightarrow$unlock;   
+':ins\_owns\_prev]'   
+':ins\_prev\_def]'         curr$\rightarrow$unlock;   
+':ins\_owns\_curr\_two]'   
+':ins\_curr\_def]'   
+':ins\_diff]'            return();   
+':ins\_elem\_inserted]'   
+':insert\_body]'      end   
+   
+//   -----   REMOVE   ----------------------------------------------   
+   
+   
+                  procedure   remove   (e:elem)   
+                     addr   prev   
+                     addr   curr   
+                     addr   aux   
+
+                  begin   
+':remove\_body['         prev   :=   head;   
+':rem\_prev\_lower['   
+':rem\_prev\_def['   
+':rem\_prev\_is\_head['  prev$\rightarrow$lock;   
+':rem\_owns\_prev['      curr   :=   prev$\rightarrow$next;   
+':rem\_curr\_def['   
+':rem\_follows['         curr$\rightarrow$lock;   
+':rem\_prev\_is\_head]'   
+':rem\_owns\_curr\_one['   
+':rem\_lookup\_loop['    while   (curr$\rightarrow$data   <   e)   do   
+':rem\_while\_begins['   
+':rem\_while['               aux   :=   prev;   
+':rem\_aux\_eq\_prev'        prev   :=   curr;   
+':rem\_equals['   
+':rem\_aux\_before\_prev'    aux$\rightarrow$unlock; 
+                             curr   :=   curr$\rightarrow$next;   
+':rem\_while\_begins]'   
+':rem\_equals]'   
+':rem\_while]'   
+':rem\_owns\_curr\_one]'     curr$\rightarrow$lock;   
+':rem\_owns\_curr\_two['   endwhile   
+':rem\_lookup\_loop]'   
+':rem\_final\_conditional' if   (curr$\rightarrow$data   =   e)   then   
+':rem\_remove['   
+':rem\_if\_one'               aux   :=   curr$\rightarrow$next;   
+':rem\_if\_two'               prev$\rightarrow$next   :=   aux   
+                        /*
+                                  region   :=   diff(region,   {curr});   
+                        */
+':rem\_follows]'   
+':rem\_curr\_def]'   
+':rem\_remove]'   
+':rem\_prev\_lower]'       endif   
+':rem\_elem\_removed['   
+':rem\_diff['              prev$\rightarrow$unlock;   
+':rem\_owns\_prev]'   
+':rem\_prev\_def]'         curr$\rightarrow$unlock;   
+':rem\_diff]'   
+':rem\_owns\_curr\_two]'   return();   
+':rem\_elem\_removed]'   
+':remove\_body]'       end   
+                        

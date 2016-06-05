@@ -1,7 +1,4 @@
 
-
-\todo{No break page on each axiom.}
-
 \subsubsection{Common}
 	This are common axioms, included in every \spass problem generated. 
 
@@ -10,8 +7,7 @@
 
 	\begin{axiomdescription}[next-error--is--null]
 		\label{ax::next_error__is__null}
-		\explanation{
-			\paragraph{Interpretation:} The field \fNext of the \fError \cell is \fNull address.
+		\explanation{ The field \fNext of the \fError \cell is \fNull address.
 		}
 		\begin{formula}
 			next(error) = null
@@ -40,8 +36,7 @@
 
 	\begin{axiomdescription}[nums-are-different]
 		\label{ax::nums_are_different}
-		\explanation{
-			\paragraph{Interpretation:} All numbers are different one another. \footnote{This axiom is necessary because \spass only includes the equality theory. Thus, 0,1,...,55 are 0-ary functions that could be equal.}
+		\explanation{ All numbers are different one another. \footnote{This axiom is necessary because \spass only includes the equality theory. Thus, 0,1,...,55 are 0-ary functions that could be equal.}
 		}
 		\begin{formula}
 			(0 \neq 1) \andcond (0 \neq 2) \andcond ... \andcond (1\neq 2) \andcond ... (54 \neq 55)
@@ -70,8 +65,7 @@
 
 	\begin{axiomdescription}[union-def]
 		\label{ax::union_def}
-		\explanation{
-			\paragraph{Interpretation:} Let $x$ be a generic, and $se1,se2$ set of generics. Then $x$ belongs to the union of $se1,se2$ \gls{iff} $x$ is in $se1$ or $se2$.
+		\explanation{ Let $x$ be a generic, and $se1,se2$ set of generics. Then $x$ belongs to the union of $se1,se2$ \gls{iff} $x$ is in $se1$ or $se2$.
 		}
 		\begin{formula}
 			((in(x,se) \vee in(x,se2)) \dimplies in(x,union(se,se2)))
@@ -81,7 +75,6 @@
 		\begin{axiomdescription}[set-equal]
 		\label{ax::set_equal}
 		\explanation{
-			\paragraph{Interpretation:}
 			Two set are equal \gls{iff} there not exists a generic that is in one set but not in the other.
 			%
 			This axiom is called in literature \cite{yellowbook} \concept{set extensionability}.
@@ -93,8 +86,7 @@
 
 	\begin{axiomdescription}[union-conmutative]
 		\label{ax::union_conmutative}
-		\explanation{
-			\paragraph{Interpretation:} 
+		\explanation{ 
 			The union of set is a commutative operation.
 		}
 		\begin{formula}
@@ -104,8 +96,7 @@
 
 	\begin{axiomdescription}[in-set--def]
 		\label{ax::in_set__def}
-		\explanation{
-			\paragraph{Interpretation:} 
+		\explanation{ 
 			Let $a,b$ be generics and $se$ a set of generics. If $a$ is not in the set but $b$ is in the set, then $a$ and $b$ can not be equal.
 		}
 		\begin{formula}
@@ -116,7 +107,6 @@
 	\begin{axiomdescription}[a--in--singl-a]
 		\label{ax::a__in__singl_a}
 		\explanation{
-			\paragraph{Interpretation:}
 			Let $se$ be the generic set built from the generic element $a$.
 			%
 			Then, there are no other address different from $a$ in $se$.
@@ -131,7 +121,6 @@
 	\begin{axiomdescription}[emptySet-is-empty]
 		\label{ax::emptySet_is_empty}
 		\explanation{
-			\paragraph{Interpretation:}
 			The generic empty set does not contain any generic.
 		}
 		\begin{formula}
@@ -144,7 +133,6 @@
 	\begin{axiomdescription}[set-exten-inv]
 		\label{ax::set_exten_inv}
 		\explanation{
-			\paragraph{Interpretation:}
 			The inverse of set extensionability (described at \ref{ax::set_equal}).
 		}
 		\begin{formula}
@@ -156,7 +144,6 @@
 	\begin{axiomdescription}[a-not--in-se-dif-a]
 		\label{ax::a_not__in_se_dif_a}
 		\explanation{
-			\paragraph{Interpretation:}
 			A generic element is not in the difference of any set with $\fSingl(a)$
 		}
 		\begin{formula}
@@ -201,7 +188,6 @@
 	\begin{axiomdescription}[rd-mem--def]
 		\label{ax::rd_mem__def}
 		\explanation{
-			\paragraph{Interpretation:}
 			The \cell returned when reading the position \fNull of any memory $m$ is the \fError \cell.
 		}
 		\begin{formula}
@@ -211,8 +197,7 @@
 
 	\begin{axiomdescription}[upd--def--not-null]
 		\label{ax::upd__def__not_null}
-		\explanation{
-			\paragraph{Interpretation:}(Update definition)
+		\explanation{(Update definition)
 			\\
 			Let $a$ be an \addr not \fNull, $m$ a \mem and $c$ a \cell.We call $m2$ the result of the \fUpd statement.
 			%
@@ -226,7 +211,6 @@
 	\begin{axiomdescription}[upd--def--one-at-the-time]
 		\label{ax::upd__def__one_at_the_time}
 		\explanation{
-			\paragraph{Interpretation:}
 			Lea $a$ be an \addr not \fNull, $m$ a memory. We call $m2$ the result of the \fUpd statement.
 			%
 			Then, an \fUpd statement of a $a$ only modifies the value stored \doubt{in} $a$ and no other value of $m$
@@ -262,7 +246,6 @@
 	\begin{axiomdescription}[less-trans]
 		\label{ax::less_trans}
 		\explanation{
-			\paragraph{Interpretation:}
 			Transitivity of the order relation defined \doubt{between/among} \elem.
 		}
 		\begin{formula}
@@ -275,7 +258,6 @@
 	\begin{axiomdescription}[ls-xy--not-ls-yx]
 		\label{ax::ls_xy__not_ls_yx}
 		\explanation{
-			\paragraph{Interpretation:}
 			The order relation \doubt{between/among} \elem is total.
 		}
 		\begin{formula}
@@ -286,7 +268,6 @@
 	\begin{axiomdescription}[lowest--less-than-highest]
 		\label{ax::lowest__less_than_highest}
 		\explanation{
-			\paragraph{Interpretation:}
 			The \fLowest is less than the \fHighest (according to the order relation defined \doubt{between/among?} elements).
 		}
 		\begin{formula}
@@ -296,8 +277,7 @@
 
 	\begin{axiomdescription}[lowestElem--def-tll]
 		\label{ax::lowestElem__def_tll}
-		\explanation{
-			\paragraph{Interpretation:}(Definition of \fLowest)\\
+		\explanation{(Definition of \fLowest)\\
 			Any other element is great or equal than the \fLowest.
 		}
 		\begin{formula}
@@ -307,8 +287,7 @@
 
 	\begin{axiomdescription}[highestElem--def-tll]
 		\label{ax::highestElem__def_tll}
-		\explanation{
-			\paragraph{Interpretation:}(Definition of \fHighest)\\
+		\explanation{(Definition of \fHighest)\\
 			Any other element is less or equal than the \fHighest.
 		}
 		\begin{formula}
@@ -341,10 +320,13 @@
 
 \subsubsection{Addr2set}
 
+This subset of axioms and the following are the specific axioms needed for this thesis.
+%
+This are quite more complex than the previous ones because they have the substance of the theories.
+
 	\begin{axiomdescription}[nextreg]
 		\label{ax::nextreg}
 		\explanation{
-			\paragraph{Interpretation:}
 			Let $a$ be an \addr reachable from another \addr $b$. 
 			%
 			If $a$ is not \fNull, then the node pointed by $a$ is also reachable from $b$.
@@ -357,23 +339,20 @@
 	\begin{axiomdescription}[lock-keeps-addr2set]
 		\label{ax::lock_keeps_addr2set}
 		\explanation{
-			\paragraph{Interpretation:}
 			The set of \addr reachable from any \addr $hd$ is preserved after a \fLock statement targeting another (or the same) \addr $a$. 
 			%
 			This is true because a \fLock statement does not change anything but the thread using the \addr. 
 			%
 			Even if the \fLock statement targets \fError, the reachable \addr are preserved.
-			\todo{Clear enough?}
 		}
 		\begin{formula}
-			(hp_p = upd(hp,a,mkcell(data(rd(hp,a)),next(rd(hp,a)),t)) \implies addr2set(p,hd) = addr2set(hp_p,hd))
+			(hp_p = upd(hp,a,mkcell(data(rd(hp,a)),next(rd(hp,a)),t))) \implies (addr2set(p,hd) = addr2set(hp_p,hd))
 		\end{formula}
 	\end{axiomdescription}
 
 	\begin{axiomdescription}[addr2set-null-is-singl-null]
 		\label{ax::addr2set_null__is__singl_null}
 		\explanation{
-			\paragraph{Interpretation:}
 			The set of \addr reachable from \fNull is the \sSetAddr with just the \addr \fNull.
 			%
 			This is true as a consequence of previous axioms, because the \fNext of \fError is \fNull for every memory.
@@ -402,22 +381,11 @@
 
 \subsubsection{Important}
 
-\todo{Rewrite}
-
-	This are the important axioms. 
-	%
-	All the previous subsets are well-known and generic. 
-	%
-	The subset of axiom presented now are the specific of this theory axioms.
 	
-
-	In table \ref{table:axiom_elemarith} is gathered the uses of each axiom in each invariant. 
-
-
+	
 	\begin{axiomdescription}[lock-keeps-heap--data \& lock-keeps-heap--next]
 		\label{ax::lock_keeps_heap__data}\label{ax::lock_keeps_heap__next}
 		\explanation{
-			\paragraph{Interpretation:}
 			In the same way a \fLock statement preserve the \sSetAddr reachable from any \addr $hd$, the same states for some other functions apart from \fAddrToSet.
 			%
 			A \fLock statement does not change the \fData and \fNext values of a \cell (which is obvious).
@@ -431,7 +399,6 @@
 	\begin{axiomdescription}[addr2set-rec-def]
 		\label{ax::addr2set_rec_def}
 		\explanation{
-			\paragraph{Interpretation:}
 			Recursive definition of \fAddrToSet.
 			%
 			As the \fAddrToSet is used to get the reachable \addr from another \addr $a$, it is to expect that the \fAddrToSet of the \fNext of $a$ would be the same \sSetAddr excluding $a$.
@@ -446,7 +413,6 @@
 	\begin{axiomdescription}[addr2set-primim]
 		\label{ax::addr2set_primim}
 		\explanation{
-			\paragraph{Interpretation:}
 			This axiom is the base of the recursion in the definition of \fAddrToSet. 
 		}
 		\begin{formula}
@@ -457,7 +423,6 @@
 	\begin{axiomdescription}[not-in-region--not-change-heap-addr]
 		\label{ax::not_in_region__not_change_heap_addr}
 		\explanation{
-			\paragraph{Interpretation:}
 			Let $hp$ be an \addr and $hp$ a \mem. 
 			%
 			Then, modifying a \mem in an \addr which is not reachable from $hp$ preserves the \sSetAddr of reachable \addr from $hp$.
@@ -472,7 +437,6 @@
 	\begin{axiomdescription}[insert--keeps-addr2set]
 		\label{ax::insert__keeps_addr2set}
 		\explanation{
-			\paragraph{Interpretation:}
 			This axiom allows to \fUpd a \mem preserving the \fAddrToSet.
 			%
 			This \fUpd correspond to an insertion in the list.
@@ -495,7 +459,6 @@
 	\begin{axiomdescription}[remove--keeps-addr2set]
 		\label{ax::remove__keeps_addr2set}
 		\explanation{
-			\paragraph{Interpretation:}
 			In a similar way \ref{ax::insert__keeps_addr2set}, this axioms allows to \fUpd a \mem preserving the \fAddrToSet, but this \fUpd would correspond to a removal in the list.
 			\\
 			Let $hp$ be the \mem. Let $hd$ be an \addr (the \head of the list would be this \addr).
@@ -517,7 +480,6 @@
 	\begin{axiomdescription}[order-primim]
 		\label{ax::order_primim}
 		\explanation{
-			\paragraph{Interpretation:}
 			This axiom is the base of the recursion in the definition of \fOrderlist. 
 			%
 			Let $hp$ be a \mem, $hd,tl$ two \addr. 
@@ -532,7 +494,6 @@
 	\begin{axiomdescription}[insert--keeps-orderlist]
 		\label{ax::insert__keeps_orderlist}
 		\explanation{
-			\paragraph{Interpretation:}
 			This axioms allows to \fUpd a \mem preserving the \fOrderlist predicate. 
 			%
 			This update preserve the predicate if certain conditions are satisfied.
@@ -548,7 +509,6 @@
 	\begin{axiomdescription}[remove--keeps-orderlist]
 		\label{ax::remove__keeps_orderlist}
 		\explanation{
-			\paragraph{Interpretation:}
 			In a similar way \ref{ax::insert__keeps_orderlist}, this axioms allows to \fUpd a \mem preserving the \fOrderlist predicate, but this \fUpd would correspond to a removal in the list. This update preserve the predicate if certain conditions are satisfied.
 			\\
 			Let $hp$ be a \mem,$hd,tl$ two \addr which satisfy $\fOrderlist(hp,hd,tl)$ and $tl$ points to \fNull. Let $prev,aux,curr$ be \addr which satisfy that $aux$ is pointed by $curr$, which is pointed by $prev$. In addition, $curr,prev,aux$ must be reachable from $hd$.
@@ -563,7 +523,6 @@
 	\begin{axiomdescription}[next-is-not-same--if-ordered]
 		\label{ax::next_is_not_same__if_ordered}
 		\explanation{
-			\paragraph{Interpretation:}
 			Let $hd,tl,a$ \addr reachable from $hd$ in the \mem $hp$, every \addr different from \fNull. 
 			%
 			In addition, $tl$ point to \fNull.
