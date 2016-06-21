@@ -6,44 +6,72 @@
 \begin{abstractEn}
 
 %250-500 words
-We study the uniform verification problem for infinite state processes. The problem consists on proving the parallel composition of an arbitrary number of processes running the same program satisfies a temporal property. As this problem is too big for a \thisworkm, we restricted to the linked list theory with insert,remove and search procedure in a most general client, as the selected theory to prove its validity. 
+We study the uniform verification problem for infinite state processes. The problem consists on proving the parallel composition of an arbitrary number of processes running the same program satisfies a temporal property.
+%
+As the general problem is too big for a bachelor thesis, we restrict our attention to concurrent implementations of sets using single linked list theory. 
+%
+We reduce the verification to the validity of formulas in this theory.
 
-By validity we mean that certain property of the theory is preserved. In this case, we prove that a list remains as a list and that it is always ordered (both with independence of the number of processes executing on the same list). We could lock all the list every time a process is using it, but that is a very inefficient procedure. We try to prove it in a grain-lock implementation.
+By validity we mean that certain property expressed as a formula of the theory holds.
+%
+In our case, we prove that a list remains a list and that it is always ordered (both with independence of the number of processes executing on the same list). 
+%
+We could lock the whole list every time a process accesses it, but that is a very inefficient procedure. 
+%
+In this work we prove a grain-lock implementation.
 
 
-Those proofs can be done using first order logic or model checking. The approach chosen by Alejandro Sánchez and César Sánchez in his \citeapos{thesisAle} was model searching. This work has been developed to complement \citeapos{thesisAle} by providing a framework to prove some of the theories treated by them with first order logic. 
+Those proofs can be done using first order logic reasoning or model search. 
+%
+The approach chosen by Alejandro Sánchez and César Sánchez in his \citeapos{thesisAle} was model searching. 
+%
+This work has been developed to complement \citeapos{thesisAle} by providing a framework to prove  the validity of formulas of the theories treated by them with first order logic. 
 
 
 As there are lots of proofs to be done, we decided to use an automatic theorem prover. \citetool{spass} has been chosen because it has been used previously in the department. 
 
 
-We will also cover a brief discussion (using the results observed) about the benefits and the costs of this technique of verification. Does this way of verification worth it? 
+We will also cover a brief discussion (using the results observed) about the benefits and the costs of this technique of verification. Is this way of verification always worth it? 
 
 \end{abstractEn}
 
 % Palabras clave en inglés
 \begin{keywordsEn}
-Software verification, Parallelism verification, first order logic, verification conditions, safety, lifeness, temporal logic, automatic theorem prover (spass), grain-lock.
+Software verification, Parallel program verification, first order logic, verification conditions, safety, lifeness, temporal logic, automatic theorem prover (spass), fine grain-locking.
 \end{keywordsEn}
 
 % Resumen en español
 \chapter*{Resumen}
 
 \begin{abstractEs}
-En este trabajo se estudia el problema de la verificación uniforme de problemas para procesos de estados infinitos. El problema consiste en probar que la composición paralela de un número arbitrario de procesos ejecutando el mismo programa satisface una propiedad temporal. Como es un problema demasiado grande, nos hemos restringido al cliente más general que utilice la teoría de listas enlazadas con los procedimientos de insertar, eliinar y buscar. Es en este marco donde vamos a probar su validez.
+En este trabajo se estudia el problema de la verificación uniforme de problemas de estados infinitos.
+%
+El problema consiste en probar que la composición paralela de un número arbitrario de procesos ejecutando el mismo programa satisface una propiedad temporal. 
+%
+Como es un problema demasiado ambicioso, nos hemos restringido en esta tesis al cliente más general que utilice una implementación de listas enlazadas con los procedimientos de insertar, eliinar y buscar. 
+%
+Es en este marco donde vamos a verificar el programa reduciéndolo a probar la validez de una formula en una teoría de listas.
 
-Por validez nos referimos a que una cierta propiedad de la teoría se preserva. En este caso, vamos a provar que una lista siempre se mantiene como tal (es decir, no hay ciclos) y que se mantiene ordenada. Ambas propiedades con independencia del número de procesos ejecutando sobre la misma lista.
+Por validez nos referimos a que una cierta propiedad de la teoría se preserva. 
+%
+En este caso, vamos a provar que una lista siempre se mantiene como tal (es decir, no hay ciclos) y que se mantiene ordenada.
+%
+Ambas propiedades se preservan con independencia del número de procesos ejecutando sobre la misma lista.
 
-Los argumentos para asegurar la satisfacción de estas condiciones, se puede utilizar búsqueda de modelos o lógica de primer orden. El método utilizado por Alejandro Sánchez and César Sánchez en su \citeapos{thesisAle} ha sido búsqueda de modelos. Este trabajo, ha sido desarrollado para complementar \citeapos{thesisAle} aportando un marco para probar algunas teorías utilizadas por ellos utilizando la lógica de primer orden.
+Para asegurar formalmente la satisfacción de estas condiciones, se puede utilizar búsqueda de modelos o razonamiento en lógica de primer orden. 
+%
+El método utilizado por Alejandro Sánchez and César Sánchez en su tesis \citeapos{thesisAle} ha sido búsqueda de modelos. 
+%
+Este trabajo ha sido desarrollado para complementar \citeapos{thesisAle} aportando un marco para probar algunas teorías utilizadas por ellos utilizando la lógica de primer orden.
 
-Debido a la gran magnitud de demostraciones necesarias, hemos utilizado un demostrador de teoremas automático. \citetool{spass} ha sido elegido debido a su previo uso en el departamento.
+Debido al gran número de demostraciones necesarias, hemos utilizado un demostrador de teoremas automático. \citetool{spass} ha sido elegido debido a su previo uso en el departamento.
 
-Además, incluimos una breve discusión a la luz de los resultados obtenidos sobre los beneficios y los costes de esta técnica de verificación. ¿Merece la pena la verificación de software utilizando estos procedimientos?
+Además, incluimos una breve discusión a la luz de los resultados obtenidos sobre los beneficios y los costes de esta técnica de verificación. ¿Merece siempre la pena la verificación de software utilizando estos procedimientos?
 
 
 \end{abstractEs}
 
 % Palabras clave en español
 \begin{keywordsEs}
-Verificación de Software, Verificación de programas en paralelo, lógica de primer order, condiciones de verificación, safety, lifeness, lógica temporal, demostradores de teoremas automáticos (spass), grain-lock.
+Verificación de Software, Verificación de programas paralelos, lógica de primer order, condiciones de verificación, safety, lifeness, lógica temporal, demostradores de teoremas automáticos (spass), fine grain-locking.
 \end{keywordsEs}
