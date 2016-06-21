@@ -1,5 +1,5 @@
 % -*- root: ../main.tex -*-
-\subsection{Formal representation of a program}
+\subsection{Formal Representation of a Program}
 
 This \gls{SPL} and its formal representation is the language chosen to write the programs to be formally verified.
 %
@@ -8,37 +8,45 @@ It has been chosen by \citep{thesisAle} because its simplicity and \doubt{expres
 Because its simplicity it is a great option to do formal verification with it.
 
 
-\subsubsection{Preliminaries (Notation, definition)}
+\subsubsection{Preliminaries (Notation, Definition)}
 
-A program is a series of state changes. 
+The semantics of programs are given as a sequence of states.
 %
-There is the \pc variable, which has the information of the line to execute next (\concept{Program\IS counter}). 
+The \pc\; variable (\concept{Program\IS counter}) has the information of the line to execute next. 
 %
-Additionally, there are the steps of the program. Each step modifies the state of the program by modifying the values of the variables.
+Additionally, there are the steps of the program. Each step modifies the state of the program by modifying the values of the variables including the \pc.
 %
-A step can be easily expressed in \gls{FOL} defining the \concept{post-state} variables, which are the new values the variables will have after the execution of the line.
+A step can be easily expressed in \gls{FOL} using \concept{post-state} variables, which are the new values the variables will have after the execution of the line.
 %
 The formula gathering the information of the execution of a line, using the \pc and \pc' (the post-state \pc) and all the other variables is called \concept[Transition relation]{transition relation}.
 
 
 \subsubsection{Possible instructions}
-
-In order to express correctly the transition relation corresponding to certain line, we need to know how to translate program lines into \gls{FOL} logic.
+%
+In order to express correctly the transition relation corresponding to certain line, we need to know how to translate program statements into \gls{FOL}.
 %
 As we are going to work with programs used by more than one thread, we need one program counter for each thread executing.
 %
-We parametrize the program counter. 
+We parametrize the program counter by thread identifiers. 
 %
-This is, defining the \textbf{program counter} as a \textbf{function} that given a thread, returns its program counter. 
+That is, we define the \textbf{program counter} as a \textbf{function} that given a thread, returns its program counter. 
 %
-We could have define as one variable per thread.
+We could have introduced one variable per thread.
 %
-It would be equivalent. 
+It would be an equivalent formulation. 
 
 
-We proceed to define in general terms how to build transition relation.
+We proceed to define in general terms how to build transition relation for a \gls{SPL} statement.
 %
+
+%
+A complete definition can be found in \cite{SPL}.
+%
+\todo{AAAAAAAAAAAAAAAAA}
 For this definitions we use the letter $T$ to refer a thread.
+%
+
+
 \begin{description}
 \item [Assignments:]
 		The transition relation for a variable assignment consists of the 
@@ -63,61 +71,61 @@ For this definitions we use the letter $T$ to refer a thread.
 			\end{array}
 			\]
 
-	\item [Conditionals:]
-		We present now the two possible kinds of conditional statements in 
-		SPL.
+%	\item [Conditionals:]
+%		We present now the two possible kinds of conditional statements in 
+%		SPL.
 %
-		In the first case, if condition $c$ does not hold, the execution 
-		proceeds from the statement following the end of the conditional.
+%		In the first case, if condition $c$ does not hold, the execution 
+%		proceeds from the statement following the end of the conditional.
 %
-		\[
-        \begin{array}[t]{p{8em}@{\hspace{6em}}p{\longtablesize}}
-				\hline
-				Statement & Transition relation \\ \hline\hline
-				$\begin{array}[t]{l@{\hspace{0.3em}}c@{\hspace{1em}}l}
-					\ell_1 & : & \mathtt{\textbf{if } c \textbf{ then }} \\ \\
-					\ell_2 & : & \mathtt{\cdots} \\
-						&& \mathtt{\vdots} \\
-					\ell_n & : & \mathtt{\textbf{end if}} \\
-					\ell_{n+1} & : & \mathtt{\cdots}
-				\end{array}$
-				&
-				$\begin{array}[t]{ll}
-					(\pc(T) = \ell_1 \andcond \;\;\mathtt{c} \andcond \pc'(T) = \ell_2) \; \Or \\
-					(\pc(T) = \ell_1 \andcond \lnot \mathtt{c} \andcond \pc'(T) = \ell_{n+1})
-				 \end{array}$ \\ \hline
-			 \end{array}
-		 \]
+%		\[
+%       \begin{array}[t]{p{8em}@{\hspace{6em}}p{\longtablesize}}
+%				\hline
+%				Statement & Transition relation \\ \hline\hline
+%				$\begin{array}[t]{l@{\hspace{0.3em}}c@{\hspace{1em}}l}
+%					\ell_1 & : & \mathtt{\textbf{if } c \textbf{ then }} \\ \\
+%					\ell_2 & : & \mathtt{\cdots} \\
+%						&& \mathtt{\vdots} \\
+%					\ell_n & : & \mathtt{\textbf{end if}} \\
+%					\ell_{n+1} & : & \mathtt{\cdots}
+%				\end{array}$
+%				&
+%				$\begin{array}[t]{ll}
+%					(\pc(T) = \ell_1 \andcond \;\;\mathtt{c} \andcond \pc'(T) = \ell_2) \; \Or \\
+%					(\pc(T) = \ell_1 \andcond \lnot \mathtt{c} \andcond \pc'(T) = \ell_{n+1})
+%				 \end{array}$ \\ \hline
+%			 \end{array}
+%		 \]
 %
-		In the second case, if condition $c$ does not hold, the execution 
-		continues at the first statement in the \textbf{else} section of the 
-		conditional statement.
+%		In the second case, if condition $c$ does not hold, the execution 
+%		continues at the first statement in the \textbf{else} section of the 
+%		conditional statement.
+%%
+%		\[
+%				\begin{array}[t]{p{8em}@{\hspace{6em}}p{\longtablesize}}
+%				\hline
+%				Statement & Transition relation \\ \hline\hline
+%				$\begin{array}[t]{l@{\hspace{0.3em}}c@{\hspace{1em}}l}
+%					\ell_1 & : & \mathtt{\textbf{if } c \textbf{ then }} \\ \\
+%					\ell_2 & : & \mathtt{\cdots} \\
+%					\mathtt{\vdots} \\
+%					\ell_n & : & \mathtt{\textbf{else}} \\
+%					\ell_{n+1} & : & \mathtt{\cdots} \\
+%					\mathtt{\vdots} \\
+%					\ell_m & : & \mathtt{\textbf{end if}} \\
+%					\ell_{m+1} & : & \mathtt{\cdots}
+%				\end{array}$
+%				&
+%				$\begin{array}[t]{ll}
+%					(\pc(T) = \ell_1 \andcond \;\;\mathtt{c} \andcond \pc'(T) = \ell_2) \; \Or \\
+%					(\pc(T) = \ell_1 \andcond \lnot \mathtt{c} \andcond \pc'(T) = \ell_{n+1})
+%						& \text{for line } \ell_1 \\ \\ \phantom{\vdots} \\
 %
-		\[
-				\begin{array}[t]{p{8em}@{\hspace{6em}}p{\longtablesize}}
-				\hline
-				Statement & Transition relation \\ \hline\hline
-				$\begin{array}[t]{l@{\hspace{0.3em}}c@{\hspace{1em}}l}
-					\ell_1 & : & \mathtt{\textbf{if } c \textbf{ then }} \\ \\
-					\ell_2 & : & \mathtt{\cdots} \\
-					\mathtt{\vdots} \\
-					\ell_n & : & \mathtt{\textbf{else}} \\
-					\ell_{n+1} & : & \mathtt{\cdots} \\
-					\mathtt{\vdots} \\
-					\ell_m & : & \mathtt{\textbf{end if}} \\
-					\ell_{m+1} & : & \mathtt{\cdots}
-				\end{array}$
-				&
-				$\begin{array}[t]{ll}
-					(\pc(T) = \ell_1 \andcond \;\;\mathtt{c} \andcond \pc'(T) = \ell_2) \; \Or \\
-					(\pc(T) = \ell_1 \andcond \lnot \mathtt{c} \andcond \pc'(T) = \ell_{n+1})
-						& \text{for line } \ell_1 \\ \\ \phantom{\vdots} \\
-
-						\pc(T) = \ell_n \andcond \pc'(T) = \ell_{m+1} & \text{for line } \ell_n
-				 \end{array}$ \\ \hline
-			\end{array}
-		\]
-%
+%						\pc(T) = \ell_n \andcond \pc'(T) = \ell_{m+1} & \text{for line } \ell_n
+%				 \end{array}$ \\ \hline
+%			\end{array}
+%		\]
+%%
 	\item [Loops:]
 		We consider the only loop statement available in SPL which executes 
 	the statements in the body as long as the loop condition holds.
@@ -146,57 +154,57 @@ For this definitions we use the letter $T$ to refer a thread.
 			 \end{array}
 		\]
 %
-			\item [Non deterministic choice:]
-		The transition relation for the non-deterministic choice statement can 
-		be expressed as follows:
+%			\item [Non deterministic choice:]
+%		The transition relation for the non-deterministic choice statement can 
+%		be expressed as follows:
 %
-		\[
-			\begin{array}[t]{p{8em}@{\hspace{6em}}p{\longtablesize}}
-				\hline
-				Statement & Transition relation \\ \hline\hline
-				$\begin{array}[t]{l@{\hspace{0.3em}}c@{\hspace{1em}}l}
-					\ell_1 & : & \mathtt{\Nondet} \\
-					\ell_2 & : & \mathtt{\;\;\;\;\;\; \cdots} \\
-					\ell_3 & : & \mathtt{\textbf{or } \; \cdots} \\
-					\mathtt{\vdots} \\
-					\ell_n & : & \mathtt{\textbf{or } \; \cdots} \\
-					\ell_{n+1} & : & \mathtt{\NondetEnd} \\
-				\end{array}$
-				&
-				$\begin{array}[t]{ll}
-					\pc(T) = \ell_1 \andcond
-					\bigvee\limits_{i = 2..n} \pc'(T) = \ell_i
-				 \end{array}$ \\ \hline
-			 \end{array}
-		\]
+%		\[
+%			\begin{array}[t]{p{8em}@{\hspace{6em}}p{\longtablesize}}
+%				\hline
+%				Statement & Transition relation \\ \hline\hline
+%				$\begin{array}[t]{l@{\hspace{0.3em}}c@{\hspace{1em}}l}
+%					\ell_1 & : & \mathtt{\Nondet} \\
+%					\ell_2 & : & \mathtt{\;\;\;\;\;\; \cdots} \\
+%					\ell_3 & : & \mathtt{\textbf{or } \; \cdots} \\
+%					\mathtt{\vdots} \\
+%					\ell_n & : & \mathtt{\textbf{or } \; \cdots} \\
+%					\ell_{n+1} & : & \mathtt{\NondetEnd} \\
+%				\end{array}$
+%				&
+%				$\begin{array}[t]{ll}
+%					\pc(T) = \ell_1 \andcond
+%					\bigvee\limits_{i = 2..n} \pc'(T) = \ell_i
+%				 \end{array}$ \\ \hline
+%			 \end{array}
+%		\]
 %
-	\item [Lock and unlock:]
-	Even though these are not SPL statements, as they will be widely used, it is necessary to define theirs transition relations.
-%
-		\[
-			\begin{array}[t]{p{8em}@{\hspace{6em}}p{\longtablesize}}
-				\hline
-				Statement & Transition relation \\ \hline\hline
-				$\begin{array}[t]{l@{\hspace{0.3em}}c@{\hspace{1em}}l}
-					\ell_1 & : & \mathtt{\fLock(l)} \\
-					\ell_2 & : & \mathtt{\cdots}
-				\end{array}$
-				&
-				$\begin{array}[t]{ll}
-					\pc(T) = \ell_1 \andcond
-						\mathtt{l} = \oslash \andcond
-						\mathtt{l}' = T \andcond \pc'(T) = \ell_2
-				 \end{array}$ \\ \hline\hline
-				$\begin{array}[t]{l@{\hspace{0.3em}}c@{\hspace{1em}}l}
-					\ell_1 & : & \mathtt{\fUnlock(l)} \\
-					\ell_2 & : & \mathtt{\cdots}
-				\end{array}$
-				&
-				$\begin{array}[t]{ll}
-					\pc(T) = \ell_1 \andcond
-						\mathtt{l}' = \oslash \andcond \pc'(T) = \ell_2
-				 \end{array}$ \\ \hline
-			 \end{array}
-		\]
+%	\item [Lock and unlock:]
+%	Even though these are not SPL statements, as they will be widely used, it is necessary to define theirs transition relations.
+%%
+%		\[
+%			\begin{array}[t]{p{8em}@{\hspace{6em}}p{\longtablesize}}
+%				\hline
+%				Statement & Transition relation \\ \hline\hline
+%				$\begin{array}[t]{l@{\hspace{0.3em}}c@{\hspace{1em}}l}
+%					\ell_1 & : & \mathtt{\fLock(l)} \\
+%					\ell_2 & : & \mathtt{\cdots}
+%				\end{array}$
+%				&
+%				$\begin{array}[t]{ll}
+%					\pc(T) = \ell_1 \andcond
+%						\mathtt{l} = \oslash \andcond
+%						\mathtt{l}' = T \andcond \pc'(T) = \ell_2
+%				 \end{array}$ \\ \hline\hline
+%				$\begin{array}[t]{l@{\hspace{0.3em}}c@{\hspace{1em}}l}
+%					\ell_1 & : & \mathtt{\fUnlock(l)} \\
+%					\ell_2 & : & \mathtt{\cdots}
+%				\end{array}$
+%				&
+%				$\begin{array}[t]{ll}
+%					\pc(T) = \ell_1 \andcond
+%						\mathtt{l}' = \oslash \andcond \pc'(T) = \ell_2
+%				 \end{array}$ \\ \hline
+%			 \end{array}
+%		\]
 %
 \end{description}
