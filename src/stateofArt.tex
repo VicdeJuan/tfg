@@ -4,64 +4,58 @@
 
 \paragraph{Abstract}
 
-Formal verification is needed in some parts of the industry and this is a fact. 
+Formal verification is needed in some parts of software industry. 
 %
-Some examples are covered, in order to encourage the reader about formal verification.
+We present some examples.
 
 There are some tools that aims to offer solutions to the need of formal verification. 
 %
-One of the tools covered is developed by Microsoft, which shows that this topic is not irrelevant.
+One of the tools covered is developed by Microsoft, which illustrates that this topic is not irrelevant.
 %
-Additionally, we cover the different ways this \textit{formal verification} can be achieved.
+Additionally, we cover different ways this \textit{formal verification} can be attempted.
 
 
 
 \section{The need of formal verification}
 
-As it was shown in the introduction \ref{Motivation} there are some systems in which software errors are totally inadmissible.
+As it was shown in the introduction  in Section \ref{Motivation} there are some systems in which software errors are totally inadmissible.
 %
-People developing software for critical systems need an effective way to check the correctness of the software.
+People developing software for critical systems need an effective way to check the correctness of this software.
 %
-In addition, they need some guarantee that the compiler they use really generates an executable which does \textbf{exactly} the same.
+In addition, they need some guarantee that the compiler generates an executable which exhibits \textbf{exactly} the same behaviour as the source program.
 %
 In order to solve this issues there are some tools which have been developed.
 
 \subsection{Solutions}
 
-\subsubsection{Compcert}
-
+\paragraph{Compcert:}
 School of Computing in the University of Utah claims \cite{CCompilerMotivation}
 
 \textit{We created a tool that generates random C programs, and then spent two and a half years using it to find compiler bugs. So far, we have reported more than 325 previously unknown bugs to compiler developers. Moreover, every compiler that we tested has been found to crash and also to silently generate wrong code when presented with valid inputs.}
 
-So there is a real need of a C verified compiler and that is what \concept{Compcert} is. 
+So there is a real need of a C verified compiler and that is what \concept{Compcert} intends to be. 
 %
-Comcpert can compile programs using almost all of the ISO C90 / ANSI C while it provides all the necessary tools to formally verify the software developed.
+Comcpert can compile programs using almost all of the ISO C90 / ANSI C.
 %
-The project began in 03/2008 and is still under development. Last version was released in 12/2015 and it is under development.
+The project began in 03/2008 and is still under development. Last version was released in 12/2015.
+%
+This research group has formally verified compilers for functional languages \cite{Dargaye-these}.
 
-Other compilers \ref{Dargaye-these} are in process to be formally verified.
 
-
-\subsubsection{VCC}
-
-\gls{VCC} is a tool developed by Microsoft which allows to develop Verified C Code \cite{VCC}. 
+\paragraph{VCC:}
+\gls{VCC} is a tool developed by Microsoft Research which allows to develop Verified C Code \cite{VCC}. 
 %
 The aim is to offer a tool to critical developers in which the formal verification needed in critical software is integrated and is easy to use.
 %
-This project impulse the use of formal verification among the developers.
+This project encourages the use of formal verification among developers.
 
 VCC is sound, which means that if VCC verifies a program, it really is correct, with 2 possible problems.
 %
-VCC is not verified itself, which means it can have bugs, so the program is correct modulo bugs in VCC itself.
+VCC is not verified itself, which means it can have bugs.
 %
-Additionally, a verified C compiler should be used in order to have a verified executable, because if the compiler is not correct and inserts a bug, then the verified program may fail.
+Additionally, the compiler used bt \gls{VCC} is verified 
 %
-Microsoft has think of that, so that problem is solved in latest versions of VCC. 
-
 This tool can be downloaded at \href{http://research.microsoft.com/en-us/projects/vcc/}{reseach.microsoft.com}
-
-
 
 
 
@@ -69,10 +63,9 @@ This tool can be downloaded at \href{http://research.microsoft.com/en-us/project
 
 There are basically two different ways of formally verify a program. 
 %
-Both of the consist on translating the program into logic a formula and try to prove it valid \cite{ScalableTechniques}.
-\todo{I didn't read the book but it looks interesting}
+Both of the consist on translating the program into a logical formula and try to prove it valid \cite{ScalableTechniques}.
 %
-The first way is search models and the other one is try to obtain a formal proof. 
+The first way is to search models and the other one is try to obtain a formal proof. 
 %
 Model searching is easily automatizable but formal proofs can not be automatized for some logic, as \gls{SOL}.
 
@@ -83,13 +76,12 @@ The approach of model checking is the one used in \citeapos{thesisAle}.
 %
 Another tool that is based on model checking is Spin.
 
-\subsubsection{Spin}
-
+\paragraph{Spin:}
 Spin targets the efficient verification of multi-threaded software. 
 %
 The tool checks the logical consistency of a specification and reports on deadlocks, race conditions, different types of incompleteness, and unwarranted assumptions about the relative speeds of processes.
 %
-Spin provides direct support to C code by including a tool which translate C code to \gls{PROMELA}.
+Spin provides direct support to C code by including a tool which translates C code to \gls{PROMELA}.
 %
 Spin also provides a \gls{LTL} model checking system.
 
@@ -104,24 +96,16 @@ The other approach is to use an \gls{ATP} which allows automatic proving.
 %
 With the theory and the formula, the \gls{ATP} tries to find a proof. 
 %
-As it was explained \doubt{in/at} \ref{intr:consistency}, we may need to use a theory which is not decidable. 
+As it was explained in Section \ref{intr:consistency}, we may need to use a theory which is not decidable,
 %
-This makes this way hard. 
-%
-The \gls{ATP} may be searching for the proof for ever.
+which means that the \gls{ATP} may be searching for the proof for ever.
 
-This is the approach we have taken in this bachelor thesis.
+This is the approach we have taken in this thesis.
 %
 There are different \gls{ATP}, but in all of them, a framework must be build in order to use them.
 %
 Essentially, they are theorem prover with no interface difference apart from the syntax. 
 %
 Internally, they search the proofs in different ways.
-
+%
 Some examples of \gls{ATP} are Vampire\cite{vampire}, Issabelle \cite{issabelle} and \spass \cite{spass}
-
-You build your own framework using Issabelle(https://isabelle.in.tum.de/), 
-
-Spass (ref) or others.
-
-
