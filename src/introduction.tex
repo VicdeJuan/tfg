@@ -3,59 +3,63 @@
 
 \paragraph{Abstract}
 
-In this chapter we will introduce this \thisworkm.
+In this chapter we will introduce this bachelor thesis.
 %
-We will cover the motivation that led the development of this \thisworkm and which objectives does it have.
+We will cover the motivation that led the development of this \thisworkm and which objectives we pursue.
 
-We will discuss its scope, the document structure and finally we will have the preliminaries, an introduction to some concepts needed during the whole \thisworkm. 
+We will discuss its scope, the document structure and finally we will introduce the preliminaries, describing some concepts needed during the whole bachelor thesis. 
 
 \section{Motivation}
 
 \label{Motivation}
-On last May $\text{2}^{\text{nd}}$ a Japanese satellite was lost. This satellite cost \$248 million.
+Last May $\text{2}^{\text{nd}}$ a Japanese satellite was lost in space. This satellite cost \$248 million.
 %
-Research shows it was a software error \cite{japaneseSatellite}. 
+Research revealed the cause was a software error \cite{japaneseSatellite}. 
 %
-Last year, another software error was found in boeing-787.
+Last year, another software error was found in Boeing-787 aircrafts.
 %
-Apparently, the plane’s electrical generators fall into a failsafe mode if kept continuously powered on for 248 days. \cite{boein787}
+Apparently, the plane’s electrical generators fall into a failsafe mode if kept continuously powered 
+%on
+for 248 days. \cite{boein787}
 %
 Fortunately this software error was discovered without relevant economic or human consequences.
 %
-Between 1985 and 1987 6 people died because of a software malfunction of a x-ray machine. \cite{xraykill}.
+Between 1985 and 1987, six people died because of a software malfunction of an x-ray machine \cite{xraykill}.
 %
-This are just a few example to show that Software verification is a very important problem.
+This are just a few example that justify software verification is a very important problem.
 %
-One needs to be sure that the software being developed is correct, one would like it to work as expected with no bugs at all and every one would like its software to be perfect.
+One needs to be sure that the software being developed, in particular critical software, is correct.
 %
-There are some critical software as the ones developed for aeroplanes, spaceships, nuclear reactors which can't have any errors while there are some other software which can afford some errors.
+One would like it to work as expected with no bugs at all.
+%
+There are some critical software as the ones developed for aeroplanes, spaceships, nuclear reactors which cannot have any errors while there are some other software which errors are more tolerable.
 
 
-The usual approach its testing.
+The usual approach to software reliability its testing.
 % 
 The normal way to verify and validate a software is running test to find, whenever is possible, all the errors.
 % 
-When the software is finished (or even while it is being developed) one can test it to check it is correct.
+When the software is finished (or even while it is being developed) one can test it to check its correctness.
 %
-How can one be sure that all functionalities have been proven? Maybe some test were missed and some bugs have not been found so the software is not correct.
+How can one be sure that all functionalities have been proven? Maybe some cases were missed and some bugs have not been found so the software is not correct even though it passed all the test.
 %
-As we said before, some systems can afford this issue but there are some others which can not.
+As we said before, some systems can tolerate some level of incorrectness but there are some others which can not.
 
 
-In the other hand, as a mathematician, I am very used to mathematical proofs of theorems and I know logic is a very powerful tool.
+On the other hand, as a mathematician, I am very used to mathematical proofs of theorems and I know logic is a very powerful tool.
 %
-We wonder if it were possible to verify and validate Software using those powerful tools.
+We wonder if it were possible to verify and validate software using those powerful tools.
 %
 And the answer is affirmative.
 %
-One can prove Software correctness in a formal way.
+One can prove software correctness in a formal way.
 % 
 Software correctness can be proven in the same way as the Gauss theorem can be proven.
 %
 One just need the appropriate framework, tools and of course, knowledge.
 
 
-I have found this topic very useful and we wanted to explore a very formal verification of some theories.
+I have found this topic very useful and we wanted to explore a very formal verification of using some logical theories.
 
 
 \section{Objectives}
@@ -64,11 +68,11 @@ The goal is to prove the correctness of an implementation of a concurrent linked
 
 We achieve to prove with mathematical certain the correctness of the program. 
 %
-We achieve to prove that a list is always a list and that it is always ordered, regardless the number of threads executing.
+We achieve to prove that a list is always preserved as a list and that it is always ordered, regardless the number of threads executing the program.
 %
 Thus, there are 2 steps to prove. 
 %
-The first one is to prove that with just one process using the list, those properties are preserved always. 
+The first one is to prove that with just one process using the list, these properties are preserved always. 
 %
 The other one is with multiple processes using the same list. 
 %
@@ -76,55 +80,55 @@ In particular, in a grain-lock implementation.
 
 But to achieve any formal proof, we need some axioms as a basis.
 %
-We can't define absolute truth, we can just demonstrate that something is true, according to the truths we already know. 
+We can't define absolute truth, we can just proof that something is true, according to facts we already know. 
 %
-We can prove some theorem, but we must use the axioms we consider true. 
+We can prove some theorem, but we must use the axioms as a starting point. 
 %
-So to achieve the verification, we need to obtain the axioms of the linked list theory.
+So to achieve the verification, we need to define the axioms for the theory of linked list.
 
-It is essential to build a framework in which this verification can be automatized, so first order logic will be used. 
+It is essential to build a framework in which this verification can be automated, so \gls{FOL} will be used. 
 %
 Additionally, it is to be hoped that this \gls{FOL} proofs can be generated, stored and checked by third-parties.
 
 
 \section{Scope}
 
-\label{def:leap}
+% Contexto
 \todo{Scope?}
 
 
 \section{Document Structure}
 
-After this introduction, we will define some necessary concepts to understand deeply this \thisworkm. 
+Start by defining some necessary concepts to understand the rest of the thesis.
 
 Once the reader is familiarized with some basic concepts, the state of the art is covered. 
 %
-We show some of the actual technologies even commercial products used nowadays.
-%
-This projects state that it is a not main-frame but not new scope of research.
+We show some of the actual technologies even commercial products used nowadays. 
 
-Chapter three has a preliminary section of what formal verification is and when and why a program can be formally verified and validated as correct. 
+
+
+Chapter 3 includes a preliminary section of what formal verification is and when and why a program can be formally verified and validated as correct. 
 % 
 After that general preliminaries, the \gls{FOL} theories used and the formalism necessary to do formal verification is explained.
 %
-The implementation of the structure is defined in this chapter.
+The implementation of the linked list is defined in this chapter.
 
-Once the goal and the formalism is defined, the development can be fully understand. 
+Once the goal and the formalism is defined, the development can be fully understood. 
 %
-In chapter four, the methodology used the tools developed or used are described.
+In Chapter 4, we describe the methodology used the tools developed or used.
 
-Next, the results of the work can be shown. 
+Next, we show the results of the work. 
 %
-This chapter gadders the list of axiom needed, an analysis of the \gls{FOL} proofs generated and finally a time analysis.
+This chapter describes the list of axioms needed, an analysis of the \gls{FOL} proofs generated and finally a time analysis.
 
-At last, the work is summarized in its conclusions. 
+Finally, the work is summarized in its conclusions. 
 %
 Does formal verification worth the try? 
 
 
 \section{Preliminaries}
 
-\subsection{First order logic}
+%\subsection{First order logic}
 
 \paragraph{Notation}
 \label{def:notation}
@@ -145,7 +149,18 @@ The same happens with $\true \equiv \neg \false$, but it is clearer when we use 
 
 We are going to define some very basic concepts, needed and used during the whole \thisworkmp.
 
-We say a formula $F$ is \concept{satisfiable} \gls{iff} there exists an interpretation $I$ such that $I \vDash F$. 
+
+Let $X$, $Y$ be two sets of any dimension.
+%
+A \concept[Function]{function} denoted by $\appl{f}{X}{Y}$ is a map which takes elements from $X$ and returns an element from $Y$.
+%
+A \concept[Predicate]{predicate} is a boolean-valued function, i.e., $\appl{P}{X}{\{\true,\false\}}$
+%
+We call \concept[Arity]{arity} to the number of arguments a function or a predicate takes.
+
+A \concept{formula} is defined recursively as it follows: Constants, $\true,\false$,predicates and functions are formulas. Let $F_1,F_2$ be two formulas. Then, $F_1\implies F_2, F_1\dimplies F_2, F_1\orcond F_2, F_1\andcond F_2$ are formulas.
+%
+We say a formula $F$ is \concept{satisfiable} \gls{iff} there exists a model $I$ that makes the formula true ($I \vDash F$). 
 %
 We say a formula $F$ is \concept{valid} \gls{iff} for all interpretations $I$, $I\vDash F$.
 \label{def:validity}
@@ -154,29 +169,27 @@ This 2 concepts are very important and they are very related. $F$ is valid \gls{
 
 A first-order \concept{theory} is defined by the following components: 
 \begin{itemize}
-	\item Its \textbf{signature} $\Sigma$ is a set of constant, function and predicate symbols.
+	\item Its \textbf{signature} $\Sigma$ is a set of constants, functions and predicate symbols, where functions and predicates have a fixed arity.
 	\item Its set of \textbf{axioms} $\axioms$ is a set of \gls{FOL} closed formula in which only elements from $\Sigma$ appear.
 \end{itemize}
 
 
-There are some important properties than a theory may have. 
+There are some important properties that a theory may have. 
 
-A theory $\Sigma$ is \concept[Completeness]{complete} \gls{iff} for every closed $\Sigma-$formula $\sigma$ we have $(\Sigma\vDash \sigma) \orcond (\Sigma\neg\vDash \sigma) $
+A theory $\Sigma$ is \concept[Completeness]{complete} \gls{iff} for every closed $\Sigma-$formula $\sigma$ we have $(\Sigma\vDash \sigma) \text{ or } (\Sigma\neg\vDash \sigma) $
 
 A theory $\Sigma$ is \concept[Consistency]{consistent} if there is at least one $\Sigma-$interpretation.	Equivalently, a theory $\Sigma$ is consistent if $\Sigma \not\vDash \false$
 
-If our theory is not consistent, we can have a formal proof of anything we want to prove. 
-%
-We can prove any contradiction. 
+If our theory is not consistent, we can have a formal proof of every formula, so we can prove any contradiction. 
 %
 We could prove that some program is both correct and incorrect at the same time, which gives no information. 
 %
-Thus \textbf{consistency is a fundamental property} for this \thisworkm.
+Thus \textbf{consistency is a fundamental property} of useful theories, like the ones used in this thesis.
 
 \label{intr:consistency}
-In the other hand, completeness is very desirable, but may not be possible to achieve because of the incompleteness theorem of Gödel.
+In the other hand, completeness is very desirable, but may not be possible to achieve because of the incompleteness theorem by Gödel.
 %
-It is not possible to have a complete and consistent theory while including basic arithmetical truths. 
+It is not possible to have a complete and consistent theory that includes basic arithmetical truths. 
 %
 One could expect that the theory needed to prove programs correctness would not be complete, because of the inclusion of basic arithmetical truths. 
 %
@@ -185,13 +198,12 @@ Normally, consistency is basic while completeness is only desirable.
 Another property of theories is the \textbf{decidability}. 
 %
 We say a theory $\Sigma$ is \concept{decidable} if $\Sigma \vDash F$ is decidable, for every $\Sigma-$formula 
-where 
-$F$ a $\Sigma-$formula is decidable if there is an \textbf{algorithm} that \textbf{always terminates} with ``yes'' if $F$ is valid in $\Sigma$ ($\Sigma$-valid) or ``no'' if $F$ is not $\Sigma-$valid.
+where a $\Sigma-$formula $F$ is decidable if there is an \textbf{algorithm} that \textbf{always terminates} with ``yes'' if $F$ is valid in $\Sigma$ ($\Sigma$-valid) or ``no'' if $F$ is not $\Sigma-$valid.
 
 
 Decidability is a stronger property than completeness. 
 %
-As completeness, decidability is a very desirable property but because \gls{FOL} (the theory with no axioms) is undecidable in general, we may not have decidability in the theory we are working on.
+As completeness, decidability is a very desirable property but because \gls{FOL} (with no axioms) is undecidable in general, we may not have decidability in the theory we are working on.
 
 
 
@@ -201,7 +213,7 @@ As completeness, decidability is a very desirable property but because \gls{FOL}
 \label{theory:equality}
 
 We are going to define the theory of equality, because it is the simplest first-order theory.
-
+%
 The signature of the theory is:
 
 \[\Sigma_e:\{=,a,b,c,...\}\]
@@ -209,35 +221,21 @@ The signature of the theory is:
 and it's axioms are:
 
 \begin{description}
-	\item[Reflexivity:	] $\forall x, x=X$
-	\item[Symmetry:	] $\forall x,y x=y \implies y=x$
-	\item[Transitivity:	] $\forall x,y,z x=y \andcond y=z \implies x=z$
-	\item[Function congruence:] For each function $f$
-	\[\forall \gor{x},\gor{y} \left( \bigwedge_{i=1}^n x_i = y_i \right) \implies f(\gor{x}) = f(\gor{y})\]
-	\item[Predicate congruence:]  For each predicate $P$
-	\[\forall \gor{x},\gor{y} \left( \bigwedge_{i=1}^n x_i = y_i \right) \implies f(\gor{x}) \dimplies f(\gor{y})\]
+	\item[Reflexivity:	] $\forall x. x=x$
+	\item[Symmetry:	] $\forall x,y. x=y \implies y=x$
+	\item[Transitivity:	] $\forall x,y,z. x=y \andcond y=z \implies x=z$
+	\item[Function congruence:] For each function $f$ of arity $n$
+	\[\forall \gor{x},\gor{y}. \left( \bigwedge_{i=1}^n x_i = y_i \right) \implies f(\gor{x}) = f(\gor{y})\]
+	\item[Predicate congruence:]  For each predicate $P$ of arity $n$
+	\[\forall \gor{x},\gor{y}. \left( \bigwedge_{i=1}^n x_i = y_i \right) \implies P(\gor{x}) \dimplies P(\gor{y})\]
 
-	This 2 ``axioms'' are not axioms but \concept[Axiom schema]{axiom schemas}, because there is one axiom for each function $f$ or predicate $p$.
+	This 2 ``axioms'' are not axioms but \concept[Axiom schema]{axiom schemas}, because there is one axiom for each function $f$ or predicate $P$.
 \end{description}
 
 \gls{FOL} with equality is a decidable theory as Leopold Löwenheim proved in 1915 \cite{EqualityIsDecidable}. 
 %
-It is both consistent and complete.
+It is also consistent and complete.
 \end{example}
 
-\subsection{Second-order logic (SOL)}
-
-In \gls{SOL} the quantifiers can be used related to functions and/or predicates. This gives lot of possibilities to reason about the universe and problems but adds lot of complexity. 
-
-In the theory of equality (\ref{theory:equality}) we could have defined axioms of congruence by:
-
-\[\forall f \left( \forall \gor{x},\gor{y} \left( \bigwedge_{i=1}^n x_i = y_i \right) \implies f(\gor{x}) = f(\gor{y}) \right)\]
-\[\forall P \left( \forall \gor{x},\gor{y} \left( \bigwedge_{i=1}^n x_i = y_i \right) \implies P(\gor{x}) \dimplies P(\gor{y}) \right)\]
-
-This is a simpler way of writing but a more complex way of reasoning.
-
-The \gls{SOL} is a very powerful tool in order to express formulas. 
-%
-However, because it is not possible to reason automatically in theories of second order, we haven't used any second-order logic and we won't get deeper into it. 
-
+%\subsection{Second-order logic} \input{src/subsrc/sol.tex}
 %\subsection{Temporal logic} \input{src/subsrc/ltl.tex}
