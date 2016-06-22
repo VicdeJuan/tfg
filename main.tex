@@ -34,6 +34,13 @@
 % Rerefencias
 \def\citeapos#1{\citetitle{#1} (\citeauthor{#1}, \citeyear{#1}) \cite{#1}}
 \def\citetool#1{\citetitle{#1} \cite{#1}}
+% Comando code (lstlisting sin cambio de página)
+\lstnewenvironment{code}[1][]%
+  { \noindent\minipage{0.935\linewidth}\medskip
+    \vspace{5mm}
+    \lstset{basicstyle=\ttfamily\footnotesize,#1}}
+  {\endminipage}
+
 
 \newcommand{\doubt}[1]{\textcolor{red}{#1}}
 
