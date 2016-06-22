@@ -1,16 +1,16 @@
 
 \subsubsection{Common}
-	This are common axioms, included in every \spass problem generated. 
+	This are some common axioms, included in every \spass problem generated. 
 
-	In table \ref{table:axioms_common} is gathered the uses of each axiom in each invariant.
+	Table \ref{table:axioms_common} reports the uses of each axiom when proving each invariant.
 
 
 	\begin{axiomdescription}[next-error--is--null]
 		\label{ax::next_error__is__null}
-		\explanation{ The field \fNext of the \fError \cell is \fNull address.
+		\explanation{ The field \fNext of the \fError \cell is the \fNull address.
 		}
 		\begin{formula}
-			next(error) = null
+			\forall \ast \;\; next(error) = null
 		\end{formula}
 	\end{axiomdescription}
 
@@ -30,16 +30,16 @@
 
 \subsubsection{Arithmetic}
 	
-	This subset of axioms refers to the arithmetical axioms needed at the proofs.
+	This subset of the axioms refers to the arithmetical axioms needed at the proofs.
 	
-	In table \ref{table:axioms_arithmetic} is gathered the uses of each axiom in each invariant.
+	Table \ref{table:axiom_arithmetic} reports the uses of each axiom when \spass proves each invariant.
 
 	\begin{axiomdescription}[nums-are-different]
 		\label{ax::nums_are_different}
-		\explanation{ All numbers are different one another. \footnote{This axiom is necessary because \spass only includes the equality theory. Thus, 0,1,...,55 are 0-ary functions that could be equal.}
+		\explanation{ All numbers are different one another. \footnote{This axiom is necessary because \spass only includes the equality theory. Thus, 0,1,...,55 are 0-ary functions that could potentially be the same number.}
 		}
 		\begin{formula}
-			(0 \neq 1) \andcond (0 \neq 2) \andcond ... \andcond (1\neq 2) \andcond ... (54 \neq 55)
+			\forall \ast \;\; (0 \neq 1) \andcond (0 \neq 2) \andcond ... \andcond (1\neq 2) \andcond ... (54 \neq 55)
 		\end{formula}
 	\end{axiomdescription}
 
@@ -59,16 +59,16 @@
 
 \subsubsection{Set theory}
 
-	This set of axioms model the set theory. As there are 3 types of set, this subset of axioms are replicated for $\Sigma_{\sSetAddr},\Sigma_{\sSetElem}$ and $\Sigma_{\sSetTid}$.
+	This set of axioms models some rudiments of set theory. As there are 3 types of sets in \TLLpL, this subset of axioms are replicated for $\Sigma_{\sSetAddr},\Sigma_{\sSetElem}$ and $\Sigma_{\sSetTid}$.
 	
-	In table \ref{table:axiom_set} is gathered the uses of each group of 3 axioms in each invariant.
+	Table \ref{table:axiom_set} reports the uses of each group of 3 axioms in each invariant.
 
 	\begin{axiomdescription}[union-def]
 		\label{ax::union_def}
 		\explanation{ Let $x$ be a generic, and $se1,se2$ set of generics. Then $x$ belongs to the union of $se1,se2$ \gls{iff} $x$ is in $se1$ or $se2$.
 		}
 		\begin{formula}
-			((in(x,se) \vee in(x,se2)) \dimplies in(x,union(se,se2)))
+			\forall \ast \;\; ((in(x,se) \vee in(x,se2)) \dimplies in(x,union(se,se2)))
 		\end{formula}
 	\end{axiomdescription}
 
@@ -80,7 +80,7 @@
 			This axiom is called in literature \cite{yellowbook} \concept{set extensionability}.
 		}
 		\begin{formula}
-			[\nexists \;a\;  (in(a,se2) \dimplies in(a,se1))] \dimplies se1 = se2
+			\forall \ast \;\; [\nexists \;a\;  (in(a,se2) \dimplies in(a,se1))] \dimplies se1 = se2
 		\end{formula}
 	\end{axiomdescription}
 
@@ -90,7 +90,7 @@
 			The union of set is a commutative operation.
 		}
 		\begin{formula}
-			union(se,se2) = union(se2,se)
+			\forall \ast \;\; union(se,se2) = union(se2,se)
 		\end{formula}
 	\end{axiomdescription}
 
@@ -100,21 +100,21 @@
 			Let $a,b$ be generics and $se$ a set of generics. If $a$ is not in the set but $b$ is in the set, then $a$ and $b$ can not be equal.
 		}
 		\begin{formula}
-			((\neg\;  in(a,se)) \implies in(b,se) \implies (\neg\;  b = a))
+			\forall \ast \;\; ((\neg\;  in(a,se)) \implies in(b,se) \implies (\neg\;  b = a))
 		\end{formula}
 	\end{axiomdescription}
 
 	\begin{axiomdescription}[a--in--singl-a]
 		\label{ax::a__in__singl_a}
 		\explanation{
-			Let $se$ be the generic set built from the generic element $a$.
+			Let $se$ be the singleton set built from the generic element $a$.
 			%
 			Then, there are no other address different from $a$ in $se$.
 			%
 			We call $se = \fSingl(a)$.
 		}
 		\begin{formula}
-			(((\neg\;  a = b) \implies (\neg\;  in(b,\fSingl(a)))) \wedge in(a,\fSingl(a)))
+			\forall \ast \;\; (((\neg\;  a = b) \implies (\neg\;  in(b,\fSingl(a)))) \wedge in(a,\fSingl(a)))
 		\end{formula}
 	\end{axiomdescription}
 
@@ -124,7 +124,7 @@
 			The generic empty set does not contain any generic.
 		}
 		\begin{formula}
-			(\neg\;  in(a,empty))
+			\forall \ast \;\; (\neg\;  in(a,empty))
 		\end{formula}
 	\end{axiomdescription}
 
@@ -133,10 +133,10 @@
 	\begin{axiomdescription}[set-exten-inv]
 		\label{ax::set_exten_inv}
 		\explanation{
-			The inverse of set extensionability (described at \ref{ax::set_equal}).
+			The inverse of set extensionability, described above  (\ref{ax::set_equal}).
 		}
 		\begin{formula}
-			(\forall a in(a,se1) \dimplies in(a,se2)) \implies se1=se2
+			\forall \ast \;\; \left((\forall a\;\; in(a,se1) \dimplies in(a,se2)) \implies se1 = se2\right)
 		\end{formula}
 	\end{axiomdescription}
 
@@ -147,7 +147,7 @@
 			A generic element is not in the difference of any set with $\fSingl(a)$
 		}
 		\begin{formula}
-			(in(a,se) \implies (\neg\;  in(a,diff(se,\fSingl(a)))))
+			\forall \ast \;\; in(a,se) \implies (\neg\;  in(a,\mathit{diff}(se,\fSingl(a))))
 		\end{formula}
 	\end{axiomdescription}
 
@@ -181,9 +181,9 @@
 
 \subsubsection{Memory}
 
-	This set of axiom models $\Sigma_{\mem}$, i.e., the axioms related with the updates of a \mem
+	These set of axioms model $\Sigma_{\mem}$, i.e. the axioms related with the updates of a heap memory \mem.
 	%
-	In table \ref{table:axiom_upd} is gathered the uses of each axiom in each invariant.
+	Table \ref{table:axiom_upd} reports the uses of each axiom when proving each invariant.
 
 	\begin{axiomdescription}[rd-mem--def]
 		\label{ax::rd_mem__def}
@@ -191,7 +191,7 @@
 			The \cell returned when reading the position \fNull of any memory $m$ is the \fError \cell.
 		}
 		\begin{formula}
-			rd(m,null) = error
+			\forall \ast \;\; rd(m,null) = error
 		\end{formula}
 	\end{axiomdescription}
 
@@ -199,24 +199,24 @@
 		\label{ax::upd__def__not_null}
 		\explanation{(Update definition)
 			\\
-			Let $a$ be an \addr not \fNull, $m$ a \mem and $c$ a \cell.We call $m2$ the result of the \fUpd statement.
+			Let $a$ be an \addr different from \fNull, $m$ a \mem and $c$ a \cell. We call $m2$ the result of the \fUpd statement.
 			%
-			Then, updating the value of $m$ stored \doubt{in} $a$ with any \cell $c$ implies that $c$ is the value returned when reading the stored \doubt{in} $a$ \doubt{at/on/of} the updated memory.
+			Then, updating the value of $m$ stored at address $a$ with a \cell $c$ implies that $c$ is the value returned when reading in the resulting memory the stored at $a$.
 		}
 		\begin{formula}
-			((\neg\;  a = null) \implies upd(m,a,c) = m2 \implies rd(m2,a) = c)
+			\forall \ast \;\; ((\neg\;  a = null) \implies upd(m,a,c) = m2 \implies rd(m2,a) = c)
 		\end{formula}
 	\end{axiomdescription}
 
 	\begin{axiomdescription}[upd--def--one-at-the-time]
 		\label{ax::upd__def__one_at_the_time}
 		\explanation{
-			Lea $a$ be an \addr not \fNull, $m$ a memory. We call $m2$ the result of the \fUpd statement.
+			Let $a$ be an \addr different from \fNull, $m$ a memory. We call $m2$ the result of the \fUpd statement.
 			%
-			Then, an \fUpd statement of a $a$ only modifies the value stored \doubt{in} $a$ and no other value of $m$
+			An \fUpd statement that only modifies the cell at $a$, preserves all other values.
 		}
 		\begin{formula}
-			(((\neg\;  a = null) \wedge (\neg\;  a = b)) \implies upd(m,a,c) = m2 \implies rd(m,b) = rd(m2,b))
+			\forall \ast \;\; (((\neg\;  a = null) \wedge (\neg\;  a = b)) \implies upd(m,a,c) = m2 \implies rd(m,b) = rd(m2,b))
 		\end{formula}
 	\end{axiomdescription}
 
@@ -237,19 +237,19 @@
 	\end{table}
 
 
-\subsubsection{Element arithmetic}
+\subsubsection{Element Arithmetic}
 
 	This set of axiom models $\Sigma_{\elem}$, i.e., the axioms related with the arithmetic of the \elem.
 	%
-	In table \ref{table:axiom_elemarith} is gathered the uses of each axiom in each invariant.
+	Table \ref{table:axiom_elemarith} reports the uses of each axiom when proving each invariant.
 
 	\begin{axiomdescription}[less-trans]
 		\label{ax::less_trans}
 		\explanation{
-			Transitivity of the order relation defined \doubt{between/among} \elem.
+			Transitivity of the order relation on \mathsf{elems}.
 		}
 		\begin{formula}
-			((x < y \wedge y < z) \implies x < z)
+			\forall \ast \;\; ((x < y \wedge y < z) \implies x < z)
 		\end{formula}
 	\end{axiomdescription}
 
@@ -258,20 +258,20 @@
 	\begin{axiomdescription}[ls-xy--not-ls-yx]
 		\label{ax::ls_xy__not_ls_yx}
 		\explanation{
-			The order relation \doubt{between/among} \elem is total.
+			The order relation \mathsf{elems} is total.
 		}
 		\begin{formula}
-			(x < y \dimplies ((\neg\;  x = y) \wedge (\neg\;  y < x)))
+			\forall \ast \;\; (\fLselem(x,y) \dimplies ((\neg\;  x = y) \wedge (\neg\;  \fLselem(y,x))))
 		\end{formula}
 	\end{axiomdescription}
 
 	\begin{axiomdescription}[lowest--less-than-highest]
 		\label{ax::lowest__less_than_highest}
 		\explanation{
-			The \fLowest is less than the \fHighest (according to the order relation defined \doubt{between/among?} elements).
+			The \fLowest is less than the \fHighest (according to the order relation defined among elements).
 		}
 		\begin{formula}
-			\fLselem(lowestElem,highestElem)
+			\forall \ast \;\; \fLselem(lowestElem,highestElem)
 		\end{formula}
 	\end{axiomdescription}
 
@@ -281,7 +281,7 @@
 			Any other element is great or equal than the \fLowest.
 		}
 		\begin{formula}
-			\forall \elem(e) (e = lowestElem \vee lowestElem < e)
+			\forall \ast \;\; (e = lowestElem \vee lowestElem < e)
 		\end{formula}
 	\end{axiomdescription}
 
@@ -291,7 +291,7 @@
 			Any other element is less or equal than the \fHighest.
 		}
 		\begin{formula}
-			\forall \elem(e) (e = highestElem \vee e < highestElem)
+			\forall \ast \;\; (e = highestElem \vee e < highestElem)
 		\end{formula}
 	\end{axiomdescription}
 
@@ -320,33 +320,37 @@
 
 \subsubsection{Addr2set}
 
-This subset of axioms and the following are the specific axioms needed for this thesis.
+This subset of axioms and the following are specific axioms introduced this thesis.
 %
-This are quite more complex than the previous ones because they have the substance of the theories.
+These are  more complex than the previous axioms because they have the substance of the theories of liked list in the heap.
 
 	\begin{axiomdescription}[nextreg]
 		\label{ax::nextreg}
 		\explanation{
 			Let $a$ be an \addr reachable from another \addr $b$. 
 			%
-			If $a$ is not \fNull, then the node pointed by $a$ is also reachable from $b$.
+			If $a$ is different from \fNull, then the node pointed by $a$ is also reachable from $b$.
 		}
 		\begin{formula}
-			((in(a,se) \wedge se = addr2set(m,b) \wedge c = next(rd(m,a)) \wedge (\neg\;  a = null))\implies in(c,se))
+			\forall \ast \;\; ((in(a,se) \wedge se = addr2set(m,b) \wedge c = next(rd(m,a)) \wedge (\neg\;  a = null))\implies in(c,se))
 		\end{formula}
 	\end{axiomdescription}
 
 	\begin{axiomdescription}[lock-keeps-addr2set]
 		\label{ax::lock_keeps_addr2set}
 		\explanation{
-			The set of \addr reachable from any \addr $hd$ is preserved after a \fLock statement targeting another (or the same) \addr $a$. 
+			The set of \addr reachable from an \addr $hd$ is preserved after a \fLock statement targeting another (or the same) \addr $a$. 
 			%
-			This is true because a \fLock statement does not change anything but the thread using the \addr. 
+			This is true because a \fLock statement does not change connectivity properties but only the thread using the \addr. 
 			%
 			Even if the \fLock statement targets \fError, the reachable \addr are preserved.
 		}
 		\begin{formula}
-			(hp_p = upd(hp,a,mkcell(data(rd(hp,a)),next(rd(hp,a)),t))) \implies (addr2set(p,hd) = addr2set(hp_p,hd))
+			\begin{array}{r}
+			\forall \ast \;\; (hp_p = upd(hp,a,mkcell(data(rd(hp,a)),next(rd(hp,a)),t))) 
+			\\
+			\implies (addr2set(p,hd) = addr2set(hp_p,hd))
+			\end{array}
 		\end{formula}
 	\end{axiomdescription}
 
@@ -358,7 +362,7 @@ This are quite more complex than the previous ones because they have the substan
 			This is true as a consequence of previous axioms, because the \fNext of \fError is \fNull for every memory.
 		}
 		\begin{formula}
-			addr2set(m,null) = \fSingl(null)
+			\forall \ast \;\; addr2set(m,null) = \fSingl(null)
 		\end{formula}
 	\end{axiomdescription}
 
@@ -386,12 +390,16 @@ This are quite more complex than the previous ones because they have the substan
 	\begin{axiomdescription}[lock-keeps-heap--data \& lock-keeps-heap--next]
 		\label{ax::lock_keeps_heap__data}\label{ax::lock_keeps_heap__next}
 		\explanation{
-			In the same way a \fLock statement preserve the \sSetAddr reachable from any \addr $hd$, the same states for some other functions apart from \fAddrToSet.
+			In the same way a \fLock statement preserves the \sSetAddr reachable from a given \addr, the same principle applies to some other functions apart from \fAddrToSet.
 			%
-			A \fLock statement does not change the \fData and \fNext values of a \cell (which is obvious).
+			A \fLock statement does not change the \fData and \fNext values of a \cell.
 		}
 		\begin{formula}
-			(hp_p = upd(hp,a,mkcell(data(rd(hp,a)),next(rd(hp,	a)),t))) \implies [data(r(hp,a)) = data(rd(hp_p,a)) \andcond next(r(hp,a)) = next(rd(hp_p,a)) ]
+		\begin{array}{r}
+			\forall \ast \;\; (hp_p = upd(hp,a,mkcell(data(rd(hp,a)),next(rd(hp,a)),t)))
+			\\
+			\implies (data(r(hp,a)) = data(rd(hp_p,a)) \andcond next(r(hp,a)) = next(rd(hp_p,a)))
+		\end{array}
 		\end{formula}
 	\end{axiomdescription}
 
@@ -403,10 +411,10 @@ This are quite more complex than the previous ones because they have the substan
 			%
 			As the \fAddrToSet is used to get the reachable \addr from another \addr $a$, it is to expect that the \fAddrToSet of the \fNext of $a$ would be the same \sSetAddr excluding $a$.
 			%
-			This definition states that an \addr is reachable from itself.
+			This definition additionally states that an \addr is reachable from itself.
 		}
 		\begin{formula}
-			addr2set(m,a) = union(\fSingl(a),addr2set(m,next(rd(m,a))))
+			\forall \ast \;\; addr2set(m,a) = union(\fSingl(a),addr2set(m,next(rd(m,a))))
 		\end{formula}
 	\end{axiomdescription}
 
@@ -416,19 +424,19 @@ This are quite more complex than the previous ones because they have the substan
 			This axiom is the base of the recursion in the definition of \fAddrToSet. 
 		}
 		\begin{formula}
-			((data(rd(hp,hd)) < data(rd(hp,tl)) \wedge next(rd(hp,hd)) = tl \wedge next(r(hp,tl)) = null) \implies addr2set(hp,hd) = union(union({ hd },{ tl }),\fSingl(\fNull)))
+			\forall \ast \;\; ((data(rd(hp,hd)) < data(rd(hp,tl)) \wedge next(rd(hp,hd)) = tl \wedge next(r(hp,tl)) = null) \implies addr2set(hp,hd) = union(union({ hd },{ tl }),\fSingl(\fNull)))
 		\end{formula}
 	\end{axiomdescription}
 
 	\begin{axiomdescription}[not-in-region--not-change-heap-addr]
 		\label{ax::not_in_region__not_change_heap_addr}
 		\explanation{
-			Let $hp$ be an \addr and $hp$ a \mem. 
+			Let $hd$ be an \addr and $hp$ a \mem. 
 			%
-			Then, modifying a \mem in an \addr which is not reachable from $hp$ preserves the \sSetAddr of reachable \addr from $hp$.
+			Then, modifying a \mem in an \addr which is not reachable from $hd$ preserves the \sSetAddr of reachable \addr from $hd$.
 		}
 		\begin{formula}
-			((\neg\;  in(a,addr2set(hp,hd))) \implies addr2set(hp,hd) = addr2set(upd(hp,a,c),hd))
+			\forall \ast \;\; ((\neg\;  in(a,addr2set(hp,hd))) \implies addr2set(hp,hd) = addr2set(upd(hp,a,c),hd))
 		\end{formula}
 	\end{axiomdescription}
 
@@ -441,38 +449,53 @@ This are quite more complex than the previous ones because they have the substan
 			%
 			This \fUpd correspond to an insertion in the list.
 			\\
-			Let $hp$ be the \mem. Let $hd$ be an \addr (the \head of the list would be this \addr).
+			Let $hp$ be a \mem. Let $hd$ be an \addr.
 			%
-			We call \region to the \fAddrToSet reachable from $hd$.
+			We call \region the set of address reachable from $hd$ as captured by \fAddrToSet.
 			%
-			Let $prev$ and \addr reachable from $hd$ (in the \fAddrToSet of $hp,hd$) and $curr,aux$ two \addr. 
+			Let $prev$ be an \addr reachable from $hd$ (in the \fAddrToSet of $hp,hd$) and $curr,aux$ two other \addr. 
 			%
-			It is needed that the 3 address ($prev,curr,aux$) are different one another and all of them are not null.
+			Let the three addresses ($prev,curr,aux$) be different from one another and all of them different from null.
 			\\
-			If prev points curr, aux points curr, then making prev point to aux has one unique effect on the \region: aux now is in the \region so every reachable address before the \fUpd is still reachable and aux is reachable too.
+			If prev points curr and aux points curr, then making prev point to aux has the following effect on \region: aux now is in \region and every reachable address before the \fUpd is still reachable.
 		}
 		\begin{formula}
-			((reg = addr2set(hp,hd) \wedge union(reg,{ aux }) = reg_p \wedge next(rd(hp,prev)) = curr \wedge (\neg\;  prev = curr) \wedge next(rd(hp,aux)) = curr \wedge (\neg\;  aux = null) \wedge (\neg\;  prev = null) \wedge (\neg\;  curr = null) \wedge in(prev,addr2set(hp,hd)) \wedge hp_p = upd(hp,prev,mkcell(data(rd(hp,prev)),aux,rd(hp,prev).lockid))) \implies reg_p = addr2set(hp_p,hd))
+			\begin{array}{l}
+				\forall \ast \;\; (reg = addr2set(hp,hd) \wedge union(reg,\fSingl(aux) }) = reg_p \wedge \\
+				next(rd(hp,prev)) = curr \wedge (\neg\;  prev = curr) \wedge next(rd(hp,aux)) = curr \wedge (\neg\;  aux = null)\wedge \\
+				(\neg\;  prev = null) \wedge (\neg\;  curr = null) \wedge
+				in(prev,addr2set(hp,hd)) \wedge 
+				\\ hp_p = upd(hp,prev,mkcell(data(rd(hp,prev)),aux,rd(hp,prev).lockid))) \\
+				\quad\quad\quad\implies reg_p = addr2set(hp_p,hd)
+			\end{array}
 		\end{formula}
 	\end{axiomdescription}
+
+%%%%%%%%%%%%%%%%%%%%%R
+%%%%%%%%%%%%%%%%%%%%%R
+%%%%%%%%%%%%%%%%%%%%%R
+%%%%%%%%%%%%%%%%%%%%%R
+%%%%%%%%%%%%%%%%%%%%%R
+%%%%%%%%%%%%%%%%%%%%%R
+
 
 	\begin{axiomdescription}[remove--keeps-addr2set]
 		\label{ax::remove__keeps_addr2set}
 		\explanation{
-			In a similar way \ref{ax::insert__keeps_addr2set}, this axioms allows to \fUpd a \mem preserving the \fAddrToSet, but this \fUpd would correspond to a removal in the list.
+			In a similar way to (\ref{ax::insert__keeps_addr2set}), this axioms allows to \fUpd a \mem preserving the \fAddrToSet, but this time corresponding to a removal in the list.
 			\\
-			Let $hp$ be the \mem. Let $hd$ be an \addr (the \head of the list would be this \addr).
+			Let $hp$ be a \mem. Let $hd$ be an \addr.
 			%
-			We call \region to the \fAddrToSet reachable from $hd$.
+			We call \region the set of addresses reachable from $hd$.
 			%
-			Let $prev$ and \addr reachable from $hd$ (in the \fAddrToSet of $hp,hd$) and $curr,aux$ two \addr. 
+			Let $prev$ be reachable from $hd$ and $curr,aux$ two other \addr,
 			%
-			It is needed that the 3 address ($prev,curr,aux$) are different one another and all of them are not null.
+			such that the three address ($prev,curr,aux$) are different from each other and all of them are not null.
 			%
-			If prev points curr, aux points curr, then making prev point to aux has one unique effect in the \region: curr is now not reachable but every \addr reachable before the \fUpd is still reachable.
+			If prev points to curr, aux points to curr, then making prev point to aux has the following effect in the \region: curr is now not reachable but every \addr reachable before the \fUpd is still reachable.
 		}
 		\begin{formula}
-			((next(rd(hp,curr)) = aux \wedge next(rd(hp,prev)) = curr \wedge (\neg\;  aux = next(rd(hp,prev))) \wedge hp_p = upd(hp,prev,mkcell(data(rd(hp,prev)),aux,rd(hp,prev).lockid)) \wedge (\neg\;  aux = null) \wedge in(curr,addr2set(hp,hd)) \wedge in(null,addr2set(hp,hd)) \wedge in(prev,addr2set(hp,hd))) \implies diff(addr2set(hp,hd),\fSingl(curr)) = addr2set(hp_p,hd))
+			\forall \ast \;\; ((next(rd(hp,curr)) = aux \wedge next(rd(hp,prev)) = curr \wedge (\neg\;  aux = next(rd(hp,prev))) \wedge hp_p = upd(hp,prev,mkcell(data(rd(hp,prev)),aux,rd(hp,prev).lockid)) \wedge (\neg\;  aux = null) \wedge in(curr,addr2set(hp,hd)) \wedge in(null,addr2set(hp,hd)) \wedge in(prev,addr2set(hp,hd))) \implies \mathit{diff}(addr2set(hp,hd),\fSingl(curr)) = addr2set(hp_p,hd))
 		\end{formula}
 	\end{axiomdescription}
 
@@ -482,40 +505,42 @@ This are quite more complex than the previous ones because they have the substan
 		\explanation{
 			This axiom is the base of the recursion in the definition of \fOrderlist. 
 			%
-			Let $hp$ be a \mem, $hd,tl$ two \addr. 
+			Let $hp$ be a \mem and $hd,tl$ be two \addr. 
 			%
-			If the \elem stored in $hp$ at $hd$ is less than the \elem stored in $hp$ at $tl$ and $hd$ point to $tl$, then the list formed by $hd,tl$ is ordered.
+			If the \elem stored in $hp$ at $hd$ is less than the \elem stored in $hp$ at $tl$ and $hd$ point to $tl$, then the list from $hd$ to $tl$ is ordered.
 		}
 		\begin{formula}
-			(ls\_elem(data(rd(hp,hd)),data(rd(hp,tl))) \andcond tl = next(rd(hp,hd)) \andcond next(rd(hp,tl)) = nl ) \implies orderlist(hp,hd,tl) 
+			\forall \ast \;\; (ls\_elem(data(rd(hp,hd)),data(rd(hp,tl))) \andcond tl = next(rd(hp,hd)) \andcond next(rd(hp,tl)) = \fNull ) \implies orderlist(hp,hd,tl) 
 		\end{formula}
 	\end{axiomdescription}
 
 	\begin{axiomdescription}[insert--keeps-orderlist]
 		\label{ax::insert__keeps_orderlist}
 		\explanation{
-			This axioms allows to \fUpd a \mem preserving the \fOrderlist predicate. 
+			This axioms allows to update a \mem preserving the \fOrderlist predicate. 
 			%
-			This update preserve the predicate if certain conditions are satisfied.
+			This update preserves the predicate if certain conditions are satisfied.
 			\\
-			Let $hp$ be a \mem,$hd,tl$ two \addr which satisfy $\fOrderlist(hp,hd,tl)$ and $tl$ is not \fNull, having $tl$ point to \fNull. Let $prev,aux,curr$ be \addr with ordered elements, i.e. the \elem stored in $hp$ at $prev$ is less than the one at $aux$, which is less than the one at $curr$. In addition, $curr$ is pointed by $aux$ and $prev$.
+			Let $hp$ be a \mem and $hd,tl$ be two \addr which satisfy $\fOrderlist(hp,hd,tl)$; let $tl$ be different from \fNull, but pointing to \fNull. Let $prev,aux,curr$ be \addr with ordered elements, i.e. the \elem stored in $hp$ at $prev$ is less than the one at $aux$, which is less than the one at $curr$. In addition, $curr$ is pointed by $aux$ and $prev$.
 			\textbf{Then}, updating $hp$ so that $prev$ points to $aux$ preserve \fOrderlist$(hp',hd,tl)$.
 		}
 		\begin{formula}
-			((orderlist(hp,hd,tl) \wedge (\neg\;  tl = null) \wedge next(rd(hp,tl)) = null \wedge data(rd(hp,prev)) < data(rd(hp,aux)) \wedge data(rd(hp,aux)) < data(rd(hp,curr)) \wedge next(rd(hp,aux)) = curr \wedge next(rd(hp,prev)) = curr \wedge hp_p = upd(hp,prev,mkcell(data(rd(hp,prev)),aux,rd(hp,prev).lockid))) \implies orderlist(hp_p,hd,tl))
+			\forall \ast \;\; ((orderlist(hp,hd,tl) \wedge (\neg\;  tl = null) \wedge next(rd(hp,tl)) = null \wedge data(rd(hp,prev)) < data(rd(hp,aux)) \wedge data(rd(hp,aux)) < data(rd(hp,curr)) \wedge next(rd(hp,aux)) = curr \wedge next(rd(hp,prev)) = curr \wedge hp_p = upd(hp,prev,mkcell(data(rd(hp,prev)),aux,rd(hp,prev).lockid))) \implies orderlist(hp_p,hd,tl))
 		\end{formula}
 	\end{axiomdescription}
 
 	\begin{axiomdescription}[remove--keeps-orderlist]
 		\label{ax::remove__keeps_orderlist}
 		\explanation{
-			In a similar way \ref{ax::insert__keeps_orderlist}, this axioms allows to \fUpd a \mem preserving the \fOrderlist predicate, but this \fUpd would correspond to a removal in the list. This update preserve the predicate if certain conditions are satisfied.
+			In a similar way to (\ref{ax::insert__keeps_orderlist}), this axiom allows to update a \mem preserving the \fOrderlist predicate, but this update corresponds to a removal in the list. 
+			%
+			This update preserves the predicate if certain conditions are satisfied.
 			\\
-			Let $hp$ be a \mem,$hd,tl$ two \addr which satisfy $\fOrderlist(hp,hd,tl)$ and $tl$ points to \fNull. Let $prev,aux,curr$ be \addr which satisfy that $aux$ is pointed by $curr$, which is pointed by $prev$. In addition, $curr,prev,aux$ must be reachable from $hd$.
-			\textbf{Then}, updating $hp$ so that $hp$ stores at $prev$ the same cell stored at $aux$ is an action that preserve \fOrderlist for the new $hp$ from $hd$ to $tl$.	
+			Let $hp$ be a \mem and $hd,tl$ be two \addr which satisfy $\fOrderlist(hp,hd,tl)$ and that $tl$ points to \fNull. Let $prev,aux,curr$ satisfy that $aux$ is pointed by $curr$, which is pointed by $prev$. In addition, $curr,prev,aux$ must be reachable from $hd$.
+			\textbf{Then}, updating $hp$ so that $hp$ stores at $prev$ the same cell stored at $aux$ is an action that preserves \fOrderlist for the new $hp$ from $hd$ to $tl$.	
 		}
 		\begin{formula}
-			((aux = next(rd(hp,curr)) \wedge curr = next(rd(hp,prev)) \wedge (\neg\;  aux = null) \wedge null = next(rd(hp,tl)) \wedge (\neg\;  aux = next(rd(hp,prev))) \wedge hp_p = upd(hp,prev,mkcell(data(rd(hp,prev)),aux,rd(hp,prev).lockid)) \wedge in(prev,addr2set(hp,hd)) \wedge in(curr,addr2set(hp,hd)) \wedge in(null,addr2set(hp,hd)) \wedge in(aux,addr2set(hp,hd)) \wedge orderlist(hp,hd,tl)) \implies orderlist(hp_p,hd,tl))
+			\forall \ast \;\; ((aux = next(rd(hp,curr)) \wedge curr = next(rd(hp,prev)) \wedge (\neg\;  aux = null) \wedge null = next(rd(hp,tl)) \wedge (\neg\;  aux = next(rd(hp,prev))) \wedge hp_p = upd(hp,prev,mkcell(data(rd(hp,prev)),aux,rd(hp,prev).lockid)) \wedge in(prev,addr2set(hp,hd)) \wedge in(curr,addr2set(hp,hd)) \wedge in(null,addr2set(hp,hd)) \wedge in(aux,addr2set(hp,hd)) \wedge orderlist(hp,hd,tl)) \implies orderlist(hp_p,hd,tl))
 		\end{formula}
 	\end{axiomdescription}
 	
@@ -523,13 +548,13 @@ This are quite more complex than the previous ones because they have the substan
 	\begin{axiomdescription}[next-is-not-same--if-ordered]
 		\label{ax::next_is_not_same__if_ordered}
 		\explanation{
-			Let $hd,tl,a$ \addr reachable from $hd$ in the \mem $hp$, every \addr different from \fNull. 
+			Let $hd,tl$ and $a$ be \addr reachable from $hd$ in the \mem $hp$, with $hp,tl$ and $a$ different from \fNull. 
 			%
-			In addition, $tl$ point to \fNull.
+			In addition, let $tl$ point to \fNull.
 			\textbf{Then} a can not point to itselt.
 		}
 		\begin{formula}
-			((in(a,addr2set(hp,hd)) \wedge in(tl,addr2set(hp,hd)) \wedge (\neg\;  hd = null) \wedge (\neg\;  tl = null) \wedge (\neg\;  a = null) \wedge next(rd(hp,tl)) = null) \implies (\neg\;  next(rd(hp,a)) = a))
+			\forall \ast \;\; ((in(a,addr2set(hp,hd)) \wedge in(tl,addr2set(hp,hd)) \wedge (\neg\;  hd = null) \wedge (\neg\;  tl = null) \wedge (\neg\;  a = null) \wedge next(rd(hp,tl)) = null) \implies (\neg\;  next(rd(hp,a)) = a))
 		\end{formula}
 	\end{axiomdescription}
 
