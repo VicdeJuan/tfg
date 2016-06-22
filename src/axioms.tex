@@ -246,7 +246,7 @@
 	\begin{axiomdescription}[less-trans]
 		\label{ax::less_trans}
 		\explanation{
-			Transitivity of the order relation on \mathsf{elems}.
+			Transitivity of the order relation on $\mathsf{elems}$.
 		}
 		\begin{formula}
 			\forall \ast \;\; ((x < y \wedge y < z) \implies x < z)
@@ -258,7 +258,7 @@
 	\begin{axiomdescription}[ls-xy--not-ls-yx]
 		\label{ax::ls_xy__not_ls_yx}
 		\explanation{
-			The order relation \mathsf{elems} is total.
+			The order relation $\mathsf{elems}$ is total.
 		}
 		\begin{formula}
 			\forall \ast \;\; (\fLselem(x,y) \dimplies ((\neg\;  x = y) \wedge (\neg\;  \fLselem(y,x))))
@@ -461,12 +461,12 @@ These are  more complex than the previous axioms because they have the substance
 		}
 		\begin{formula}
 			\begin{array}{l}
-				\forall \ast \;\; (reg = addr2set(hp,hd) \wedge union(reg,\fSingl(aux) }) = reg_p \wedge \\
+				\forall \ast \;\; (reg = addr2set(hp,hd) \wedge union(reg,\fSingl(aux) ) = reg_p \wedge \\
 				next(rd(hp,prev)) = curr \wedge (\neg\;  prev = curr) \wedge next(rd(hp,aux)) = curr \wedge (\neg\;  aux = null)\wedge \\
 				(\neg\;  prev = null) \wedge (\neg\;  curr = null) \wedge
 				in(prev,addr2set(hp,hd)) \wedge 
 				\\ hp_p = upd(hp,prev,mkcell(data(rd(hp,prev)),aux,rd(hp,prev).lockid))) \\
-				\quad\quad\quad\implies reg_p = addr2set(hp_p,hd)
+				\;\;\;\;\implies reg_p = addr2set(hp_p,hd)
 			\end{array}
 		\end{formula}
 	\end{axiomdescription}
