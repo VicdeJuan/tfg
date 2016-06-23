@@ -22,7 +22,7 @@ We study the loop version of the factorial function.
 
 
 
-We achieve to proof two formulae.
+We seek to prove two formulae.
 
 \[\tau_1 \equiv (l_5 \to \mathtt{x}\geq 1) \;\; \wedge \;\; \tau_2 \equiv \mathtt{x} \geq 0\]
 
@@ -44,12 +44,12 @@ We need to prove, for $i=1,2$:
 
 \[
 	\left\{
-		\begin{array}{lr}
-			\psi_1 \andcond \tau_i \to \tau_i\prime  &
+		\begin{array}{l}
+			\psi_1 \andcond \tau_i \to \tau_i\prime  \\
 			\psi_2 \andcond \tau_i \to \tau_i\prime \\
-			\psi_3 \andcond \tau_i \to \tau_i\prime  &
+			\psi_3 \andcond \tau_i \to \tau_i\prime  \\
 			\psi_4 \andcond \tau_i \to \tau_i\prime \\
-			\psi_5 \andcond \tau_i \to \tau_i\prime  &
+			\psi_5 \andcond \tau_i \to \tau_i\prime  \\
 			\psi_6 \andcond \tau_i \to \tau_i\prime 
 		\end{array}
 	\right.
@@ -148,9 +148,9 @@ We need to prove, for $i=1,2$:
 
 \paragraph{Conclusion:} we have proven that $\pc(T) = l_5 \to x \geq 1$. 
 %
-This is called an \concept[Invariant]{invariant} because it is true during all the execution. 
+This is called an \concept[Invariant]{invariant} because it is always true in all executions of the program. 
 %
-This transition has been chosen specially because it is needed in the proof of $\tau_2$.
+This invariant has been chosen specially because it is needed in the proof of $\tau_2$.
 
 \begin{center}\rule{4cm}{0.4pt}  $\tau_2$  \rule{4cm}{0.4pt}\end{center}
 
@@ -221,18 +221,18 @@ This transition has been chosen specially because it is needed in the proof of $
 	%
 	Inside the loop $x$ should be greater than 1.
 	%
-	However, that information is not in the implication to prove.
+	However, that information is not encoded in the formula.
 	
 	The solution is use some \concept{support}.
 	%
-	A support formula is a formula added to the precedent of an implication to give more information. 
+	A support formula is an invariant formula added to the antecedent of an implication to give more information. 
 	%
 	This addition does not change the validity of the formula.
 	%
 	We could equivalently prove
 
 	\[
-		(\psi_5 \andcond \tau_1 \andcond \tau_2 \to \tau_2\prime ) rightarrow (\psi_5\andcond \tau_2\to\tau_2\prime )
+		(\psi_5 \andcond \tau_1 \andcond \tau_2 \to \tau_2\prime ) \rightarrow (\psi_5\andcond \tau_2\to\tau_2\prime )
 	\]
 
 	And this is exactly the solution to proof this \gls{VC}
@@ -271,9 +271,9 @@ This transition has been chosen specially because it is needed in the proof of $
 	%
 	One can think that the unique possible value of $x$ should be $0$ because of the content of the loop.
 	%
-	However, that information is not within the formula.
+	However, that information is not encoded in the formula.
 	%
-	As we did before, some support is needed to prove this formula.
+	As we did before, some support is needed to prove the validity of this formula.
 	%
 	The support needed is $\tau_3 \equiv \pc(T) = l_3 \to \mathtt{x} \geq 0$.
 	%

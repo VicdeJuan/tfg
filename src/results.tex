@@ -32,31 +32,29 @@ The division is as follows
 \input{src/axioms}
 
 
-The full list of axioms has been included as an appendix at \ref{spass:syntax_file}. 
+The full list of axioms has been listed in appendix \ref{spass:syntax_file}. 
 
 %
 
-We claim that there is no need of more axioms than the ones defined at \ref{ax::fulllist}. 
+We claim that there is no need for more axioms than the ones defined at \ref{ax::fulllist}. 
 %
-The next section will present which axioms are needed for which invariants.
+The next section will present which axioms are needed for proving each invariants.
 
 \section{Analysis of generated proofs}
 \label{proof:Preserve}
 \label{sec:axiomgraph}
 
 \paragraph{Example}
-Lets take \invDisjoint as an example because its simplicity.
+Lets take \invDisjoint\footnote{Its full definition is at \ref{inv::full:disjoint}} as an example.
 %
-To prove \invDisjoint valid
+We aim to prove that \invDisjoint is an invariant. To do so, we need to prove its VCs valid.
 %
-(\footnote{Its full definition is at \ref{inv::full:disjoint}})
+There are only needed 3 axioms: the axiom which states that numbers are different and the 2 axioms which states $i$ and $j$ are threads. 
 %
-there are only needed 3 axioms: the axiom which states that numbers are different and the 2 axioms which states $i$ and $j$ are threads. 
-%
-With this 3 axiom, \spass can prove valid all the \spass problems associated with \invDisjoint.
+With these 3 axiom, \spass can prove valid all the \spass problems associated with \invDisjoint.
 
 
-To clarify the process described in \ref{ProcessDescription} we expose all the \spass problems generated to prove \invDisjoint.
+To clarify the process described in \ref{ProcessDescription} we expose all the \spass problems generated to prove that \invDisjoint is an invariant.
 %
 There are 362 \spass problems. Half of them correspond to the \reducedProblem and the other half to the \smallToBig problem.
 %
@@ -64,7 +62,7 @@ For each half, there are 181 \spass problems:
 %
 For \textbf{\instantiation} there is one problem. 
 %
-For self-consecution there are 60 \spass problems (the program has 55 lines, so there is a \gls{VC} for each line except for \textit{while} and \textit{if} which have 2 \gls{VC} associated depending on the validity of the condition. As there are 3 while and 2 if, we have) for each thread. 
+For self-consecution there are 60 \spass problems. The program has 55 statements, so there is a \gls{VC} for each line except for \textit{while} and \textit{if} statements which have 2 \gls{VC} associated depending on the validity of the condition. As there are 3 while and 2 if, we have 60 \spass problems for each thread.
 %
 As \invDisjoint involves 2 threads, there are \textbf{120 self-consecution \spass problems}.
 %
@@ -74,11 +72,11 @@ Finally for \textbf{Others consecution} there are \textbf{60} \spass problems.
 
 Most of the transitions (\numTransitionsProvedWithPC in \numTotalTransitions) are proven without any relevant axiom. 
 %
-Some of them don't even need any axiom. 
+Some of them do not even need any axiom. 
 %
-\smallToBig problems usually don't need any axiom, because there are simple but big \gls{FOL} formulas.
+\smallToBig problems usually do not need any axiom, because there are simple but big \gls{FOL} formulas.
 
-Table \ref{table:analysisProofs}  contains some global information about the prove of each invariant.
+Table \ref{table:analysisProofs}  contains some global information about the proof of each invariant.
 %
 It is important to mention that every invariant has 2 problems of \instantiation. 
 
@@ -94,9 +92,9 @@ Invariant & Self-consecution & Others consecution & Total & Number of axioms use
 
 
 
-In terms of number of axioms needed, it is interesting to see that \invLock is the most complicated, followed by \invNext.  
+In terms of the number of axioms needed, it is interesting to see that \invLock is the most complicated, followed by \invNext.  
 %
-The easiest is \invDisjoint, which only uses \textit{nums-are-different} (\ref{ax::nums_are_different}) and axioms related with sorts (there are 2 threads involved in the formula which are different one another.)
+The easiest is \invDisjoint, which only uses \textit{nums-are-different} (\ref{ax::nums_are_different}) and axioms related with sorts (there are 2 threads involved in the formula which are different from one another.)
 \\
 The differences on the number of other-consecution problem is caused by the splitting on complex \spass problems. 
 %
@@ -104,15 +102,15 @@ To prove \invOrder all other-consecution problems have been splat, but for \invL
 %
 Despite that fact, \invOrder is not very complex in terms of total number of axioms needed.
 
-Another interesting data to lock at in order to study the difficult of each invariant is the number of axioms needed in each problem. 
+Another interesting data to look at in order to study the difficult of each invariant is the number of axioms needed in each problem. 
 %
-In Figure \ref{fig:frequencyAxioms} is represented the number of problems solved against the number of axioms needed.
+Figure \ref{fig:frequencyAxioms} shows the number of problems solved against the number of axioms needed.
 %
-The graphic the number of problems solved normalized by the total amount of problems each invariant has.
+The graphic illustrate the number of problems solved normalized by the total amount of problems that invariant involves.
 %
-As it was stated before, most of the problems can be proven without any axiom, or just with the axioms of sorts and nums are different which allows to reason with the \pc.
+As it was stated before, most of the problems can be proven without any axiom, or just with the axioms of sorts and numbers to reason about the \pc.
 %
-Looking to the figure, the difficulty of each axiom in terms of the axioms used in each problem is more precise. 
+Looking to the figure, the difficulty of each axiom in terms of the axioms used in each problem is more precise:
 %
 \invOrder needs more axioms in general than the rest.
 
@@ -124,22 +122,22 @@ Looking to the figure, the difficulty of each axiom in terms of the axioms used 
 \label{fig:frequencyAxioms}
 \end{figure}
 
-\subsection{Special transitions}
+\subsection{Special Transitions}
 
 Due to the limited space, we can not explore deeply the proof of the invariants.
 %
-However, some we offer a brief analysis of the most complicated transitions for the important invariant: \invPreserve. The complicated transitions are the ones modifying the heap: \textit{locks}, \textit{insertion} and \textit{removal}. 
+However, some we offer a brief analysis of the complicated transitions for the most important invariant: \invPreserve. The complicated transitions are the ones modifying the heap: \textit{locks}, \textit{insertion} and \textit{removal}. 
 %
-\textit{locks} and \textit{unlocks} transitions can be proven easily with the axioms, because a \fLock does not modify the content nor the pointer; thus, it can not break the list nor disorder the list.
+The transitions including \textit{locks} and \textit{unlocks} can be proven easily with the axioms, because a \fLock does not modify the content nor the pointer; thus, it can not break the list nor disorder the list.
 %
-For the other transitions some expert knowledge had been needed, because of some limitation \spass has.
+For the other transitions some expert knowledge is needed, because \spass lacks information to finish the proof.
 %
 This limitation is that \spass does not know how to choose the axioms to use, leading into an unnecessary exploration of a branch of the proof. 
 %
 \label{infty:time}
 If \spass could know that, it would be much more efficient. 
 %
-As a consequence, transitions 35 and 55 have been subdivided in more \spass problems and reducing manually the number of axioms, leaving the ones which could be relevant.
+As a consequence, transitions 35 and 55 have been subdivided in to a number of smaller \spass problems, reducing manually in each case the number of axioms needed and leaving the ones which could be relevant.
 %
 
 \section{Time analysis}
@@ -147,42 +145,43 @@ As a consequence, transitions 35 and 55 have been subdivided in more \spass prob
 
 \subsection{Proof generation}
 
-All the times shown refer to the time \spass has needed to prove the problem. 
+All the times shown refer to the time \spass takes to prove the validity of each problem. 
 %
-Previous parsing and creating the \spass problem has been ignored.
+Previous parsing and creating the proper input to \spass has been ignored.
 
 
+\subsection{Proof Checking}
 
-\subsection{Proof checking}
-
-One of the greatest consequences of this method is the possibility to refute the generated proofs to double check they are valid.
+One of the greatest consequences of this method is the possibility to refute the generated proofs and double check that they are valid.
 %
-It has been developed that for each \spass problem there are 3 files generated. The \spass output (storing the information of which axioms had been used and the time), the \spass proof in \spass format and the \spass proof in \gls{tptp} syntax.
+We developed the solution such that for each \spass problem there are three files generated. 
 %
-By generating a tptp proof for each \spass problem we made possible to check this proofs with any other theorem prover as \citetool{vampire} or \citetool{issabelle}.
+The \spass output (storing the information of which axioms have been used and the running time), the \spass proof in \spass format and the \spass proof in TPTP syntax (\cite{tptp}).
+%
+By generating a TPTP proof for each \spass problem we made possible to check these proofs with any other theorem prover as \citetool{vampire} or \citetool{issabelle}.
 
-Another advantage of the generation of this files is the reduced amount of time needed to check the validity of the fine-grained-linked-list implementation. 
+Another advantage of the generation of these files is the reduced amount of time needed to check the validity of the fine-grained-linked-list implementation. 
 %
-There is no need to regenerate all the verification conditions and regenerate all the \spass files and let \spass running until it finds the proof for every problem. 
+There is no need to regenerate all the verification conditions and regenerate all the \spass files and let \spass run until it finds the proof for every problem. 
 %
 One can just run \spass on the generated proofs and will save lot of time.
 %
-Lets see the amount of time needed to check the proofs in stead of generate them.
+Lets see the amount of time needed to check the proofs instead of generate them.
 
 
 \subsection{Comparing times}
 
 In order to use formal verification in real environments, a time analysis is fundamental. 
 %
-The more time it takes, the more useless formal verification can be.
+The more time it takes, the more useless formal verification is.
 %
 How much time does it takes to generate all the proofs for this linked-list implementation? 
 %
 And more importantly,  How much time does it takes to check the generated proofs? 
 
-In table \ref{anaylisis::bigtimetable} one can find the summary of the timing according to 4 different times. The first column refers to the time that \leap takes to proof the invariant (obtained from \cite{paperParametrizedInvariants}). 
+In Table \ref{anaylisis::bigtimetable} one can find the summary of the timing according to four different activities. The first column refers to the time that \leap takes to prove the invariant (obtained from \cite{paperParametrizedInvariants}). 
 %
-The second column, \textit{Full process}, refers to the time the whole process takes \footnote{The full process is described in \ref{ProcessDescription}}. 
+The second column, \textit{Full process}, refers to the time the whole process takes\footnote{The full process is described in \ref{ProcessDescription}}. 
 %
 This is, generating the verification conditions, creating all the \spass problems and letting \spass work to solve each problem.
 %
@@ -190,9 +189,9 @@ The third column, \textit{Sum of \spass time}, refers to the amount of time that
 %
 This column shows the real time necessary to generate the proofs, from the already generated files.
 %
-Finally, the last column shows very important information.
+Finally, the last column shows very important information,
 %
-The amount of time needed to check that the proofs are correct is less than every other method. 
+which is amount of time needed to check that the proofs are correct is less than every other method. 
 %
 This method reduces significantly the time spent in checking the formal verification of a problem.
 
@@ -201,16 +200,16 @@ This method reduces significantly the time spent in checking the formal verifica
 \centering
 \begin{tabular}{r|rrrr}
 Invariant 		& Leap 	& Full process 		& Sum of \spass time 	& Check proofs 	\\\hline
-\invPreserve 	& 12:85	& $\infty$			& 10:56.56				& 0:52.19		\\
-\invOrder		& 1:20	& 180:40.548		& 62:32.89				& 7:41.17 		\\
-\invLock		& 0:50	& 39:28.321			& 13:34.00 				& 1:53.94		\\
-\invNext 		& 1:76	& 352:17.839		& 123:37.73				& 17:06.12		\\
-\invRegion		& 25:67	& 7:34.425			& 1:14.68				& 0:19.14		\\
-\invDisjoint 	& 0:22 	& 4:13.300 			& 1:17.15 				& 0:26.40		\\
+\invPreserve 	& 12 min 85	& sec $\infty$			& 10 min 56.56 sec				& 0 min 52.19 sec		\\
+\invOrder		& 1 min 20	& sec 180 min 40.548 sec		& 62 min 32.89 sec				& 7 min 41.17 sec 		\\
+\invLock		& 0 min 50	& sec 39 min 28.321 sec			& 13 min 34.00 sec 				& 1 min 53.94 sec		\\
+\invNext 		& 1 min 76	& sec 352 min 17.839 sec		& 123 min 37.73 sec				& 17 min 06.12 sec		\\
+\invRegion		& 25 min 67	& sec 7 min 34.425 sec			& 1 min 14.68 sec				& 0 min 19.14 sec		\\
+\invDisjoint 	& 0 min 22 	& sec 4 min 13.300 sec 			& 1 min 17.15 sec 				& 0 min 26.40 sec		\\
 %Total: 			& 		& 					& 						&  				\\
 \end{tabular}
 \caption{Compare of the times.}
-\label{anaylsis:bigtimetable}
+\label{analysis:bigtimetable}
 \end{table}
 
 
@@ -219,29 +218,29 @@ There are some very relevant issues with the measures of the \textit{Full proces
 \paragraph{About measuring the full process}
 In order to improve performance, all \spass problems are first considered as if they were the simplest. 
 %
-If it took too much time to \spass (according to a timeout) to find a proof for a problem, then it would be divided.
+If it took \spass too much time to (according to a timeout) to find a proof for a problem, then the problem would be automatically divided.
 %
-This allows to prove very fast the simple problems, such as the majority of \invDisjoint transitions for example. 
+This approach allows to prove simple problems very quickly, such as the majority of \invDisjoint transitions for example. 
 %
 When a problem is not so simple (again, according to the timeout), then it is divided and some time has been wasted because the initial attempt to prove the problem is terminated.
 %
-The value of this timeout is not trivial to be setted.
+The value of this timeout is not trivial to be set.
 %
 There are transitions which do not need any axioms. 
 %
-This is caused because they are transitions of the form $(false \to something)$.
+This is caused because of VCs of the form $(\mathit{false} \to \mathit{something})$.
 %
-For this transitions, it is usual that \spass takes less than one second to prove them. 
+For these transitions, it is usual that \spass takes less than one second to prove them. 
 %
 Thus, we could set the timeout to one second. 
 %
-If a transition is taking more than one seconds, then it may need more axioms and or it should be divided.
+If a transition is taking more than one second, then it may need more axioms and or it should be divided.
 %
 But we may incur into dividing a problem which does not need to be divided. 
 %
 Others consecution for transition 33 in \invLock takes 1 second and a half, but does not need to be divided because it is of the form $(false \to something)$.
 %
-A timeout of 1 second would make \gandalf to divided this transition, but a timeout of 2 seconds second would cause a waste of 1 second in each not simple \spass problem.
+A timeout of 1 second would make \gandalf to divided this transition, but a timeout of 2 seconds would cause a waste of 1 second in each not simple \spass problem.
 %
 The timeout had been setted to 100 seconds because it was preferable in order to generate less \spass problems, and consequently less proofs.
 
@@ -253,7 +252,7 @@ No arithmetic axiom is needed to prove \invRegion and \spass does not neither ne
 %
 There is a subset of axioms for each invariant.
 %
-Including unnecessary axioms may cause \spass to take more time searching for the proof in a branch where the proof can not be found. 
+Including unnecessary axioms may cause \spass to take more time searching for the proof in a branch where the proof cannot be found. 
 %
 It may not cause any delay because it finds the proof without exploring all the branches.
 %
@@ -261,7 +260,7 @@ We show an example of this reality.
 %
 Transition 11 of the \invPreserve takes 23 seconds to \spass when all the axioms are included but it takes 0.44 seconds when only used axioms are included. 
 %
-This difference has been an important challenge, because when \spass could not find a proof it did not necessary mean that the problem was unsatisfiable. 
+This difference has been an important challenge, because when \spass could not find a proof it did not necessarily mean that the problem was unsatisfiable. 
 %
 It could mean that too many unnecessary axiom had been included or that the problem needed to be divided.
 %
