@@ -1,93 +1,95 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70005" creator="Ipe 7.1.4">
-<info created="D:20100713154401" modified="D:20141006150404"/>
+<info created="D:20100713154401" modified="D:20160623111808"/>
 <preamble>\usepackage{algorithm}
 \usepackage{algpseudocode}
-\usepackage{ltlfonts}
-\usepackage{ale-defs}
-\usepackage{definitions}</preamble>
+%\usepackage{ltlfonts}
+\usepackage{definitions}
+%\usepackage{ale-defs}
+
+</preamble>
 <ipestyle name="imdeaslides">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
 0 0 m
--1 0.333 l
--1 -0.333 l
+-1 0 l
+-1 0 l
 h
 </path>
 </symbol>
 <symbol name="arrow/farc(spx)">
 <path stroke="sym-stroke" fill="white" pen="sym-pen">
 0 0 m
--1 0.333 l
--1 -0.333 l
+-1 0 l
+-1 0 l
 h
 </path>
 </symbol>
 <symbol name="mark/circle(sx)" transformations="translations">
 <path fill="sym-stroke">
-0.6 0 0 0.6 0 0 e
-0.4 0 0 0.4 0 0 e
+0 0 0 0 0 0 e
+0 0 0 0 0 0 e
 </path>
 </symbol>
 <symbol name="mark/disk(sx)" transformations="translations">
 <path fill="sym-stroke">
-0.6 0 0 0.6 0 0 e
+0 0 0 0 0 0 e
 </path>
 </symbol>
 <symbol name="mark/fdisk(sfx)" transformations="translations">
 <group>
 <path fill="sym-stroke" fillrule="eofill">
-0.6 0 0 0.6 0 0 e
-0.4 0 0 0.4 0 0 e
+0 0 0 0 0 0 e
+0 0 0 0 0 0 e
 </path>
 <path fill="sym-fill">
-0.4 0 0 0.4 0 0 e
+0 0 0 0 0 0 e
 </path>
 </group>
 </symbol>
 <symbol name="mark/box(sx)" transformations="translations">
 <path fill="sym-stroke" fillrule="eofill">
--0.6 -0.6 m
-0.6 -0.6 l
-0.6 0.6 l
--0.6 0.6 l
+0 0 m
+0 0 l
+0 0 l
+0 0 l
 h
--0.4 -0.4 m
-0.4 -0.4 l
-0.4 0.4 l
--0.4 0.4 l
+0 0 m
+0 0 l
+0 0 l
+0 0 l
 h
 </path>
 </symbol>
 <symbol name="mark/square(sx)" transformations="translations">
 <path fill="sym-stroke">
--0.6 -0.6 m
-0.6 -0.6 l
-0.6 0.6 l
--0.6 0.6 l
+0 0 m
+0 0 l
+0 0 l
+0 0 l
 h
 </path>
 </symbol>
 <symbol name="mark/fsquare(sfx)" transformations="translations">
 <group>
 <path fill="sym-stroke" fillrule="eofill">
--0.6 -0.6 m
-0.6 -0.6 l
-0.6 0.6 l
--0.6 0.6 l
+0 0 m
+0 0 l
+0 0 l
+0 0 l
 h
--0.4 -0.4 m
-0.4 -0.4 l
-0.4 0.4 l
--0.4 0.4 l
+0 0 m
+0 0 l
+0 0 l
+0 0 l
 h
 </path>
 <path fill="sym-fill">
--0.4 -0.4 m
-0.4 -0.4 l
-0.4 0.4 l
--0.4 0.4 l
+0 0 m
+0 0 l
+0 0 l
+0 0 l
 h
 </path>
 </group>
@@ -95,17 +97,17 @@ h
 <symbol name="mark/cross(sx)" transformations="translations">
 <group>
 <path fill="sym-stroke">
--0.43 -0.57 m
-0.57 0.43 l
-0.43 0.57 l
--0.57 -0.43 l
+0 0 m
+0 0 l
+0 0 l
+0 0 l
 h
 </path>
 <path fill="sym-stroke">
--0.43 0.57 m
-0.57 -0.43 l
-0.43 -0.57 l
--0.57 0.43 l
+0 0 m
+0 0 l
+0 0 l
+0 0 l
 h
 </path>
 </group>
@@ -113,65 +115,65 @@ h
 <symbol name="arrow/fnormal(spx)">
 <path stroke="sym-stroke" fill="white" pen="sym-pen">
 0 0 m
--1 0.333 l
--1 -0.333 l
+-1 0 l
+-1 0 l
 h
 </path>
 </symbol>
 <symbol name="arrow/pointed(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
 0 0 m
--1 0.333 l
--0.8 0 l
--1 -0.333 l
+-1 0 l
+0 0 l
+-1 0 l
 h
 </path>
 </symbol>
 <symbol name="arrow/fpointed(spx)">
 <path stroke="sym-stroke" fill="white" pen="sym-pen">
 0 0 m
--1 0.333 l
--0.8 0 l
--1 -0.333 l
+-1 0 l
+0 0 l
+-1 0 l
 h
 </path>
 </symbol>
 <symbol name="arrow/linear(spx)">
 <path stroke="sym-stroke" pen="sym-pen">
--1 0.333 m
+-1 0 m
 0 0 l
--1 -0.333 l
+-1 0 l
 </path>
 </symbol>
 <symbol name="arrow/fdouble(spx)">
 <path stroke="sym-stroke" fill="white" pen="sym-pen">
 0 0 m
--1 0.333 l
--1 -0.333 l
+-1 0 l
+-1 0 l
 h
 -1 0 m
--2 0.333 l
--2 -0.333 l
+-2 0 l
+-2 0 l
 h
 </path>
 </symbol>
 <symbol name="arrow/double(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
 0 0 m
--1 0.333 l
--1 -0.333 l
+-1 0 l
+-1 0 l
 h
 -1 0 m
--2 0.333 l
--2 -0.333 l
+-2 0 l
+-2 0 l
 h
 </path>
 </symbol>
 <symbol name="smalltriangle">
 <path stroke="imdeablueone" fill="imdeablueone">
-0 0.70212 m
-0 -0.14319 l
-0.85565 0.25691 l
+0 0 m
+0 0 l
+0 0 l
 h
 </path>
 </symbol>
@@ -291,8 +293,8 @@ h
 \usepackage{amsmath,amsfonts,amssymb}
 \usepackage{stmaryrd}
 \usepackage{array}
-\usepackage{cesar-llncs}
-\usepackage{ltlfonts}
+%\usepackage{cesar-llncs}
+%\usepackage{ltlfonts}
 \usepackage{color}
 \usepackage[all,2cell,curve,frame,color,crayon]{xypic}
 \usepackage{fancyvrb}
@@ -303,10 +305,10 @@ h
 \xyoption{crayon}
 \xyoption{line}
 \UseCrayolaColors
-\input{figures/figures}
+%\input{figures/figures}
 %\input{definitions}
-\input{programs}
-\input{macros/macros}
+%\input{programs}
+%\input{macros/macros}
 \def\labelitemi{\small\raise1.0pt\hbox{\textcolor{imdeablue}{$\blacktriangleright$}}}
 %\def\labelitemii{\footnotesize\textcolor{imdeablue}{$\blacktriangleright$}}
 \def\labelitemii{\raisebox{1.0pt}{\hbox to 0.3em%
@@ -321,11 +323,11 @@ h
 <symbol name="arrow/latexarc(spx)">
 <path stroke="sym-stroke" pen="sym-pen" cap="1">
 0 0 m
--0.2049 0.121
--0.294 0.291 s
+0 0
+0 0 s
 0 0 m
--0.2049 -0.121
--0.294 -0.291 s
+0 0
+0 0 s
 </path>
 </symbol>
 </ipestyle>
@@ -342,21 +344,20 @@ h
 592 1492 l
 h
 </path>
-<text matrix="1 0 0 1 -151.229 450.629" transformations="translations" pos="272 752" stroke="black" type="label" width="527.407" height="346.546" depth="334.412" valign="baseline">\newcommand{\Elem}{\ensuremath{\mathit{Elem}}\xspace}
+<text matrix="1 0 0 1 -151 450" transformations="translations" pos="272 752" stroke="black" type="label" valign="baseline">\newcommand{\Elem}{\ensuremath{\mathit{Elem}}\xspace}
 
 \begin{tabular}{c}
 \begin{minipage}[c]{6.5cm}
 \begin{algorithmic}[1]
 	\Statex \tbf{global}%
-		\Statex $\quad \Taddr \; \head;
-		\; \Taddr \; \tail;$
-		\Statex $\quad \Tset \langle\Taddr\rangle \; \region;
+		\Statex $\quad \addr \; \head;
+		\; \addr \; \tail;$
+		\Statex $\quad \Tset \langle\addr\rangle \; \region;
 		\; \Tset \langle\Telem\rangle \; \elements;$
 	\Statex \tbf{assume}
 		\Statex $ \hspace{-0.4em}
 		\begin{array}{l&gt;{\hspace{-0.7em}}l}
 			&amp; \region = \{\head, \tail, \fNull\} \\
-			\And &amp; \elements = \{\head \pointsto \fData, \tail \pointsto \fData\} \\
 			\And &amp; \head \neq \tail \And 
 			\head \neq \fNull \And 
 			\tail \neq \fNull \\
@@ -393,16 +394,16 @@ h
 \end{minipage}
 \end{tabular}
 </text>
-<text matrix="1 0 0 1 464.272 452.498" transformations="translations" pos="272 752" stroke="black" type="label" width="564.257" height="344.677" depth="332.54" valign="baseline">\newcommand{\Elem}{\ensuremath{\mathit{Elem}}\xspace}
+<text matrix="1 0 0 1 464 452" transformations="translations" pos="272 752" stroke="black" type="label" valign="baseline">\newcommand{\Elem}{\ensuremath{\mathit{Elem}}\xspace}
 
 \begin{tabular}{c}
 \begin{minipage}[c]{7cm}
 \begin{algorithmic}[1]
 	\algrestore{endMGC}
 	\Statex $\ProcedureBegin \; \Search (e)$
-		\Statex {\quad \Taddr \; \prev}
-		\Statex {\quad \Taddr \; \curr}
-		\Statex {\quad \Taddr \; \aux}
+		\Statex {\quad \addr \; \prev}
+		\Statex {\quad \addr \; \curr}
+		\Statex {\quad \addr \; \aux}
 		\Statex {\quad \Tbool \; \found}
 	\Statex \tbf{begin}
 	\State $\prev := \head$
@@ -426,23 +427,23 @@ h
 \end{minipage}
 \end{tabular}
 </text>
-<path matrix="1 0 0 1 6.78902 -40.0007" stroke="black">
+<path matrix="1 0 0 1 6 -40" stroke="black">
 216 260 m
 216 196 l
 468 196 l
 468 260 l
 h
 </path>
-<text matrix="1 0 0 1 -151.229 -336.23" transformations="translations" pos="272 752" stroke="black" type="label" width="564.257" height="422.302" depth="410.332" valign="baseline">\newcommand{\Elem}{\ensuremath{\mathit{Elem}}\xspace}
+<text matrix="1 0 0 1 -151 -336" transformations="translations" pos="272 752" stroke="black" type="label" valign="baseline">\newcommand{\Elem}{\ensuremath{\mathit{Elem}}\xspace}
 
 \begin{tabular}{c}
 \begin{minipage}[c]{7cm}
 \begin{algorithmic}[1]
 	\algrestore{endSearch}
 	\Statex $\ProcedureBegin \; \Insert (e)$
-		\Statex {\quad \Taddr \; \prev}
-		\Statex {\quad \Taddr \; \curr}
-		\Statex {\quad \Taddr \; \aux}
+		\Statex {\quad \addr \; \prev}
+		\Statex {\quad \addr \; \curr}
+		\Statex {\quad \addr \; \aux}
 	\Statex \tbf{begin}
 	\State $\prev := \head$
 	\State $\prev \pointsto \fLock()$
@@ -461,7 +462,6 @@ h
 		\State $\aux \pointsto \fNext := \curr$
 		\State $\prev \pointsto \fNext := \aux$
 		\Statex $\quad\;\; \region := \region \cup \{\aux\}$
-		\Statex $\quad\;\; \elements := \elements \cup \{e\}$
 	\EndIf
 	\State $\prev \pointsto \fUnlock()$
 	\State $\curr \pointsto \fUnlock()$
@@ -472,23 +472,23 @@ h
 \end{minipage}
 \end{tabular}
 </text>
-<path matrix="1 0 0 1 -17.9595 140.028" stroke="black">
+<path matrix="1 0 0 1 -17 140" stroke="black">
 856 112 m
 856 48 l
 1108 48 l
 1108 112 l
 h
 </path>
-<text matrix="1 0 0 1 464.272 -320.692" transformations="translations" pos="272 752" stroke="black" type="label" width="564.257" height="406.765" depth="394.784" valign="baseline">\newcommand{\Elem}{\ensuremath{\mathit{Elem}}\xspace}
+<text matrix="1 0 0 1 464 -320" transformations="translations" pos="272 752" stroke="black" type="label" valign="baseline">\newcommand{\Elem}{\ensuremath{\mathit{Elem}}\xspace}
 
 \begin{tabular}{c}
 \begin{minipage}[c]{7cm}
 \begin{algorithmic}[1]
 	\algrestore{endAdd}
 	\Statex $\ProcedureBegin \; \Remove (e)$
-		\Statex {\quad \Taddr \; \prev}
-		\Statex {\quad \Taddr \; \curr}
-		\Statex {\quad \Taddr \; \aux}
+		\Statex {\quad \addr \; \prev}
+		\Statex {\quad \addr \; \curr}
+		\Statex {\quad \addr \; \aux}
 	\Statex \tbf{begin}
 
 	\State $\prev := \head$
@@ -506,7 +506,6 @@ h
 		\State $\aux := \curr \pointsto \fNext$
 		\State $\prev \pointsto \fNext := \aux$
 		\Statex $\quad\;\; \region := \region \setminus \{curr\}$
-		\Statex $\quad\;\; \elements := \elements \setminus \{e\}$
 	\EndIf
 	\State $\prev \pointsto \fUnlock()$
 	\State $\curr \pointsto \fUnlock()$

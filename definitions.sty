@@ -1540,7 +1540,11 @@
 \newcommand{\CriticalStm}{\tbf{critical}\xspace}
 \newcommand{\Noncritical}{\tbf{noncritical}\xspace}
 \newcommand{\Await}{\tbf{await }\xspace}
-\newcommand{\Call}{\tbf{call }}
+\ifx\Call\undefined
+	\newcommand{\Call}{\tbf{call }}
+\else
+	\renewcommand{\Call}{\tbf{call }}
+\fi
 \newcommand{\ProgOr}{\tbf{    or }}
 \newcommand{\PrgIf}{\tbf{if }\xspace}
 \newcommand{\PrgThen}{\tbf{ then }\xspace}

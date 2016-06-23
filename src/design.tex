@@ -243,10 +243,15 @@ The variable \tail, an address points to the last node of the list  which has th
 %
 Finally, the variable \region, a set of addresses, is used to keep track of the portion of the heap whose cells form the list.
 
+In Figure \ref{fig:listcode} present the code of the implementation chosen.
 
+\input{graphics/code}
 
-In appendix \ref{app:code} we present the program we are going to use, written in \gls{SPL}. 
-\todo{The code should be here}
+\begin{figure}
+	\centering	
+	\label{fig:listcode}
+	\caption{Code of the implementation chosen.}
+\end{figure}
 %
 There are three procedures, \Search, \Insert and \Remove which traverses through the list the way it was explained.
 

@@ -61,32 +61,6 @@ A simple program, which one can see it should work perfectly is verified manuall
 
 \chapter{Code}
 \label{app:code}
-\lstdefinelanguage{SPL}{
-  keywords={global, new, true, false, data, next, lock, unlock, procedure , function, return, null, catch, switch, var, if, in, while, do, else, case, break,endchoice,endwhile,endif,end,begin,assume},
-  keywordstyle=\color{gray!70!blue}\bfseries,
-  ndkeywords={addr, ghost, elem, return},
-  ndkeywordstyle=\color{magenta!60!black!90!white}\bfseries,
-  identifierstyle=\color{black},
-  sensitive=false,
-  comment=[l]{//},
-  morecomment=[s]{/*}{*/},
-  commentstyle=\color{gray}\ttfamily,
-  stringstyle=\color{green!60!black}\ttfamily,
-  morestring=[b]',
-  morestring=[b]"
-}
-
-\lstdefinelanguage{leap}{
-	keywords={invariant,vars},
-	keywordstyle=\color{blue}\bfseries,
-	ndkeywords={preserve,locks,nexts,order,disjoint},
-  commentstyle=\color{magenta!90!black!70!yellow},
-  ndkeywordstyle=\color{magenta!60!black!90!white}\bfseries,
-  stringstyle=\color{green!60!black}\ttfamily,
-  morestring=[b]',
-  morestring=[b]",
-  comment=[l]{\#}
-}
 
 The code is shown with annotations and not with line numbers in order to better understand the invariants.
 %
