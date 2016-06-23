@@ -1,0 +1,1065 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                                        %%
+%% I'm just using this file to define some basic commands %%
+%%                                                        %%
+%%                                                        %%
+%%                                                        %%
+%%                                                        %%
+%%   Alejandro Sanchez                                    %%
+%%     IMDEA Software, Sep 2010                           %%
+%%                                                        %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{ale-defs}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Include useful packages. %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\RequirePackage{amsmath}
+\RequirePackage{latexsym}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Small command for TODO notation. %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\MYTODO}[1]{%
+%  \textsf{\textcolor{red}{$^{[\thetodos]}$}}%
+  \marginpar{%
+    \framebox[0.9\marginparwidth][t]{%
+      \parbox[t]{0.85\marginparwidth}{%
+	#1
+%        \raggedright\scriptsize{
+%	  \textcolor{red}{\thetodos: #1}%
+%	}
+	}}}%
+%  \stepcounter{todos}%
+}
+
+
+%\usepackage{pstricks}
+%\newcommand{\todobox}[2]{
+%	\begin{center}
+%	\hspace{-1.8cm}
+%	\psframebox[fillstyle=solid, fillcolor=lightgray,
+%			framesep=10pt, linearc=14pt,
+%			cornersize=absolute, linewidth=1.5pt]
+%	{\parbox{\textwidth}{
+%	\begin{tabular}{m{1.4cm}p{10cm}}
+%	$\textrm{\textsc{\Huge{#1}}}$ & {#2}
+%	\end{tabular}}}
+%	\end{center}}
+
+%\newcommand{\toask}[1]{\todobox{?}{#1}}
+%\newcommand{\todo}[1]{\todobox{!}{#1}}
+
+
+%\newcommand{\ytodo}[1]{\colorbox{yellow}{#1}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Theorems, lemmas, definitions, proofs, examples... headlines %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\usepackage[amsmath,thmmarks]{ntheorem}
+
+%\theoremstyle{break}
+%\theoremheaderfont{\normalfont\bfseries}
+%\theorembodyfont{\slshape}
+%\theoremsymbol{\ensuremath{\spadesuit}}
+%\theoremseparator{:}
+%\theoremprework{\bigskip}
+%\theorempostwork{\bigskip}
+%\newtheorem{Lemma}{Lemma}
+
+%\theoremstyle{nonumberplain}
+%\theoremheaderfont{\bfseries}
+%\theorembodyfont{\upshape}
+%\theoremseparator{}
+%\theoremsymbol{\ensuremath{\Box}}
+%\theoremprework{\bigskip}
+%\theorempostwork{\bigskip}
+%\newtheorem{Proof}{Proof}
+
+%\theoremstyle{break}
+%\theorem eaderfont{\normalfont\bfseries}
+%\theorembodyfont{\upshape}
+%\theoremsymbol{\ensuremath{\ast}}
+%\theoremseparator{:}
+%\theoremprework{\bigskip}
+%\theorempostwork{\bigskip}
+%\newtheorem{Example}{Example}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                       %%
+%%  General definitions  %%
+%%                       %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Some spaces
+\newcommand{\hs}[1]{\hspace{#1cm}}
+\newcommand{\mhs}{\hspace{0.5cm}}
+\newcommand{\lsp}{\vspace{0.3cm}}
+
+%% Math phantom symbol
+\newcommand{\mps}{\phantom{\Big|}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                             %%
+%%  Mathematical environments  %%
+%%                             %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\cequ}[1]{\begin{equation*}{#1}\end{equation*}}
+\newcommand{\cmath}[1]{\begin{center}\begin{math}{#1}\end{math}\end{center}}
+\newcommand{\lmath}[1]{\begin{flushleft}\begin{math}{#1}
+	\end{math}\end{flushleft}}
+
+% Left aligned multiple line math environment
+\newcommand{\mmath}[1]{\lmath{\begin{array}{l}#1\end{array}}}
+
+
+\newcommand{\defsym}{\hat{=}}
+\newcommand{\newdef}[2]{{#1} \: \defsym \: {
+	\begin{array}{l}
+		{#2}
+	\end{array}}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                  %%
+%%  Basic terminology for theories  %%
+%%                                  %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Signatures
+\newcommand{\Sig}{\ensuremath{\Sigma}\xspace}
+\newcommand{\SigInter}{\ensuremath{\Sig}-interpretation\xspace}
+\newcommand{\SigStruct}{\ensuremath{\Sig}-structure\xspace}
+\newcommand{\SigStructs}{\ensuremath{\Sig}-structures\xspace}
+\newcommand{\SigFormula}{\ensuremath{\Sig}-formula\xspace}
+\newcommand{\SigTheory}{\ensuremath{\Sig}-theory\xspace}
+
+%% Interpretations
+\newcommand{\Omg}{\ensuremath{\Omega}\xspace}
+\newcommand{\OmgInter}{\ensuremath{\Omg}-interpretation\xspace}
+\newcommand{\AiSig}{\ensuremath{\Ai^{\Sig}}\xspace}
+\newcommand{\SigClass}{\ensuremath{\mathbf{A}}\xspace}
+
+% Variable sets
+\newcommand{\VarV}{\ensuremath{V\xspace}}
+\newcommand{\VarU}{\ensuremath{U\xspace}}
+
+%% Generic theories names
+\newcommand{\Theo}{\ensuremath{T}\xspace}
+\newcommand{\TheoInter}{\ensuremath{\Theo}-interpretation\xspace}
+\newcommand{\TheoSat}{\ensuremath{\Theo}-satisfiable\xspace}
+
+
+%% Symbols for theory combination
+\newcommand{\sort}{\ensuremath{\mathit{sort}}\xspace}
+
+
+%% Theory names
+\newcommand{\addr}{\ensuremath{\mathsf{addr}}\xspace}
+\newcommand{\elem}{\ensuremath{\mathsf{elem}}\xspace}
+\newcommand{\thId}{\ensuremath{\mathsf{thid}}\xspace}
+\newcommand{\cells}{\ensuremath{\mathsf{cell}}\xspace}
+\newcommand{\memory}{\ensuremath{\mathsf{mem}}\xspace}
+\newcommand{\reach}{\ensuremath{\mathsf{reachability}}\xspace}
+\newcommand{\path}{\ensuremath{\mathsf{path}}\xspace}
+\newcommand{\sets}{\ensuremath{\mathsf{set}}\xspace}
+\newcommand{\setsE}{\ensuremath{\mathsf{setElem}}\xspace}
+\newcommand{\setsT}{\ensuremath{\mathsf{setth}}\xspace}
+\newcommand{\bridge}{\ensuremath{\mathsf{bridge}}\xspace}
+\newcommand{\lists}{\ensuremath{\mathsf{Lists}}\xspace}
+\newcommand{\cons}{\ensuremath{\mathsf{cons}}\xspace}
+\newcommand{\listsBridge}{\ensuremath{\mathsf{ListsBridge}}\xspace}
+
+
+%% Sorts
+\newcommand{\sElem}{\ensuremath{\mathsf{elem}}\xspace}
+\newcommand{\sAddr}{\ensuremath{\mathsf{addr}}\xspace}
+\newcommand{\sThId}{\ensuremath{\mathsf{thid}}\xspace}
+\newcommand{\sCell}{\ensuremath{\mathsf{cell}}\xspace}
+\newcommand{\sMem}{\ensuremath{\mathsf{mem}}\xspace}
+\newcommand{\sPath}{\ensuremath{\mathsf{path}}\xspace}
+\newcommand{\sSet}{\ensuremath{\mathsf{set}}\xspace}
+\newcommand{\sSetE}{\ensuremath{\mathsf{setElem}}\xspace}
+\newcommand{\sSetT}{\ensuremath{\mathsf{setth}}\xspace}
+\newcommand{\sSeq}{\ensuremath{\mathsf{fseq}}\xspace}
+\newcommand{\sList}{\ensuremath{\mathsf{list}}\xspace}
+\newcommand{\sCList}{\ensuremath{\mathsf{clist}}\xspace}
+\newcommand{\sLevel}{\ensuremath{\mathsf{level}}\xspace}
+\newcommand{\sLevelK}{\ensuremath{\mathsf{level}_{\mathsf{K}}}\xspace}
+\newcommand{\sOrd}{\ensuremath{\mathsf{ord}}\xspace}
+\newcommand{\sArray}{\ensuremath{\mathsf{array}}\xspace}
+\newcommand{\sMrgn}{\ensuremath{\mathsf{mrgn}}\xspace}
+
+
+%% Functions
+\newcommand{\fNil}{\ensuremath{\mathit{nil}}\xspace}
+\newcommand{\fCons}{\ensuremath{\mathit{cons}}\xspace}
+\newcommand{\fHd}{\ensuremath{\mathit{hd}}\xspace}
+\newcommand{\fTl}{\ensuremath{\mathit{tl}}\xspace}
+\newcommand{\fError}{\ensuremath{\mathit{error}}\xspace}
+\newcommand{\fMkcell}{\ensuremath{\mathit{mkcell}}\xspace}
+\newcommand{\fData}{\ensuremath{\mathit{data}}\xspace}
+\newcommand{\fKey}{\ensuremath{\mathit{key}}\xspace}
+\newcommand{\fNext}{\ensuremath{\mathit{next}}\xspace}
+\newcommand{\fArr}{\ensuremath{\mathit{arr}}\xspace}
+\newcommand{\fMax}{\ensuremath{\mathit{max}}\xspace}
+\newcommand{\fLockID}{\ensuremath{\mathit{lockid}}\xspace}
+\newcommand{\fLock}{\ensuremath{\mathit{lock}}\xspace}
+\newcommand{\fUnlock}{\ensuremath{\mathit{unlock}}\xspace}
+\newcommand{\fNull}{\ensuremath{\mathit{null}}\xspace}
+\newcommand{\fNoThread}{\ensuremath{\oslash}\xspace}
+\newcommand{\fUndef}{\ensuremath{\mathit{undef}}\xspace}
+\newcommand{\fRd}{\ensuremath{\mathit{rd}}\xspace}
+\newcommand{\fUpd}{\ensuremath{\mathit{upd}}\xspace}
+\newcommand{\fRev}{\ensuremath{\mathit{rev}}\xspace}
+\newcommand{\fEpsilon}{\ensuremath{\epsilon}\xspace}
+\newcommand{\fPathToSet}{\ensuremath{\mathit{path2set}}\xspace}
+\newcommand{\fPathToSetA}{\ensuremath{\mathit{\inter{path2set}{\Ai}}}\xspace}
+\newcommand{\fPathToSetB}{\ensuremath{\mathit{\inter{path2set}{\Bi}}}\xspace}
+\newcommand{\fSetToElemSet}{\ensuremath{\mathit{set2elemset}}\xspace}
+\newcommand{\fAddrToSet}{\ensuremath{\mathit{addr2set}}\xspace}
+\newcommand{\fAddrToSetK}{\ensuremath{\mathit{addr2set_{\K}}}\xspace}
+\newcommand{\fGetp}{\ensuremath{\mathit{getp}}\xspace}
+\newcommand{\fGetpK}{\ensuremath{\mathit{getp_{\K}}}\xspace}
+\newcommand{\fPathToList}{\ensuremath{\mathit{path2list}}\xspace}
+\newcommand{\fPathToListA}{\ensuremath{\inter{\fPathToList}{\Ai}}\xspace}
+\newcommand{\fPathToListB}{\ensuremath{\inter{\fPathToList}{\Bi}}\xspace}
+\newcommand{\fPathToCList}{\ensuremath{\mathit{path2clist}}\xspace}
+\newcommand{\fPathToCListA}{\ensuremath{\inter{\fPathToCList}{\Ai}}\xspace}
+\newcommand{\fPathToCListB}{\ensuremath{\inter{\fPathToCList}{\Bi}}\xspace}
+\newcommand{\fFirstLocked}{\ensuremath{\mathit{firstlocked}}\xspace}
+\newcommand{\fFirstLockedK}{\ensuremath{\mathit{firstlocked_{\K}}}\xspace}
+\newcommand{\fListToSet}{\ensuremath{\mathit{list2set}}\xspace}
+\newcommand{\fListToSetA}{\ensuremath{\inter{\fListToSet}{\Ai}}\xspace}
+\newcommand{\fListToSetB}{\ensuremath{\inter{\fListToSet}{\Bi}}\xspace}
+\newcommand{\fSeqToList}{\ensuremath{\mathit{fseq2list}}\xspace}
+\newcommand{\fSeqToCList}{\ensuremath{\mathit{fseq2clist}}\xspace}
+\newcommand{\fFirstMarked}{\ensuremath{\mathit{firstmarked}}\xspace}
+\newcommand{\fIsPath}{\ensuremath{\mathit{ispath}}\xspace}
+\newcommand{\fLevel}[1]{\ensuremath{\eta_{#1}}\xspace}
+\newcommand{\fZero}{\ensuremath{-\infty}\xspace}
+\newcommand{\fInfty}{\ensuremath{+\infty}\xspace}
+\newcommand{\fSucc}{\ensuremath{\mathsf{succ}}\xspace}
+\newcommand{\fSkipKToList}{\ensuremath{\mathit{skiplist_{\mathsf{k}}2list}}\xspace}
+\newcommand{\fApp}{\ensuremath{\mathit{app}}\xspace}
+\newcommand{\fSeqToSet}{\ensuremath{\mathit{fseq2set}}\xspace}
+\newcommand{\fLast}{\ensuremath{\mathit{last}}\xspace}
+
+
+%% Predicates
+\newcommand{\pOrdPath}{\ensuremath{\mathit{ordPath}}\xspace}
+\newcommand{\pOrdList}{\ensuremath{\mathit{ordList}}\xspace}
+\newcommand{\pSubPath}{\ensuremath{\mathit{subPath}}\xspace}
+\newcommand{\pAppend}{\ensuremath{\mathit{append}}\xspace}
+\newcommand{\pReach}{\ensuremath{\mathit{reach}}\xspace}
+\newcommand{\pReachK}{\ensuremath{\mathit{reach_{\K}}}\xspace}
+\newcommand{\pIsReachable}{\eniguremath{\mathit{isreachable}}\xspace}
+\newcommand{\pOrd}{\ensuremath{\preceq}\xspace}
+\newcommand{\pSubList}{\ensuremath{\mathit{SubList}}\xspace}
+\newcommand{\pSkiplistK}{\ensuremath{\mathit{Skiplist_{\mathsf{K}}}}\xspace}
+\newcommand{\pDisjLevelK}{\ensuremath{\mathit{DisjLevel_{\mathsf{K}}}}\xspace}
+\newcommand{\pIsReach}{\ensuremath{\mathit{isreachable}}\xspace}
+\newcommand{\pIsReachP}{\ensuremath{\mathit{isreachablep}}\xspace}
+\newcommand{\pIsReachK}{\ensuremath{\mathit{isreachable_{\K}}}\xspace}
+\newcommand{\pIsReachKP}{\ensuremath{\mathit{isreachablep_{\K}}}\xspace}
+
+
+%% Signatures
+\newcommand{\sigAddr}{\ensuremath{\Sigma_{\addr}}\xspace}
+\newcommand{\sigElem}{\ensuremath{\Sigma_{\elem}}\xspace}
+\newcommand{\sigThId}{\ensuremath{\Sigma_{\thId}}\xspace}
+\newcommand{\sigCells}{\ensuremath{\Sigma_{\cells}}\xspace}
+\newcommand{\sigMemory}{\ensuremath{\Sigma_{\memory}}\xspace}
+\newcommand{\sigReach}{\ensuremath{\Sigma_{\reach}}\xspace}
+\newcommand{\sigSets}{\ensuremath{\Sigma_{\sets}}\xspace}
+\newcommand{\sigSetsE}{\ensuremath{\Sigma_{\setsE}}\xspace}
+\newcommand{\sigSetsT}{\ensuremath{\Sigma_{\setsT}}\xspace}
+\newcommand{\sigBridge}{\ensuremath{\Sigma_{\bridge}}\xspace}
+\newcommand{\sigLists}{\ensuremath{\Sigma_{\cons}}\xspace}
+\newcommand{\sigListsBridge}{\ensuremath{\Sigma_{\listsBridge}}\xspace}
+\newcommand{\sigSeq}{\ensuremath{\Sigma_{\sSeq}}\xspace}
+\newcommand{\sigPath}{\ensuremath{\Sigma_{\sPath}}\xspace}
+\newcommand{\sigMrgn}{\ensuremath{\Sigma_{\sMrgn}}\xspace}
+\newcommand{\sigTLL}{\ensuremath{\Sigma_{\TLL}}\xspace}
+\newcommand{\sigTLLh}{\ensuremath{\Sigma_{\TLLh}}\xspace}
+\newcommand{\sigTLLpL}{\ensuremath{\Sigma_{\TLLpL}}\xspace}
+\newcommand{\sigTLLpLh}{\ensuremath{\Sigma_{\TLLpLh}}\xspace}
+\newcommand{\sigLevel}{\ensuremath{\Sigma_{\sLevel}}\xspace}
+\newcommand{\sigLevelK}{\ensuremath{\Sigma_{\sLevelK}}\xspace}
+\newcommand{\sigOrd}{\ensuremath{\Sigma_{\sOrd}}\xspace}
+\newcommand{\sigArray}{\ensuremath{\Sigma_{\sArray}}\xspace}
+\newcommand{\sigTSLK}{\ensuremath{\Sigma_{\TSLK}}\xspace}
+\newcommand{\sigTSLKh}{\ensuremath{\Sigma_{\TSLKh}}\xspace}
+\newcommand{\sigTSLKhBar}{\ensuremath{\Sigma_{\TSLKhBar}}\xspace}
+\newcommand{\sigTBaseSLK}{\ensuremath{\Sigma_{\TBaseSLK}}\xspace}
+\newcommand{\sigTBaseSLKP}{\ensuremath{\Sigma_{\TBaseSLKP}}\xspace}
+
+
+%% Interpretations
+\newcommand{\interTLL}{\ensuremath{\textbf{TLL}}\xspace}
+\newcommand{\interTLLpL}{\ensuremath{\textbf{TLL3}}\xspace}
+\newcommand{\interTOrd}{\ensuremath{\textbf{TOrd}}\xspace}
+\newcommand{\interTSLK}{\ensuremath{\textbf{TSLK}}\xspace}
+
+
+%% Theories
+\newcommand{\thCells}{\ensuremath{\mathit{T}_{\cells}}\xspace}
+\newcommand{\thElem}{\ensuremath{\mathit{T}_{\elem}}\xspace}
+\newcommand{\thThId}{\ensuremath{\mathit{T}_{\thId}}\xspace}
+\newcommand{\thAddr}{\ensuremath{\mathit{T}_{\addr}}\xspace}
+\newcommand{\thMem}{\ensuremath{\mathit{T}_{\memory}}\xspace}
+\newcommand{\thReach}{\ensuremath{\mathit{T}_{\reach}}\xspace}
+\newcommand{\thPath}{\ensuremath{\mathit{T}_{\path}}\xspace}
+\newcommand{\thSets}{\ensuremath{\mathit{T}_{\sets}}\xspace}
+\newcommand{\thSetsE}{\ensuremath{\mathit{T}_{\setsE}}\xspace}
+\newcommand{\thSetsT}{\ensuremath{\mathit{T}_{\setsT}}\xspace}
+\newcommand{\thSeq}{\ensuremath{\mathit{T}_{\sSeq}}\xspace}
+\newcommand{\thLists}{\ensuremath{\mathit{T}_{\cons}}\xspace}
+\newcommand{\thMrgn}{\ensuremath{\mathit{T}_{\sMrgn}}\xspace}
+\newcommand{\thBridge}{\ensuremath{\mathit{T}_{\bridge}}\xspace}
+
+\newcommand{\TLL}{\ensuremath{\textsf{TLL}}\xspace}
+\newcommand{\TLLh}{\ensuremath{\widehat{\textsf{TLL}}}\xspace}
+\newcommand{\TLLpL}{\ensuremath{\textsf{TLL3}}\xspace}
+\newcommand{\TLLpLh}{\ensuremath{\widehat{\textsf{TLL3}}}\xspace}
+\newcommand{\TBase}{\ensuremath{\mathit{T}_{\textsf{Base}}}\xspace}
+\newcommand{\TBasepL}{\ensuremath{\mathit{T}_{\textsf{Base3}}}\xspace}
+\newcommand{\TBaseSLK}{\ensuremath{\mathit{T}_{\textsf{SLKBase}}}\xspace}
+\newcommand{\TBaseSLKP}{\ensuremath{\mathit{T}_{\textsf{SLKBase+}}}\xspace}
+\newcommand{\TSL}{\ensuremath{\textsf{TSL}}\xspace}
+\newcommand{\K}{\ensuremath{\textsf{K}}\xspace}
+\newcommand{\TSLK}{\ensuremath{\TSL_{\K}}\xspace}
+\newcommand{\TSLKh}{\ensuremath{\widehat{\TSLK}}\xspace}
+\newcommand{\TSLKhBar}{\ensuremath{\overline{\widehat{\TSLK}}}\xspace}
+\newcommand{\TN}{\ensuremath{\T_{\Nat}}\xspace}
+\newcommand{\TLevel}{\ensuremath{\mathit{T}_{\sLevel}}\xspace}
+\newcommand{\TLevelK}{\ensuremath{\mathit{T}_{\sLevelK}}\xspace}
+\newcommand{\TOrd}{\ensuremath{\mathit{T}_{\sOrd}}\xspace}
+
+
+%% Lists operations for theory of ideal lists
+\newcommand{\lempty}{\ensuremath{\langle \rangle}\xspace}
+\newcommand{\lemptyA}{\ensuremath{\inter{\lempty}{\Ai}}\xspace}
+\newcommand{\lemptyB}{\ensuremath{\inter{\lempty}{\Bi}}\xspace}
+\newcommand{\lcons}{\ensuremath{::}\xspace}
+\newcommand{\lconsA}{\ensuremath{\inter{\lcons}{\Ai}}\xspace}
+\newcommand{\lconsB}{\ensuremath{\inter{\lcons}{\Bi}}\xspace}
+\newcommand{\lcar}{\ensuremath{\mathsf{car}}\xspace}
+\newcommand{\lcdr}{\ensuremath{\mathsf{cdr}}\xspace}
+
+
+%% Set operations for the Theory of Set of Elements
+\newcommand{\seSym}{E}
+\newcommand{\seEmpty}{\ensuremath{\emptyset_{\seSym}}\xspace}
+\newcommand{\seSingle}[1]{\ensuremath{\{{#1}\}_{\seSym}}\xspace}
+\newcommand{\seCup}{\ensuremath{\cup_{\seSym}}\xspace}
+\newcommand{\seCap}{\ensuremath{\cap_{\seSym}}\xspace}
+\newcommand{\seSubst}{\ensuremath{\setminus_{\seSym}}\xspace}
+\newcommand{\seIn}{\ensuremath{\in_{\seSym}}\xspace}
+\newcommand{\seSubset}{\ensuremath{\subseteq_{\seSym}}\xspace}
+
+
+%% Set operations for the Theory of Set of thread ids
+\newcommand{\stSym}{\footnotesize{T}}
+\newcommand{\stEmpty}{\ensuremath{\emptyset_{\stSym}}\xspace}
+\newcommand{\stSingle}[1]{\ensuremath{\{{#1}\}_{\stSym}}\xspace}
+\newcommand{\stCup}{\ensuremath{\cup_{\stSym}}\xspace}
+\newcommand{\stCap}{\ensuremath{\cap_{\stSym}}\xspace}
+\newcommand{\stSubst}{\ensuremath{\setminus_{\stSym}}\xspace}
+\newcommand{\stIn}{\ensuremath{\in_{\stSym}}\xspace}
+\newcommand{\stSubset}{\ensuremath{\subseteq_{\stSym}}\xspace}
+
+
+%% Set operations for the Theory of Masked Regions
+\newcommand{\mrSym}{\ensuremath{\mathsf{mr}}}
+\newcommand{\mrgnEmpty}{\ensuremath{\emp_{\mrSym}}\xspace}
+\newcommand{\mrgnSingle}[1]{\ensuremath{\langle{#1}\rangle_{\mrSym}}\xspace}
+\newcommand{\mrgnCup}{\ensuremath{\cup_{\mrSym}}\xspace}
+\newcommand{\mrgnCap}{\ensuremath{\cap_{\mrSym}}\xspace}
+\newcommand{\mrgnMinus}{\ensuremath{-_{\mrSym}}\xspace}
+\newcommand{\mrgnIn}{\ensuremath{\in_{\mrSym}}\xspace}
+\newcommand{\mrgnSubset}{\ensuremath{\subseteq_{\mrSym}}\xspace}
+\newcommand{\mrgnDisj}{\ensuremath{\#_{\mrSym}}\xspace}
+
+
+%% Operations for the generic array manipulation
+\newcommand{\fArrayRd}[2]
+		{\ensuremath{{#1} \lbrack {#2} \rbrack}\xspace}
+\newcommand{\fArrayUpd}[3]
+		{\ensuremath{{#1} \{{#2} \gets {#3} \}}\xspace}
+\newcommand{\fArrayRdInter}[3]
+		{\ensuremath{{#1} \lbrack {#2} \rbrack^{#3}}\xspace}
+\newcommand{\fArrayUpdInter}[4]
+		{\ensuremath{{#1} \{{#2} \gets {#3} \}^{#4}}\xspace}
+
+
+%% Interpreted set operations for the Theory of Masked Regions
+\newcommand{\mrgnEmptyI}[1]{\ensuremath{\emp_{\mrSym}^{#1}}\xspace}
+\newcommand{\mrgnSingleI}[2]{\ensuremath{\langle{#1}\rangle_{\mrSym}^{#2}}\xspace}
+\newcommand{\mrgnCupI}[1]{\ensuremath{\cup_{\mrSym}^{#1}}\xspace}
+\newcommand{\mrgnCapI}[1]{\ensuremath{\cap_{\mrSym}^{#1}}\xspace}
+\newcommand{\mrgnMinusI}[1]{\ensuremath{-_{\mrSym}^{#1}}\xspace}
+\newcommand{\mrgnInI}[1]{\ensuremath{\in_{\mrSym}^{#1}}\xspace}
+\newcommand{\mrgnSubsetI}[1]{\ensuremath{\subseteq_{\mrSym}^{#1}}\xspace}
+\newcommand{\mrgnDisjI}[1]{\ensuremath{\#_{\mrSym}^{#1}}\xspace}
+
+
+%% Auxiliary structures names for theories
+\newcommand{\TGen}{\ensuremath{\mathsf{TGen}}\xspace}
+\newcommand{\ETGen}{\ensuremath{\mathsf{ETGen}}\xspace}
+\newcommand{\ETGenh}{\ensuremath{\widehat{\mathsf{ETGen}}}\xspace}
+\newcommand{\Mod}[2]{\ensuremath{\mathit{Mod}^{#1}(#2)}\xspace}
+\newcommand{\AxPATH}{\ensuremath{\mathit{PATH}}\xspace}
+\newcommand{\GAP}{\ensuremath{\mathit{GAP}}\xspace}
+\newcommand{\BASEP}{\ensuremath{\mathit{BASE+}}\xspace}
+\newcommand{\Ax}[1]{\ensuremath{\mathsf{Ax}_{#1}}\xspace}
+\newcommand{\kacyclic}{\ensuremath{\mathsf{k-acyclicity}}\xspace}
+\newcommand{\generatedness}{\ensuremath{\mathsf{Generatedness}}\xspace}
+\newcommand{\acyclic}{\ensuremath{\mathit{acyclic}}\xspace}
+
+
+%% Interpretations names
+\newcommand{\inter}[2]{\ensuremath{\mathit{#1}^{#2}}\xspace}
+\newcommand{\Ai}{\ensuremath{\mathcal{A}}\xspace}
+\newcommand{\Bi}{\ensuremath{\mathcal{B}}\xspace}
+\newcommand{\Ais}[1]{\ensuremath{\Ai_{#1}}\xspace}
+\newcommand{\Bis}[1]{\ensuremath{\Bi_{#1}}\xspace}
+\newcommand{\SAi}{\ensuremath{S_{\Ai}}\xspace}
+\newcommand{\SBi}{\ensuremath{S_{\Bi}}\xspace}
+
+
+%% Variables names
+\newcommand{\TVar}[1]{\ensuremath{\mathit{V}_{#1}}\xspace}
+\newcommand{\VarA}[1]{\ensuremath{\mathit{V}_{#1}^{\Ai}}\xspace}
+\newcommand{\VarB}[1]{\ensuremath{\mathit{V}_{#1}^{\Bi}}\xspace}
+
+
+%% Auxiliary functions for theories definitions
+\newcommand{\fa}{\ensuremath{f_a}\xspace}
+\newcommand{\fb}{\ensuremath{f_b}\xspace}
+\newcommand{\Marked}{\ensuremath{\mathit{marked}}\xspace}
+\newcommand{\NoMarks}{\ensuremath{\mathit{NoMarks}}\xspace}
+\newcommand{\SomeMark}{\ensuremath{\mathit{SomeMark}}\xspace}
+\newcommand{\LastMarked}{\ensuremath{\mathit{LastMarked}}\xspace}
+\newcommand{\MarkedList}{\ensuremath{\mathit{MarkedList}}\xspace}
+\newcommand{\LastLockedAddr}{\ensuremath{\mathit{LastLockedAddr}}\xspace}
+\newcommand{\NoLocks}{\ensuremath{\mathit{NoLocks}}\xspace}
+\newcommand{\NoChange}{\ensuremath{\mathit{NoChange}}\xspace}
+\newcommand{\AboutToChange}{\ensuremath{\mathit{AboutToChange}}\xspace}
+\newcommand{\IsLast}{\ensuremath{\mathit{IsLast}}\xspace}
+\newcommand{\NoIsLast}{\ensuremath{\mathit{IsNotLast}}\xspace}
+\newcommand{\KEnds}{\ensuremath{\mathit{K_{ends}}}\xspace}
+\newcommand{\tranEnd}{\ensuremath{\mathit{end}}\xspace}
+\newcommand{\tPre}{\ensuremath{\mathit{t^{pre}}}\xspace}
+\newcommand{\deltaL}{\ensuremath{\delta_{L}}\xspace}
+\newcommand{\first}{\ensuremath{\mathit{first}}\xspace}
+\newcommand{\firstK}{\ensuremath{\mathit{first}_{\K}}\xspace}
+\newcommand{\compress}{\ensuremath{\mathit{compress}}\xspace}
+\newcommand{\compressA}{\ensuremath{\inter{\compress}{\Ai}}\xspace}
+\newcommand{\compressB}{\ensuremath{\inter{\compress}{\Bi}}\xspace}
+\newcommand{\compressList}{\ensuremath{\mathit{compressList}}\xspace}
+\newcommand{\compressListA}{\ensuremath{\inter{\compressList}{\Ai}}\xspace}
+\newcommand{\compressListB}{\ensuremath{\inter{\compressList}{\Bi}}\xspace}
+
+\newcommand{\NUM}[1]{\ensuremath{\overline{#1}}}
+\newcommand{\fstL}{\ensuremath{\mathit{fstL}}}
+\newcommand{\unordered}{\ensuremath{\mathit{unordered}}}
+\newcommand{\diseqPath}{\ensuremath{\mathit{diseq}}}
+\newcommand{\common}{\ensuremath{\mathit{common}}}
+
+
+%% Sets names
+\newcommand{\setL}{\ensuremath{\mathit{L}}\xspace}
+\newcommand{\setO}{\ensuremath{\mathit{O}}\xspace}
+\newcommand{\setX}{\ensuremath{\mathit{X}}\xspace}
+\newcommand{\setY}{\ensuremath{\mathit{Y}}\xspace}
+\newcommand{\setZ}{\ensuremath{\mathit{Z}}\xspace}
+
+
+%% Shortcuts for theory manipulation
+\newcommand{\ai}[2]{\ensuremath{\mathit{a}_{#1}^{#2}}\xspace}
+\newcommand{\hp}[2]{\ensuremath{\mathit{h}_{{#1} \mapsto {#2}}}\xspace}
+\newcommand{\ma}{\ensuremath{\inter{m}{\Ai}}\xspace}
+\newcommand{\mb}{\ensuremath{\inter{m}{\Bi}}\xspace}
+\newcommand{\md}[1]{\ensuremath{m[{#1}].\fData}\xspace}
+\newcommand{\mda}[1]
+	{\ensuremath{\inter{m}{\Ai}(\inter{#1}{\Ai}).\inter{\fData}{\Ai}}\xspace}
+\newcommand{\mdb}[1]
+	{\ensuremath{\inter{m}{\Bi}(\inter{#1}{\Bi}).\inter{\fData}{\Bi}}\xspace}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                             %%
+%%  Concurrent lock-coupling example commands  %%
+%%                                             %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\ra}{\ensuremath{r_a}\xspace}
+\newcommand{\rb}{\ensuremath{r_b}\xspace}
+\newcommand{\setT}{\ensuremath{\mathit{set}_{T}}\xspace}
+\newcommand{\thSetAP}{\ensuremath{\mathit{TSet}_{prev}}\xspace}
+\newcommand{\thSetAC}{\ensuremath{\mathit{TSet}_{curr}}\xspace}
+\newcommand{\thSetB}{\ensuremath{\mathit{TSet}_{bef}}\xspace}
+
+\newcommand{\ThSetIn}{\ensuremath{\mathit{In}}\xspace}
+\newcommand{\ThSetOut}{\ensuremath{\mathit{Out}}\xspace}
+\newcommand{\SerIn}{\ensuremath{\mathit{Ser_{\ThSetIn}}}\xspace}
+\newcommand{\SerOut}{\ensuremath{\mathit{Ser_{\ThSetOut}}}\xspace}
+\newcommand{\kisin}{\ensuremath{\mathit{k\_is\_in}}\xspace}
+
+\newcommand{\serB}{\ensuremath{\mathit{ser}_{b}}\xspace}
+\newcommand{\serA}{\ensuremath{\mathit{ser}_{a}}\xspace}
+\newcommand{\iisin}{\ensuremath{\mathit{i\_is\_in}}\xspace}
+\newcommand{\myid}{\ensuremath{\mathit{my\_id}}\xspace}
+\newcommand{\NLA}{\ensuremath{\mathit{NLA}}\xspace}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                            %%
+%%  Commands for writing program source code  %%
+%%                                            %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newlength{\stwidth}
+\newlength{\myalgindent}
+\addtolength{\myalgindent}{15pt}
+
+
+% A normal statement with a model statement
+% param1: Statement
+% param2: Model Statement
+% param3: Column width
+% param4: Identation count
+\algnewcommand{\MState}[4]
+	{\settowidth{\stwidth}{{#1}}
+	\addtolength{\stwidth}{-2\stwidth}
+	\addtolength{\stwidth}{-#4\myalgindent}
+	\addtolength{\stwidth}{#3cm}
+	\State {#1}
+	\hspace{\stwidth} //@ #2}
+
+
+% A single model only statement
+% param1: Model Statement
+% param2: Column width
+\algnewcommand{\MOState}[2]
+	{\Statex{\hspace{2pt}\hspace{#2cm} //@ #1}}
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+%%                    %%
+%%  Stack operations  %%
+%%                    %%
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\StkEmpty}{\ensuremath{\mathit{isEmpty}}\xspace}
+\newcommand{\StkSize}{\ensuremath{\mathit{size}}\xspace}
+\newcommand{\StkPush}{\ensuremath{\mathit{push}}\xspace}
+\newcommand{\StkPop}{\ensuremath{\mathit{pop}}\xspace}
+\newcommand{\StkTop}{\ensuremath{\mathit{top}}\xspace}
+\newcommand{\StkPretop}{\ensuremath{\mathit{pretop}}\xspace}
+\newcommand{\StkIncTop}{\ensuremath{\mathit{incTop}}\xspace}
+\newcommand{\Set}{\ensuremath{\mathit{Set}}\xspace}
+\newcommand{\Stack}{\ensuremath{\mathit{Stack}}\xspace}
+\newcommand{\IStack}{\ensuremath{\mathit{I_{\Stack}}}\xspace}
+\newcommand{\IPrevStack}{\ensuremath{\mathit{I_{Prev\Stack}}}\xspace}
+\newcommand{\IPrevStackP}{\ensuremath{\mathit{I'_{Prev\Stack}}}\xspace}
+\newcommand{\IStackTop}{\ensuremath{\mathit{I_{\Stack}^{top}}}\xspace}
+\newcommand{\IStackNTop}{\ensuremath{\mathit{I_{\Stack}^{nontop}}}\xspace}
+\newcommand{\IStackP}{\ensuremath{\mathit{I'_{\Stack}}}\xspace}
+\newcommand{\IStackTopP}{\ensuremath{\mathit{I_{\Stack}^{top'}}}\xspace}
+\newcommand{\IStackNTopP}{\ensuremath{\mathit{I_{\Stack}^{nontop'}}}\xspace}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                         %%
+%%  Region function names  %%
+%%                         %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\mr}[3]{\ensuremath{\vt{m}{#1}_{#2..#3}}}
+\newcommand{\mskreg}[1]{\ensuremath{\vt{m}{#1}_{r}}}
+\newcommand{\rgn}{\ensuremath{\mathbf{rgn}}\xspace}
+\newcommand{\mrgn}{\ensuremath{\mathbf{mrgn}}\xspace}
+\newcommand{\tdot}{\tbf{.}}
+\newcommand{\wre}{\text{\textbf{wr }}}
+\newcommand{\rde}{\text{\textbf{rd }}}
+\newcommand{\sreg}[1]{\left\langle {#1} \right\rangle}
+\newcommand{\mreg}[1]{({#1})}
+\newcommand{\emp}{\text{\textbf{emp}}\xspace}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                              %%
+%%  Lists names and operations  %%
+%%                              %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\Node}{\ensuremath{\mathit{Node}}\xspace}
+\newcommand{\NodeP}{\ensuremath{\mathit{Node^{*}}}\xspace}
+\newcommand{\Nodes}{\ensuremath{\mathit{Nodes}}\xspace}
+\newcommand{\DNode}{\ensuremath{\mathit{DoubleNode}}\xspace}
+\newcommand{\DList}{\ensuremath{\mathit{DoubleList}}\xspace}
+\newcommand{\Prev}{\ensuremath{\mathit{Prev}}\xspace}
+\newcommand{\NodeSize}{\ensuremath{\mathit{NodeSize}}\xspace}
+\newcommand{\NodeSizeUpTo}{\ensuremath{\mathit{NodeSizeUpTo}}\xspace}
+\newcommand{\KeepSize}{\ensuremath{\mathit{KeepSize}}\xspace}
+\newcommand{\EqN}{\ensuremath{\mathit{EqN}}\xspace}
+\newcommand{\EqNode}{\ensuremath{\mathit{EqNode}}\xspace}
+\newcommand{\EqNodeUpTo}{\ensuremath{\mathit{EqNodeUpTo}}\xspace}
+\newcommand{\ListUpTo}{\ensuremath{\mathit{ListUpTo}}\xspace}
+\newcommand{\OrdListUpTo}{\ensuremath{\mathit{OrdListUpTo}}\xspace}
+\newcommand{\OrdListUpToLevel}{\ensuremath{\mathit{OrdListUpToLevel}}\xspace}
+\newcommand{\CircList}{\ensuremath{\mathit{CircList}}\xspace}
+\newcommand{\RevInitUpTo}{\ensuremath{\mathit{RevInitUpTo}}\xspace}
+\newcommand{\EqSkipUpTo}{\ensuremath{\mathit{EqSkipUpTo}}\xspace}
+\newcommand{\RevConcat}{\ensuremath{\mathit{RevConcat}}\xspace}
+\newcommand{\IsInList}{\ensuremath{\mathit{IsInList}}\xspace}
+\newcommand{\NotInList}{\ensuremath{\mathit{NotInList}}\xspace}
+\newcommand{\List}{\ensuremath{\mathit{List}}\xspace}
+\newcommand{\RegInv}{\ensuremath{\mathit{RegInv}}\xspace}
+\newcommand{\forward}{\ensuremath{\mathit{forward}}\xspace}
+\newcommand{\last}{\ensuremath{\mathit{last}}\xspace}
+\newcommand{\size}{\ensuremath{\mathit{size}}\xspace}
+\newcommand{\Head}{\ensuremath{\mathit{Head}}\xspace}
+\newcommand{\head}{\ensuremath{\mathit{head}}\xspace}
+\newcommand{\Tail}{\ensuremath{\mathit{Tail}}\xspace}
+\newcommand{\tail}{\ensuremath{\mathit{tail}}\xspace}
+\newcommand{\heap}{\ensuremath{\mathit{heap}}\xspace}
+\newcommand{\tNext}{\ensuremath{\mathit{next}}\xspace}
+\newcommand{\tList}{\ensuremath{\mathit{list}}\xspace}
+\newcommand{\rs}{\ensuremath{\mathit{rs}}\xspace}
+\providecommand*{\ts}{} % Cesar: otherwise, it \ts is undefined, it crashes
+\renewcommand{\ts}{\ensuremath{\mathit{ts}}\xspace}
+\newcommand{\fs}{\ensuremath{\mathit{fs}}\xspace}
+
+\newcommand{\fPtoS}{\ensuremath{\mathit{p2s}}\xspace}
+
+\newcommand{\ListToSet}{\ensuremath{\mathit{ListToSet}}\xspace}
+\newcommand{\OrdList}{\ensuremath{\mathit{OrdList}}\xspace}
+\newcommand{\Ordered}{\ensuremath{\mathit{Ordered}}\xspace}
+\newcommand{\ChkP}{\ensuremath{\mathit{ChkSer}}\xspace}
+
+\newcommand{\goess}{\ensuremath{\hookrightarrow}}
+\newcommand{\goesn}{\ensuremath{\goess^{n}}}
+\newcommand{\goesk}[1]{\ensuremath{\goess^{#1}}}
+
+\newcommand{\Op}{\ensuremath{\mathit{Op}}\xspace}
+\newcommand{\AddOp}{\ensuremath{\mathit{Add_{Op}}}\xspace}
+\newcommand{\RemOp}{\ensuremath{\mathit{Rem_{Op}}}\xspace}
+\newcommand{\FindTOp}{\ensuremath{\mathit{FindT_{Op}}}\xspace}
+\newcommand{\FindFOp}{\ensuremath{\mathit{FindF_{Op}}}\xspace}
+
+\newcommand{\preds}{\ensuremath{\mathit{preds}}\xspace}
+\newcommand{\succs}{\ensuremath{\mathit{succs}}\xspace}
+\newcommand{\lFound}{\ensuremath{\mathit{lFound}}\xspace}
+
+\newcommand{\pred}{\ensuremath{\mathit{pred}}\xspace}
+\newcommand{\curr}{\ensuremath{\mathit{curr}}\xspace}
+\newcommand{\update}{\ensuremath{\mathit{update}}\xspace}
+\newcommand{\upd}{\ensuremath{\mathit{upd}}\xspace}
+
+%% Concurrent lists predicates
+\newcommand{\Respect}{\ensuremath{\mathit{Respect}}\xspace}
+\newcommand{\AfterMe}{\ensuremath{\mathit{AfterMe}}\xspace}
+\newcommand{\BeforeMe}{\ensuremath{\mathit{BeforeMe}}\xspace}
+\newcommand{\BeforeSer}{\ensuremath{\mathit{BeforeSer}}\xspace}
+\newcommand{\AfterSer}{\ensuremath{\mathit{AfterSer}}\xspace}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                  %%
+%%  Skiplists names and operations  %%
+%%                                  %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\SkipList}{\ensuremath{\mathit{SkipList}}\xspace}
+\newcommand{\IsSkipList}{\ensuremath{\mathit{IsSkipList}}\xspace}
+\newcommand{\ListUpToLevel}{\ensuremath{\mathit{ListUpToLevel}}\xspace}
+\newcommand{\SubPath}{\ensuremath{\mathit{SubPath}}\xspace}
+\newcommand{\SubList}{\ensuremath{\mathit{SubList}}\xspace}
+\newcommand{\SubListUpTo}{\ensuremath{\mathit{SubListUpTo}}\xspace}
+\newcommand{\SubListUpToLevel}{\ensuremath{\mathit{SubListUpToLevel}}\xspace}
+\newcommand{\OList}{\ensuremath{\mathit{OList}}\xspace}
+\newcommand{\skreg}{\ensuremath{\mathit{skreg}}\xspace}
+\newcommand{\locks}{\ensuremath{\mathit{locks}}\xspace}
+\newcommand{\randomLevel}{\ensuremath{\mathit{randomLevel}}\xspace}
+\newcommand{\randomKey}{\ensuremath{\mathit{randomKey}}\xspace}
+\newcommand{\randomValue}{\ensuremath{\mathit{randomValue}}\xspace}
+\newcommand{\CreateNode}{\ensuremath{\mathit{CreateNode}}\xspace}
+\newcommand{\maxLevel}{\ensuremath{\mathit{maxLevel}}\xspace}
+\newcommand{\level}{\ensuremath{\mathit{level}}\xspace}
+\newcommand{\initialLevel}{\ensuremath{\mathit{initialLevel}}\xspace}
+\newcommand{\currLevel}{\ensuremath{\mathit{currLevel}}\xspace}
+\newcommand{\topLevel}{\ensuremath{\mathit{topLevel}}\xspace}
+\newcommand{\DisjRegions}{\ensuremath{\mathit{DisjRegions}}\xspace}
+\newcommand{\DisjSkLevel}{\ensuremath{\mathit{DisjSkLevel}}\xspace}
+\newcommand{\DisjSkUpToLevel}{\ensuremath{\mathit{DisjSkUpToLevel}}\xspace}
+\newcommand{\DisjSkRegs}{\ensuremath{\mathit{DisjSkRegs}}\xspace}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                             %%
+%%  Algorithms and code names  %%
+%%                             %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\ghcode}[1]{\ensuremath{
+			\left[ \begin{array}{l}
+			#1
+			\end{array} \right]}
+}
+
+\newlength{\mylen}
+\newenvironment{derivation} {
+
+	\newcommand{\rint}{\text{\textbf{int}}}
+	\newcommand{\rnull}{\tbf{null}}
+	\newcommand{\alloc}{\text{\textbf{alloc}}}
+	\newcommand{\new}{\text{\textbf{new}}}
+	\newcommand{\rif}{\text{\textbf{if}}}
+	\newcommand{\rthen}{\text{\textbf{then}}}
+	\newcommand{\relse}{\text{\textbf{else}}}
+	\newcommand{\while}[1]{\text{\textbf{while }}{##1}\text{\textbf{ do }}}
+	\newcommand{\var}[2]{\text{\textbf{var }}{##1}:{##2}\text{\textbf{ in }}}
+	\newcommand{\varend}{\text{\textbf{end}}}	
+
+%% New ghost command.
+	\newcommand{\gcode}[1]{\code{@ \: ##1}}
+
+	\newcommand{\code}[1]{\item{\hspace{0.5cm}\ensuremath{##1}}}
+	
+	\newcommand{\step}[3]{\item \item[\ensuremath{##1}]{
+		\setlength{\mylen}{\linewidth}
+		\addtolength{\mylen}{-0.7cm}
+			\ensuremath{\Big\{}\parbox[t]{\mylen}{\ensuremath{##2}\ensuremath{\Big\}} \\ \big[\ensuremath{##3} \big] }\par \item
+	}}
+	
+	\newcommand{\simplestep}[2]{\item \item[\ensuremath{##1}]{
+		\setlength{\mylen}{\linewidth}
+		\addtolength{\mylen}{-0.7cm}
+			\ensuremath{\Big\{}\parbox[t]{\mylen}{\ensuremath{##2}\ensuremath{\Big\}} }\par \item
+	}}
+
+	\begin{list}{} {
+		\setlength{\itemsep}{0cm}
+		\setlength{\leftmargin}{1cm}
+		\addtolength{\topsep}{-0.5\topsep}
+	}
+	\item
+}{
+	\end{list}
+}
+
+\newcommand{\New}{\tbf{new }}
+\newcommand{\Nondet}{\tbf{nondet}}
+\newcommand{\Critical}{\tbf{critical}}
+\newcommand{\Noncritical}{\tbf{noncritical}}
+\renewcommand{\Call}{\tbf{call }}
+\newcommand{\ProgOr}{\tbf{    or }}
+\newcommand{\Free}{\ensuremath{\textrm{\tbf{free }}}\xspace}
+\newcommand{\Break}{\ensuremath{\textrm{\tbf{break }}}\xspace}
+
+\newcommand{\result}{\ensuremath{\mathit{result}}\xspace}
+\newcommand{\retval}{\ensuremath{\mathit{retval}}\xspace}
+\newcommand{\newval}{\ensuremath{\mathit{newval}}\xspace}
+\newcommand{\valueWasIn}{\ensuremath{\mathit{valueWasIn}}\xspace}
+\newcommand{\valueIsIn}{\ensuremath{\mathit{valueIsIn}}\xspace}
+\newcommand{\fullyLinked}{\ensuremath{\mathit{fullyLinked}}\xspace}
+
+\newcommand{\aInit}{\ensuremath{a_{\textit{init}}}\xspace}
+\newcommand{\aEnd}{\ensuremath{a_{\textit{end}}}\xspace}
+
+
+%%%%%%%%%%%%%%%%%%%
+%%               %%
+%%  Types names  %%
+%%               %%
+%%%%%%%%%%%%%%%%%%%
+\newcommand{\true}{\ensuremath{\mathit{true}}\xspace}
+\newcommand{\false}{\ensuremath{\mathit{false}}\xspace}
+\newcommand{\Tvector}{\ensuremath{\mathit{Vector}}\xspace}
+\newcommand{\TArray}{\ensuremath{\mathit{Array}}\xspace}
+\newcommand{\Tint}{\ensuremath{\mathit{Int}}\xspace}
+\newcommand{\intt}{\ensuremath{\mathit{Int}}\xspace}
+\newcommand{\thIdT}{\ensuremath{\mathit{thId}}\xspace}
+\newcommand{\bool}{\ensuremath{\mathit{Bool}}\xspace}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                      %%
+%%  Locks manipulation  %%
+%%                      %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\Lock}{\ensuremath{\mathit{Lock}}\xspace}
+\newcommand{\Locked}{\ensuremath{\mathit{Locked}}\xspace}
+\newcommand{\lock}{\ensuremath{\mathit{lock}}\xspace}
+\newcommand{\unlock}{\ensuremath{\mathit{unlock}}\xspace}
+\newcommand{\owner}{\ensuremath{\mathit{owner}}\xspace}
+
+
+%%%%%%%%%%%%%%%%%%%
+%%               %%
+%%  Transitions  %%
+%%               %%
+%%%%%%%%%%%%%%%%%%%
+\newcommand{\at}[1]{\ensuremath{\mathit{at\_\ell_{#1}}}\xspace}
+\newcommand{\att}[1]{\ensuremath{\mathit{at'\_\ell_{#1}}}\xspace}
+
+\newcommand{\atth}[2]{\ensuremath{\mathit{at\_\ell^{[{#2}]}_{#1}}}\xspace}
+\newcommand{\attht}[2]{\ensuremath{\mathit{at'\_\ell^{[{#2}]}_{#1}}}\xspace}
+
+\newcommand{\atthps}[2]{\ensuremath{\mathit{at\_{#1}_{#2}}}\xspace}
+\newcommand{\atthpst}[2]{\ensuremath{\mathit{at'\_{#1}_{#2}}}\xspace}
+
+\newcommand{\atthp}[3]{\ensuremath{\mathit{at\_{#1}^{[{#3}]}_{#2}}}\xspace}
+\newcommand{\atthpt}[3]{\ensuremath{\mathit{at'\_{#1}^{[{#3}]}_{#2}}}\xspace}
+
+\newcommand{\atEnd}[1]{\ensuremath{\mathit{at\_{\mit{end}}^{[{#1}]}}}\xspace}
+
+\newcommand{\tr}[1]{\ensuremath{\mathit{\rho_{\ell_{#1}}}}\xspace}
+\newcommand{\tset}[1]{\ensuremath{\big\{ {#1} \big\}}\xspace}
+\newcommand{\tra}[1]{\ensuremath{\tau_{#1}}\xspace}
+\newcommand{\tranDef}[2]{\ensuremath{\tau^{#2}_{#1}}\xspace}
+\newcommand{\tran}[3]{\ensuremath{\tau^{[{#3}]}_{{#1}_{#2}}}\xspace}
+\newcommand{\trans}[2]{\ensuremath{\tau_{{#1}_{#2}}}\xspace}
+\newcommand{\ttran}[2]{\ensuremath{\tau^{[#1]}_{#2}}\xspace}
+
+\newcommand{\pt}[1]{\pi^{[#1]}}
+
+\newcommand{\rtau}[2]{\ensuremath{\mathit{\rho_{\tau^{[#2]}_{#1}}}}\xspace}
+\newcommand{\rtaust}[2]{\ensuremath{\mathit{\rho_\tau(#1,#2)}}\xspace}
+\newcommand{\rptaust}[3]{\ensuremath{\mathit{\rho^{[{#1}]}_\tau(#2,#3)}}\xspace}
+\newcommand{\rhotran}[3]{\ensuremath{\rho_{\tau_{#1_{#2}}^{[#3]}}}\xspace}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                     %%
+%%  Skiplists symbols  %%
+%%                     %%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% Common words used in mathematical enviroments.
+\newcommand{\inv}[2]{\ensuremath{I_{\textrm{#1}}^{[#2]}}}
+\newcommand{\Value}{\ensuremath{\mathit{Value}}\xspace}
+\newcommand{\Key}{\ensuremath{\mathit{Key}}\xspace}
+\newcommand{\Null}{\ensuremath{\mathit{Null}}\xspace}
+\newcommand{\Thread}{\ensuremath{\mathit{Thread}}\xspace}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                      %%
+%%  Schorr-Waite names  %%
+%%                      %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\Graph}{\ensuremath{\mathit{Graph}}\xspace}
+\newcommand{\Rch}{\ensuremath{\mathit{Rch}}\xspace}
+\newcommand{\Rall}{\ensuremath{\mathit{R_{all}}}\xspace}
+\newcommand{\Rgraph}{\ensuremath{\mathit{R_{graph}}}\xspace}
+\newcommand{\PreSW}{\ensuremath{\mathit{Pre_{SSW}}}\xspace}
+\newcommand{\PostSW}{\ensuremath{\mathit{Post_{SSW}}}\xspace}
+\newcommand{\PreNDTS}{\ensuremath{\mathit{Pre_{NDTS}}}\xspace}
+\newcommand{\PostNDTS}{\ensuremath{\mathit{Post_{NDTS}}}\xspace}
+\newcommand{\PreNDSW}{\ensuremath{\mathit{Pre_{NDSW}}}\xspace}
+\newcommand{\PostNDSW}{\ensuremath{\mathit{Post_{NDSW}}}\xspace}
+\newcommand{\edges}{\ensuremath{\mathit{edges}}\xspace}
+\newcommand{\ptr}{\ensuremath{\mathit{Ptr}}\xspace}
+\newcommand{\ptrChild}{\ensuremath{\mathit{Ptr_{child}}}\xspace}
+\newcommand{\MptrChild}{\ensuremath{\mathit{MPtr_{child}}}\xspace}
+
+\newcommand{\ptrLROnly}{\ensuremath{\mathit{Ptr_{LR\_only}}}\xspace}
+\newcommand{\ptrLPOnly}{\ensuremath{\mathit{Ptr_{LP\_only}}}\xspace}
+\newcommand{\Mptr}{\ensuremath{\mathit{MPtr}}\xspace}
+
+\newcommand{\Forall}[1]{\ensuremath{\textsf{forall}_{#1}}\xspace}
+\newcommand{\DUnion}{\ensuremath{\oplus}\xspace}
+\newcommand{\BDUnion}{\ensuremath{\bigoplus}\xspace}
+
+\newcommand{\TID}{\ensuremath{T_{ID}}\xspace}
+\newcommand{\vt}[2]{\ensuremath{{#1}^{[{#2}]}}\xspace}
+\newcommand{\Addr}{\ensuremath{\mathit{Addr}}\xspace}
+\newcommand{\Values}{\ensuremath{\mathit{Values}}\xspace}
+\newcommand{\Vars}{\ensuremath{\mathit{Vars}}\xspace}
+\newcommand{\val}{\ensuremath{\mathit{val}}\xspace}
+\newcommand{\key}{\ensuremath{\mathit{key}}\xspace}
+\newcommand{\visits}{\ensuremath{\mathit{visits}}\xspace}
+\newcommand{\aux}{\ensuremath{\mathit{aux}}\xspace}
+\newcommand{\leftp}{\ensuremath{\mathit{left}}\xspace}
+\newcommand{\rightp}{\ensuremath{\mathit{right}}\xspace}
+\newcommand{\oleftp}{\ensuremath{\mathit{orig\_left}}\xspace}
+\newcommand{\orightp}{\ensuremath{\mathit{orig\_right}}\xspace}
+\newcommand{\vroot}{\ensuremath{\mathit{vroot}}\xspace}
+\newcommand{\rootnode}{\ensuremath{\mathit{root}}\xspace}
+
+\newcommand{\info}{\ensuremath{\mathit{info}}\xspace}
+\newcommand{\infostr}{\ensuremath{\mathit{info\_structure}}\xspace}
+\newcommand{\Step}{\ensuremath{\mathit{step}}\xspace}
+\newcommand{\theresWork}{\ensuremath{\mathit{theresWork}}\xspace}
+\newcommand{\prev}{\ensuremath{\mathit{prev}}\xspace}
+\newcommand{\visited}{\ensuremath{\mathit{visited}}\xspace}
+\newcommand{\execPoint}{\ensuremath{\mathit{execPoint}}\xspace}
+
+\newcommand{\TheresAvailableNodes}
+	{\ensuremath{\mathit{TheresAvailableNodes}}\xspace}
+\newcommand{\NondetDecide}{\ensuremath{\mathit{NondetDecide}}\xspace}
+\newcommand{\NondetChooseThread}{\ensuremath{\mathit{NondetChooseThread}}\xspace}
+\newcommand{\NondetChooseNode}{\ensuremath{\mathit{NondetChooseNode}}\xspace}
+\newcommand{\NondetChooseElem}{\ensuremath{\mathit{NondetPickElem}}\xspace}
+\newcommand{\NondetSchorrWaite}
+	{\ensuremath{\mathit{NondeterministicShorrWaite}}\xspace}
+
+\newcommand{\findNode}{\ensuremath{\mathit{findNode}}\xspace}
+\newcommand{\okToDelete}{\ensuremath{\mathit{okToDelete}}\xspace}
+
+\newcommand{\pn}{\ensuremath{\pi_{n}}}
+\newcommand{\pc}{\ensuremath{\pi_{c}}}
+
+%% Some names for graphs operations
+\newcommand{\rotjump}{\textsf{rotate \& jump }}
+\newcommand{\rot}{\textsf{rotate }}
+
+
+%%%%%%%%%%%%%%%%%%%%%
+%%                 %%
+%%  Lock drawings  %%
+%%                 %%
+%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\blacklocksym}{\ensuremath{
+	\stackrel{\textrm{\raisebox{-2ex}{$\cap$}}}
+		{\blacksquare}}}
+
+\newcommand{\locksym}[1]{\tiny{\stackrel{\cap}{\Box}}
+	\hspace{-2.8ex}\textrm{\raisebox{0.9ex}{#1}}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                   %%
+%%  Fair Transition Systems Symbols  %%
+%%                                   %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\FTS}{\ensuremath{\textsc{fts}}\xspace}
+\newcommand{\PFTSof}[1]{\ensuremath{\mathcal{F}^{[{#1}]}}\xspace}
+\newcommand{\TFof}[1]{\ensuremath{\varphi^{({#1})}}\xspace}
+\newcommand{\VD}{\ensuremath{\textsc{vd}}\xspace}
+\newcommand{\GTVD}{\ensuremath{\textsc{gtvd}}\xspace}
+\newcommand{\PVD}{\ensuremath{\textsc{pvd}}\xspace}
+\newcommand{\PVDsym}{\ensuremath{\mathcal{D}}\xspace}
+\newcommand{\FA}{\ensuremath{\textsc{fa}}\xspace}
+\newcommand{\Prog}{\ensuremath{\mathit{P}}\xspace}
+\newcommand{\V}{\ensuremath{\mathit{V}}\xspace}
+\newcommand{\VProg}{\ensuremath{\mathit{V_{prog}}}\xspace}
+\newcommand{\Vtheta}{\ensuremath{\mathit{V_{\theta}}}\xspace}
+\newcommand{\VTID}{\ensuremath{\mathit{V_{\TID}}}\xspace}
+\newcommand{\VTIDp}{\ensuremath{\mathit{V_{\TID}^{+}}}\xspace}
+\newcommand{\VSetT}{\ensuremath{\mathit{V_{\setT}}}\xspace}
+\newcommand{\tDiff}{\ensuremath{\mathit{t_{diff}}}\xspace}
+\newcommand{\J}{\ensuremath{\mathcal{J}}\xspace}
+\newcommand{\C}{\ensuremath{\mathcal{C}}\xspace}
+\renewcommand{\T}{\ensuremath{\mathcal{T}}\xspace}
+\renewcommand{\F}{\ensuremath{\mathcal{F}}\xspace}
+\newcommand{\D}{\ensuremath{\mathcal{D}}\xspace}
+\newcommand{\tDelta}[1]{\ensuremath{\delta_{#1}}\xspace}
+\renewcommand{\k}{\ensuremath{\kappa}\xspace}
+\newcommand{\bpn}{\ensuremath{\beta_n}\xspace}
+\newcommand{\bpv}{\ensuremath{\beta_v}\xspace}
+\newcommand{\FTSState}{\ensuremath{\mathit{state}}\xspace}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                 %%
+%%  Verification Diagrams Symbols  %%
+%%                                 %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\validVD}{\ensuremath{(\Phi, \varphi)\mit{-valid}}\xspace}
+\newcommand{\validPVD}
+	{\ensuremath{(\PFTSof{M}, \TFof{k})\mit{-valid}}\xspace}
+
+\newcommand{\pres}{\ensuremath{\mathit{pres}}\xspace}
+% A preserved set of variables
+\newcommand{\preset}[1]{\ensuremath{\pres(V - \{ #1 \})}}
+\newcommand{\En}{\ensuremath{\mathit{En}}\xspace}
+\newcommand{\lang}{\ensuremath{\mathcal{L}}\xspace}
+
+\newcommand{\infn}{\ensuremath{\mathit{inf_n}}\xspace}
+\newcommand{\infe}{\ensuremath{\mathit{inf_e}}\xspace}
+
+\newcommand{\PFTSrun}{\ensuremath{\mathcal{L}_{R}(\PFTSof{M})}\xspace}
+\newcommand{\PVDrun}{\ensuremath{\mathcal{L}_{R}(\PVDsym)}\xspace}
+\newcommand{\PFTScomp}{\ensuremath{\mathcal{L}(\PFTSof{M})}\xspace}
+\newcommand{\PVDcomp}{\ensuremath{\mathcal{L}(\PVDsym)}\xspace}
+\newcommand{\PTFcomp}{\ensuremath{\mathcal{L}(\TFof{k})}\xspace}
+\newcommand{\PVDcompP}{\ensuremath{\mathcal{L}^{p}(\PVDsym)}\xspace}
+\newcommand{\PTFcompP}{\ensuremath{\mathcal{L}^{p}(\TFof{k})}\xspace}
+
+\newcommand{\FTSrun}{\ensuremath{\mathcal{L}_{R}(\Phi)}\xspace}
+\newcommand{\VDrun}{\ensuremath{\mathcal{L}_{R}(\Psi)}\xspace}
+\newcommand{\FTScomp}{\ensuremath{\mathcal{L}(\Phi)}\xspace}
+\newcommand{\VDcomp}{\ensuremath{\mathcal{L}(\Psi)}\xspace}
+\newcommand{\TFcomp}{\ensuremath{\mathcal{L}(\varphi)}\xspace}
+\newcommand{\VDcompP}{\ensuremath{\mathcal{L}^{p}(\Psi)}\xspace}
+\newcommand{\TFcompP}{\ensuremath{\mathcal{L}^{p}(\varphi)}\xspace}
+
+\newcommand{\LastTerm}{\ensuremath{\psi}\xspace}
+\newcommand{\Term}{\ensuremath{\psi}\xspace}
+\newcommand{\Sys}{\ensuremath{\mathcal{S}}\xspace}
+\newcommand{\SysN}{\ensuremath{\mathcal{S}[N]}\xspace}
+
+\newcommand{\any}{\ensuremath{\mathit{any}}\xspace}
+
+\newcommand{\mL}{\ensuremath{\mathit{max}_{H}}\xspace}
+\newcommand{\phiPA}{\ensuremath{\varphi^{\mathit{PA}}}\xspace}
+\newcommand{\phiNC}{\ensuremath{\varphi^{\mathit{NC}}}\xspace}
+\newcommand{\toTSLK}[1]{\ensuremath{\ulcorner{#1}\urcorner}\xspace}
+
+
+%%%%%%%%%%%%%%%%%%%%%
+%%                 %%
+%%  Program names  %%
+%%                 %%
+%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\locate}{\ensuremath{\mathit{locate}}\xspace}
+\newcommand{\validate}{\ensuremath{\mathit{validate}}\xspace}
+\newcommand{\add}{\ensuremath{\mathit{add}}\xspace}
+\newcommand{\remove}{\ensuremath{\mathit{remove}}\xspace}
+\newcommand{\search}{\ensuremath{\mathit{search}}\xspace}
+\renewcommand{\insert}{\ensuremath{\mathit{insert}}\xspace}
+\newcommand{\contains}{\ensuremath{\mathit{contains}}\xspace}
+\newcommand{\creation}{\ensuremath{\mathit{creation}}\xspace}
+\newcommand{\decide}{\ensuremath{\mathit{decide}}\xspace}
+\newcommand{\dec}{\ensuremath{\mathit{dec}}\xspace}
+\newcommand{\marked}{\ensuremath{\mathit{marked}}\xspace}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+%%                    %%
+%%  Class definition  %%
+%%                    %%
+%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\class}{\tbf{class}}
+\newcommand{\field}[2]{\hs{1} #1 \: #2; \\}
+\newcommand{\mfield}[2]{\hs{1} @ #1 \: #2; \\}
+\newenvironment{classdef}[1]
+	{
+		\begin{center}
+		\begin{math}
+		\begin{array}{l}
+		\class \: #1 \: \{ \\
+	}
+	{
+		\}
+		\end{array}
+		\end{math}
+		\end{center}
+	}
+

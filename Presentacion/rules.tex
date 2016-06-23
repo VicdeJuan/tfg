@@ -1,0 +1,179 @@
+\newcommand{\supports}{\mathrel{\rhd}}
+
+\newcommand{\INV}{\textsc{inv}\xspace}
+\newcommand{\bINV}{\textsc{b-inv}\xspace}
+\newcommand{\bpINV}{\textsc{p-inv}\xspace}
+\newcommand{\pINV}{\ensuremath{\textsc{p-inv}\xspace}}
+\newcommand{\spINV}{\textsc{sp-inv}\xspace}
+\newcommand{\gINV}{\textsc{g-inv}\xspace}
+\newcommand{\uspINV}{\textsc{up-inv}\xspace}
+\newcommand{\SPL}{\textsc{spl}\xspace}
+%\newcommand{\sArray}{\textsf{array}\xspace}
+\newcommand{\Arr}{\textit{Arr}} 
+
+\newcommand{\Premise}[1]{\ensuremath{\mathsf{#1}}\xspace}
+
+
+\newcommand{\bINVRule}{
+  \framebox{
+    \begin{minipage}[b]{17.3em}
+      To show that $\Sys$ satisfies $\Always p$:
+       \[ \begin{array}{r@{\hspace{2em}}r@{\;}c@{\;}l@{}l}
+         \Premise{B1.} & \Theta &\Into& p & \\
+         \Premise{B2.} &  p \And \tau &\Into& p'  & \;\;\;\;\text{for all $\tau$}\\
+         \phantom{\Premise{I3}} \\ \cline{1-5}
+         & \multicolumn{3}{c}{\hspace{1em}\Always p} &
+       \end{array}
+       \]
+    \end{minipage}
+  }
+}
+
+\newcommand{\INVRule}{
+%  \centering
+  \framebox{
+    \begin{minipage}[b]{17.3em}
+      To show that $\Sys$ satisfies $\Always p$, find $q$ with:
+       \[ \begin{array}{r@{\hspace{2em}}r@{\;}c@{\;}l@{}l}
+         \Premise{I1}. & \Theta &\Into& q & \\
+         \Premise{I2}. &  q \And \tau &\Into& q'  & \;\;\;\;\text{for all $\tau$}\\
+         \Premise{I3}. & q &\Into& p \\ \cline{1-5}
+         & \multicolumn{3}{c}{\hspace{1em}\Always p} &
+       \end{array}
+       \]
+    \end{minipage}
+  }
+}
+
+
+\newcommand{\bpINVRule}{
+ % \centering
+  \framebox{
+    \begin{minipage}[b]{23em}
+      To show that $\Sys$ satisfies $\varphi(\overline{k})$, with $\overline{k}=\Var(\varphi)$:
+      \hspace{-1em}
+      \[ \begin{array}{r@{\;\;}r@{\;}@{\;}cl@{\hspace{1em}}l}
+         \Premise{P1}. & \Theta(\overline{k}) &\Into& \varphi & \\
+         \Premise{P2}. &  \varphi \And \tau^{(i)} &\Into& \varphi'  & \text{forall $\tau$}, i\in \overline{k}\\
+         \Premise{P3}. & \big(\bigwedge\limits_{x\in\overline{k}} j\neq x \And \varphi \And \tau^{(j)} &\Into& \varphi' \big)& \text{forall $\tau$}, j\notin\overline{k}\\ \hline
+         & \multicolumn{3}{c}{\hspace{3em} \Always \varphi} &
+       \end{array}
+       \]
+    \end{minipage}
+  }
+}
+
+\newcommand{\pINVRule}{
+%  \centering
+  \framebox{
+    \begin{minipage}[b]{30em}
+      To show that $\Sys$ satisfies $\Always\varphi(\overline{k})$, with $\overline{k}=\Var(\varphi)$:
+      \hspace{-1em}
+      \[ \begin{array}{r@{\;\;}lr@{\;}@{\;}cl@{\hspace{1em}}l}
+         \Premise{P1}. & & \Theta(\overline{k}) &\Into& \varphi & \\
+         \Premise{P2}. & & \varphi \And \tau^{(i)} &\Into& \varphi'  & \text{forall $\tau$ and all $i\in \overline{k}$}\\
+         \Premise{P3}. & &\varphi \And \big(\bigwedge\limits_{x\in\overline{k}} j\neq x \And \tau^{(j)} &\Into& \varphi' \big)& \text{forall $\tau$ and one fresh $j\notin\overline{k}$}\\ \hline
+         & \multicolumn{4}{c}{\hspace{3em} \Always \varphi} &
+       \end{array}
+       \]
+    \end{minipage}
+  }
+}
+
+\newcommand{\pINVThree}{
+  \framebox{
+    \begin{minipage}[b]{30em}
+      \[
+      \begin{array}{r@{\;\;}lr@{\;}@{\;}cl@{\hspace{1em}}l}
+        \;\;\Premise{P3'}. & \varphi \supports & \big(\bigwedge\limits_{x\in\overline{k}} j\neq x \And \tau^{(j)} &\Into& \varphi' \big)& \text{forall $\tau$ and one fresh $j\notin\overline{k}$}\;\;
+      \end{array}\]
+  \end{minipage}
+}}
+
+
+
+\newcommand{\uINVRule}{
+    \centering
+  \framebox{
+    \begin{minipage}[b]{35em}
+      To show that $\Sys$ satisfies $\Always\varphi(\overline{j})$. Find $\psi$ with:
+      \[ \begin{array}{r@{\hspace{2em}}rcl@{\hspace{2em}}l}
+        \Premise{U1.} & \multicolumn{2}{c}{\hspace{12em}\Always\psi} & \\
+%        \Premise{U1.} & \Theta &\Into&  \varphi \And \psi & \\
+%        \Premise{U2.} &  \psi \And \tau^{(i)} &\Into& \psi'  & \text{for all $\tau$}, i\in\overline{k} \\
+ %       \Premise{U3.} &  \bigwedge\limits_{x\in\overline{k}}i\neq x \hspace{4.3em}\And \psi \And \tau^{(i)} &\Into& \psi'  & \text{for all $\tau$}, i\notin\overline{k}\\
+        \Premise{U2.} & \Theta & \Into & \varphi & \\
+        \Premise{U3.} & \forall \overline{k}.\psi(\overline{k}) \And \varphi \And \tau^{(i)} &\Into& \varphi' &  \text{for all $\tau$}, i\in\overline{j}\\
+        \Premise{U4.} & \bigwedge\limits_{x\in\overline{j}} i\neq x \And \forall \overline{k}.\psi(\overline{k}) \And \varphi  \And
+        \tau^{(i)} &\Into& \varphi' & \text{for all $\tau$},
+        i\notin\overline{j}\\ \hline &
+        \multicolumn{3}{c}{\hspace{9em}\Always\varphi} &
+       \end{array}
+       \]
+    \end{minipage}
+  }
+}
+
+
+\newcommand{\spINVRule}{
+  \centering
+  \framebox{
+    \begin{minipage}[b]{35em}
+      To show that $\Sys$ satisfies $\Always\varphi(\overline{j})$. Find $\psi(\overline{k})$ with:
+      \[ \begin{array}{r@{\hspace{2em}}rcl@{\hspace{2em}}l}
+        \Premise{S1.} \;\Premise{S2.}\; \Premise{S3.} & \multicolumn{1}{l}{\Premise{U1.}\; \Premise{U2.}\; \Premise{U3.}} & & &\\
+  \Premise{S4.} & \bigwedge\limits_{\sigma\in S} \psi\;\sigma \And \varphi \And \tau^{(i)} &\Into& \varphi' &  \text{for all $\tau$}, i\in\overline{j}, \text{and}\\
+  & & & & \;\;\;\;\;S=\Arr(\overline{k},\overline{k}\cup\overline{j})\\
+  \Premise{S5.} & \bigwedge\limits_{x\in\overline{j}} i\neq x \And \bigwedge\limits_{\sigma\in S} \psi\;\sigma \And \varphi  \And
+  \tau^{(i)} &\Into& \varphi' & \text{for all $\tau$, $i\notin\overline{j}$},\text{and}\\ 
+  & & & &\;\;\;\;\;S=\Arr(\overline{k},\overline{k}\cup\overline{j}\cup\{i\})\\
+        \hline &
+        \multicolumn{3}{c}{\Always\varphi} &
+       \end{array}
+       \]
+    \end{minipage}
+  }
+}
+
+\newcommand{\strgINVRule}{
+  \centering
+  \framebox{
+    \begin{minipage}[b]{34em}
+      To show that $\Sys$ satisfies $\Always\varphi(\overline{k})$. Find $\psi$ with:
+      \[ \begin{array}{r@{\hspace{1em}}r@{\hspace{1em}}rcl@{\hspace{2em}}l}
+        \Premise{S0.} & &\multicolumn{3}{c}{\hspace{2em}\Always\psi} & \\
+        \Premise{S1.} & & \Theta & \Into & \varphi & \\
+  \Premise{S2.} & \psi,\varphi \supports &  \tau^{(i)} &\Into& \varphi' &  \text{forall $\tau$ and all $i\in \overline{k}$}\\
+  \Premise{S3.} & \psi,\varphi\supports & \bigwedge\limits_{x\in\overline{k}} j\neq x   \And
+  \tau^{(j)} &\Into& \varphi' & \text{forall $\tau$ and one fresh $j\notin\overline{k}$}\\ \hline 
+  & &\multicolumn{3}{c}{\hspace{2em}\Always\varphi} &
+       \end{array}
+       \]
+    \end{minipage}
+  }
+}
+
+\newcommand{\graphINVRule}{
+  \centering
+  \framebox{
+    \begin{minipage}[b]{34em}
+      To show that $\Sys$ satisfies
+        $\Always\varphi_i(\overline{v}_i) \And \Always\varphi_j(\overline{v}_j)$:
+      \[ \begin{array}{l@{\hspace{1em}}r@{\hspace{1em}}rcl@{\hspace{2em}}l}
+        \Premise{G1.} & & \Theta & \Into & \varphi_i \And \varphi_j & \\
+        \Premise{G2_i.} & \varphi_i,\varphi_j \supports & \tau^{(k)} &\Into& \varphi_i' &  \text{forall $\tau$ and all $k\in \overline{v}_i$}\\
+        \Premise{G2_j.} & \varphi_i,\varphi_j \supports & \tau^{(k)} &\Into& \varphi_j' &  \text{forall $\tau$ and all $k\in \overline{v}_j$}\\
+        \Premise{G3_i.} & \varphi_i,\varphi_j \supports & \bigwedge\limits_{x\in\overline{v}_i} k\neq x   \And
+  \tau^{(k)} &\Into& \varphi_i' & \text{forall $\tau$ and one fresh $k\notin\overline{v}_i$}\\
+        \Premise{G3_j.} & \varphi_i,\varphi_j \supports & \bigwedge\limits_{x\in\overline{v}_j} k\neq x   \And
+  \tau^{(k)} &\Into& \varphi_j' & \text{forall $\tau$ and one fresh $k\notin\overline{v}_j$}\\ \hline
+          & &\multicolumn{3}{c}{\hspace{2em}\Always\varphi_i \And \Always\varphi_j} &
+       \end{array}
+       \]
+    \end{minipage}
+  }
+}
+%%% Local Variables:
+%%% TeX-master: "main.tex"
+%%% TeX-PDF-mode: t
+%%% End:

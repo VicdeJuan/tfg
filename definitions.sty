@@ -769,9 +769,11 @@
 	\newcommand{\quadsize}{\quad}
 
 \renewcommand{\pc}{pc}
-\newcommand{\tbf}[1]{\textbf{#1}}
-
-
+\ifx\tbf\undefined
+	\newcommand{\tbf}[1]{\textbf{#1}}
+\else
+	\renewcommand{\tbf}[1]{\textbf{#1}}
+\fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                                  %%
@@ -781,6 +783,7 @@
 
 %% Signatures
 \newcommand{\Sig}{\ensuremath{\Sigma}\xspace}
+
 \newcommand{\SigInter}{\ensuremath{\Sig}-interpretation\xspace}
 \newcommand{\SigStruct}{\ensuremath{\Sig}-structure\xspace}
 \newcommand{\SigStructs}{\ensuremath{\Sig}-structures\xspace}
@@ -1795,7 +1798,11 @@
 \else
 	\renewcommand{\C}{\ensuremath{\mathcal{C}}\xspace}
 \fi
-\newcommand{\T}{\ensuremath{\mathcal{T}}\xspace}
+\ifx\T\undefined
+	\newcommand{\T}{\ensuremath{\mathcal{T}}\xspace}
+\else
+	\renewcommand{\T}{\ensuremath{\mathcal{T}}\xspace}
+\fi
 \ifx\F\undefined
 	\newcommand{\F}{\ensuremath{\mathcal{F}}\xspace}
 \else
@@ -1962,4 +1969,5 @@
 	{
 	%\vskip -1cm
 	}
+
 

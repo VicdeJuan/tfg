@@ -1,0 +1,541 @@
+%
+% T_{fSeq} to T_{path} Auxiliary Functions
+%
+\newcommand{\TPathFig}{
+\renewcommand{\arraystretch}{1}
+\centering
+\begin{tabular}{|c|}
+\hline
+$\fApp : \sSeq \times \sSeq \to \sSeq$ \\
+\hline
+$\fApp (\fNil, l) = l$ \\
+$\fApp(\fCons(a,l), l') = \fCons(a, \fApp(l, l'))$ \\
+\hline
+\hline
+$\fSeqToSet : \sSeq \to \sSet$ \\
+\hline
+$\fSeqToSet (\fNil) = \emptyset$ \\
+$\fSeqToSet (\fCons(a,l)) = \{ a \} \cup \fSeqToSet(l)$ \\
+\hline
+\hline
+$\fIsPath : \sSeq$ \\
+\hline
+$\fIsPath(\fNil)$ \\
+$\fIsPath(\fCons(a, \fNil))$ \\
+$\{a\} \nsubseteq \fSeqToSet(l) \land \fIsPath(l) \Impl
+	\fIsPath(\fCons(a,l))$ \\
+\hline
+\hline
+$\fLast : \sSeq \to \sAddr$ \\
+\hline
+$\fLast(\fCons(a, \fNil)) = a$ \\
+$l \neq \fNil \Impl \fLast(\fCons(a, l)) = \fLast(l)$ \\
+\hline
+\hline
+$\pIsReachK : \sMem \times \sAddr \times \sAddr \times \sLevelK$ \\
+\hline
+$\pIsReachK(m, a, a, l)$ \\
+$m[a].\fNext[l] = a' \land \pIsReach(m, a', b, l)
+	\Impl \pIsReach(m, a, b, l)$ \\
+\hline
+\hline
+$\pIsReachKP : \sMem \times \sAddr \times \sAddr \times \sLevelK
+	\times \sSeq$ \\
+\hline
+$\pIsReachKP(m, a, a, l, \fNil)$ \\
+$m[a].\fNext[l] = a' \land \pIsReachP(m, a', b, l, p) \Impl
+	\pIsReachP(m, a, b, l, \fCons(a, p))$ \\
+\hline
+\hline
+$\fFirstMarked : \sMem \times \sSeq \times \sLevelK \times \sAddr$ \\
+\hline
+$\fFirstMarked (m, \fNil, l, \fNull)$ \\
+$p \neq \fNil \land p = \fCons(j, q) \land m[j].\fLockID[l] \neq \oslash
+	\Impl \fFirstMarked(m, p, l, j)$ \\
+$p \neq \fNil \land p = \fCons(j, q) \land m[j].\fLockID[l] = \oslash
+	\land \fFirstMarked(m, q, l, i)
+		\Impl \fFirstMarked(m, p, l, i)$ \\
+\hline
+\hline
+$\pOrdPath : \sMem \times \sSeq$ \\
+\hline
+$\pOrdPath(h, \fNil)$ \\
+$h[a].\fNext[\fLevel{0}] = a' \land h[a].\fKey \pOrd h[a'].\fKey \land
+	p = \fCons(a, q) \land \pOrdPath(h, q) \Impl \pOrdPath(h, p)$ \\
+\hline
+\end{tabular}
+}
+
+
+%
+% TLLpL Auxiliary Functions
+%
+\newcommand{\AuxiliaryFunctions}{
+\centering
+\begin{tabular}{|c|}
+\hline
+$\List : \sMem \times \sAddr \times \sSet$ \\
+\hline
+$\begin{array}{lcl}
+	\List(h,a,r) & \Iff & \fNull \in \fAddrToSet(h, a)
+		\land r = \fPathToSet(\fGetp(h, a, \fNull)) \\
+\end{array}$\\
+\hline
+\hline
+$\fa : \sMem \times \sAddr \to \sPath$ \\
+\hline
+$\fa(h,n) = \begin{cases}
+		\fEpsilon & \trm{if } n = \fNull \\
+		\fGetp(h, h[n].\fNext, \fNull) & \trm{if } n \neq \fNull \\
+		\end{cases}$ \\
+\hline
+%
+% Begin: Function removed to reduce space
+%
+%\hline
+%$\fb : \sMem \times \sAddr \times \sAddr \times \sPath$ \\
+%\hline
+%$\begin{array}{lcl}
+%\fb(h, n, m, p) & \Iff & (n = \fNull \land p = \fEpsilon)
+%	\lor \; \big(n \neq \fNull \land \pReach(h,n,m,\tilde{p})\\
+%		&& \hs{3.5} \land \; m = \fNull
+%			\Impl \pAppend(p, \fNull, \tilde{p}) \\
+%		&& \hs{3.5} \land \; m \neq \fNull
+%			\Impl \pAppend(p, [m], \tilde{p}) \big) \\
+%\end{array}$ \\
+%\hline
+\hline
+$\LastMarked : \sMem \times \sPath \to \sAddr$ \\
+\hline
+$\LastMarked(m, p) = \fFirstLocked(m, \fRev(p))$ \\
+\hline
+\hline
+$\NoMarks : \sMem \times \sPath$ \\
+\hline
+$\NoMarks(m,p) \Iff \fFirstLocked(m,p) = \fNull$ \\
+\hline
+\hline
+$\SomeMark : \sMem \times \sPath$ \\
+\hline
+$\SomeMark(m,p) \Iff \fFirstLocked(m,p) \neq \fNull$ \\
+\hline
+\end{tabular}
+}
+
+
+
+%
+% TSLK Signature
+%
+\newcommand{\TSLKSignature}{
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+Signature & \hs{0.1} Sorts \hs{0.1} & Functions & Predicates \\
+\hline
+\hline
+\sigLevelK &
+	$\begin{array}{c}
+		\sLevelK
+	\end{array}$ &
+	$\begin{array}{lcl}
+		0,1, \ldots, \K-1 & : & \sLevelK \\
+	\end{array}$ &
+	$\begin{array}{lcl}
+		< : \sLevelK \times \sLevelK
+	\end{array}$\\
+\hline
+\sigOrd &
+	$\begin{array}{c}
+		\sOrd
+	\end{array}$ &
+	$\begin{array}{lcl}
+		\fZero & : & \sOrd \\
+		\fInfty & : & \sOrd \\
+	\end{array}$ &
+	$\begin{array}{lcl}
+		\pOrd & : & \sOrd \times \sOrd \\
+	\end{array}$ \\
+\hline
+\sigThId &
+	$\begin{array}{c}
+		\sThId
+	\end{array}$ &
+	$\begin{array}{lcl}
+		\oslash & : & \sThId \\
+	\end{array}$ & \\
+\hline
+\hline
+\sigCells &
+	$\begin{array}{c}
+		\sCell \\ \sElem \\ \sOrd \\ \sAddr \\ \sThId
+	\end{array}$ &
+	$\begin{array}{lcl}
+		\fError & : & \sCell \\
+		\fMkcell & : & \sElem \times \sOrd \times \sAddr^{\K}
+			\times \sThId^{\K} \to \sCell \\
+		\_.\fData & : & \sCell \to \sElem \\
+		\_.\fKey & : & \sCell \to \sOrd \\
+		\_.\fNext \lbrack \_ \rbrack & : & \sCell \times \sLevelK
+			\to \sAddr \\
+		\_.\fLockID \lbrack \_ \rbrack & : & \sCell
+			\times \sLevelK \to \sThId \\
+		\_.\fLock \lbrack \_ \rbrack & : & \sCell \times \sLevelK	
+			\to \sThId \to \sCell \\
+		\_.\fUnlock \lbrack \_ \rbrack & : & \sCell
+			\times \sLevelK \to \sCell \\
+	\end{array}$ & \\
+\hline
+\sigMemory &
+	$\begin{array}{c}
+		\sMem \\ \sAddr \\ \sCell
+	\end{array}$ &
+	$\begin{array}{lcl}
+		\fNull & : & \sAddr \\
+		\_[\_] & : & \sMem \times \sAddr \to \sCell \\
+		\fUpd & : & \sMem \times \sAddr \times \sCell \to \sMem
+	\end{array}$ & \\
+\hline
+\sigReach &
+	$\begin{array}{c}
+		\sMem \\ \sAddr \\ \sPath
+	\end{array}$ &
+	$\begin{array}{lcl}
+		\fEpsilon & : & \sPath \\
+		\lbrack \_ \rbrack & : & \sAddr \to \sPath
+	\end{array}$ &
+	$\begin{array}{lcl}
+		\pAppend & : & \sPath \times \sPath \times \sPath \\
+		\pReachK & : & \sMem \times \sAddr \times \sAddr \\
+				&& \mhs \times \; \sLevelK \times \sPath \\
+	\end{array}$ \\
+\hline
+\hline
+\sigSets &
+	$\begin{array}{c}
+		\sAddr \\ \sSet
+	\end{array}$ &
+	$\begin{array}{lcl}
+		\emptyset & : & \sSet \\
+		\{ \_ \} & : & \sAddr \to \sSet \\
+		\cup, \cap, \setminus & : & \sSet \times \sSet \to \sSet
+	\end{array}$ &
+	$\begin{array}{lcl}
+		\in & : & \sAddr \times \sSet \\
+		\subseteq & : & \sSet \times \sSet
+	\end{array}$ \\
+\hline
+\sigSetsT &
+	$\begin{array}{c}
+		\sThId \\ \sSetT
+	\end{array}$ &
+	$\begin{array}{lcl}
+		\stEmpty & : & \sSetT \\
+		\stSingle{\_} & : & \sThId \to \sSetT \\
+		\stCup, \stCap, \stSubst & : & \sSetT \times \sSetT \to \sSetT
+	\end{array}$ &
+	$\begin{array}{lcl}
+		\stIn & : & \sThId \times \sSetT \\
+		\stSubset & : & \sSetT \times \sSetT
+	\end{array}$ \\
+\hline
+\sigMrgn &
+	$\begin{array}{c}
+		\sMrgn, \\ \sAddr \\ \sLevelK
+	\end{array}$ &
+	$\begin{array}{lcl}
+		\mrgnEmpty & : & \sMrgn \\
+		\mrgnSingle{\_, \_} & : & \sAddr \times \sLevelK \to \sMrgn \\
+		\mrgnCup, \mrgnCap, \mrgnMinus & : & \sMrgn \times \sMrgn
+			\to \sMrgn
+	\end{array}$ &
+	$\begin{array}{lcl}
+		\mrgnIn & : & \sAddr \times \sLevelK \times \sMrgn \\
+		\mrgnSubset & : & \sMrgn \times \sMrgn \\
+		\mrgnDisj & : & \sMrgn \times \sMrgn
+	\end{array}$ \\
+\hline
+\hline
+\sigBridge &
+	$\begin{array}{c}
+		\sMem \\ \sAddr \\ \sSet \\ \sPath
+	\end{array}$ &
+	$\begin{array}{lcl}
+		\fPathToSet & : & \sPath \to \sSet \\
+		\fAddrToSetK & : & \sMem \times \sAddr \times \sLevelK
+			\to \sSet \\
+		\fGetpK & : & \sMem \times \sAddr \times \sAddr \times
+			\sLevelK \to \sPath \\
+		\fFirstLockedK & : & \sMem \times \sPath \times \sLevelK
+			\to \sAddr
+	\end{array}$ &
+	$\begin{array}{lcl}
+		\pOrdList & : & \sMem \times \sPath \\
+	\end{array}$ \\
+\hline
+\end{tabular}
+}
+
+
+%
+% TSLK Interpretations
+%
+\newcommand{\TSLKInterpretationsOne}{
+\centering
+\begin{tabular}{|c|p{10.5cm}|}
+\hline
+\multicolumn{2}{|c|}{Interpretation of sort symbols: \sAddr, \sElem, 
+\sThId, \sLevelK, \sOrd, \sCell, \sMem, \sPath, \sSet, \sSetT and \sMrgn}
+\\
+\hline
+\hline
+\multicolumn{2}{|l|}{
+Each sort $\sigma$ in \sigTSLK is mapped to a non-empty set $\Ais{\sigma}$ 
+such that:} \\
+\multicolumn{2}{|l|}{
+\begin{tabular}{clcl}
+	(a) &$\Ais{\sAddr}$ and $\Ais{\sElem}$ are discrete sets &
+	(b) &$\Ais{\sThId}$ is a discrete set containing symbol $\oslash$ \\
+	(c) &$\Ais{\sLevelK}$ is the finite collection 0,\ldots,\K-1 &
+	(d) &$\Ais{\sOrd}$ is a collection of total ordered identifiers \\
+	(e) &$\Ais{\sCell} = \Ais{\sElem} \times \Ais{\sOrd} \times 
+		\Ais{\sAddr}^{\K} \times \Ais{\sThId}^{\K}$ &
+	(f) &$\Ais{\sMem} = \Ais{\sCell}^{\Ais{\sAddr}}$ \\
+	(g) &$\Ais{\sPath}$ is the set of all finite sequences of &
+	(h) &$\Ais{\sSet}$ is the power-set of $\Ais{\sAddr}$ \\
+		& \hs{0.5} (pairwise) distinct elements of $\Ais{\sAddr}$ &
+	(i) &$\Ais{\sSetT}$ is the power-set of $\Ais{\sThId}$ \\
+	(j) &$\Ais{\sMrgn}$ is the power-set of
+		$\Ais{\sAddr} \times \Ais{\sLevelK}$ &
+\end{tabular}
+} \\
+\hline
+\hline
+Signature & Interpretation \\
+\hline
+%\hline
+%\sigLevelK &
+%	\begin{tabular}{p{9.7cm}}
+%		$\inter{\fLevel{i}}{\Ai} \neq \inter{\fLevel{j}}{\Ai}$
+%			when $i \neq j$
+%	\end{tabular} \\
+\hline
+\sigOrd &
+	\begin{tabular}{p{9.7cm}}
+		$x \inter{\pOrd}{\Ai} y \land y \inter{\pOrd}{\Ai} x
+			\Impl x = y$ for any $x, y \in \Ais{\sOrd}$ \\
+		$x \inter{\pOrd}{\Ai} y \land y \inter{\pOrd}{\Ai} z
+			\Impl x \inter{\pOrd}{\Ai} z$
+			for any $x, y, z \in \Ais{\sOrd}$ \\
+		$x \inter{\pOrd}{\Ai} y \lor y \inter{\pOrd}{\Ai} x$
+			for any $x, y \in \Ais{\sOrd}$ \\
+		$\inter{\fZero}{\Ai} \inter{\pOrd}{\Ai} x \land
+		x \inter{\pOrd}{\Ai} \inter{\fInfty}{\Ai}$
+			for any $x \in \Ais{\sOrd}$ \\
+%		$x \neq \inter{\fInfty}{\Ai} \Impl
+%			x \inter{\pOrd}{\Ai} \inter{\fSucc}{\Ai}(x)$
+%			for any $x \in \Ais{\sOrd}$ \\
+	\end{tabular} \\
+\hline
+\hline
+\sigCells &
+	\begin{tabular}{p{11.5cm}}
+		\begin{compactitem}
+		\item $\inter{\fMkcell}{\Ai} (e, k, a_0, \ldots, a_{\K-1},
+						t_0, \ldots, t_{\K-1}) =
+			\langle e, k, a_0, \ldots, a_{\K-1},
+				t_0, \ldots, t_{\K-1} \rangle$
+			for each
+			$e \in \Ais{\sElem}$, $i \in \Ais{\sOrd}$,
+			$a_0, \ldots, a_{\K-1} \in \Ais{\sAddr}$
+			and $t_0, \ldots, t_{\K-1} \in \Ais{\sThId}$
+		\item $\langle e, k, \vect{a}, \vect{t} \rangle
+				.\inter{\fData}{\Ai} = e$
+			for each $e \in \Ais{\sElem}$,
+			$k \in \Ais{\sOrd}$,
+			$\vect{a} \in \Ais{\sAddr}^{\K}$
+			and $\vect{t} \in \Ais{\sThId}^{\K}$
+		\item $\langle e, k, \vect{a}, \vect{t} \rangle
+				.\inter{\fKey}{\Ai} = k$
+			for each $e \in \Ais{\sElem}$,
+			$k \in \Ais{\sOrd}$,
+			$\vect{a} \in \Ais{\sAddr}^{\K}$
+			and $\vect{t} \in \Ais{\sThId}^{\K}$
+		\item $\langle e, k, a_0, \ldots, a_{\K-1}, \vect{t} \rangle
+				.\inter{\fNext}{\Ai}[j] = a_j$
+			for each $e \in \Ais{\sElem}$,
+			$k \in \Ais{\sOrd}$,
+			$a_0 \ldots, a_{\K-1} \in \Ais{\sAddr}$,
+			$j \in \Ais{\sLevelK}$
+			and $\vect{t} \in \Ais{\sThId}^{\K}$ and
+		\item $\langle e, k, \vect{a}, t_0, \ldots, t_{\K-1} \rangle
+				.\inter{\fLockID}{\Ai}[j] = t_{j}$
+			for each $e \in \Ais{\sElem}$,
+			$k \in \Ais{\sOrd}$,
+			$\vect{a} \in \Ais{\sAddr}^{\K}$,
+			$j \in \Ais{\sLevelK}$
+			and $t_0, \dots, t_{\K-1} \in \Ais{\sThId}$
+		\item $\langle e, k, \vect{a}, t_0, \ldots, t_{\K-1} \rangle
+				.\inter{\fLock}{\Ai}[j](t') =
+			\langle e, k, \vect{a},
+				t_0, \ldots, t_{j-1}, t',
+				t_{j+1}, \ldots, t_{\K-1}
+			\rangle$
+			for each $e \in \Ais{\sElem}$,
+			$k \in \Ais{\sOrd}$,
+			$\vect{a} \in \Ais{\sAddr}^{\K}$,
+			$j \in \Ais{\sLevelK}$
+			and $t_0, \ldots, t_{\K-1}, t' \in \Ais{\sThId}$
+		\item $\langle e, k, \vect{a}, t_0, \ldots, t_{\K-1} \rangle
+				.\inter{\fUnlock}{\Ai}[j] =
+			\langle e, k, \vect{a},
+				t_0, \ldots, t_{j-1}, \oslash,
+				t_{j+1}, \ldots, t_{\K-1}
+			\rangle$
+			for each $e \in \Ais{\sElem}$,
+			$k \in \Ais{\sOrd}$,
+			$\vect{a} \in \Ais{\sAddr}^{\K}$,
+			$j \in \Ais{\sLevelK}$
+			and $t_0, \ldots, t_{\K-1} \in \Ais{\sThId}$
+		\item $\inter{\fError}{\Ai}.\inter{\fNext}{\Ai} =
+			\inter{\fNull}{\Ai}$
+		\end{compactitem}
+	\end{tabular} \\
+\hline
+\sigMemory &
+	\begin{tabular}{p{9.7cm}}
+		\begin{compactitem}
+		\item $m\inter{[a]}{\Ai} = m(a)$ for each $m \in \Ais{\sMem}$
+			and $a \in \Ais{\sAddr}$
+		\item $\inter{\fUpd}{\Ai}(m,a,c) = m_{a \mapsto c}$ for each
+			$m \in \Ais{\sMem}$, $a \in \Ais{\sAddr}$ and
+			$c \in \Ais{\sCell}$
+		\item $\inter{m}{\Ai}(\inter{\fNull}{\Ai}) = 
+			\inter{\fError}{\Ai}$
+			for each $m \in \Ais{\sMem}$
+		\end{compactitem}
+	\end{tabular} \\
+\hline
+\sigReach &
+	\begin{tabular}{p{11cm}}
+		\begin{compactitem}
+		\item $\inter{\fEpsilon}{\Ai}$ is the empty sequence
+		\item $\inter{[i]}{\Ai}$ is the sequence containing $i \in 
+			\Ais{\sAddr}$ as the only element
+		\item $\left(\left[i_1,\ldots, i_n\right], \left[j_1, \ldots, 
+			j_m\right], \left[i_1,\ldots, i_n, j_1,
+				\ldots, j_m\right]
+			\right) \in \inter{\pAppend}{\Ai}$ iff $i_k$
+		and $j_l$ are all distinct
+		\item $(m, \aInit, \aEnd, l, p) \in \inter{\pReachK}{\Ai}$
+			iff $\aInit=\aEnd$ and $p = \fEpsilon$, or
+		there exist addresses $a_1, \ldots, a_n \in \Ais{\sAddr}$ such 
+		that:
+		\end{compactitem} \\
+		\hs{1.5} $\begin{array}{ll}
+			\trm{(a) } p = [a_1, \ldots, a_n]  \phantom{aaaa}&
+			\trm{(c) } m(a_r).\inter{\fNext}{\Ai}[l]
+				= a_{r+1}, \trm{for } 1 \leq r < n \\
+			\trm{(b) } a_1 = \aInit &
+			\trm{(d) } m(a_n).\inter{\fNext}{\Ai}[l]
+				= \aEnd
+		\end{array}$
+	\end{tabular} \\
+\hline
+\hline
+\sigSets &
+	\begin{tabular}{p{11cm}}
+		The symbols $\emptyset$, $\{ \_ \}$, $\cup$, $\cap$, 
+		$\setminus$, $\in$ and $\subseteq$ are interpreted 
+according to
+		their standard interpretation over sets of addresses.
+	\end{tabular} \\
+\hline
+\sigSetsT &
+	\begin{tabular}{p{11cm}}
+		The symbols $\stEmpty$, $\stSingle{\_}$, $\stCup$, $\stCap$, 
+		$\stSubst$, $\stIn$ and $\stSubset$ are interpreted according
+		to their standard interpretation over sets of thread
+		identifiers.
+	\end{tabular} \\
+\hline
+\end{tabular}
+}
+
+
+\newcommand{\TSLKInterpretationsTwo}{
+\centering
+\begin{tabular}{|c|p{11.7cm}|}
+\hline
+Signature & Interpretation \\
+\hline
+\hline
+\sigMrgn &
+	\begin{tabular}{p{11cm}}
+		\begin{compactitem}
+		\item $\mrgnEmptyI{\Ai} = \emptyset$
+		\item $\mrgnSingleI{a,j}{\Ai} = \{ (a,j) \}$
+			for each $a \in \Ais{\sAddr}$
+			and $j \in \Ais{\sLevelK}$
+		\item $m_1 \mrgnCupI{\Ai} m_2 = m_1 \cup m_2$
+			for each $m_1, m_2 \in \Ais{\sMrgn}$
+		\item $m_1 \mrgnCapI{\Ai} m_2 = m_1 \cap m_2$
+			for each $m_1, m_2 \in \Ais{\sMrgn}$
+		\item $m_1 \mrgnMinusI{\Ai} m_2 = m_1 \setminus m_2$
+			for each $m_1, m_2 \in \Ais{\sMrgn}$
+		\item $m_1 \mrgnSubsetI{\Ai} m_2 \Iff m_1 \subseteq m_2$
+			for each $m_1, m_2 \in \Ais{\sMrgn}$
+		\item $(a,j) \mrgnInI{\Ai} m \Iff (a,j) \in m$
+			for each $a \in \Ais{\sAddr}$,
+			$j \in \Ais{\sLevelK}$ and $m \in \Ais{\sMrgn}$
+		\item $m_1 \mrgnDisjI{\Ai} m_2 \Iff m_1 \mrgnCapI{\Ai} m_2
+			= \mrgnEmptyI{\Ai}$
+			for each $m_1, m_2 \in \Ais{\sMrgn}$
+		\end{compactitem}
+	\end{tabular} \\
+\hline
+\hline
+\sigBridge &
+	\begin{tabular}{p{11cm}}
+		\begin{compactitem}
+		\item $\inter{\fPathToSet}{\Ai}(p) = \{ a_1, \ldots, 
+			a_n\}$ for $p = [a_1, \ldots, a_n] \in
+			\Ais{\sPath}$
+		\item $\inter{\fAddrToSetK}{\Ai}(m, a, l) = \big\{
+			a' \in \Ais{\sAddr} \:|\: \exists p \in 
+			\Ais{\sPath}$ s.t. $(m,a,a',l,p) \in \pReachK
+			\big\}$
+		\item $\inter{\fGetpK}{\Ai}(m,\aInit,\aEnd,l) =
+			\begin{cases}
+				p & \text{if } (m,\aInit,\aEnd,l,p)
+					\in \inter{\pReachK}{\Ai} \\
+				\fEpsilon & \text{otherwise}
+			\end{cases}$
+		\end{compactitem} \\
+			\hspace{1cm} for each $m \in \Ais{\sMem}$,
+			$p \in \Ais{\sPath}$, $l \in \Ais{\sLevelK}$
+			and $\aInit, \aEnd \in \Ais{\sAddr}$
+		\begin{compactitem}
+		\item $\inter{\fFirstLocked}{\Ai}\left(m,[a_1, \ldots,
+			a_n], l \right) =\left\{
+			\begin{array}{ll}
+			a_k &
+			\trm{if there is } 1 \leq k \leq n \trm{ such that } \\
+			& \trm{for all } 1 \leq j < k,
+				m[a_j].\fLockID[l] = \oslash \\
+			& \trm{and } m[a_k].\fLockID[l] \neq \oslash \\
+			\fNull & \trm{otherwise }
+			\end{array}
+			\right.$
+		\item $\inter{\pOrdList}{\Ai}\left(m,p \right)$
+			iff $p=\fEpsilon$ or $p = \lbrack a \rbrack$ or
+			$p = [a_1, \ldots, a_n]$ with $n \geq 2$ and
+			$m(a_i).\inter{\key}{\Ai} \pOrd
+				m(a_{i+1}).\inter{\key}{\Ai}$
+			for all $1 \leq i < n$,
+			for any $m \in \Ais{\sMem}$
+		\end{compactitem}
+	\end{tabular} \\
+\hline
+\end{tabular}
+}

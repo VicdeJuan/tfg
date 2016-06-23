@@ -1,0 +1,42 @@
+%\UseComputerModernTips
+
+\newcommand{\ST}[1]{**[F-]{\texttt{#1}}}
+\newcommand{\PROC}[1]{**[F-:<40pt>]{\textit{#1}}}
+\newcommand{\EmbeddedAppsST}{
+  \ST{\begin{tabular}{c}Embedded\\Application\\(C sources)\end{tabular}}}
+\newcommand{\DirectST}{
+  \PROC{\begin{tabular}{c}\phantom{A}\\\Direct\\\phantom{a} \end{tabular}}}
+\newcommand{\InstrumentedSourcesST}{
+  \ST{\begin{tabular}{c}Instrumented\\Annotated\\C sources\end{tabular}}}
+\newcommand{\RuntimeManagerST}{
+  \PROC{\begin{tabular}{c}\Direct\\Runtime\\Manager\end{tabular}}}
+\newcommand{\CompileLinkST}{
+  \PROC{\begin{tabular}{c}Compile\\Link\end{tabular}}}
+\newcommand{\EmbeddedAppExecST}{
+  \ST{\begin{tabular}{c}Embedded\\Application\\(executable)\end{tabular}}}
+
+
+
+
+\newcommand{\FlowFig}{
+  {\scriptsize
+   \xymatrix@W=4.5em @H=4em @R=0em @C=3em {
+     & & \RuntimeManagerST \ar[dr] & & \\
+     \EmbeddedAppsST\ar[r] & \DirectST\ar[ur]\ar[dr] & & 
+     \CompileLinkST \ar[r] & \EmbeddedAppExecST\\
+     & & \InstrumentedSourcesST \ar[ur] & & \\
+   }}
+}
+  
+\newcommand{\Queue}[1]{**[F-]{\textrm{#1}}}
+\newcommand{\Proc}[1]{**[F-:<50pt>]{\textit{#1}}}
+%\newcommand{\Proc}[1]{*++[o][F-]{\textit{#1}}}
+
+\newcommand{\AdhocFig}{
+  {\scriptsize
+   \xymatrix@W=4em @H=1.5em @R=1.3em @C=5em {
+                              & \Proc{user}\ar[dl] & \Queue{user}\ar[l] &  \\
+     \Queue{input}\ar[r] & \Proc{router}\ar[ur]\ar[r]\ar[dr] & \Queue{broadcast}\ar[dr] & \\
+     \Proc{generator}\ar[u] & \Proc{sender}\ar[ur] & \Queue{output}\ar[l] & \Proc{delay}\ar[l]
+  }
+}}

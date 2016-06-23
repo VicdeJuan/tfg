@@ -1,0 +1,178 @@
+% Clase del documento
+
+%
+% Paquetes necesarios
+%
+
+\usepackage{eurosym} 			% Símbolo del euro
+\usepackage[utf8]{inputenc} 	% Codificación UTF8
+\usepackage[spanish,english]{babel} 	% Caracteres del español
+\usepackage{listings} 		% Código, algoritmos, etc.
+\usepackage{color} 			% Definición de colores
+\usepackage[table,xcdraw]{xcolor} 		% Extensión del paquete color
+\usepackage{anysize} 		% Márgenes
+\usepackage{fancyhdr} 		% Cabecera y pie de página
+\usepackage{quotchap} 		% Estilo título capítulos
+\usepackage{algorithmic} 	% Algoritmos (expresarlos mejor)
+\usepackage{titlesec} 		% Títulos de secciones
+\usepackage{amsmath} 		% Fórmulas matemáticas
+\usepackage{enumerate} 		% Enumeraciones
+\usepackage{emptypage} 		% Páginas en blanco
+\usepackage{float} 			% Separación entre cajas
+\usepackage{graphicx} 		% Imágenes
+\usepackage{array} 			% Mejora de las tablas
+\usepackage{mdwmath} 		% Mejora de los símbolos matemáticos
+\usepackage[caption=false,font=footnotesize]{subfig} 		% Separar figuras en subfiguras
+\usepackage{pdfpages} 		% Incluir pdfs externos
+\usepackage{fancybox} 		% Mejoras sobre las cajas
+\usepackage{appendix} 		% Apéndices
+\usepackage{bookmark} 		% Marcadores (para el pdf)
+\usepackage{enumitem} 		% Estilo de enumeraciones
+\usepackage{setspace} 		% Espacio entre líneas y párrafos
+\usepackage[acronym]{glossaries} 		% Glosario/Acrónimos
+\usepackage[T1]{fontenc} 	% Fuentes
+\usepackage[sorting=none,natbib=true,backend=bibtex,bibencoding=ascii]{biblatex} 		% Bibliografía
+\usepackage{csquotes} 		% Fix biblatex+babel warning
+\usepackage{exmath}
+\usepackage{MathUnicode}
+\usepackage{imakeidx}
+\usepackage{definitions}
+\usepackage{breqn}
+\usepackage{hyperref}
+
+\usepackage{babel}
+
+\usetikzlibrary{arrows}
+\tikzset{
+every picture/.append style={
+  execute at begin picture={\deactivatequoting},
+  execute at end picture={\activatequoting}
+  }
+}
+%\tikzset{every node/.append style={minimum size=0.5cm, draw,circle,font=\sffamily\Large\bfseries,inner sep=0.05cm}}%
+
+
+
+%\PrerenderUnicode{ÁáÉéÍíÓóÚúÑñ} % Para que salgan las tildes y demás mierdas en el título.
+
+% Enlaces
+\hypersetup{hidelinks,pageanchor=true,colorlinks,citecolor=Fuchsia,urlcolor=black,linkcolor=Cerulean}
+
+% Euro (€)
+\DeclareUnicodeCharacter{20AC}{\euro}
+
+% Inclusión de gráficos
+\graphicspath{{./graphics/}}
+
+% Extensiones de gráficos
+\DeclareGraphicsExtensions{.pdf,.jpeg,.jpg,.png}
+
+% Definiciones de colores (para hidelinks)
+\definecolor{LightCyan}{rgb}{0,0,0}
+\definecolor{Cerulean}{rgb}{0,0,0}
+\definecolor{Fuchsia}{rgb}{0,0,0}
+
+% Keywords (español e inglés)
+\def\keywordsEn{\vspace{.5em}
+{\textbf{\textit{Key words ---}}\,\relax%
+}}
+\def\endkeywordsEn{\par}
+
+\def\keywordsEs{\vspace{.5em}
+{\textbf{\textit{Palabras clave ---}}\,\relax%
+}}
+\def\endkeywordsEs{\par}
+
+
+% Abstract (español e inglés)
+\def\abstractEs{\vspace{.5em}
+{\textbf{\textit{Resumen ---}}\,\relax%
+}}
+\def\endabstractEs{\par}
+
+\def\abstractEn{\vspace{.5em}
+{\textbf{\textit{Abstract ---}}\,\relax%
+}}
+\def\endabstractEn{\par}
+
+% Estilo páginas de capítulos
+\fancypagestyle{plain}{
+\fancyhf{}
+\fancyfoot[CO]{\footnotesize\emph{\workname}}
+\fancyfoot[RO]{\thepage}
+\renewcommand{\footrulewidth}{.6pt}
+\renewcommand{\headrulewidth}{0.0pt}
+}
+
+% Estilo resto de páginas
+\pagestyle{fancy}
+
+% Estilo páginas impares
+\fancyfoot[CO]{\footnotesize\emph{\workname}}
+\fancyfoot[RO]{\thepage}
+\rhead[]{\leftmark}
+
+% Estilo páginas pares
+\fancyfoot[CE]{\emph{\pieparcen}}
+\fancyfoot[LE]{\thepage}
+\fancyfoot[RE]{\pieparizq}
+\lhead[\leftmark]{}
+
+% Guía del pie de página
+\renewcommand{\footrulewidth}{.6pt}
+
+% Nombre de los bloques de código
+\renewcommand{\lstlistingname}{Code}
+
+% Estilo de los lstlistings
+\lstset{
+    frame=tb,
+    breaklines=true,
+    postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{gray}\hookrightarrow\space}}
+}
+
+% Definiciones de funciones para los títulos
+\newlength\salto
+\setlength{\salto}{3.5ex plus 1ex minus .2ex}
+\newlength\resalto
+\setlength{\resalto}{2.3ex plus.2ex}
+
+% Estilo de los acrónimos
+
+\pretolerance=2000
+\tolerance=3000
+
+% Texto índice de tablas
+%\addto\captionsspanish{
+%\def\tablename{Tabla}
+%\def\listtablename{\'Indice de tablas}
+%}
+
+
+\lstdefinelanguage{SPL}{
+  keywords={global, new, true, false, data, next, lock, unlock, procedure , function, return, null, catch, switch, var, if, in, while, do, else, case, break,endchoice,endwhile,endif,end,begin,assume},
+  keywordstyle=\color{gray!70!blue}\bfseries,
+  ndkeywords={addr, ghost, elem, return},
+  ndkeywordstyle=\color{magenta!60!black!90!white}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{gray}\ttfamily,
+  stringstyle=\color{green!60!black}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+\lstdefinelanguage{leap}{
+	keywords={invariant,vars},
+	keywordstyle=\color{blue}\bfseries,
+	ndkeywords={preserve,locks,nexts,order,disjoint},
+  commentstyle=\color{magenta!90!black!70!yellow},
+  ndkeywordstyle=\color{magenta!60!black!90!white}\bfseries,
+  stringstyle=\color{green!60!black}\ttfamily,
+  morestring=[b]',
+  morestring=[b]",
+  comment=[l]{\#}
+}
+

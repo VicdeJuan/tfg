@@ -1,0 +1,12 @@
+<ipestyle name="arrows">
+<symbol name="arrow/latexarc(spx)">
+<path stroke="sym-stroke" pen="sym-pen" cap="1">
+0 0 m
+-0.2049 0.121
+-0.294 0.291 s
+0 0 m
+-0.2049 -0.121
+-0.294 -0.291 s
+</path>
+</symbol>
+</ipestyle>

@@ -1,0 +1,508 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                                                 %%
+%% These are macros derived from Matteo Slanina's ones.            %%
+%%                                                                 %%
+%%                                                                 %%
+%%                                                                 %%
+%%                                                                 %%
+%%   Cesar Sanchez.                                                %%
+%%     Stanford, Jan 2004                                          %%
+%%                                                                 %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                                                 %%
+%% These are some of my personal LaTeX macros. You can use them in %%
+%% any way you want, but I decline all responsibility and will     %%
+%% provide no support. If you modify this file in any way and      %%
+%% redistribute it I ask you to specify, in the new one, which     %%
+%% parts are modified or added, or to remove reference to me       %%
+%% completely (the latter is perfectly ok). No copyright.          %%
+%%     Matteo Slanina                                              %%
+%%     Stanford, December 2000                                     %%
+%%                                                                 %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{cesar-llncs}[2004/1/27]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Include useful packages. %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+%\RequirePackage{amsthm}
+%\RequirePackage{zsym}
+\RequirePackage{ltlfonts}
+\RequirePackage{xspace}
+
+%% additions by Henny
+%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Reactors}{{\cal R}}
+\newcommand{\CallGraphs}{{\cal G}}
+\newcommand{\Invokes}{{\cal P}}
+\newcommand{\ReactorState}{{s_{\cal R}}}
+\newcommand{\Status}{{\gamma}}
+\newcommand{\System}{{\cal S}}
+\newcommand{\ReactorAssignment}{\alpha}
+\newcommand{\Processes}{I}
+\newcommand{\Root}{\text{root}}
+\newcommand{\AllNodes}{{\cal V}}
+\newcommand{\gdepends}{\succ}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Short commands for Greek letters. All are shortened to two or %%
+%% (in special cases) three characters. Since I always use       %%
+%% \verb|\varphi|, I override \verb|\phi|.                       %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\ga}{\gamma}
+\newcommand{\de}{\delta}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\ze}{\zeta}
+\renewcommand{\th}{\theta}
+\newcommand{\io}{\iota}
+\newcommand{\ka}{\kappa}
+\newcommand{\la}{\lambda}
+\newcommand{\si}{\sigma}
+\newcommand{\ups}{\upsilon}
+%\renewcommand{\phi}{\varphi}
+\newcommand{\om}{\omega}
+
+\newcommand{\Ga}{\Gamma}
+\newcommand{\De}{\Delta}
+\newcommand{\Th}{\Theta}
+\newcommand{\La}{\Lambda}
+\newcommand{\Si}{\Sigma}
+\newcommand{\Tau}{\mathcal{T}}
+\newcommand{\Ups}{\Upsilon}
+\newcommand{\Om}{\Omega}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Short commands for font changes, in text and math mode. %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\osn}[1]{\oldstylenums{#1}}
+
+\newcommand{\tno}[1]{\textnormal{#1}}
+\newcommand{\mno}[1]{\mathnormal{#1}}
+
+\newcommand{\trm}[1]{\textrm{#1}}
+\newcommand{\mrm}[1]{\mathrm{#1}}
+
+\newcommand{\tbf}[1]{\textbf{\textcolor{darkred}{#1}}}
+\newcommand{\mbf}[1]{\mathbf{#1}}
+\newcommand{\bsy}[1]{\boldsymbol{#1}}
+
+\newcommand{\tit}[1]{\textit{#1}}
+\renewcommand{\mit}[1]{\mathit{#1}}
+
+\newcommand{\tsc}[1]{\textsc{#1}}
+\newcommand{\ttt}[1]{\texttt{#1}}
+
+\newcommand{\mcal}[1]{\mathcal{#1}}
+
+\newcommand{\tsf}[1]{\textsf{#1}}
+\newcommand{\msf}[1]{\mathsf{#1}}
+
+\newcommand{\opn}[1]{\operatorname{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Abbreviations for some useful text symbols. %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \newcommand{\midpoint}{\textperiodcentered{}} % redefine as \cdot
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Abbreviations for useful mathematical symbols, with appropriate %%
+%% spacing.                                                        %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Not}{\mathclose{\neg}}
+\renewcommand{\And}{\mathrel{\wedge}}
+\newcommand{\Or}{\mathrel{\vee}}
+\newcommand{\Impl}{\mathrel{\rightarrow}}
+\newcommand{\Then}{\mathrel{\rightarrow}} %% ce
+\newcommand{\Iff}{\mathrel{\leftrightarrow}}
+\newcommand{\A}[1]{{\forall #1 \,}}
+%\newcommand{\E}[1]{{\exists #1 \,}}
+\newcommand{\Eu}[1]{{(\exists! #1) \,}}
+
+\newcommand{\Entail}{\mathrel{\Rightarrow}}
+\newcommand{\EntIff}{\mathrel{\Leftrightarrow}}
+
+\newcommand{\Always}{\LTLsquare}
+\newcommand{\Eventually}{\LTLdiamond}
+\newcommand{\Next}{\LTLcircle}
+
+\newcommand{\SoFar}{\LTLsquareminus}
+\newcommand{\Once}{\LTLdiamondminus}
+\newcommand{\Previously}{\LTLcircleminus}
+
+\newcommand{\Before}{\LTLcircletilde}
+
+\newcommand{\Until}{\mathbin{\mathcal{U}}}
+\newcommand{\WaitFor}{\mathbin{\mathcal{W}}}
+\newcommand{\Since}{\mathbin{\mathcal{S}}}
+\newcommand{\BackTo}{\mathbin{\mathcal{B}}}
+
+
+\renewcommand{\models}{\mathrel{\vDash}}
+\newcommand{\nmodels}{\mathrel{\nvDash}}
+\newcommand{\derives}{\mathrel{\vdash}}
+\newcommand{\nderives}{\mathrel{\nvdash}}
+
+\newcommand{\nin}{\not\in}
+\newcommand{\sm}{\setminus}
+\newcommand{\sset}{\subset}
+\newcommand{\sseq}{\subseteq}
+\newcommand{\sqleq}{\sqsubseteq}
+
+\newcommand{\Nat}{\mathbb{N}}
+\newcommand{\tuple}[1]{\langle#1\rangle} 
+\newcommand{\tupleof}[1]{\langle#1\rangle} 
+\newcommand{\card}[1]{\mathopen{\vert}#1\mathclose{\vert}}
+
+\newcommand{\produce}{\longrightarrow}
+
+\newcommand{\mathcomma}{\enspace\text{,}}
+\newcommand{\mathperiod}{\enspace\text{.}}
+\newcommand{\mathsemicolon}{\enspace\text{;}}
+
+\newcommand{\Into}{\mathrel{\rightarrow}} %% ce (function definition)
+\newcommand{\IntoPlus}{\mathrel{\rightarrow^+}} %% ce (function definition)
+\newcommand{\set}[1]{\{#1\}} %% ce
+\newcommand{\Emptyset}{\varnothing} %% ce
+\newcommand{\EmptySet}{\varnothing} %% ce
+
+\newcommand{\vect}[1]{\overrightarrow{#1}} %% ce
+\newcommand{\cross}{\times} %% ce (cross product)
+\newcommand{\lub}{\vee} %% ce
+\newcommand{\glb}{\wedge} %%ce
+\newcommand{\Union}{\cup} %% ce
+\newcommand{\Intersection}{\cap} %% ce
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Theorems et cetera. %%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%
+% for LLNCS
+%
+
+
+%% \theoremstyle{plain}
+%% \newtheorem{thm}{Theorem}
+%% \newtheorem{lem}[thm]{Lemma}
+%% \newtheorem{lemma}[thm]{Lemma}
+%% \newtheorem{prop}[thm]{Proposition}
+%% \newtheorem{cor}[thm]{Corollary}
+%% \newtheorem{corollary}[thm]{Corollary}
+%% \newtheorem{goal}{Goal}
+%% \newtheorem{claim}[thm]{Claim}
+%% \newtheorem{fact}[thm]{Fact}
+%% \newtheorem{property}[thm]{Property}
+
+%% \theoremstyle{definition}
+%% \newtheorem{defn}[thm]{Definition}
+%% \newtheorem{definition}[thm]{Definition}
+%% \newtheorem{exmp}{Example} 
+%% \newtheorem{example}{Example} %% ce
+%% \newtheorem*{notn}{Notation} %% ce
+%% \newtheorem*{notation}{Notation} %% ce
+
+%% \newcommand\Proof{{\textsc{Proof.}}\hspace{0.1cm}} %% ce
+%% %\newcommand\halmos{\hfill $\blacksquare$ } %% ce
+%% \newcommand\halmos{\hfill $\square$ } %% ce
+%% \newcommand\cqd{\halmos}
+
+
+
+%%%%%%%%%%%%%%%%%
+%% SPL macros. %%
+%%%%%%%%%%%%%%%%%
+
+\newcommand{\True}{\mathnormal{\textsc{t}}}
+\newcommand{\False}{\mathnormal{\textsc{f}}}
+\newcommand{\keyword}[1]{\textbf{#1}}
+\newcommand{\HoareTriple}[3]{{\{#1\}#2\{#3\}}}
+\newcommand{\Atl}{\mathit{at\_\ell}}
+\newcommand{\Atm}{\mathit{at\_m}}
+\newcommand{\Skip}{\mathbf{skip}}
+\newcommand{\Atle}[2]{\mathit{at\_\ell_{#1\_#2,r}}}
+\newcommand{\Acto}{\mathit{act_{1,r}}}
+\newcommand{\Actk}[1]{\mathit{act_{>{#1},r}}}
+
+
+%%%%%%%%%%%%%%%%%%%%
+%% GENERAL        %% %% ce
+%%%%%%%%%%%%%%%%%%%%
+\newcommand\comment[1]{} % for commenting out regions of text input
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Correlation macros. %% %% Ce
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\CM}{\text{CM}\xspace} %% Correlation Machines
+\newcommand{\CG}{\text{CG}\xspace} %% Correlation Graphs
+\newcommand{\FCG}{\text{FCG}\xspace} %% Finite Correlation Graphs
+\newcommand{\ECL}{\text{ECL}\xspace} %% Event Correlation Language
+\newcommand{\EPR}{\textsc{EPR}\xspace} %% Event-pattern Reactive language
+\newcommand{\BasicEPR}{\textsc{Basic-EPR}\xspace} %% Event-pattern Reactive language
+\newcommand{\PARName}{\textsf{PAR}}
+\newcommand{\PAR}{\PARName\xspace} %% PAttern Reactions
+\newcommand{\BasicPAR}{\textsf{Basic-PAR}\xspace} %% PAttern Reactions
+
+
+\newcommand{\Bisim}{\sim}
+\newcommand{\SBisim}{\Bisim}
+\newcommand{\OBisim}{\approx}
+\newcommand{\Bisimid}{\Bisim_{id}}
+
+\newcommand{\aobisimulation}{\alpha\omicron\text{-bisimulation}}
+\newcommand{\obisimulation}{\omicron\text{-bisimulation}}
+\newcommand{\aobisimilar}{\alpha\omicron\text{-bisimilar}}
+\newcommand{\obisimilar}{\omicron\text{-bisimilar}}
+\newcommand{\aobisimilarity}{\alpha\omicron\text{-bisimilarity}}
+\newcommand{\obisimilarity}{\omicron\text{-bisimilarity}}
+\newcommand{\GraphBisim}{\sim}
+\newcommand{\GraphOBisim}{\sim_\omicron}
+\newcommand{\GraphAOBisim}{\sim_{\alpha\omicron}}
+
+\newcommand{\Sigmastar}{\Sigma^*}
+\newcommand{\Sigmaplus}{\Sigma^+}
+\newcommand{\Sigmaomega}{\Sigma^\omega}
+
+
+\newcommand\OutputAlphabet{\Sigma_{\mathit{out}}}
+\newcommand\InputAlphabet{\Sigma_{\mathit{in}}}
+\newcommand{\sigmain}{\InputAlphabet}
+\newcommand{\Sigmain}{\sigmain}
+\newcommand{\sigmaout}{\OutputAlphabet}
+\newcommand{\Sigmaout}{\sigmaout}
+\newcommand{\sigmainomega}{\Sigmain^\omega}
+\newcommand{\Sigmainomega}{\sigmainomega}
+\newcommand{\sigmainstar}{\Sigmain^*}
+\newcommand{\Sigmainstar}{\Sigmain^*}
+\newcommand{\sigmainplus}{\Sigmain^+}
+\newcommand{\Sigmainplus}{\sigmainplus}
+\newcommand{\Sigmaininf}{\Sigmain^{\inf}}
+\newcommand{\extsigmain}{\overline{\sigmain}}
+\newcommand{\extsigmaout}{\overline{\sigmaout}}
+\newcommand{\outputset}{2^{\sigmaout}}
+
+
+%%% CORRELATION GRAPHS
+\newcommand{\halt}{\mathit{halt}}
+\newcommand{\vhalt}{v_{\mathit{halt}}}
+\newcommand{\qhalt}{q_{\mathit{halt}}}
+\newcommand{\Labelling}{\cal L}
+\newcommand{\Lab}{\Labelling}
+
+
+%% CORRELATION LANGUAGE
+\newcommand{\Accumulate}{\textnormal{\textbf{accumulate}}}
+\newcommand{\Acc}{\Accumulate}
+\newcommand{\Select}{\textnormal{\textbf{select}}}
+%\newcommand{\Sel}{\Select}
+\newcommand{\Sequential}{\textnormal{\textbf{sequential}}}
+%\newcommand{\Seq}{\Sequential}
+%\newcommand{\Do}{\textnormal{\textbf{do}}}
+\newcommand{\Try}{\textnormal{\textbf{try}}}
+\newcommand{\Unless}{\textnormal{\textbf{unless}}}
+\newcommand{\TryUnlessName}{\textnormal{\textbf{try--unless}}}
+\newcommand{\TryUnless}[2]{\Try\;#1\;\Unless\;#2}
+%\newcommand{\Fail}{\textbf{fail}}
+\newcommand{\Push}{\textnormal{\textbf{push}}}
+\newcommand{\PushT}{\textnormal{\textbf{push}}^\top}
+\newcommand{\PushF}{\textnormal{\textbf{push}}^\bot}
+\newcommand{\Parallel}{\textnormal{\textbf{parallel}}}
+\newcommand{\PersistName}{\textnormal{\textit{persist}}}
+\newcommand{\Persist}[2]{\PersistName_{#2} #1}
+\newcommand{\PersistSimple}[1]{\PersistName\,#1}
+\newcommand{\RepeatName}{\textnormal{\textbf{repeat}}}
+% Collision with algorithmx package
+%\newcommand{\Repeat}[2]{\RepeatName_{#2} #1}
+\newcommand{\RepeatSimple}[1]{\RepeatName\,{#1}}
+\newcommand{\LoopName}{\textnormal{\textit{loop}}}
+% Collision with algorithmx package
+%\newcommand{\Loop}[2]{\LoopName_{#2} #1}
+\newcommand{\LoopSimple}[1]{\LoopName #1}
+\newcommand{\TRUE}{\textnormal{\textsc{T}}}
+\newcommand{\FALSE}{\textnormal{\textsc{F}}}
+\newcommand{\Neg}{\textnormal{\textbf{neg}}}
+\newcommand{\Succeed}{\textnormal{\textbf{ss}}}
+\newcommand{\Fail}{\textnormal{\textbf{ff}}}
+\newcommand{\Ss}{\Succeed}
+\newcommand{\Ff}{\Fail}
+\newcommand{\Halt}{\textnormal{\textbf{halt}}}
+\newcommand{\Silent}{\textnormal{\textbf{silent}}}
+\newcommand{\Event}[1]{\textnormal{\textbf{#1}}}
+\newcommand{\Strict}[1]{\widehat{#1}}
+
+\newcommand{\Sel}{\mathbin{|}}
+\newcommand{\Par}{\mathbin{\|}}
+\newcommand{\Seq}{\mathbin{;}}
+
+\newcommand{\omicron}{o}
+\newcommand{\Deriv}{\partial}
+\newcommand{\Completion}{{\cal C}}
+
+\newcommand{\Equiv}{\approx}
+
+
+%%CORRELATION MACHINES
+
+\newcommand\Transitions{{\cal T}}
+\newcommand\Enabled{\textit{En}}
+\newcommand\NotEnabled{\textit{Nen}}
+\newcommand\Target{\textit{Tgt}}
+\newcommand\Clear{\textit{Clr}}
+\newcommand\Output{{\cal O}}
+\newcommand\emptyinput{\epsilon}
+\newcommand\emptyoutput{\epsilon}
+
+
+
+
+%%AUTOMATA
+\newcommand\Automaton{{\cal A}}
+\newcommand\Module{{\cal M}}
+\newcommand\Final{{\cal F}}
+
+%% term Rewriting
+\newcommand{\nf}{\textsc{nf}}
+\newcommand{\goesto}{\rightarrow}
+\newcommand{\Var}{\mathit{Var}}
+\newcommand{\SubstPair}[2]{#1\leftarrow #2}
+\newcommand{\SubstApp}{\triangleleft}
+\newcommand{\Subst}[2]{\SubstApp\{\SubstPair{#1}{#2}\}}
+
+%\mathchardef\lscr"160
+%\newcommand{\ell}{\mathchardef\lscr"160}
+
+\newcommand{\Eager}[1]{\widehat{\mathbf{#1}}}
+\newcommand{\Focus}{\textnormal{\textit{focus}}}
+\newcommand{\FocusT}{\textnormal{\textit{focus}}^\top}
+\newcommand{\FocusF}{\textnormal{\textit{focus}}^\bot}
+\newcommand{\DefinedAs}{\,\stackrel{\text{def}}{=}\,}
+\newcommand{\BigSelection}{\mathop{\big|}}
+
+\newcommand{\Prefix}[1]{\textnormal{Pref}(#1)}
+\newcommand{\Border}[1]{\textnormal{Bor}(#1)}
+\newcommand{\Outside}[1]{\textnormal{Out}(#1)}
+\newcommand{\Incomplete}[1]{\textnormal{Inc}(#1)}
+\newcommand{\FinishF}{\textnormal{\textit{finish}}^\bot}
+\newcommand{\FinishT}{\textnormal{\textit{finish}}^\top}
+\newcommand{\RepeatCatch}{\textnormal{\textit{repeat}}}
+% Collision with algorithmx package
+%\newcommand{\While}{\textnormal{\textit{while}}}
+\newcommand{\Catch}{\textnormal{\textit{catch}}}
+\newcommand{\Kleene}{\textnormal{\textit{Kleene}}}
+\newcommand{\WhileCatchName}{\textnormal{\textit{while-catch}\xspace}}
+\newcommand{\WhileCatchSimple}[2]{\While\;#1\;\Catch\;#2}
+\newcommand{\WhileCatch}[4]{\While_{#3}\;#1\;\Catch_{#4}\;#2}
+\newcommand{\Base}[1]{\dot{#1}}
+
+
+\newcommand{\PhiDef}{\begin{array}{l}\Try \BigSelection_{j=1}^n \Kleene_{1j}^n(\FocusT_j) \\
+    \Unless \BigSelection_{j=1}^n\Kleene_{1j}^n(\FocusF_j)
+  \end{array}}
+
+
+%%%%% strings
+\newcommand{\Emptystring}{\epsilon}
+\newcommand{\EmptyString}{\Emptystring}
+
+\newcommand{\TODO}[1]{\paragraph{TODO:} \textit{#1}}
+
+
+%%%%
+%%%% omega automata, and regexps
+%%%%
+\newcommand{\omautomaton}{\omega\text{-automaton}}
+\newcommand{\omautomata}{\omega\text{-automata}}
+\newcommand{\omregexp}{\omega\text{-regular expression}}
+\newcommand{\omregexps}{\omega\text{-regular expressions}}
+
+%% Langs
+\newcommand{\Lcal}{\mcal{L}}
+\newcommand{\Lang}{\Lcal}
+\newcommand{\Fcal}{\mcal{F}}
+
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\E}{\mathcal{E}}
+\newcommand{\PARMachine}{\mcal P}
+
+%%%
+\newcommand{\EPM}{event-pattern machines}
+\newcommand{\TO}[1]{\xrightarrow{#1}}
+\newcommand{\sem}[1]{\llbracket #1\rrbracket}
+\newcommand{\obs}[1]{[ #1]}
+
+\newcommand{\st}{s.t.\xspace}
+\newcommand{\ie}{i.e.,\xspace}
+\newcommand{\eg}{e.g.,\xspace}
+\newcommand{\etc}{etc.\@\xspace}
+\newcommand{\cf}{cf.\@\xspace}
+
+
+%%%% In case we cannot use amsthm
+\let\QED@stack\@empty
+\let\qed@elt\relax
+\providecommand*{\qedhere}{} %Ale: to compile with amsthm
+\renewcommand{\qedhere}{%
+  \begingroup \let\mathqed\math@qedhere
+    \let\qed@elt\setQED@elt \QED@stack\relax\relax \endgroup
+}
+\def\setQED@elt#1#2\relax{%
+  \ifmeasuring@
+  \else \iffirstchoice@ \gdef\QED@stack{\qed@elt{}#2}\fi
+  \fi
+  #1%
+}
+\providecommand*{\mathqed}{} %Ale: to compile with amsthm
+\renewcommand{\mathqed}{\quad\hbox{\qedsymbol}}
+\newcommand{\qedsymol}{\blacksqare}
+%% \newcommand{\openbox}{\leavevmode
+%%   \hbox to.77778em{%
+%%   \hfil\vrule
+%%   \vbox to.675em{\hrule width.6em\vfil\hrule}%
+%%   \vrule\hfil}}
+%% \DeclareRobustCommand{\textsquare}{%
+%%   \begingroup \usefont{U}{msa}{m}{n}\thr@@\endgroup
+%% }
+%% \providecommand{\qedsymbol}{\openbox}%
+
+%%%% Margin notes for the drafts
+%\newcommand{\Margin}[1]{\mbox{}\marginpar{\raggedleft\hspace{0pt}\textit{#1}}}
+
+
+%%% behavior graphs
+\newcommand{\Reach}{\mathrel{\vdash}}
+
+%%%%% completion statuses
+\newcommand{\I}{\iota}
+\newcommand{\T}{\top}
+\newcommand{\F}{\bot}
+
+
+% Margin
+
+\newlength{\marnoteinner}
+\newcommand{\Margin}[1]{\mbox{}%
+  \setlength{\marnoteinner}{\marginparwidth}%
+  \addtolength{\marnoteinner}{-2\fboxrule}%
+  \addtolength{\marnoteinner}{-2\fboxsep}%
+  \marginpar{\fbox{\parbox{\marnoteinner}%
+%      {\raggedright\ttfamily \strut #1\strut}}}}
+      {\raggedright\strut \texttt{#1}\strut}}}}
+
+\newcommand{\Bool}{\mathbb{B}}

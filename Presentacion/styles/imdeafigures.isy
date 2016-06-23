@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<!DOCTYPE ipestyle SYSTEM "ipe.dtd">
+<ipestyle name="imdeafigures">
+<layout paper="2560 1600" origin="32 0" skip="32" crop="yes"/>
+</ipestyle>

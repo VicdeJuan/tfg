@@ -1,0 +1,181 @@
+
+%\newcommand{\AccSym}{\uparrow}
+% \newcommand{\AccSym}{\tick}
+%%\RequirePackage{pifont}
+%% \newcommand{\tick}{\ding{51}}
+%% \newcommand{\AccSym}{\tick}
+
+\RequirePackage{amssymb}
+\newcommand{\AccSym}{\surd}
+
+
+%\newcommand{\RejSym}{\downarrow}
+\RequirePackage{pifont}
+%\newcommand{\RejSym}{\text{\ding{53}}}
+\newcommand{\RejSym}{\,\mathsf{x}\,}
+
+% \newcommand{\ACC}[1]{\ensuremath{\overset{#1}{\AccSym}}}
+ \newcommand{\ACC}[1]{\ensuremath{{\AccSym}\hspace{-0.7em}{\overset{#1}{\text{\phantom{x}}}}}}
+ \newcommand{\ACCa}{\ACC{s}}
+ \newcommand{\REJ}[1]{\ensuremath{\overset{#1}{\RejSym}}}
+ \newcommand{\REJa}{\REJ{s}}
+ \newcommand{\DER}[1]{\ensuremath{\overset{#1}{\Into}}}
+ \newcommand{\DERa}{\DER{s}}
+
+ \newcommand{\BasicAcceptRuleA}{\ell \ACCa\;\;\text{(if $s\models \ell$)}}
+ \newcommand{\BasicAcceptRuleB}{\ell \REJa\;\;\text{(if $s\nmodels \ell$)}}
+ \newcommand{\BasicNextRule}{\ell \DERa \F}
+
+
+ \newcommand{\ORAcceptRuleA}{
+   \AxiomC{$x\ACCa$}
+   %\LeftLabel{\ORAcceptRuleALabel}
+   \UnaryInfC{$x \OR y \ACCa$}
+   \DisplayProof
+ }
+ \newcommand{\ORAcceptRuleB}{
+   \AxiomC{$y\ACCa$}
+   %\LeftLabel{\ORAcceptRuleALabel}
+   \UnaryInfC{$x \OR y \ACCa$}
+   \DisplayProof
+ }
+ \newcommand{\ORAcceptRuleC}{
+      \AxiomC{$x\REJa$}
+      \AxiomC{$y\REJa$}
+      %\LeftLabel{\ORAcceptRuleALabel}
+      \BinaryInfC{$x \OR y \REJa$}
+      \DisplayProof
+ }
+ \newcommand{\OrNextRule}{
+      \AxiomC{$x\DERa x'$}
+      \AxiomC{$y\DERa y'$}
+      %\LeftLabel{\ORAcceptRuleALabel}
+      \BinaryInfC{$x \OR y \DERa x' \OR y'$}
+      \DisplayProof
+ }
+
+ \newcommand{\AndAcceptRuleA}{
+   \AxiomC{$x\REJa$}
+   %\LeftLabel{\ORAcceptRuleALabel}
+   \UnaryInfC{$x \AND y \REJa$}
+   \DisplayProof
+   
+ }
+ \newcommand{\AndAcceptRuleB}{
+   \AxiomC{$y\REJa$}
+   %\LeftLabel{\ORAcceptRuleALabel}
+   \UnaryInfC{$x \AND y \REJa$}
+   \DisplayProof
+}
+\newcommand{\AndAcceptRuleC}{
+  \AxiomC{$x\ACCa$}
+  \AxiomC{$y\ACCa$}
+  %\LeftLabel{\ORAcceptRuleALabel}
+  \BinaryInfC{$x \AND y \ACCa$}
+  \DisplayProof
+}
+\newcommand{\AndNextRule}{
+  \AxiomC{$x\DERa x'$}
+  \AxiomC{$y\DERa y'$}
+  %\LeftLabel{\ORAcceptRuleALabel}
+  \BinaryInfC{$x \AND y \DERa x' \AND y'$}
+  \DisplayProof
+}
+
+\newcommand{\SeqAcceptRule}{
+  x \SEQ y \REJa
+}
+
+\newcommand{\SeqNextRuleA}{
+  \AxiomC{$x\ACCa$}
+  \AxiomC{$x\DERa x'$}
+  %\LeftLabel{\ORAcceptRuleALabel}
+  \BinaryInfC{$x \SEQ y \DERa x'\SEQ y \OR y$}
+  \DisplayProof
+}
+\newcommand{\SeqNextRuleB}{
+  \AxiomC{$x\REJa$}
+  \AxiomC{$x\DERa x'$}
+  %\LeftLabel{\ORAcceptRuleALabel}
+  \BinaryInfC{$x \SEQ y \DERa x'\SEQ y$}
+  \DisplayProof
+}
+
+\newcommand{\PowAcceptRuleA}{
+  \AxiomC{$y\ACCa$}
+  \UnaryInfC{$x^z y \ACCa$}
+  \DisplayProof
+}
+\newcommand{\PowAcceptRuleB}{
+  \AxiomC{$y\REJa$}
+  \UnaryInfC{$x^z y \REJa$}
+  \DisplayProof
+}
+\newcommand{\PowNextRuleA}{
+  \AxiomC{$x\DERa x'$}
+  \AxiomC{$y\DERa y'$}
+  \AxiomC{$z\DERa z'\;\;\;\;z\REJa$}
+  \TrinaryInfC{$x^z y \DERa y' \OR (x' \AND (z' \SEQ x^z y))\text{\phantom{$\OR x^z y$}}$}
+  \DisplayProof
+}
+\newcommand{\PowNextRuleB}{
+  \AxiomC{$x\DERa x'$}
+  \AxiomC{$y\DERa y'$}
+  \AxiomC{$z\DERa z'\;\;\;\;z\ACCa$}
+  \TrinaryInfC{$x^z y \DERa y' \OR (x' \AND (z' \SEQ x^z y \OR x^z y))$}
+  \DisplayProof
+}
+
+\newcommand{\DualPowAcceptRuleA}{
+  \AxiomC{$y\REJa$}
+  \UnaryInfC{$x_z y \REJa$}
+  \DisplayProof
+}
+\newcommand{\DualPowAcceptRuleB}{
+  \AxiomC{$y\ACCa$}
+  \AxiomC{$x\ACCa$}
+  \BinaryInfC{$x_z y \ACCa$}
+  \DisplayProof
+}
+\newcommand{\DualPowAcceptRuleC}{
+  \AxiomC{$y\ACCa$}
+  \AxiomC{$x\REJa$}
+  \BinaryInfC{$x_z y \REJa$}
+  \DisplayProof
+}
+
+
+
+\newcommand{\DualPowNextRuleA}{
+  \AxiomC{$x\DERa x'$}
+  \AxiomC{$y\DERa y'$}
+  \AxiomC{$z\DERa z'\;\;\;\;z\REJa$}
+  \TrinaryInfC{$x_z y \DERa y' \AND (x' \OR (z' \SEQ x_z y))\text{\phantom{$\OR x^z y$}}$}
+  \DisplayProof
+}
+\newcommand{\DualPowNextRuleB}{
+  \AxiomC{$x\DERa x'$}
+  \AxiomC{$y\DERa y'$}
+  \AxiomC{$z\DERa z'\;\;\;\;z\ACCa$}
+  \TrinaryInfC{$x_z y \DERa y' \AND (x' \OR (z' \SEQ x_z y \OR x_z y))$}
+  \DisplayProof
+}
+
+\newcommand{\EquationAcceptRuleA}{
+  \AxiomC{$\phi(x_1,\ldots) \ACCa$}
+  \UnaryInfC{$\phi(x_1,\ldots) \ACCa_\Eqs$}
+  \DisplayProof 
+}
+
+\newcommand{\EquationAcceptRuleB}{
+  \AxiomC{$\phi(x_1,\ldots) \REJa$}
+  \UnaryInfC{$\phi(x_1,\ldots) \REJa_\Eqs$}
+  \DisplayProof 
+}
+
+\newcommand{\EquationNextRule}{ 
+  \AxiomC{$\phi(x_1,\ldots,x_n) \DERa \phi'(x_1,\ldots,x_n)$} 
+  \UnaryInfC{$\phi \DERa_\Eqs
+    \phi'(\phi_{x_1},\ldots,\phi_{x_n})$} 
+  \DisplayProof 
+}

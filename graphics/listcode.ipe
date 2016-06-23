@@ -1,12 +1,45 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70005" creator="Ipe 7.1.4">
-<info created="D:20100713154401" modified="D:20160623111808"/>
+<info created="D:20100713154401" modified="D:20160623120126"/>
 <preamble>\usepackage{algorithm}
 \usepackage{algpseudocode}
 %\usepackage{ltlfonts}
 \usepackage{definitions}
-%\usepackage{ale-defs}
+\usepackage{ale-defs}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                            %%
+%%  Commands for writing program source code  %%
+%%                                            %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newlength{\stwidth}
+\newlength{\myalgindent}
+\addtolength{\myalgindent}{15pt}
+
+
+% A normal statement with a model statement
+% param1: Statement
+% param2: Model Statement
+% param3: Column width
+% param4: Identation count
+\algnewcommand{\MState}[4]
+	{\settowidth{\stwidth}{{#1}}
+	\addtolength{\stwidth}{-2\stwidth}
+	\addtolength{\stwidth}{-#4\myalgindent}
+	\addtolength{\stwidth}{#3cm}
+	\State {#1}
+	\hspace{\stwidth} //@ #2}
+
+
+% A single model only statement
+% param1: Model Statement
+% param2: Column width
+\algnewcommand{\MOState}[2]
+	{\Statex{\hspace{2pt}\hspace{#2cm} //@ #1}}
+
+
 
 </preamble>
 <ipestyle name="imdeaslides">
@@ -337,180 +370,179 @@ h
 <page>
 <layer name="alpha"/>
 <view layers="alpha" active="alpha"/>
-<path layer="alpha" stroke="black">
+<path layer="alpha" matrix="0.494737 0 0 1 107.116 -16" stroke="black">
 212 1492 m
 212 1456 l
 592 1456 l
 592 1492 l
 h
 </path>
-<text matrix="1 0 0 1 -151 450" transformations="translations" pos="272 752" stroke="black" type="label" valign="baseline">\newcommand{\Elem}{\ensuremath{\mathit{Elem}}\xspace}
+<text matrix="1 0 0 1 -151 450" transformations="translations" pos="272 752" stroke="black" type="label" width="404" height="252.74" depth="245.26" valign="baseline">\newcommand{\Elem}{\ensuremath{\mathit{Elem}}\xspace}
 
 \begin{tabular}{c}
 \begin{minipage}[c]{6.5cm}
 \begin{algorithmic}[1]
-	\Statex \tbf{global}%
-		\Statex $\quad \addr \; \head;
-		\; \addr \; \tail;$
-		\Statex $\quad \Tset \langle\addr\rangle \; \region;
-		\; \Tset \langle\Telem\rangle \; \elements;$
-	\Statex \tbf{assume}
+	\Statex \textbf{global}%
+		\Statex {\quad addr \; head;
+		\; addr \; tail;}
+		\Statex {\quad setaddr \; region;}
+	\Statex \textbf{assume}
 		\Statex $ \hspace{-0.4em}
 		\begin{array}{l&gt;{\hspace{-0.7em}}l}
-			&amp; \region = \{\head, \tail, \fNull\} \\
-			\And &amp; \head \neq \tail \And 
-			\head \neq \fNull \And 
-			\tail \neq \fNull \\
-			\And &amp; \head \pointsto \fData = -\infty \And
-			\tail \pointsto \fData = +\infty \\
-			\And &amp; \head \pointsto \fNext = \tail \And 
-			\tail \pointsto \fNext = \fNull
+			&amp; region = \{head, tail, null\} \\
+			\And &amp; head \neq tail \And 
+			head \neq null \And 
+			tail \neq null \\
+			\And &amp; head \pointsto data = -\infty \And
+			tail \pointsto data = +\infty \\
+			\And &amp; head \pointsto next = tail \And 
+			tail \pointsto next = null
 		\end{array}$
 
 	\Statex $ $
-	\Statex $\ProcedureBegin \; \MostGeneralClient$
-		\Statex $\quad \Telem \; e$
-	\Statex \tbf{begin}%
+	\Statex $Procedure \; MGC()$
+		\Statex {\quad elem \; e}
+	\Statex \textbf{begin}%
 	\While {true}
-	\State $e := \HavocListElem()$
-	\State $\Nondet$
- 	\State $\quad \Call \Search(e)$
+	\State $e := HavocListElem()$
+	\State $non deterministic choice:$
+ 	\State $\quad \Call Search(e)$
 	\Statex $\;\;\;\; \ProgOr$
-	\State $\quad \Call \Insert(e)$
+	\State $\quad \Call Insert(e)$
 	\Statex $\;\;\;\; \ProgOr$
-	\State $\quad \Call \Remove(e)$
+	\State $\quad \Call Remove(e)$
 %	\State $\left[
 %		\begin{array}{l}
-%		 	\Call \search(e) \\
+%		 	\Call search(e) \\
 %			\ProgOr \\
-%			\Call \add(e) \\
+%			\Call add(e) \\
 %			\ProgOr \\
-%			\Call \remove(e)
+%			\Call remove(e)
 %		\end{array} \right]$
 	\EndWhile
-	\Statex $\ProcedureEnd$
+	\Statex{end procedure}
 	\algstore{endMGC}
 \end{algorithmic}
 \end{minipage}
 \end{tabular}
 </text>
-<text matrix="1 0 0 1 464 452" transformations="translations" pos="272 752" stroke="black" type="label" valign="baseline">\newcommand{\Elem}{\ensuremath{\mathit{Elem}}\xspace}
+<text matrix="1 0 0 1 464 452" transformations="translations" pos="272 752" stroke="black" type="label" width="434" height="264.2" depth="255.8" valign="baseline">\newcommand{\Elem}{\ensuremath{\mathit{Elem}}\xspace}
 
 \begin{tabular}{c}
 \begin{minipage}[c]{7cm}
 \begin{algorithmic}[1]
 	\algrestore{endMGC}
-	\Statex $\ProcedureBegin \; \Search (e)$
-		\Statex {\quad \addr \; \prev}
-		\Statex {\quad \addr \; \curr}
-		\Statex {\quad \addr \; \aux}
-		\Statex {\quad \Tbool \; \found}
-	\Statex \tbf{begin}
-	\State $\prev := \head$
-	\State $\prev \pointsto \fLock()$
-	\State $\curr := \prev \pointsto \fNext$
-	\State $\curr \pointsto \fLock$
-	\While {$\curr \pointsto \fData &lt; e$}
-		\State $\aux := \prev$
-		\State $\prev := \curr$
-		\State $\aux \pointsto \fUnlock()$
-		\State $\curr := \curr \pointsto \fNext$
-		\State $\curr \pointsto \fLock()$
+	\Statex $Procedure \; Search (e)$
+		\Statex {\quad addr \; prev}
+		\Statex {\quad addr \; curr}
+		\Statex {\quad addr \; aux}
+		\Statex {\quad bool \; found}
+	\Statex \textbf{begin}
+	\State $prev := head$
+	\State $prev \pointsto lock()$
+	\State $curr := prev \pointsto next$
+	\State $curr \pointsto lock$
+	\While {$curr \pointsto data &lt; e$}
+		\State $aux := prev$
+		\State $prev := curr$
+		\State $aux \pointsto unlock()$
+		\State $curr := curr \pointsto next$
+		\State $curr \pointsto lock()$
 	\EndWhile
-	\State $\found := (\curr \pointsto \fData = e)$
-	\State $\prev \pointsto \fUnlock()$
-	\State $\curr \pointsto \fUnlock()$
-	\State $\tbf{return}\; \found$
-	\Statex $\ProcedureEnd$
+	\State $found := (curr \pointsto data = e)$
+	\State $prev \pointsto unlock()$
+	\State $curr \pointsto unlock()$
+	\State $\textbf{return}\; found$
+	\Statex{end procedure}
 	\algstore{endSearch}
 \end{algorithmic}
 \end{minipage}
 \end{tabular}
 </text>
-<path matrix="1 0 0 1 6 -40" stroke="black">
+<path matrix="1.26902 0 0 0.466667 -52.1089 82.6667" stroke="black">
 216 260 m
 216 196 l
 468 196 l
 468 260 l
 h
 </path>
-<text matrix="1 0 0 1 -151 -336" transformations="translations" pos="272 752" stroke="black" type="label" valign="baseline">\newcommand{\Elem}{\ensuremath{\mathit{Elem}}\xspace}
+<text matrix="1 0 0 1 -151 -336" transformations="translations" pos="272 752" stroke="black" type="label" width="434" height="312.32" depth="303.68" valign="baseline">\newcommand{\Elem}{\ensuremath{\mathit{Elem}}\xspace}
 
 \begin{tabular}{c}
 \begin{minipage}[c]{7cm}
 \begin{algorithmic}[1]
 	\algrestore{endSearch}
-	\Statex $\ProcedureBegin \; \Insert (e)$
-		\Statex {\quad \addr \; \prev}
-		\Statex {\quad \addr \; \curr}
-		\Statex {\quad \addr \; \aux}
-	\Statex \tbf{begin}
-	\State $\prev := \head$
-	\State $\prev \pointsto \fLock()$
-	\State $\curr := \prev \pointsto \fNext$
-	\State $\curr \pointsto \fLock()$
-	\While {$\curr \pointsto \fData &lt; e$}
-		\State $\aux := \prev$
-		\State $\prev := \curr$
-		\State $\aux \pointsto \fUnlock()$
-		\State $\curr := \curr \pointsto \fNext$
-		\State $\curr \pointsto \fLock()$
+	\Statex $Procedure \; Insert (e)$
+		\Statex {\quad addr \; prev}
+		\Statex {\quad addr \; curr}
+		\Statex {\quad addr \; aux}
+	\Statex \textbf{begin}
+	\State $prev := head$
+	\State $prev \pointsto lock()$
+	\State $curr := prev \pointsto next$
+	\State $curr \pointsto lock()$
+	\While {$curr \pointsto data &lt; e$}
+		\State $aux := prev$
+		\State $prev := curr$
+		\State $aux \pointsto unlock()$
+		\State $curr := curr \pointsto next$
+		\State $curr \pointsto lock()$
 	\EndWhile
 
-	\If {$\curr \neq \fNull \And \curr \pointsto \fData &gt; e$}
-		\State $\aux := \malloc(e, \fNull, \#)$
-		\State $\aux \pointsto \fNext := \curr$
-		\State $\prev \pointsto \fNext := \aux$
-		\Statex $\quad\;\; \region := \region \cup \{\aux\}$
+	\If {$curr \neq null \And curr \pointsto data &gt; e$}
+		\State $aux := malloc(e, null, \#)$
+		\State $aux \pointsto next := curr$
+		\State $prev \pointsto next := aux$
+		\Statex $\quad\;\; region := region \cup \{aux\}$
 	\EndIf
-	\State $\prev \pointsto \fUnlock()$
-	\State $\curr \pointsto \fUnlock()$
-	\State \tbf{return}
-	\Statex $\ProcedureEnd$
-	\algstore{endAdd}
+	\State $prev \pointsto unlock()$
+	\State $curr \pointsto unlock()$
+	\State \textbf{return}
+	\Statex{end procedure}
+	\algstore{endInsert}
 \end{algorithmic}
 \end{minipage}
 \end{tabular}
 </text>
-<path matrix="1 0 0 1 -17 140" stroke="black">
+<path matrix="1.22972 0 0 0.529412 -213.638 178.588" stroke="black">
 856 112 m
 856 48 l
 1108 48 l
 1108 112 l
 h
 </path>
-<text matrix="1 0 0 1 464 -320" transformations="translations" pos="272 752" stroke="black" type="label" valign="baseline">\newcommand{\Elem}{\ensuremath{\mathit{Elem}}\xspace}
+<text matrix="1 0 0 1 464 -320" transformations="translations" pos="272 752" stroke="black" type="label" width="434" height="300.3" depth="291.7" valign="baseline">\newcommand{\Elem}{\ensuremath{\mathit{Elem}}\xspace}
 
 \begin{tabular}{c}
 \begin{minipage}[c]{7cm}
 \begin{algorithmic}[1]
-	\algrestore{endAdd}
-	\Statex $\ProcedureBegin \; \Remove (e)$
-		\Statex {\quad \addr \; \prev}
-		\Statex {\quad \addr \; \curr}
-		\Statex {\quad \addr \; \aux}
-	\Statex \tbf{begin}
+\algrestore{endInsert}
+	\Statex $Procedure \; Remove (e)$
+		\Statex {\quad addr \; prev}
+		\Statex {\quad addr \; curr}
+		\Statex {\quad addr \; aux}
+	\Statex \textbf{begin}
 
-	\State $\prev := \head$
-	\State $\prev \pointsto \fLock()$
-	\State $\curr := \prev \pointsto \fNext$
-	\State $\curr \pointsto \fLock()$
-	\While {$\curr \pointsto \fData &lt; e$}
-		\State $\aux := \prev$
-		\State $\prev := \curr$
-		\State $\aux \pointsto \fUnlock()$
-		\State $\curr := \curr \pointsto \fNext$
-		\State $\curr \pointsto \fLock()$
+	\State $prev := head$
+	\State $prev \pointsto lock()$
+	\State $curr := prev \pointsto next$
+	\State $curr \pointsto lock()$
+	\While {$curr \pointsto data &lt; e$}
+		\State $aux := prev$
+		\State $prev := curr$
+		\State $aux \pointsto unlock()$
+		\State $curr := curr \pointsto next$
+		\State $curr \pointsto lock()$
 	\EndWhile
-	\If {$\curr \neq \tail \And \curr \pointsto \fData = e$}
-		\State $\aux := \curr \pointsto \fNext$
-		\State $\prev \pointsto \fNext := \aux$
-		\Statex $\quad\;\; \region := \region \setminus \{curr\}$
+	\If {$curr \neq tail \And curr \pointsto data = e$}
+		\State $aux := curr \pointsto next$
+		\State $prev \pointsto next := aux$
+		\Statex $\quad\;\; region := region \setminus \{curr\}$
 	\EndIf
-	\State $\prev \pointsto \fUnlock()$
-	\State $\curr \pointsto \fUnlock()$
-	\State \tbf{return}
-	\Statex $\ProcedureEnd$
+	\State $prev \pointsto unlock()$
+	\State $curr \pointsto unlock()$
+	\State \textbf{return}
+	\Statex{end procedure}
 \end{algorithmic}
 \end{minipage}
 \end{tabular}

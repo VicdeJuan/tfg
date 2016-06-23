@@ -1,0 +1,9 @@
+\ProvidesFile{Ultlfonts.fd}
+             [2006/08/06 v0.1.1
+              LTL Fonts definitions]
+\DeclareFontFamily{U}{ltlfonts}{}
+\DeclareFontShape{U}{ltlfonts}{m}{n}{ <-> ltlfonts }{}
+\DeclareFontShape{U}{ltlfonts}{b}{n}{ <-> sub * ltlfonts/m/n }{}
+
+\pdfmapline{+ltlfonts\space <ltlfonts.pfb}
+\endinput

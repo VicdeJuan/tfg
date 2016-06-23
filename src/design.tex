@@ -63,7 +63,7 @@ This method is not complex to understand but it requires a lot of work even for 
 %
 We illustrate this method with an example in \ref{app:exampleFactorial}.
 
-
+\vspace{-0.3cm}
 \section{Parametrized systems}
 
 The correctness of a program executed by just one thread it is an easier problem because the program runs sequentiality.
@@ -81,7 +81,8 @@ We are going to study those cases.
 To do so, we need to parametrize the program executed by multiple threads.
 %
 Typically we use  $i$,$j$,$k_0$,$k_i$ for threads identifiers.
-%
+
+\vspace{-0.3cm}
 \subsubsection{Arbitrary number of threads}
 
 For example, the web servers may not have a bound of the number of clients they can accept.
@@ -110,7 +111,6 @@ We need to extend the concept of support to parametrized formulas.
   We use $\psi\supports(A\Into B)$ as a short notation for
   $\big((\bigwedge_{\sigma\in S} \sigma(\psi)) \andcond A\big) \Into B$.  
 \end{defn}
-
 Note that if $S'\subseteq S$ is a subset of the substitutions, and 
 %
   \[ \big( (\bigwedge_{\sigma\in S'} \sigma(\psi)\big) \andcond A\big) \Into B \hspace{4em} \text{is valid} \]
@@ -154,8 +154,7 @@ We will refer to $\Premise{S1}$ as \concept{initiation} because it depends on th
 $\Premise{S2}$ will be referred as \concept{self-consecution} because it captures the execution of one of the threads mentioned in the formula.
 %
 Finally, $\Premise{S3}$ will be referred as \concept{others-consecution} because it captures the execution of threads which do not appear in the formula. 
-
-
+%
 The example included in appendix \ref{app:exampleFactorial} illustrate the concept of support. 
 
 
@@ -178,7 +177,7 @@ A thread could lock the entire list, work with the list and then release the loc
 %
 There could be some optimizations in this approach, such as a writer-reader system.
 %
-However, this is extremely \doubt{unefficient} although it could more secure in terms of preventing deadlocks.
+However, this is extremely unefficient although it could more secure in terms of preventing deadlocks.
 %
 The other approach is locking and unlocking each node of the list, so multiple threads can work simultaneously using the same list as long as they do not need to use the same node.
 %
@@ -242,14 +241,13 @@ The variable \head, an address points to the first node of the list which has th
 The variable \tail, an address points to the last node of the list  which has the lowest possible value ($+\infty$).
 %
 Finally, the variable \region, a set of addresses, is used to keep track of the portion of the heap whose cells form the list.
-
-In Figure \ref{fig:listcode} present the code of the implementation chosen.
-
-\input{graphics/code}
+%
+In Figure \ref{fig:listcode} we present the code of the implementation chosen.
 
 \begin{figure}
 	\centering	
 	\label{fig:listcode}
+	\includegraphics[scale=0.4]{listcode}
 	\caption{Code of the implementation chosen.}
 \end{figure}
 %

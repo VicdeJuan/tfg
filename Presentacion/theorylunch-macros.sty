@@ -1,0 +1,125 @@
+
+%% Haifa talk macros
+
+\newcommand{\ProcedureBegin}{\tbf{procedure}\xspace}
+\newcommand{\ProcedureEnd}{\tbf{end procedure}\xspace}
+
+\newcommand{\Tarray}{\ensuremath{\mathit{Array}}\xspace}
+
+\newcommand{\procData}{\ensuremath{\mathit{process}}\xspace}
+
+\newcommand{\Inv}{\ensuremath{\textit{Inv}}\xspace}
+
+\newcommand{\Loc}{\ensuremath{\textit{Loc}}\xspace}
+
+%% Mutual exclusion algorithm based on sets
+
+\newcommand{\tick}{\ensuremath{\mathit{avail}}\xspace}
+\newcommand{\Tset}{\ensuremath{\mathit{Set}}\xspace}
+\newcommand{\announced}{\ensuremath{\mathit{bag}}\xspace}
+\newcommand{\CriticalSectName}{\ensuremath{\textsc{MutExc}}\xspace}
+\newcommand{\ticket}{\ensuremath{\mathit{ticket}}\xspace}
+\newcommand{\setAdd}{\ensuremath{\mathit{add}}\xspace}
+\newcommand{\setRemove}{\ensuremath{\mathit{remove}}\xspace}
+\newcommand{\setMin}{\ensuremath{\mathit{min}}\xspace}
+\newcommand{\Await}{\tbf{await }\xspace}
+\newcommand{\CriticalLines}{\ensuremath{\mathit{critical}}\xspace}
+\newcommand{\CriticalStm}{\tbf{critical}}
+\renewcommand{\pc}{\ensuremath{\mathit{pc}}\xspace}
+
+
+\newcommand{\TicketMutexProg}{
+\begin{tabular}{c}
+  \begin{minipage}[c]{6.5cm}
+	\begin{algorithmic}[1]
+                \Statex $\mathbf{global}$%
+		\Statex $\;\;\;\Tint \; \tick := 0$
+		\Statex $\;\;\;\Tset \langle\Tint\rangle \; \announced := \emptyset$
+		\Statex $ $
+		\Statex $\ProcedureBegin \; \CriticalSectName$
+		\Statex $\;\;\;\Tint \; \ticket$
+                \Statex $\mathbf{begin}$%
+		\Loop
+			\State $\Nondet$
+			\State $\left\langle \begin{array}{l}
+						\ticket := \tick++ \\
+						\announced.\setAdd(\ticket)
+					\end{array} \right\rangle$
+			\State $\Await (\announced.\setMin == \ticket)$
+			\State $\CriticalStm$
+			\State $\announced.\setRemove(\ticket)$
+		\EndLoop
+		\Statex $\ProcedureEnd$
+	\end{algorithmic}
+  \end{minipage}
+\end{tabular}
+}
+
+
+\newcommand{\mutex}{\ensuremath{\mathsf{mutex}}\xspace}
+\newcommand{\Active}{\ensuremath{\mathsf{active}}\xspace}
+\newcommand{\Want}{\ensuremath{\mathsf{wants}}\xspace}
+
+\newcommand{\isannounced}{\ensuremath{\mathsf{isannounced}}\xspace}
+
+\newcommand{\minticket}{\ensuremath{\mathsf{minticket}}\xspace}
+\newcommand{\activelow}{\ensuremath{\mathsf{activelow}}\xspace}
+\newcommand{\notsame}{\ensuremath{\mathsf{notsame}}\xspace}
+\newcommand{\someholds}{\ensuremath{\mathsf{someholds}}\xspace}
+
+\newcommand{\partialmap}{\mathrel{\rightharpoonup}}
+
+\newcommand{\Search}{\ensuremath{\textsc{Search}}\xspace}
+\newcommand{\Insert}{\ensuremath{\textsc{Insert}}\xspace}
+\newcommand{\Remove}{\ensuremath{\textsc{Remove}}\xspace}
+
+
+\newcommand{\invPreserve}{\ensuremath{\mathsf{list}}\xspace}
+\newcommand{\invLock}{\ensuremath{\mathsf{lock}}\xspace}
+\newcommand{\invNext}{\ensuremath{\mathsf{next}}\xspace}
+\newcommand{\invRegion}{\ensuremath{\mathsf{region}}\xspace}
+\newcommand{\invDisjoint}{\ensuremath{\mathsf{disj}}\xspace}
+\newcommand{\invOrder}{\ensuremath{\mathsf{order}}\xspace}
+
+\newcommand{\region}{\ensuremath{\mathit{reg}}\xspace}
+\newcommand{\elements}{\ensuremath{\mathit{elems}}\xspace}
+\newcommand{\fOrdered}{\ensuremath{\mathit{ordered}}\xspace}
+\newcommand{\pointsto}{\ensuremath{\hspace{-0.3em}\rightarrow{\hspace{-0.3em}}}}
+
+%% Results
+\usepackage{hhline}
+
+\newcolumntype{W}{>{\raggedleft\arraybackslash}m{4.2em}<{}}
+\newcolumntype{T}{>{\raggedleft\arraybackslash}m{2em}<{}}
+\newcommand{\MulTwo}[1]{\multicolumn{2}{c||}{#1}}
+\newcommand{\MulThree}[1]{\multicolumn{3}{c||}{#1}}
+\newcommand{\MulTwoS}[1]{\multicolumn{2}{c|}{#1}}
+\newcommand{\ColC}[1]{\multicolumn{1}{c|}{#1}}
+\newcommand{\ColCC}[1]{\multicolumn{1}{c||}{#1}}
+
+\newcommand{\ResultsTable}{
+	\begin{tabular}{ |r||T|T||T|T||W|W|W|} \cline{2-8}
+		\ColC{} & \MulTwo{formula info} & \MulTwo{\#solved vc} &
+		\ColC{FS+TA} & \ColC{FS+RS} & \ColC{Graph} \\
+		\cline{2-5}
+		\ColC{}& \ColC{index} & \ColCC{\#vc} & \ColC{pos} & \ColCC{dp} &
+		\ColC{time(s)} & \ColC{time(s)} & \ColC{time(s)} \\
+		\hhline{-*{7}=}
+		$\invPreserve$	 & $0$ & $ 61$ & $ 19$ & $42$ & $146.1$ & $34.9$ & $0.1$ \\ \hline
+		$\invOrder$			 & $1$ & $121$ & $ 38$ & $83$ & $107.6$ & $91.4$ & $1.2$ \\ \hline
+		$\invLock$			 & $1$ & $121$ & $ 57$ & $64$ & $ 39.7$ & $ 8.9$ & $0.4$ \\ \hline
+		$\invNext$			 & $1$ & $121$ & $ 38$ & $83$ & $166.7$ & $18.4$ & $0.9$ \\ \hline
+		$\invRegion$		 & $1$ & $121$ & $ 95$ & $26$ & $ 15.7$ & $ 4.1$ & $1.1$ \\ \hline
+		$\invDisjoint$	 & $2$ & $181$ & $177$ & $ 4$ & $ 80.6$ & $ 5.1$ & $0.1$ \\ \hline \hline
+		$\mutex$      & $2$ & $28$ & $26$ & $2$ & $0.2$ & $0.2$ & $0.1$ \\ \hline
+		$\minticket$  & $1$ & $19$ & $18$ & $1$ & $0.2$ & $0.2$ & $0.1$ \\ \hline
+		$\notsame$ 	 & $2$ & $28$ & $25$ & $3$ & $0.2$ & $0.1$ & $0.1$ \\ \hline
+		$\activelow$  & $1$ & $19$ & $17$ & $2$ & $0.1$ & $0.1$ & $0.1$ \\ \hline
+	\end{tabular}
+}
+
+
+%% Other macros
+
+\newcommand{\gray}[1]{\textcolor{lightgray}{#1}}
+\newcommand{\black}[1]{\textcolor{black}{#1}}

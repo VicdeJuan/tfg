@@ -1,0 +1,99 @@
+%%%%% %%%%% 1. for the enriched paper %%%%%
+%\newcommand{\F}{\mathsf{F}} %\newcommand{\T}{\mathsf{T}}
+%\newcommand{\F}{\mathbf{false}}
+%\newcommand{\T}{\mathbf{true}}
+%\newcommand{\true}{\T}
+\providecommand*{\Always}{} %Ale: to compile with cesar-llncs
+\renewcommand{\Always}{\LTLsquare}
+\providecommand*{\Event}{} %Ale: to compile with cesar-llncs
+\renewcommand{\Event}{\LTLdiamond}
+\providecommand*{\Next}{} %Ale: to compile with cesar-llncs
+\renewcommand{\Next}{\LTLcircle}
+%\newcommand{\Prev}{\LTLcircleminus}
+\newcommand{\PrevNoFirst}{\LTLcircletilde}
+\newcommand{\HasAlwaysBeen}{\LTLsquareminus}
+\providecommand*{\Once}{} %Ale: to compile with cesar-llncs
+\renewcommand{\Once}{\LTLdiamondminus}
+\providecommand*{\Since}{} %Ale: to compile with cesar-llncs
+\renewcommand{\Since}{\mathbin{\mathcal{S}}}
+\providecommand*{\BackTo}{} %Ale: to compile with cesar-llncs
+\renewcommand{\BackTo}{\mathbin{\mathcal{B}}}
+\newcommand{\WeakPrev}{\LTLcircletilde}
+
+
+\newcommand{\ORsym}{{\scriptstyle{\pmb{+}}}}
+\newcommand{\SEQsym}{{\scriptstyle{\cdot}}}
+\newcommand{\ANDsym}{{\scriptstyle{\pmb{|}}}}
+\newcommand{\STARsym}{*}
+\newcommand{\EXPsym}{\widehat{\;\phantom{\cdot}\;}}
+\newcommand{\POWsym}{\EXPsym}
+\newcommand{\DPOWsym}{\_}
+\newcommand{\NEGsym}{\overline{\;\phantom{\cdot}\;}}
+%\newcommand{\INF}[1]{\overset{\infty}{#1}}
+\newcommand{\INF}[1]{\widehat{#1}}
+%\newcommand{\ORsymInf}{\INF{\ORsym}}
+\newcommand{\ORsymInf}{\oplus}
+%\newcommand{\ANDsymInf}{\INF{\ANDsym}}
+\newcommand{\ANDsymInf}{\oslash}
+%\newcommand{\SEQsymInf}{\INF{\SEQsym}} 
+\newcommand{\SEQsymInf}{\odot} 
+\newcommand{\OR}{\mathrel{+}}
+\newcommand{\AND}{\mathrel{|}} 
+\newcommand{\SEQ}{\mathrel{\cdot}}
+%\newcommand{\ORInf}{\mathrel{\INF{\scriptstyle{+}}}}
+\newcommand{\ORInf}{\mathrel{\oplus}}
+%\newcommand{\ANDInf}{\mathrel{\INF{\scriptstyle{|}}}}
+\newcommand{\ANDInf}{\mathrel{\oslash}}
+%\newcommand{\SEQInf}{\mathrel{\INF{\scriptstyle{\cdot}}}}
+\newcommand{\SEQInf}{\mathrel{\odot}}
+
+\newcommand{\uSTAR}{^\STARsym} %unary star
+\newcommand{\bSTAR}{\mathrel{\STARsym}} %unary star
+\newcommand{\STAR}{\uSTAR} \newcommand{\CIRC}{\mathrel{\circ}}
+%\newcommand{\EnrichedRE}{E$\omega${}RE\xspace}
+\newcommand{\EnrichedRE}{\ensuremath{\textup{EnRE}}\xspace}
+\newcommand{\EnRE}{\EnrichedRE}
+\newcommand{\VeryEnrichedRE}{kE$\omega${}RE\xspace}
+%\newcommand{\Vars}{\mathcal{V}}
+\newcommand{\ElemRE}{\ensuremath{\textup{ElemRE}}\xspace}
+%\newcommand{\Bool}{\mathcal{B}}
+\newcommand{\wRE}[1]{\ensuremath{\omega\text{RE}(#1)}}
+\newcommand{\finRE}[1]{\ensuremath{\text{RE}(#1)}}
+\newcommand{\RE}{\textup{RE}\xspace} % regular expressions
+\newcommand{\ERE}{\textup{ERE}\xspace} % Extended Regular Expressions RE(+,*,;,|,~,[w]) 
+\newcommand{\SERE}{\textup{SERE}\xspace} %Semi-Extended Regular Expressions RE(+,*,;,|, ,[w])
+
+\newcommand{\SigmaElem}{\Sigma_\text{elem}}
+\newcommand{\SigmaEnriched}{\Sigma_\text{rich}}
+\newcommand{\SigmaEnrichedInf}{\Sigma^{\omega}_\text{rich}}
+\newcommand{\SigmaRegexp}{\Sigma_\text{regexp}}
+
+\newcommand{\NBW}{NBW\xspace} % non-deterministic B\"uchi automata on words 
+\newcommand{\DBW}{DBW\xspace} % deterministic B\"uchi automata on words 
+\newcommand{\ABW}{ABW\xspace} % alternating B\"uchi automata on words 
+\newcommand{\BABW}{BABW\xspace} %
+\newcommand{\ETL}{\text{ETL}\xspace} % Extended Temporal Logic ETL
+\newcommand{\ETLr}{\ensuremath{\text{ETL}_r}\xspace} % ETL (regular condition) 
+\newcommand{\ETLl}{\ensuremath{\text{ETL}_l\xspace}} % ETL (loop condition) 
+\newcommand{\ETLf}{\ensuremath{\text{ETL}_f\xspace}}
+% ETL (finite condition)
+\newcommand{\ETLa}{\ensuremath{\text{ETL}_a\xspace}} % ETL(alternating condition)
+\newcommand{\ETLta}{\ensuremath{\text{ETL}_2a}\xspace} % ETL (two way alternating condition) 
+\newcommand{\Release}{\mathbin{\mathcal{R}}}
+
+\newcommand{\ALL}{\ensuremath{\mathbf{all}}\xspace}
+
+%\newcommand{\Alphabet}{\Gamma}
+\newcommand{\Alphabet}{\Sigma}
+
+\newcommand{\Eqs}{\mathcal{E}}
+
+
+\newcommand{\DefOR}{\ensuremath{\;\;\;\big|\;\;\;}}
+\renewcommand{\SEQsym}{\ensuremath{;}}
+\renewcommand{\SEQ}{\mathrel{\SEQsym}}
+
+\newcommand{\REOR}{+}
+\newcommand{\RESEQsym}{\ensuremath{;}}
+\newcommand{\RESeq}{\mathrel{\RESEQsym}}
+\newcommand{\REStar}{*}

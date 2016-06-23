@@ -1,0 +1,23 @@
+\newcommand\Def[2][]{%                        % F"ur Definitionen 
+  \def\temp{#1}%                              % die in den Index sollen
+  \ifx\temp\empty%
+    \def\temp{#2}%
+  \fi%
+%{\em\boldmath#2\unboldmath\index{\temp}}}
+{\em#2\index{\temp}}}
+
+\newcommand{\N}{\mathbb{N}}
+
+\newcommand{\onlyWithComplement}[1]{}
+
+%\newcommand{\pos}{\textit{pos}}
+%\newcommand{\Pos}{\textit{Pos}}
+\newcommand{\pos}{\omega}
+\newcommand{\Pos}{\omega}
+
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% End: 

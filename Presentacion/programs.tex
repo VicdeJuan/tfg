@@ -1,0 +1,442 @@
+\newcommand{\RefFigListClass}{\ref{fig:programs}(a)\xspace}
+\newcommand{\RefFigMGC}      {\ref{fig:programs}(b)\xspace}
+\newcommand{\RefFigSearch}   {\ref{fig:programs}(c)\xspace}
+\newcommand{\RefFigLocate}   {\ref{fig:programs}(d)\xspace}
+\newcommand{\RefFigAdd}      {\ref{fig:programs}(e)\xspace}
+\newcommand{\RefFigRemove}   {\ref{fig:programs}(f)\xspace}
+
+\newcommand{\RefFigListClassGhost}{\ref{fig:programs:ghost}(a)\xspace}
+\newcommand{\RefFigLocateGhost}		{\ref{fig:programs:ghost}(b)\xspace}
+\newcommand{\RefFigAddGhost}			{\ref{fig:programs:ghost}(c)\xspace}
+\newcommand{\RefFigRemoveGhost}		{\ref{fig:programs:ghost}(d)\xspace}
+
+\newcommand{\FigLabel}[1]{\multicolumn{1}{c}{#1}}
+\newcommand{\FigLabelWide}[1]{\multicolumn{3}{c}{#1}}
+
+%
+% Figures for data structure
+%
+
+\begin{SaveVerbatim}{list-data}
+class List {
+     Node list;
+}
+\end{SaveVerbatim}
+
+\begin{SaveVerbatim}{list-data-space}
+class List {
+     Node list;
+
+}
+\end{SaveVerbatim}
+
+
+\begin{SaveVerbatim}{node-data}
+class Node {
+     Value val;
+     Node next;
+     Lock lock;
+}
+\end{SaveVerbatim}
+
+\newcommand{\DataStructuresBody}{
+  \begin{tabular}{l}
+    \renewcommand{\arraystretch}{0.4}
+    $\begin{array}{l}
+      \class \: \List \: \{ \\
+      \mhs \Node \: \tList ;\\
+      \}
+    \end{array}$ \\ \\ \\
+    \renewcommand{\arraystretch}{0.4}
+    $\begin{array}{l}
+      \class \: \Node \: \{ \\
+      \mhs \Value \: \val ;\\
+      \mhs \Node \: \tNext ;\\
+      \mhs \Lock \: \lock ;\\
+      \}
+    \end{array}$
+  \end{tabular}
+}
+\newcommand{\DataStructuresFig}{
+\begin{minipage}[c]{3.7cm}
+  \DataStructuresBody
+\label{fig:listclass}
+\end{minipage}
+}
+
+%
+% Figures for most generate cliente "decide"
+%
+\newcommand{\MGCBody}{
+  \begin{algorithmic}[1]
+    \While {$\true$}
+    \State $e := \NondetChooseElem$
+    \State $\Nondet$
+    \State $\left[ \begin{array}{l}
+	\Call \search(e) \\
+	\ProgOr \\
+	\Call \add(e) \\
+	\ProgOr \\
+	\Call \remove(e)
+      \end{array} \right]$
+    \EndWhile
+  \end{algorithmic}
+}
+
+\begin{SaveVerbatim}[fontfamily=courier]{mgc-prg}
+0:  while true
+1:     e:= NonDet();
+2:     select
+3:        search(e);
+4:     or
+5:        add(e);
+6:     or
+7:        remove(e);
+8:  end;
+\end{SaveVerbatim}
+
+\newcommand{\MGCPrg}{
+  \begin{minipage}[c]{5.0cm}
+    \MGCBody
+  \end{minipage}
+}
+\newcommand{\MGCFig}{
+  \begin{minipage}[c]{4.1cm}
+    \MGCBody
+    \label{fig:mgc}
+  \end{minipage}
+}
+
+%
+% Figure for "search" 
+%
+\begin{SaveVerbatim}{search-prog}
+20:  prev, cur := locate (e);
+21:  if curr.val = e then
+22:      result := true;
+23:  else
+24:      result := false;
+25:  curr.unlock();
+26:  prev.unlock();
+27:  return result;
+\end{SaveVerbatim}
+
+\newcommand{\SearchBody}{
+  \begin{algorithmic}[1]
+    \State $\prev, \curr := \locate(e)$
+    \If {$\curr.\val = e$}
+    \State $\result := \true$
+    \Else
+    \State $\result := \false$
+    \EndIf
+    \State $\curr.\unlock()$
+    \State $\prev.\unlock()$
+    \State \tbf{return} $\result$
+  \end{algorithmic}
+}
+\newcommand{\SearchPrg}{
+  \begin{minipage}[c]{3.9cm}
+    \SearchBody
+  \end{minipage}
+}
+\newcommand{\SearchFig}{
+\begin{minipage}[c]{3.9cm}
+  \SearchBody
+\label{fig:search}
+\end{minipage}
+}
+
+%
+% Figure for "locate"
+%
+\begin{SaveVerbatim}{locate-prog}
+ 9:  prev := Head;
+10:  prev.lock();
+11:  curr := prev.next;
+12:  curr.lock();
+13:  while curr.val < e do
+14:      prev.unlock();
+15:      prev := curr;
+16:      curr := curr.next;
+17:      curr.lock();
+18:  end;
+19:  return (prev,curr)
+\end{SaveVerbatim}
+
+\newcommand{\LocateBody}{
+\begin{algorithmic}[1]
+\State $\prev := \Head$
+\State $\prev.\lock()$
+\State $\curr := \prev.\tNext$
+\State $\curr.lock()$
+\While {$\curr.\val < e$}
+	\State $\prev.\unlock()$
+	\State $\prev := \curr$
+	\State $\curr := \curr.\tNext$
+	\State $\curr.\lock()$
+\EndWhile
+\State \tbf{return} $(\prev, \curr)$
+\Statex
+\end{algorithmic}
+}
+
+\newcommand{\LocatePrg}{
+  \begin{minipage}[c]{3.7cm}
+    \LocateBody
+  \end{minipage}
+}
+
+\newcommand{\LocateFig}{
+\begin{minipage}[c]{3.7cm}
+  \LocateBody
+\label{fig:locate}
+\end{minipage}
+}
+
+%
+% Figure for "add"
+%
+\begin{SaveVerbatim}{add-prog}
+28:  prev, curr := locate(e);
+29:  if curr.val != e then
+30:      aux := new Node(e);
+31:      aux.next := curr;
+32:      prev.next := aux;
+33:      result := true;
+34:  else
+35:      result := false;
+36:  end;
+37:  prev.unlock();
+38:  curr.unlock();
+39:  return result;
+\end{SaveVerbatim}
+
+
+
+\newcommand{\AddBody}{
+\begin{algorithmic}[1]
+\State $\prev, \curr := \locate(e)$
+\If {$\curr.\val \neq e$}
+	\State $\aux := \New \Node(e)$
+	\State $\aux.\tNext := \curr$
+	\State $\prev.\tNext := \aux$
+	\State $\result := \true$
+\Else
+	\State $\result := \false$
+\EndIf
+\State $\prev.\unlock()$
+\State $\curr.\unlock()$
+\State \tbf{return} $\result$
+\end{algorithmic}
+}
+
+\newcommand{\AddPrg}{
+  \begin{minipage}[c]{4.1cm}
+    \AddBody
+  \end{minipage}
+}
+
+\newcommand{\AddFig}{
+\begin{minipage}[c]{4.1cm}
+  \AddBody
+  \label{fig:add}
+\end{minipage}
+}
+
+%
+% Figure for "remove"
+%
+\begin{SaveVerbatim}{remove-prog}
+40:  prev, curr := locate(e);
+41:  if curr.val == e then
+42:      aux := curr.next;
+43:      prev.next := aux;
+44:      result := true;
+45:  else
+46:      result := false;
+47:  end;
+48:  prev.unlock();
+49:  curr.unlock();
+50:  return result;
+\end{SaveVerbatim}
+
+
+\newcommand{\RemoveBody}{
+    \begin{algorithmic}[1]
+      \State $\prev, \curr := \locate(e)$
+      \If {$\curr.\val = e$}
+      \State $\aux := \curr.\tNext$
+      \State $\prev.\tNext := \aux$
+      \State $\result := \true$
+      \Else
+      \State $\result := \false$
+      \EndIf
+      \State $\prev.\unlock()$
+      \State $\curr.\unlock()$
+      \State \tbf{return} $\result$
+      \Statex
+    \end{algorithmic}
+}
+
+\newcommand{\RemovePrg}{
+  \begin{minipage}[c]{3.9cm}
+    \RemoveBody
+  \end{minipage}
+}
+
+
+\newcommand{\RemoveFig}{
+  \begin{minipage}[c]{3.9cm}
+    \RemoveBody
+    \label{fig:remove}
+  \end{minipage}
+}
+
+
+
+
+%
+% Figures for data structure
+%
+\newcommand{\DataStructuresGhostBody}{
+	\begin{tabular}{cc}
+		\renewcommand{\arraystretch}{0.4}
+		$\begin{array}{l}
+			\class \: \List \: \{ \\
+			\mhs \Node \: \tList ;\\
+			\hs{0.2} \fbox{ \begin{array}{l}
+				\rgn \: r; \\
+			\end{array}}\\
+		\}
+		\end{array}$ & \hs{2} $\begin{array}{l}
+			\class \: \Node \: \{ \\
+			\mhs \Value \: \val ;\\
+			\mhs \Node \: \tNext ;\\
+			\mhs \Lock \: \lock ;\\
+		\}
+	\end{array}$
+	\end{tabular}
+}
+
+\newcommand{\DataStructuresGhostFig}{
+\begin{minipage}[c]{6.5cm}
+	\DataStructuresGhostBody
+\label{fig:conclists:ghost}
+\end{minipage}
+}
+
+
+%
+% Figure for "locate" extended with ghost fields
+%
+
+\newcommand{\LocateGhostBody}{
+	\begin{algorithmic}[1]
+		\State $\prev := \Head$
+		\State $\prev.\lock()$
+		\State $\curr := \prev.\tNext$
+		\State $\curr.lock()$
+		\While {$\curr.\val < e$}
+			\State $\prev.\unlock()$
+			\State $\prev := \curr$
+			\State $\curr := \curr.\tNext$
+			\State $\curr.\lock()$
+		\EndWhile
+		\State \tbf{return} $(\prev, \curr)$
+		\vspace{0.8cm}
+	\end{algorithmic}
+}
+
+
+\newcommand{\LocateGhostFig}{
+\begin{minipage}[c]{4.2cm}
+	\LocateGhostBody
+\label{fig:locate:ghost}
+\end{minipage}
+}
+
+
+%
+% Figure for "add" extended with ghost fields
+%
+\newcommand{\AddGhostBody}{
+	\begin{algorithmic}[1]
+		\State $\prev, \curr := \locate(e)$
+		\If {$\curr.\val \neq e$}
+			\State $\aux := \New \Node(e)$
+			\State $\aux.\tNext := \curr$
+			\State $\prev.\tNext := \aux$
+			\Statex $\hs{0.7}\fbox{
+				\begin{array}{l}
+					l.r := l.r \cup \sreg{\aux} \\
+				\end{array}}$
+			\State $\result := \true$
+		\Else
+			\State $\result := \false$
+		\EndIf
+		\State $\prev.\unlock()$
+		\State $\curr.\unlock()$
+		\State \tbf{return} $\result$
+	\end{algorithmic}
+}
+
+
+\newcommand{\AddGhostFig}{
+\begin{minipage}[c]{4.2cm}
+	\AddGhostBody
+	\label{fig:add:ghost}
+\end{minipage}
+}
+
+
+%
+% Figure for "remove" extended with ghost fields
+%
+\newcommand{\RemoveGhostBody}{
+		\begin{algorithmic}[1]
+			\State $\prev, \curr := \locate(e)$
+			\If {$\curr.\val = e$}
+				\State $\aux := \curr.\tNext$
+				\State $\prev.\tNext := \aux$
+				\Statex $\hs{0.7}\fbox{
+					\begin{array}{l}
+						l.r := l.r - \sreg{\curr} \\
+					\end{array}}$
+				\State $\result := \true$
+			\Else
+				\State $\result := \false$
+			\EndIf
+			\State $\prev.\unlock()$
+			\State $\curr.\unlock()$
+			\State \tbf{return} $\result$
+			\Statex
+		\end{algorithmic}
+}
+
+
+\newcommand{\RemoveGhostFig}{
+	\begin{minipage}[c]{4.3cm}
+		\RemoveGhostBody
+		\label{fig:remove:ghost}
+  \end{minipage}
+}
+
+
+
+\begin{SaveVerbatim}{skiplist-data}
+class Skiplist {
+	Node* head;
+	Node* tail;
+	int maxLevel;
+
+}
+\end{SaveVerbatim}
+
+\begin{SaveVerbatim}{skiplist-node-data}
+class Node {
+	Value v;
+	Key k;
+	Array<Node*>(4) next;
+}
+\end{SaveVerbatim}
+

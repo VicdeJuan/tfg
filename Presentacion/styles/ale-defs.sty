@@ -1,0 +1,138 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                                        %%
+%% I'm just using this file to define some basic commands %%
+%%                                                        %%
+%%                                                        %%
+%%                                                        %%
+%%                                                        %%
+%%   Alejandro Sanchez                                    %%
+%%     IMDEA Software, Sep 2010                           %%
+%%                                                        %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{ale-defs}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Include useful packages. %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\RequirePackage{amsmath}
+\RequirePackage{latexsym}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Small command for TODO notation. %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\MYTODO}[1]{%
+%  \textsf{\textcolor{red}{$^{[\thetodos]}$}}%
+  \marginpar{%
+    \framebox[0.9\marginparwidth][t]{%
+      \parbox[t]{0.85\marginparwidth}{%
+	#1
+%        \raggedright\scriptsize{
+%	  \textcolor{red}{\thetodos: #1}%
+%	}
+	}}}%
+%  \stepcounter{todos}%
+}
+
+
+%\usepackage{pstricks}
+%\newcommand{\todobox}[2]{
+%	\begin{center}
+%	\hspace{-1.8cm}
+%	\psframebox[fillstyle=solid, fillcolor=lightgray,
+%			framesep=10pt, linearc=14pt,
+%			cornersize=absolute, linewidth=1.5pt]
+%	{\parbox{\textwidth}{
+%	\begin{tabular}{m{1.4cm}p{10cm}}
+%	$\textrm{\textsc{\Huge{#1}}}$ & {#2}
+%	\end{tabular}}}
+%	\end{center}}
+
+%\newcommand{\toask}[1]{\todobox{?}{#1}}
+%\newcommand{\todo}[1]{\todobox{!}{#1}}
+
+
+%\newcommand{\ytodo}[1]{\colorbox{yellow}{#1}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Theorems, lemmas, definitions, proofs, examples... headlines %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\usepackage[amsmath,thmmarks]{ntheorem}
+
+%\theoremstyle{break}
+%\theoremheaderfont{\normalfont\bfseries}
+%\theorembodyfont{\slshape}
+%\theoremsymbol{\ensuremath{\spadesuit}}
+%\theoremseparator{:}
+%\theoremprework{\bigskip}
+%\theorempostwork{\bigskip}
+%\newtheorem{Lemma}{Lemma}
+
+%\theoremstyle{nonumberplain}
+%\theoremheaderfont{\bfseries}
+%\theorembodyfont{\upshape}
+%\theoremseparator{}
+%\theoremsymbol{\ensuremath{\Box}}
+%\theoremprework{\bigskip}
+%\theorempostwork{\bigskip}
+%\newtheorem{Proof}{Proof}
+
+%\theoremstyle{break}
+%\theorem eaderfont{\normalfont\bfseries}
+%\theorembodyfont{\upshape}
+%\theoremsymbol{\ensuremath{\ast}}
+%\theoremseparator{:}
+%\theoremprework{\bigskip}
+%\theorempostwork{\bigskip}
+%\newtheorem{Example}{Example}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                       %%
+%%  General definitions  %%
+%%                       %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Some spaces
+\newcommand{\hs}[1]{\hspace{#1cm}}
+\newcommand{\mhs}{\hspace{0.5cm}}
+\newcommand{\lsp}{\vspace{0.3cm}}
+
+%% Math phantom symbol
+\newcommand{\mps}{\phantom{\Big|}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                             %%
+%%  Mathematical environments  %%
+%%                             %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\cequ}[1]{\begin{equation*}{#1}\end{equation*}}
+\newcommand{\cmath}[1]{\begin{center}\begin{math}{#1}\end{math}\end{center}}
+\newcommand{\lmath}[1]{\begin{flushleft}\begin{math}{#1}
+	\end{math}\end{flushleft}}
+
+% Left aligned multiple line math environment
+\newcommand{\mmath}[1]{\lmath{\begin{array}{l}#1\end{array}}}
+
+
+\newcommand{\defsym}{\hat{=}}
+\newcommand{\newdef}[2]{{#1} \: \defsym \: {
+	\begin{array}{l}
+		{#2}
+	\end{array}}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                  %%
+%%  Basic terminology for theories  %%
+%%                                  %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
