@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Limpiar archivos auxiliares
-#./limpiar.sh
+./limpiar.sh
 
 # Compilar
 pdflatex main.tex
