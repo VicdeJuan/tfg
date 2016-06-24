@@ -1,625 +1,310 @@
-\chapter{\spass syntax file \& full list of axioms}
-
+\chapter{\spass\; syntax file \& full list of axioms}
 \label{spass:syntax_file}
+\begin{lstlisting}
 
-\large{\textbf{begin\_problem(SPASS\_test).}}
+begin_problem(Template).
 
-\small{}
 
-\textbf{list\_of\_descriptions.}
-
- name({*SPASS\_test*}).
-
+list_of_descriptions.
+ name({*Template*}).
  author({*Victor de Juan*}).
-
  status(unknown).
-
  description({*desc*}).
+end_of_list.
 
-\textbf{end\_of\_list.}
 
 
-\textbf{list\_of\_symbols.}
-
-\textcolor{orange}{functions}[
+list_of_symbols.
+functions[
 
 %%  %%  static global variables:
-
-    region\_prime,region,heap\_prime,heap,elements\_prime,elements,i,k\_0,j,l,
-
+    region_prime,region,heap_prime,heap,elements_prime,elements,i,
 %%  %%  local in threads and in procedures variables:
-
-    search\_prev\_prime\_i,search\_prev\_i,search\_curr\_prime\_i,search\_curr\_i,search\_aux\_prime\_i,search\_aux\_i,search\_e\_prime\_i,search\_e\_i,search\_e\_prime\_i,search\_e\_i,search\_e\_prime\_i,search\_e\_i,remove\_prev\_prime\_i,remove\_prev\_i,remove\_curr\_prime\_i,remove\_curr\_i,remove\_aux\_prime\_i,remove\_aux\_i,remove\_e\_prime\_i,remove\_e\_i,remove\_e\_prime\_i,remove\_e\_i,remove\_e\_prime\_i,remove\_e\_i,insert\_prev\_prime\_i,insert\_prev\_i,insert\_curr\_prime\_i,insert\_curr\_i,insert\_aux\_prime\_i,insert\_aux\_i,insert\_e\_prime\_i,insert\_e\_i,insert\_e\_prime\_i,insert\_e\_i,insert\_e\_prime\_i,insert\_e\_i,search\_prev\_prime\_k\_0,search\_prev\_k\_0,search\_curr\_prime\_k\_0,search\_curr\_k\_0,search\_aux\_prime\_k\_0,search\_aux\_k\_0,search\_e\_prime\_k\_0,search\_e\_k\_0,search\_e\_prime\_k\_0,search\_e\_k\_0,search\_e\_prime\_k\_0,search\_e\_k\_0,remove\_prev\_prime\_k\_0,remove\_prev\_k\_0,remove\_curr\_prime\_k\_0,remove\_curr\_k\_0,remove\_aux\_prime\_k\_0,remove\_aux\_k\_0,remove\_e\_prime\_k\_0,remove\_e\_k\_0,remove\_e\_prime\_k\_0,remove\_e\_k\_0,remove\_e\_prime\_k\_0,remove\_e\_k\_0,insert\_prev\_prime\_k\_0,insert\_prev\_k\_0,insert\_curr\_prime\_k\_0,insert\_curr\_k\_0,insert\_aux\_prime\_k\_0,insert\_aux\_k\_0,insert\_e\_prime\_k\_0,insert\_e\_k\_0,insert\_e\_prime\_k\_0,insert\_e\_k\_0,insert\_e\_prime\_k\_0,insert\_e\_k\_0,search\_prev\_prime\_j,search\_prev\_j,search\_curr\_prime\_j,search\_curr\_j,search\_aux\_prime\_j,search\_aux\_j,search\_e\_prime\_j,search\_e\_j,search\_e\_prime\_j,search\_e\_j,search\_e\_prime\_j,search\_e\_j,remove\_prev\_prime\_j,remove\_prev\_j,remove\_curr\_prime\_j,remove\_curr\_j,remove\_aux\_prime\_j,remove\_aux\_j,remove\_e\_prime\_j,remove\_e\_j,remove\_e\_prime\_j,remove\_e\_j,remove\_e\_prime\_j,remove\_e\_j,insert\_prev\_prime\_j,insert\_prev\_j,insert\_curr\_prime\_j,insert\_curr\_j,insert\_aux\_prime\_j,insert\_aux\_j,insert\_e\_prime\_j,insert\_e\_j,insert\_e\_prime\_j,insert\_e\_j,insert\_e\_prime\_j,insert\_e\_j,search\_prev\_prime\_l,search\_prev\_l,search\_curr\_prime\_l,search\_curr\_l,search\_aux\_prime\_l,search\_aux\_l,search\_e\_prime\_l,search\_e\_l,search\_e\_prime\_l,search\_e\_l,search\_e\_prime\_l,search\_e\_l,remove\_prev\_prime\_l,remove\_prev\_l,remove\_curr\_prime\_l,remove\_curr\_l,remove\_aux\_prime\_l,remove\_aux\_l,remove\_e\_prime\_l,remove\_e\_l,remove\_e\_prime\_l,remove\_e\_l,remove\_e\_prime\_l,remove\_e\_l,insert\_prev\_prime\_l,insert\_prev\_l,insert\_curr\_prime\_l,insert\_curr\_l,insert\_aux\_prime\_l,insert\_aux\_l,insert\_e\_prime\_l,insert\_e\_l,insert\_e\_prime\_l,insert\_e\_l,insert\_e\_prime\_l,insert\_e\_l,
+    search_prev_prime_i,search_prev_i,search_curr_prime_i,search_curr_i,search_aux_prime_i,search_aux_i,search_e_prime_i,search_e_i,search_e_prime_i,search_e_i,search_e_prime_i,search_e_i,remove_prev_prime_i,remove_prev_i,remove_curr_prime_i,remove_curr_i,remove_aux_prime_i,remove_aux_i,remove_e_prime_i,remove_e_i,remove_e_prime_i,remove_e_i,remove_e_prime_i,remove_e_i,insert_prev_prime_i,insert_prev_i,insert_curr_prime_i,insert_curr_i,insert_aux_prime_i,insert_aux_i,insert_e_prime_i,insert_e_i,insert_e_prime_i,insert_e_i,insert_e_prime_i,insert_e_i,
 
 %%  %%   numbers: 
-
-    0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,
-
+    0,1,2,3,4,5,
 %%  %%  functions:
-
     
-
 %%   %%  mem
 
 (null,0),(upd,3),(rd,2),
+%%   %%  W_reach
 
-%%   %%  W\_reach
 
-
-%%   %%  W\_bridge
+%%   %%  W_bridge
 
 (path2set,1),(addr2set,2),(getp,3),(fstlock,2),
-
 %%   %%  path
 
 (epsilon,0),(consPath,1),
-
 %%   %%  addr
 
 (freshaddr,0),
-
 %%   %%  setaddr
 
 (emptySet,0),(union,2),(setDiff,2),(singl,1),
-
 %%   %%  elem
 
-(highestElem,0),(lowestElem,0),(main\_e\_prime\_i,0),(main\_e\_prime\_k\_0,0),(main\_e\_prime\_j,0),(main\_e\_prime\_l,0),(main\_e\_i,0),(main\_e\_k\_0,0),(main\_e\_j,0),(main\_e\_l,0),
-
+(highestElem,0),(lowestElem,0),(main_e_prime_i,0),(main_e_i,0),
 %%   %%  setelem
 
-(emptySetElem,0),(unionElem,2),(setDiffElem,2),(singlElem,1)
-
+(emptySetElem,0),(unionElem,2),(setDiffElem,2),(singlElem,1),(set2elem,2),
 %%   %%  cell
 
 (error,0),(mkcell,3),(data,1),(next,1),(lockid,1),(lock,2),(unlock,1),(head,0),(tail,0),(freshcell,0),
-
 %%   %%  nat
 
 (s,1),
-
 %%   %%  tid
 
-(nothread,0),(pc\_prime\_i,0),(pc\_prime\_k\_0,0),(pc\_prime\_j,0),(pc\_prime\_l,0),(pc\_i,0),(pc\_k\_0,0),(pc\_j,0),(pc\_l,0),
-
+(nothread,0),(pc_prime_i,0),(pc_i,0),
 %%   %%  settid
 
 (emptySetTh,0),(unionTh,2),(setDiffTh,2),(singlTh,1)
-
 ].
 
 
-\textcolor{orange}{predicates}[
-
+predicates[
  %  program
-
     
-
 %%   %%  mem
-
     
-
-%%   %%  W\_reach
-
+%%   %%  W_reach
     (reach,4),
-
-%%   %%  W\_bridge
-
-    (orderlist,3),(initial,0),(search\_result\_prime\_i,0),(search\_result\_prime\_k\_0,0),(search\_result\_prime\_j,0),(search\_result\_prime\_l,0),(search\_result\_i,0),(search\_result\_k\_0,0),(search\_result\_j,0),(search\_result\_l,0),
-
+%%   %%  W_bridge
+    (orderlist,3),(initial,0),(search_result_prime_i,0),(search_result_i,0),
 %%   %%  path
-
     (append,3),
-
 %%   %%  addr
-
     
-
 %%   %%  setaddr
-
     (in,2),(sub,2),
-
 %%   %%  elem
-
-    (ls\_elem,2),
-
+    (ls_elem,2),
 %%   %%  setelem
-
     (inElem,2),(subElem,2),
-
 %%   %%  cell
-
     
-
 %%   %%  nat
-
     (ls,2),
-
 %%   %%  tid
-
-    (ls\_tid,2),
-
+    (ls_tid,2),
 %%   %%  settid
-
     (inTh,2),(subTh,2)
-
 ].
-
-\textcolor{orange}{sorts}[
-
+sorts[
     mem,path,addr,setaddr,elem,setelem,cell,nat,tid,settid
-
 ].
+end_of_list.
+
+
+list_of_formulae(axioms).
+    %% %% %% sorts_types
+    formula(tid(i),i__is__Tid_tllign). formula(equal(i,0),i__def_tllign).
+
+    formula(setaddr(region_prime),setaddr_prime__def_tllign).
+    formula(setaddr(region),setaddr__def_tllign).
+    formula(mem(heap_prime),mem_prime__def_tllign).
+    formula(mem(heap),mem__def_tllign).
+    formula(setelem(elements_prime),setelem_prime__def_tllign).
+    formula(setelem(elements),setelem__def_tllign).
+
+    %%   %% mem
+    formula(addr(null),null__is__addr_tllign).
+    formula(forall([mem(h),addr(a),cell(c)],mem(upd(h,a,c))),upd__is__mem_tllign).
+    formula(forall([mem(h),addr(a)],cell(rd(h,a))),rd__is__cell_tllign).
+
+    %%   %% W_reach
+
+    %%   %% W_bridge
+    formula(forall([path(p)],setaddr(path2set(p))),path2set__is__setaddr_tllign).
+    formula(forall([mem(h),addr(a)],setaddr(addr2set(h,a))),addr2set__is__setaddr_tllign).
+    formula(forall([mem(h),addr(a),addr(a1)],path(getp(h,a,a1))),getp__is__path_tllign).
+    formula(forall([mem(h),path(p)],addr(fstlock(h,p))),fstlock__is__addr_tllign).
+
+    %%   %% path
+    formula(path(epsilon),epsilon__is__path_tllign).
+    formula(forall([addr(a)],path(consPath(a))),consPath__is__path_tllign).
+
+    %%   %% addr
+    formula(addr(freshaddr),freshaddr__is__addr_tllign).
+
+    %%   %% setaddr
+    formula(setaddr(emptySet),emptySet__is__setaddr_tllign).
+    formula(forall([setaddr(set_a),setaddr(set_a1)],setaddr(union(set_a,set_a1))),union__is__setaddr_tllign).
+    formula(forall([setaddr(set_a),setaddr(set_a1)],setaddr(setDiff(set_a,set_a1))),setDiff__is__setaddr_tllign).
+    formula(forall([addr(a)],setaddr(singl(a))),singl__is__setaddr_tllign).
+
+    %%   %% elem
+    formula(elem(highestElem),highestElem__is__elem_tllign).
+    formula(elem(lowestElem),lowestElem__is__elem_tllign).
+    formula(elem(main_e_prime_i),main_e_prime_i__is__elem_tllign).
+    formula(elem(main_e_i),main_e_i__is__elem_tllign).
+
+    %%   %% setelem
+    formula(setelem(emptySetElem),emptySetElem__is__setelem_tllign).
+    formula(forall([setelem(set_e),setelem(set_e1)],setelem(unionElem(set_e,set_e1))),unionElem__is__setelem_tllign).
+    formula(forall([setelem(set_e),setelem(set_e1)],setelem(setDiffElem(set_e,set_e1))),setDiffElem__is__setelem_tllign).
+    formula(forall([elem(e)],setelem(singlElem(e))),singlElem__is__setelem_tllign).
+    formula(forall([setaddr(set_a),mem(h)],setelem(set2elem(set_a,h))),set2elem__is__setelem_tllign).
+
+    %%   %% cell
+    formula(cell(error),error__is__cell_tllign).
+    formula(forall([elem(e),addr(a),tid(t)],cell(mkcell(e,a,t))),mkcell__is__cell_tllign).
+    formula(forall([cell(c)],elem(data(c))),data__is__elem_tllign).
+    formula(forall([cell(c)],addr(next(c))),next__is__addr_tllign).
+    formula(forall([cell(c)],tid(lockid(c))),lockid__is__tid_tllign).
+    formula(forall([cell(c),tid(t)],cell(lock(c,t))),lock__is__cell_tllign).
+    formula(forall([cell(c)],cell(unlock(c))),unlock__is__cell_tllign).
+    formula(addr(head),head__is__addr_tllign).
+    formula(addr(tail),tail__is__addr_tllign).
+    formula(cell(freshcell),freshcell__is__cell_tllign).
+
+    %%   %% nat
+    formula(forall([nat(n)],nat(s(n))),s__is__nat_tllign).
+
+    %%   %% tid
+    formula(tid(nothread),nothread__is__tid_tllign).
+    formula(nat(pc_prime_i),pc_prime_i__is__nat_tllign).
+    formula(nat(pc_i),pc_i__is__nat_tllign).
+
+    %%   %% settid
+    formula(settid(emptySetTh),emptySetTh__is__settid_tllign).
+    formula(forall([settid(set_t),settid(set_t1)],settid(unionTh(set_t,set_t1))),unionTh__is__settid_tllign).
+    formula(forall([settid(set_t),settid(set_t1)],settid(setDiffTh(set_t,set_t1))),setDiffTh__is__settid_tllign).
+    formula(forall([tid(t)],settid(singlTh(t))),singlTh__is__settid_tllign).
+    formula(not(or(equal(i,nothread) )),th_nothread_diff_i_tllign).
+    % % % % % % % % % % Program axioms
+    % % % % % % % Natural axioms
+    % numbers:
+    formula(equal(s(0),1),def_1_tllign).
+    formula(equal(s(1),2),def_2_tllign).
+    formula(equal(s(2),3),def_3_tllign).
+    formula(equal(s(3),4),def_4_tllign).
+    formula(equal(s(4),5),def_5_tllign).
+    formula(and(not(equal(0,1)),not(equal(0,2)),not(equal(0,3)),not(equal(0,4)),not(equal(1,2)),not(equal(1,3)),not(equal(1,4)),not(equal(2,3)),not(equal(2,4)),not(equal(3,4))),nums_are_different_tllign).
+
+    % < and s 
+    formula(forall([nat(x),nat(y)],implies(equal(x,y),equal(s(x),s(y)))),s_injective_tllign).
+    formula(forall([nat(x)],not(exists([nat(y)],equal(s(y),0)))),no_negative_numbers_tllign).
+    formula(addr(search_prev_prime_i),search_prev__is__addr_tllign).    formula(addr(search_prev_i),search_prev__is__addr_tllign).  
+    formula(addr(search_curr_prime_i),search_curr__is__addr_tllign).    formula(addr(search_curr_i),search_curr__is__addr_tllign).  
+    formula(addr(search_aux_prime_i),search_aux__is__addr_tllign).  formula(addr(search_aux_i),search_aux__is__addr_tllign).    
+    formula(elem(search_e_prime_i),search_e__is__elem_tllign).  formula(elem(search_e_i),search_e__is__elem_tllign).    
+    formula(elem(search_e_prime_i),search_e__is__elem_tllign).  formula(elem(search_e_i),search_e__is__elem_tllign).    
+    formula(elem(search_e_prime_i),search_e__is__elem_tllign).  formula(elem(search_e_i),search_e__is__elem_tllign).    
+    formula(addr(remove_prev_prime_i),remove_prev__is__addr_tllign).    formula(addr(remove_prev_i),remove_prev__is__addr_tllign).  
+    formula(addr(remove_curr_prime_i),remove_curr__is__addr_tllign).    formula(addr(remove_curr_i),remove_curr__is__addr_tllign).  
+    formula(addr(remove_aux_prime_i),remove_aux__is__addr_tllign).  formula(addr(remove_aux_i),remove_aux__is__addr_tllign).    
+    formula(elem(remove_e_prime_i),remove_e__is__elem_tllign).  formula(elem(remove_e_i),remove_e__is__elem_tllign).    
+    formula(elem(remove_e_prime_i),remove_e__is__elem_tllign).  formula(elem(remove_e_i),remove_e__is__elem_tllign).    
+    formula(elem(remove_e_prime_i),remove_e__is__elem_tllign).  formula(elem(remove_e_i),remove_e__is__elem_tllign).    
+    formula(addr(insert_prev_prime_i),insert_prev__is__addr_tllign).    formula(addr(insert_prev_i),insert_prev__is__addr_tllign).  
+    formula(addr(insert_curr_prime_i),insert_curr__is__addr_tllign).    formula(addr(insert_curr_i),insert_curr__is__addr_tllign).  
+    formula(addr(insert_aux_prime_i),insert_aux__is__addr_tllign).  formula(addr(insert_aux_i),insert_aux__is__addr_tllign).    
+    formula(elem(insert_e_prime_i),insert_e__is__elem_tllign).  formula(elem(insert_e_i),insert_e__is__elem_tllign).    
+    formula(elem(insert_e_prime_i),insert_e__is__elem_tllign).  formula(elem(insert_e_i),insert_e__is__elem_tllign).    
+    formula(elem(insert_e_prime_i),insert_e__is__elem_tllign).  formula(elem(insert_e_i),insert_e__is__elem_tllign).    
 
-\textbf{end\_of\_list.}
 
+    % % % % Type equivalences: : : : : : 
+    formula(forall([mem(x)],and(    not(path(x)),not(addr(x)),not(setaddr(x)),not(elem(x)),not(setelem(x)),not(cell(x)),not(nat(x)),not(tid(x)),not(settid(x)))),mem_is_not_other_type_tllign).
+    formula(forall([path(x)],and(   not(mem(x)),not(addr(x)),not(setaddr(x)),not(elem(x)),not(setelem(x)),not(cell(x)),not(nat(x)),not(tid(x)),not(settid(x)))),path_is_not_other_type_tllign).
+    formula(forall([addr(x)],and(   not(mem(x)),not(path(x)),not(setaddr(x)),not(elem(x)),not(setelem(x)),not(cell(x)),not(nat(x)),not(tid(x)),not(settid(x)))),addr_is_not_other_type_tllign).
+    formula(forall([setaddr(x)],and(not(mem(x)),not(path(x)),not(addr(x)),not(elem(x)),not(setelem(x)),not(cell(x)),not(nat(x)),not(tid(x)),not(settid(x)))),setaddr_is_not_other_type_tllign).
+    formula(forall([elem(x)],and(   not(mem(x)),not(path(x)),not(addr(x)),not(setaddr(x)),not(setelem(x)),not(cell(x)),nat(x),not(tid(x)),not(settid(x)))),elem_is_not_other_type_tllign).
+    formula(forall([setelem(x)],and(not(mem(x)),not(path(x)),not(addr(x)),not(setaddr(x)),not(elem(x)),not(cell(x)),not(nat(x)),not(tid(x)),not(settid(x)))),setelem_is_not_other_type_tllign).
+    formula(forall([cell(x)],and(   not(mem(x)),not(path(x)),not(addr(x)),not(setaddr(x)),not(elem(x)),not(setelem(x)),not(nat(x)),not(tid(x)),not(settid(x)))),cell_is_not_other_type_tllign).
+    formula(forall([nat(x)],and(    not(mem(x)),not(path(x)),not(addr(x)),not(setaddr(x)),not(setelem(x)),not(cell(x)),not(settid(x)))),nat_is_not_other_type_tllign).
+    formula(forall([tid(x)],and(    not(mem(x)),not(path(x)),not(addr(x)),not(setaddr(x)),not(elem(x)),not(setelem(x)),not(cell(x)),nat(x),not(settid(x)))),tid_is_not_other_type_tllign).
+    formula(forall([settid(x)],and(not(mem(x)),not(path(x)),not(addr(x)),not(setaddr(x)),not(elem(x)),not(setelem(x)),not(cell(x)),not(nat(x)),not(tid(x)))),settid_is_not_other_type_tllign).
 
-\textbf{list\_of\_formulae(axioms).}
 
-%% %% %% sorts\_types
 
-formula(tid(i),i\_\_is\_\_Tid\_tllign). formula(equal(i,0),i\_\_def\_tllign).
 
-formula(tid(k\_0),k\_0\_\_is\_\_Tid\_tllign). formula(equal(k\_0,1),k\_0\_\_def\_tllign).
 
-formula(tid(j),j\_\_is\_\_Tid\_tllign). formula(equal(j,2),j\_\_def\_tllign).
 
-formula(tid(l),l\_\_is\_\_Tid\_tllign). formula(equal(l,3),l\_\_def\_tllign).
+    % % % % Set
 
-formula(setaddr(region\_prime),setaddr\_prime\_\_def\_tllign).
 
-formula(setaddr(region),setaddr\_\_def\_tllign).
+    formula(forall([setaddr(se),setaddr(se2),addr(x)],equiv(or(in(x,se),in(x,se2)),in(x,union(se,se2)))),union_def).
+    formula(forall([setaddr(se),setaddr(se2)],equal(union(se,se2),union(se2,se))),union_conmutative).
+    formula(forall([addr(b),addr(a),setaddr(se)],implies(not(in(a,se)),implies(in(b,se),not(equal(b,a))))),in_set__def).
+    formula(forall([addr(a),addr(b)],and(implies(not(equal(a,b)),not(in(b,singl(a)))) ,in(a,singl(a)))),a__in__singl_a).
+    formula(forall([addr(a)],not(in(a,emptySet))),emptySet_is_empty).
+    formula(forall([setaddr(se1),setaddr(se2)],equiv(not(exists([addr(a)],equiv(in(a,se1),not(in(a,se2))))),equal(se1,se2))),set_eq_addr).
+    formula(forall([setaddr(se1),setaddr(se2)],implies(equal(se1,se2),forall([addr(a)],equiv(in(a,se1),in(a,se2))))),set_extenaddr).
+    formula(forall([setaddr(se1),setaddr(se2)],implies(forall([addr(a)],equiv(in(a,se1),in(a,se2))),    equal(se1,se2))),set_exten_invaddr).
+    formula(forall([setaddr(se),setaddr(se2),addr(x)],equiv(and(in(x,se),not(in(x,se2))),in(x,setDiff(se,se2)))),SetDiff_def).
+    formula(forall([addr(a),setaddr(se)],implies(in(a,se),not(in(a,setDiff(se,singl(a)))))),a_not__in_se_dif_a).
 
-formula(mem(heap\_prime),mem\_prime\_\_def\_tllign).
 
-formula(mem(heap),mem\_\_def\_tllign).
 
-formula(setelem(elements\_prime),setelem\_prime\_\_def\_tllign).
 
-formula(setelem(elements),setelem\_\_def\_tllign).
 
-%%   %% mem
+    % % % % Cell
+    formula(forall([cell(c)],exists([elem(e),addr(a),tid(t)],equal(c,mkcell(e,a,t)))),mckcell__def_tllign).
+    formula(forall([elem(e),addr(a),tid(t)],equal(data(mkcell(e,a,t)),e)),data__def).
+    formula(forall([elem(e),addr(a),tid(t)],equal(next(mkcell(e,a,t)),a)),next__def).
+    formula(forall([elem(e),addr(a),tid(t)],equal(lockid(mkcell(e,a,t)),t)),lockid__def).
+    formula(equal(next(error),null),next_error__is__null).
+    formula(forall([cell(c1),cell(c2)],implies(equal(c1,c2),and(equal(data(c1),data(c2)),equal(lockid(c1),lockid(c2)),equal(next(c1),next(c2))))),equality_bt_cell).
+    formula(forall([mem(m),addr(a),addr(b)],implies(equal(a,b),equal(rd(m,a),rd(m,b)))),equality_on_read).
 
-formula(addr(null),null\_\_is\_\_addr\_tllign).
 
-formula(forall([mem(h),addr(a),cell(c)],mem(upd(h,a,c))),upd\_\_is\_\_mem\_tllign).
+            % % % % mem
+    formula(forall([mem(m),addr(a),addr(b),cell(c),mem(m2)],implies(not(equal(a,null)),implies(equal(upd(m,a,c),m2),equal(rd(m2,a),c)))),upd__def__not_null).
+    formula(forall([mem(m),addr(a),addr(b),cell(c),mem(m2)],implies(and(not(equal(a,null)),not(equal(a,b))),implies(equal(upd(m,a,c),m2),equal(rd(m,b),rd(m2,b))))),upd__def__one_at_the_time).
+    formula(forall([mem(m)],equal(rd(m,null),error)),rd_mem__def).
 
-formula(forall([mem(h),addr(a)],cell(rd(h,a))),rd\_\_is\_\_cell\_tllign).
+            % % % % elem
+    formula(not(equal(lowestElem,highestElem)),lowest__less_than_highest).
+    formula(forall([elem(e)],or(equal(e,lowestElem),ls_elem(lowestElem,e))),lowestElem__def_tll).
+    formula(forall([elem(e)],or(equal(e,highestElem),ls_elem(e,highestElem))),highestElem__def_tll).
+    formula(forall([elem(x),elem(y),elem(z)],implies(and(ls_elem(x,y),ls_elem(y,z)),ls_elem(x,z))),less_trans).
+    formula(forall([elem(x),elem(y)],not(and(ls_elem(x,y),ls_elem(y,x)))),less_total).
+    formula(forall([elem(x),elem(y)],equiv(ls_elem(x,y),and(not(equal(x,y)),not(ls_elem(y,x))))),ls_xy__not_ls_yx).
+    % % % % % % Important axioms: 
 
-%%   %% W\_reach
+    formula(forall([addr(c),addr(a),addr(b),mem(m),setaddr(se)],implies(and(in(a,se),equal(se,addr2set(m,b)),equal(c,next(rd(m,a))),not(equal(a,null))),in(c,se))),nextreg).
+    formula(forall([tid(t),mem(hp_p),mem(hp),addr(a),addr(hd)],implies(and(equal(hp_p,upd(hp,a,mkcell(data(rd(hp,a)),next(rd(hp,a)),t)))),equal(addr2set(hp,hd),addr2set(hp_p,hd)))),lock_keeps_addr2set).
+    formula(forall([tid(t),mem(hp_p),mem(hp),addr(tl),addr(a),addr(hd)],implies(and(equal(hp_p,upd(hp,a,mkcell(data(rd(hp,a)),next(rd(hp,a)),t)))),equiv(orderlist(hp,hd,tl),orderlist(hp_p,hd,tl)))),lock_keeps_orderlist).
+    formula(forall([tid(t),mem(hp_p),mem(hp),addr(a),addr(hd)],implies(and(equal(hp_p,upd(hp,a,mkcell(data(rd(hp,a)),next(rd(hp,a)),t)))),equal(data(rd(hp,a)),data(rd(hp_p,a))))),lock_keeps_heap__data).
+    formula(forall([tid(t),mem(hp_p),mem(hp),addr(a),addr(hd)],implies(and(equal(hp_p,upd(hp,a,mkcell(data(rd(hp,a)),next(rd(hp,a)),t)))),equal(next(rd(hp,a)),next(rd(hp_p,a))))),lock_keeps_heap__next).
+    formula(forall([addr(a),addr(hd),cell(c),mem(hp)],implies(and(not(in(a,addr2set(hp,hd)))),equal(addr2set(hp,hd),addr2set(upd(hp,a,c),hd)))),not_in_region__not_change_heap_addr).
+    formula(forall([addr(tl),addr(a),addr(hd),cell(c),mem(hp)],implies(and(not(in(a,addr2set(hp,hd)))),equiv(orderlist(hp,hd,tl),orderlist(upd(hp,a,c),hd,tl)))),not_in_region__not_change_heap_list).
+    formula(forall([mem(hp),addr(hd),addr(tl),addr(nl)],implies(and(ls_elem(data(rd(hp,hd)),data(rd(hp,tl))),equal(next(rd(hp,hd)),tl),equal(next(rd(hp,tl)),nl)),orderlist(hp,hd,tl))),order_primim).
+    formula(forall([mem(hp),addr(hd),addr(tl)],implies(and(ls_elem(data(rd(hp,hd)),data(rd(hp,tl))),equal(next(rd(hp,hd)),tl),equal(next(rd(hp,tl)),null)),equal(addr2set(hp,hd),union(union(singl(hd),singl(tl)),singl(null))))),addr2set_primim).
+    formula(forall([addr(hd),addr(prev),addr(aux),addr(curr),mem(hp),mem(hp_p),setaddr(reg),setaddr(reg_p)],implies(and(equal(reg,addr2set(hp,hd)),equal(union(reg,singl(aux)),reg_p),equal(next(rd(hp,prev)),curr),not(equal(prev,curr)),equal(next(rd(hp,aux)),curr),not(equal(aux,null)),not(equal(prev,null)),not(equal(curr,null)),in(prev,addr2set(hp,hd)),equal(hp_p,upd(hp,prev,mkcell(data(rd(hp,prev)),aux,lockid(rd(hp,prev)))))),equal(reg_p,addr2set(hp_p,hd)))),insert__keeps_addr2set).
+    formula(forall([addr(curr),addr(aux),addr(prev),addr(hd),mem(hp),mem(hp_p)],implies(and(equal(next(rd(hp,curr)),aux),equal(next(rd(hp,prev)),curr),not(equal(aux,next(rd(hp,prev)))),equal(hp_p,upd(hp,prev,mkcell(data(rd(hp,prev)),aux,lockid(rd(hp,prev))))),not(equal(aux,null)),in(curr,addr2set(hp,hd)),in(null,addr2set(hp,hd)),in(prev,addr2set(hp,hd))),equal(setDiff(addr2set(hp,hd),singl(curr)),addr2set(hp_p,hd)))),remove__keeps_addr2set).
+    % % % Addr2set
+    formula(forall([mem(m),addr(a)],equal(addr2set(m,a),union(singl(a),addr2set(m,next(rd(m,a)))))),addr2set_rec_def).
+    formula(forall([mem(m)],equal(addr2set(m,null),singl(null))),addr2set_null__is__singl_null).
 
-%%   %% W\_bridge
 
-formula(forall([path(p)],setaddr(path2set(p))),path2set\_\_is\_\_setaddr\_tllign).
 
-formula(forall([mem(h),addr(a)],setaddr(addr2set(h,a))),addr2set\_\_is\_\_setaddr\_tllign).
 
-formula(forall([mem(h),addr(a),addr(a1)],path(getp(h,a,a1))),getp\_\_is\_\_path\_tllign).
 
-formula(forall([mem(h),path(p)],addr(fstlock(h,p))),fstlock\_\_is\_\_addr\_tllign).
+    % % % Orderlist
+    formula(forall([addr(a),addr(b),addr(c),addr(d),addr(hd),addr(tl),mem(hp)], implies( and( orderlist(hp,hd,tl),in(a,addr2set(hp,hd)) , in(b,addr2set(hp,hd)) , in(c,addr2set(hp,hd)) , in(d,addr2set(hp,hd)),not(equal(tl,null)),equal(null,next(rd(hp,tl))),not(equal(c,null)),not(equal(d,null)),not(equal(a,null)),not(equal(b,null)),not(equal(a,tl)),not(equal(b,tl)),equal(next(rd(hp,c)),a),equal(next(rd(hp,d)),b)),implies(equal(a,b),equal(c,d)))),next_injective__if_ordered).
+    formula(forall([addr(a),addr(tl),addr(hd),mem(hp)],implies(and(in(a,addr2set(hp,hd)),in(tl,addr2set(hp,hd)),not(equal(hd,null)),not(equal(tl,null)),not(equal(a,null)),equal(next(rd(hp,tl)),null)),not(equal(next(rd(hp,a)),a)))),next_is_not_same__if_ordered).
+    formula(forall([addr(d),addr(tl),addr(hd),mem(hp)],implies(and(in(tl,addr2set(hp,hd)),not(equal(hd,null)),not(equal(tl,null)),equal(next(rd(hp,tl)),null),not(equal(d,null)),equal(next(rd(hp,d)),null),in(d,addr2set(hp,hd))),equal(d,tl))),just_tail__points__null).
+    formula(forall([addr(hd),mem(hp),mem(hp_p),addr(aux),addr(prev),addr(curr),addr(tl)],implies(and(orderlist(hp,hd,tl),not(equal(tl,null)),equal(next(rd(hp,tl)),null),ls_elem(data(rd(hp,prev)),data(rd(hp,aux))),ls_elem(data(rd(hp,aux)),data(rd(hp,curr))),equal(next(rd(hp,aux)),curr),equal(next(rd(hp,prev)),curr),equal(hp_p,upd(hp,prev,mkcell(data(rd(hp,prev)),aux,lockid(rd(hp,prev)))))),orderlist(hp_p,hd,tl))),insert__keeps_orderlist).
+    formula(forall([addr(hd),mem(hp),mem(hp_p),addr(aux),addr(prev),addr(curr),addr(tl)],implies(and(equal(aux,next(rd(hp,curr))),equal(curr,next(rd(hp,prev))),not(equal(aux,null)),equal(null,next(rd(hp,tl))),not(equal(aux,next(rd(hp,prev)))),equal(hp_p,upd(hp,prev,mkcell(data(rd(hp,prev)),aux,lockid(rd(hp,prev))))),in(prev,addr2set(hp,hd)),in(curr,addr2set(hp,hd)),in(null,addr2set(hp,hd)),in(aux,addr2set(hp,hd)),orderlist(hp,hd,tl)),orderlist(hp_p,hd,tl))),remove__keeps_orderlist).
 
-%%   %% path
+end_of_list.
 
-formula(path(epsilon),epsilon\_\_is\_\_path\_tllign).
 
-formula(forall([addr(a)],path(consPath(a))),consPath\_\_is\_\_path\_tllign).
 
-%%   %% addr
+list_of_formulae(conjectures).
+    formula(false).
+end_of_list.
 
-formula(addr(freshaddr),freshaddr\_\_is\_\_addr\_tllign).
 
-%%   %% setaddr
 
-formula(setaddr(emptySet),emptySet\_\_is\_\_setaddr\_tllign).
+end_problem.
 
-formula(forall([setaddr(set\_a),setaddr(set\_a1)],setaddr(union(set\_a,set\_a1))),union\_\_is\_\_setaddr\_tllign).
 
-formula(forall([setaddr(set\_a),setaddr(set\_a1)],setaddr(setDiff(set\_a,set\_a1))),setDiff\_\_is\_\_setaddr\_tllign).
 
-formula(forall([addr(a)],setaddr(singl(a))),singl\_\_is\_\_setaddr\_tllign).
-
-%%   %% elem
-
-formula(elem(highestElem),highestElem\_\_is\_\_elem\_tllign).
-
-formula(elem(lowestElem),lowestElem\_\_is\_\_elem\_tllign).
-
-formula(elem(main\_e\_prime\_i),main\_e\_prime\_i\_\_is\_\_elem\_tllign).
-
-formula(elem(main\_e\_prime\_k\_0),main\_e\_prime\_k\_0\_\_is\_\_elem\_tllign).
-
-formula(elem(main\_e\_prime\_j),main\_e\_prime\_j\_\_is\_\_elem\_tllign).
-
-formula(elem(main\_e\_prime\_l),main\_e\_prime\_l\_\_is\_\_elem\_tllign).
-
-formula(elem(main\_e\_i),main\_e\_i\_\_is\_\_elem\_tllign).
-
-formula(elem(main\_e\_k\_0),main\_e\_k\_0\_\_is\_\_elem\_tllign).
-
-formula(elem(main\_e\_j),main\_e\_j\_\_is\_\_elem\_tllign).
-
-formula(elem(main\_e\_l),main\_e\_l\_\_is\_\_elem\_tllign).
-
-%%   %% setelem
-
-formula(setelem(emptySetElem),emptySetElem\_\_is\_\_setelem\_tllign).
-
-formula(forall([setelem(set\_e),setelem(set\_e1)],setelem(unionElem(set\_e,set\_e1))),unionElem\_\_is\_\_setelem\_tllign).
-
-formula(forall([setelem(set\_e),setelem(set\_e1)],setelem(setDiffElem(set\_e,set\_e1))),setDiffElem\_\_is\_\_setelem\_tllign).
-
-formula(forall([elem(e)],setelem(singlElem(e))),singlElem\_\_is\_\_setelem\_tllign).
-
-%%   %% cell
-
-formula(cell(error),error\_\_is\_\_cell\_tllign).
-
-formula(forall([elem(e),addr(a),tid(t)],cell(mkcell(e,a,t))),mkcell\_\_is\_\_cell\_tllign).
-
-formula(forall([cell(c)],elem(data(c))),data\_\_is\_\_elem\_tllign).
-
-formula(forall([cell(c)],addr(next(c))),next\_\_is\_\_addr\_tllign).
-
-formula(forall([cell(c)],tid(lockid(c))),lockid\_\_is\_\_tid\_tllign).
-
-formula(forall([cell(c),tid(t)],cell(lock(c,t))),lock\_\_is\_\_cell\_tllign).
-
-formula(forall([cell(c)],cell(unlock(c))),unlock\_\_is\_\_cell\_tllign).
-
-formula(addr(head),head\_\_is\_\_addr\_tllign).
-
-formula(addr(tail),tail\_\_is\_\_addr\_tllign).
-
-formula(cell(freshcell),freshcell\_\_is\_\_cell\_tllign).
-
-%%   %% nat
-
-formula(forall([nat(n)],nat(s(n))),s\_\_is\_\_nat\_tllign).
-
-%%   %% tid
-
-formula(tid(nothread),nothread\_\_is\_\_tid\_tllign).
-
-formula(nat(pc\_prime\_i),pc\_prime\_i\_\_is\_\_nat\_tllign).
-
-formula(nat(pc\_prime\_k\_0),pc\_prime\_k\_0\_\_is\_\_nat\_tllign).
-
-formula(nat(pc\_prime\_j),pc\_prime\_j\_\_is\_\_nat\_tllign).
-
-formula(nat(pc\_prime\_l),pc\_prime\_l\_\_is\_\_nat\_tllign).
-
-formula(nat(pc\_i),pc\_i\_\_is\_\_nat\_tllign).
-
-formula(nat(pc\_k\_0),pc\_k\_0\_\_is\_\_nat\_tllign).
-
-formula(nat(pc\_j),pc\_j\_\_is\_\_nat\_tllign).
-
-formula(nat(pc\_l),pc\_l\_\_is\_\_nat\_tllign).
-
-%%   %% settid
-
-formula(settid(emptySetTh),emptySetTh\_\_is\_\_settid\_tllign).
-
-formula(forall([settid(set\_t),settid(set\_t1)],settid(unionTh(set\_t,set\_t1))),unionTh\_\_is\_\_settid\_tllign).
-
-formula(forall([settid(set\_t),settid(set\_t1)],settid(setDiffTh(set\_t,set\_t1))),setDiffTh\_\_is\_\_settid\_tllign).
-
-formula(forall([tid(t)],settid(singlTh(t))),singlTh\_\_is\_\_settid\_tllign).
-
-formula(not(or(equal(i,k\_0),equal(i,j),equal(i,l) )),th\_diffi\_tllign).
-
-formula(not(or(equal(k\_0,i),equal(k\_0,j),equal(k\_0,l) )),th\_diffk\_0\_tllign).
-
-formula(not(or(equal(j,i),equal(j,k\_0),equal(j,l) )),th\_diffj\_tllign).
-
-formula(not(or(equal(l,i),equal(l,k\_0),equal(l,j) )),th\_diffl\_tllign).
-
-formula(not(or(equal(i,nothread),equal(k\_0,nothread),equal(j,nothread),equal(l,nothread) )),th\_nothread\_diff\_l\_tllign).
-
-% % % % % % % % % % Program axioms
-
-% % % % % % % Natural axioms
-
-% numbers:
-
-formula(and(not(equal(0,1)),not(equal(0,2)),not(equal(0,3)),not(equal(0,4)),not(equal(0,5)),not(equal(0,6)),not(equal(0,7)),not(equal(0,8)),not(equal(0,9)),not(equal(0,10)),not(equal(0,11)),not(equal(0,12)),not(equal(0,13)),not(equal(0,14)),not(equal(0,15)),not(equal(0,16)),not(equal(0,17)),not(equal(0,18)),not(equal(0,19)),not(equal(0,20)),not(equal(0,21)),not(equal(0,22)),not(equal(0,23)),not(equal(0,24)),not(equal(0,25)),not(equal(0,26)),not(equal(0,27)),not(equal(0,28)),not(equal(0,29)),not(equal(0,30)),not(equal(0,31)),not(equal(0,32)),not(equal(0,33)),not(equal(0,34)),not(equal(0,35)),not(equal(0,36)),not(equal(0,37)),not(equal(0,38)),not(equal(0,39)),not(equal(0,40)),not(equal(0,41)),not(equal(0,42)),not(equal(0,43)),not(equal(0,44)),not(equal(0,45)),not(equal(0,46)),not(equal(0,47)),not(equal(0,48)),not(equal(0,49)),not(equal(0,50)),not(equal(0,51)),not(equal(0,52)),not(equal(0,53)),not(equal(0,54)),not(equal(1,2)),not(equal(1,3)),not(equal(1,4)),not(equal(1,5)),not(equal(1,6)),not(equal(1,7)),not(equal(1,8)),not(equal(1,9)),not(equal(1,10)),not(equal(1,11)),not(equal(1,12)),not(equal(1,13)),not(equal(1,14)),not(equal(1,15)),not(equal(1,16)),not(equal(1,17)),not(equal(1,18)),not(equal(1,19)),not(equal(1,20)),not(equal(1,21)),not(equal(1,22)),not(equal(1,23)),not(equal(1,24)),not(equal(1,25)),not(equal(1,26)),not(equal(1,27)),not(equal(1,28)),not(equal(1,29)),not(equal(1,30)),not(equal(1,31)),not(equal(1,32)),not(equal(1,33)),not(equal(1,34)),not(equal(1,35)),not(equal(1,36)),not(equal(1,37)),not(equal(1,38)),not(equal(1,39)),not(equal(1,40)),not(equal(1,41)),not(equal(1,42)),not(equal(1,43)),not(equal(1,44)),not(equal(1,45)),not(equal(1,46)),not(equal(1,47)),not(equal(1,48)),not(equal(1,49)),not(equal(1,50)),not(equal(1,51)),not(equal(1,52)),not(equal(1,53)),not(equal(1,54)),not(equal(2,3)),not(equal(2,4)),not(equal(2,5)),not(equal(2,6)),not(equal(2,7)),not(equal(2,8)),not(equal(2,9)),not(equal(2,10)),not(equal(2,11)),not(equal(2,12)),not(equal(2,13)),not(equal(2,14)),not(equal(2,15)),not(equal(2,16)),not(equal(2,17)),not(equal(2,18)),not(equal(2,19)),not(equal(2,20)),not(equal(2,21)),not(equal(2,22)),not(equal(2,23)),not(equal(2,24)),not(equal(2,25)),not(equal(2,26)),not(equal(2,27)),not(equal(2,28)),not(equal(2,29)),not(equal(2,30)),not(equal(2,31)),not(equal(2,32)),not(equal(2,33)),not(equal(2,34)),not(equal(2,35)),not(equal(2,36)),not(equal(2,37)),not(equal(2,38)),not(equal(2,39)),not(equal(2,40)),not(equal(2,41)),not(equal(2,42)),not(equal(2,43)),not(equal(2,44)),not(equal(2,45)),not(equal(2,46)),not(equal(2,47)),not(equal(2,48)),not(equal(2,49)),not(equal(2,50)),not(equal(2,51)),not(equal(2,52)),not(equal(2,53)),not(equal(2,54)),not(equal(3,4)),not(equal(3,5)),not(equal(3,6)),not(equal(3,7)),not(equal(3,8)),not(equal(3,9)),not(equal(3,10)),not(equal(3,11)),not(equal(3,12)),not(equal(3,13)),not(equal(3,14)),not(equal(3,15)),not(equal(3,16)),not(equal(3,17)),not(equal(3,18)),not(equal(3,19)),not(equal(3,20)),not(equal(3,21)),not(equal(3,22)),not(equal(3,23)),not(equal(3,24)),not(equal(3,25)),not(equal(3,26)),not(equal(3,27)),not(equal(3,28)),not(equal(3,29)),not(equal(3,30)),not(equal(3,31)),not(equal(3,32)),not(equal(3,33)),not(equal(3,34)),not(equal(3,35)),not(equal(3,36)),not(equal(3,37)),not(equal(3,38)),not(equal(3,39)),not(equal(3,40)),not(equal(3,41)),not(equal(3,42)),not(equal(3,43)),not(equal(3,44)),not(equal(3,45)),not(equal(3,46)),not(equal(3,47)),not(equal(3,48)),not(equal(3,49)),not(equal(3,50)),not(equal(3,51)),not(equal(3,52)),not(equal(3,53)),not(equal(3,54)),not(equal(4,5)),not(equal(4,6)),not(equal(4,7)),not(equal(4,8)),not(equal(4,9)),not(equal(4,10)),not(equal(4,11)),not(equal(4,12)),not(equal(4,13)),not(equal(4,14)),not(equal(4,15)),not(equal(4,16)),not(equal(4,17)),not(equal(4,18)),not(equal(4,19)),not(equal(4,20)),not(equal(4,21)),not(equal(4,22)),not(equal(4,23)),not(equal(4,24)),not(equal(4,25)),not(equal(4,26)),not(equal(4,27)),not(equal(4,28)),not(equal(4,29)),not(equal(4,30)),not(equal(4,31)),not(equal(4,32)),not(equal(4,33)),not(equal(4,34)),not(equal(4,35)),not(equal(4,36)),not(equal(4,37)),not(equal(4,38)),not(equal(4,39)),not(equal(4,40)),not(equal(4,41)),not(equal(4,42)),not(equal(4,43)),not(equal(4,44)),not(equal(4,45)),not(equal(4,46)),not(equal(4,47)),not(equal(4,48)),not(equal(4,49)),not(equal(4,50)),not(equal(4,51)),not(equal(4,52)),not(equal(4,53)),not(equal(4,54)),not(equal(5,6)),not(equal(5,7)),not(equal(5,8)),not(equal(5,9)),not(equal(5,10)),not(equal(5,11)),not(equal(5,12)),not(equal(5,13)),not(equal(5,14)),not(equal(5,15)),not(equal(5,16)),not(equal(5,17)),not(equal(5,18)),not(equal(5,19)),not(equal(5,20)),not(equal(5,21)),not(equal(5,22)),not(equal(5,23)),not(equal(5,24)),not(equal(5,25)),not(equal(5,26)),not(equal(5,27)),not(equal(5,28)),not(equal(5,29)),not(equal(5,30)),not(equal(5,31)),not(equal(5,32)),not(equal(5,33)),not(equal(5,34)),not(equal(5,35)),not(equal(5,36)),not(equal(5,37)),not(equal(5,38)),not(equal(5,39)),not(equal(5,40)),not(equal(5,41)),not(equal(5,42)),not(equal(5,43)),not(equal(5,44)),not(equal(5,45)),not(equal(5,46)),not(equal(5,47)),not(equal(5,48)),not(equal(5,49)),not(equal(5,50)),not(equal(5,51)),not(equal(5,52)),not(equal(5,53)),not(equal(5,54)),not(equal(6,7)),not(equal(6,8)),not(equal(6,9)),not(equal(6,10)),not(equal(6,11)),not(equal(6,12)),not(equal(6,13)),not(equal(6,14)),not(equal(6,15)),not(equal(6,16)),not(equal(6,17)),not(equal(6,18)),not(equal(6,19)),not(equal(6,20)),not(equal(6,21)),not(equal(6,22)),not(equal(6,23)),not(equal(6,24)),not(equal(6,25)),not(equal(6,26)),not(equal(6,27)),not(equal(6,28)),not(equal(6,29)),not(equal(6,30)),not(equal(6,31)),not(equal(6,32)),not(equal(6,33)),not(equal(6,34)),not(equal(6,35)),not(equal(6,36)),not(equal(6,37)),not(equal(6,38)),not(equal(6,39)),not(equal(6,40)),not(equal(6,41)),not(equal(6,42)),not(equal(6,43)),not(equal(6,44)),not(equal(6,45)),not(equal(6,46)),not(equal(6,47)),not(equal(6,48)),not(equal(6,49)),not(equal(6,50)),not(equal(6,51)),not(equal(6,52)),not(equal(6,53)),not(equal(6,54)),not(equal(7,8)),not(equal(7,9)),not(equal(7,10)),not(equal(7,11)),not(equal(7,12)),not(equal(7,13)),not(equal(7,14)),not(equal(7,15)),not(equal(7,16)),not(equal(7,17)),not(equal(7,18)),not(equal(7,19)),not(equal(7,20)),not(equal(7,21)),not(equal(7,22)),not(equal(7,23)),not(equal(7,24)),not(equal(7,25)),not(equal(7,26)),not(equal(7,27)),not(equal(7,28)),not(equal(7,29)),not(equal(7,30)),not(equal(7,31)),not(equal(7,32)),not(equal(7,33)),not(equal(7,34)),not(equal(7,35)),not(equal(7,36)),not(equal(7,37)),not(equal(7,38)),not(equal(7,39)),not(equal(7,40)),not(equal(7,41)),not(equal(7,42)),not(equal(7,43)),not(equal(7,44)),not(equal(7,45)),not(equal(7,46)),not(equal(7,47)),not(equal(7,48)),not(equal(7,49)),not(equal(7,50)),not(equal(7,51)),not(equal(7,52)),not(equal(7,53)),not(equal(7,54)),not(equal(8,9)),not(equal(8,10)),not(equal(8,11)),not(equal(8,12)),not(equal(8,13)),not(equal(8,14)),not(equal(8,15)),not(equal(8,16)),not(equal(8,17)),not(equal(8,18)),not(equal(8,19)),not(equal(8,20)),not(equal(8,21)),not(equal(8,22)),not(equal(8,23)),not(equal(8,24)),not(equal(8,25)),not(equal(8,26)),not(equal(8,27)),not(equal(8,28)),not(equal(8,29)),not(equal(8,30)),not(equal(8,31)),not(equal(8,32)),not(equal(8,33)),not(equal(8,34)),not(equal(8,35)),not(equal(8,36)),not(equal(8,37)),not(equal(8,38)),not(equal(8,39)),not(equal(8,40)),not(equal(8,41)),not(equal(8,42)),not(equal(8,43)),not(equal(8,44)),not(equal(8,45)),not(equal(8,46)),not(equal(8,47)),not(equal(8,48)),not(equal(8,49)),not(equal(8,50)),not(equal(8,51)),not(equal(8,52)),not(equal(8,53)),not(equal(8,54)),not(equal(9,10)),not(equal(9,11)),not(equal(9,12)),not(equal(9,13)),not(equal(9,14)),not(equal(9,15)),not(equal(9,16)),not(equal(9,17)),not(equal(9,18)),not(equal(9,19)),not(equal(9,20)),not(equal(9,21)),not(equal(9,22)),not(equal(9,23)),not(equal(9,24)),not(equal(9,25)),not(equal(9,26)),not(equal(9,27)),not(equal(9,28)),not(equal(9,29)),not(equal(9,30)),not(equal(9,31)),not(equal(9,32)),not(equal(9,33)),not(equal(9,34)),not(equal(9,35)),not(equal(9,36)),not(equal(9,37)),not(equal(9,38)),not(equal(9,39)),not(equal(9,40)),not(equal(9,41)),not(equal(9,42)),not(equal(9,43)),not(equal(9,44)),not(equal(9,45)),not(equal(9,46)),not(equal(9,47)),not(equal(9,48)),not(equal(9,49)),not(equal(9,50)),not(equal(9,51)),not(equal(9,52)),not(equal(9,53)),not(equal(9,54)),not(equal(10,11)),not(equal(10,12)),not(equal(10,13)),not(equal(10,14)),not(equal(10,15)),not(equal(10,16)),not(equal(10,17)),not(equal(10,18)),not(equal(10,19)),not(equal(10,20)),not(equal(10,21)),not(equal(10,22)),not(equal(10,23)),not(equal(10,24)),not(equal(10,25)),not(equal(10,26)),not(equal(10,27)),not(equal(10,28)),not(equal(10,29)),not(equal(10,30)),not(equal(10,31)),not(equal(10,32)),not(equal(10,33)),not(equal(10,34)),not(equal(10,35)),not(equal(10,36)),not(equal(10,37)),not(equal(10,38)),not(equal(10,39)),not(equal(10,40)),not(equal(10,41)),not(equal(10,42)),not(equal(10,43)),not(equal(10,44)),not(equal(10,45)),not(equal(10,46)),not(equal(10,47)),not(equal(10,48)),not(equal(10,49)),not(equal(10,50)),not(equal(10,51)),not(equal(10,52)),not(equal(10,53)),not(equal(10,54)),not(equal(11,12)),not(equal(11,13)),not(equal(11,14)),not(equal(11,15)),not(equal(11,16)),not(equal(11,17)),not(equal(11,18)),not(equal(11,19)),not(equal(11,20)),not(equal(11,21)),not(equal(11,22)),not(equal(11,23)),not(equal(11,24)),not(equal(11,25)),not(equal(11,26)),not(equal(11,27)),not(equal(11,28)),not(equal(11,29)),not(equal(11,30)),not(equal(11,31)),not(equal(11,32)),not(equal(11,33)),not(equal(11,34)),not(equal(11,35)),not(equal(11,36)),not(equal(11,37)),not(equal(11,38)),not(equal(11,39)),not(equal(11,40)),not(equal(11,41)),not(equal(11,42)),not(equal(11,43)),not(equal(11,44)),not(equal(11,45)),not(equal(11,46)),not(equal(11,47)),not(equal(11,48)),not(equal(11,49)),not(equal(11,50)),not(equal(11,51)),not(equal(11,52)),not(equal(11,53)),not(equal(11,54)),not(equal(12,13)),not(equal(12,14)),not(equal(12,15)),not(equal(12,16)),not(equal(12,17)),not(equal(12,18)),not(equal(12,19)),not(equal(12,20)),not(equal(12,21)),not(equal(12,22)),not(equal(12,23)),not(equal(12,24)),not(equal(12,25)),not(equal(12,26)),not(equal(12,27)),not(equal(12,28)),not(equal(12,29)),not(equal(12,30)),not(equal(12,31)),not(equal(12,32)),not(equal(12,33)),not(equal(12,34)),not(equal(12,35)),not(equal(12,36)),not(equal(12,37)),not(equal(12,38)),not(equal(12,39)),not(equal(12,40)),not(equal(12,41)),not(equal(12,42)),not(equal(12,43)),not(equal(12,44)),not(equal(12,45)),not(equal(12,46)),not(equal(12,47)),not(equal(12,48)),not(equal(12,49)),not(equal(12,50)),not(equal(12,51)),not(equal(12,52)),not(equal(12,53)),not(equal(12,54)),not(equal(13,14)),not(equal(13,15)),not(equal(13,16)),not(equal(13,17)),not(equal(13,18)),not(equal(13,19)),not(equal(13,20)),not(equal(13,21)),not(equal(13,22)),not(equal(13,23)),not(equal(13,24)),not(equal(13,25)),not(equal(13,26)),not(equal(13,27)),not(equal(13,28)),not(equal(13,29)),not(equal(13,30)),not(equal(13,31)),not(equal(13,32)),not(equal(13,33)),not(equal(13,34)),not(equal(13,35)),not(equal(13,36)),not(equal(13,37)),not(equal(13,38)),not(equal(13,39)),not(equal(13,40)),not(equal(13,41)),not(equal(13,42)),not(equal(13,43)),not(equal(13,44)),not(equal(13,45)),not(equal(13,46)),not(equal(13,47)),not(equal(13,48)),not(equal(13,49)),not(equal(13,50)),not(equal(13,51)),not(equal(13,52)),not(equal(13,53)),not(equal(13,54)),not(equal(14,15)),not(equal(14,16)),not(equal(14,17)),not(equal(14,18)),not(equal(14,19)),not(equal(14,20)),not(equal(14,21)),not(equal(14,22)),not(equal(14,23)),not(equal(14,24)),not(equal(14,25)),not(equal(14,26)),not(equal(14,27)),not(equal(14,28)),not(equal(14,29)),not(equal(14,30)),not(equal(14,31)),not(equal(14,32)),not(equal(14,33)),not(equal(14,34)),not(equal(14,35)),not(equal(14,36)),not(equal(14,37)),not(equal(14,38)),not(equal(14,39)),not(equal(14,40)),not(equal(14,41)),not(equal(14,42)),not(equal(14,43)),not(equal(14,44)),not(equal(14,45)),not(equal(14,46)),not(equal(14,47)),not(equal(14,48)),not(equal(14,49)),not(equal(14,50)),not(equal(14,51)),not(equal(14,52)),not(equal(14,53)),not(equal(14,54)),not(equal(15,16)),not(equal(15,17)),not(equal(15,18)),not(equal(15,19)),not(equal(15,20)),not(equal(15,21)),not(equal(15,22)),not(equal(15,23)),not(equal(15,24)),not(equal(15,25)),not(equal(15,26)),not(equal(15,27)),not(equal(15,28)),not(equal(15,29)),not(equal(15,30)),not(equal(15,31)),not(equal(15,32)),not(equal(15,33)),not(equal(15,34)),not(equal(15,35)),not(equal(15,36)),not(equal(15,37)),not(equal(15,38)),not(equal(15,39)),not(equal(15,40)),not(equal(15,41)),not(equal(15,42)),not(equal(15,43)),not(equal(15,44)),not(equal(15,45)),not(equal(15,46)),not(equal(15,47)),not(equal(15,48)),not(equal(15,49)),not(equal(15,50)),not(equal(15,51)),not(equal(15,52)),not(equal(15,53)),not(equal(15,54)),not(equal(16,17)),not(equal(16,18)),not(equal(16,19)),not(equal(16,20)),not(equal(16,21)),not(equal(16,22)),not(equal(16,23)),not(equal(16,24)),not(equal(16,25)),not(equal(16,26)),not(equal(16,27)),not(equal(16,28)),not(equal(16,29)),not(equal(16,30)),not(equal(16,31)),not(equal(16,32)),not(equal(16,33)),not(equal(16,34)),not(equal(16,35)),not(equal(16,36)),not(equal(16,37)),not(equal(16,38)),not(equal(16,39)),not(equal(16,40)),not(equal(16,41)),not(equal(16,42)),not(equal(16,43)),not(equal(16,44)),not(equal(16,45)),not(equal(16,46)),not(equal(16,47)),not(equal(16,48)),not(equal(16,49)),not(equal(16,50)),not(equal(16,51)),not(equal(16,52)),not(equal(16,53)),not(equal(16,54)),not(equal(17,18)),not(equal(17,19)),not(equal(17,20)),not(equal(17,21)),not(equal(17,22)),not(equal(17,23)),not(equal(17,24)),not(equal(17,25)),not(equal(17,26)),not(equal(17,27)),not(equal(17,28)),not(equal(17,29)),not(equal(17,30)),not(equal(17,31)),not(equal(17,32)),not(equal(17,33)),not(equal(17,34)),not(equal(17,35)),not(equal(17,36)),not(equal(17,37)),not(equal(17,38)),not(equal(17,39)),not(equal(17,40)),not(equal(17,41)),not(equal(17,42)),not(equal(17,43)),not(equal(17,44)),not(equal(17,45)),not(equal(17,46)),not(equal(17,47)),not(equal(17,48)),not(equal(17,49)),not(equal(17,50)),not(equal(17,51)),not(equal(17,52)),not(equal(17,53)),not(equal(17,54)),not(equal(18,19)),not(equal(18,20)),not(equal(18,21)),not(equal(18,22)),not(equal(18,23)),not(equal(18,24)),not(equal(18,25)),not(equal(18,26)),not(equal(18,27)),not(equal(18,28)),not(equal(18,29)),not(equal(18,30)),not(equal(18,31)),not(equal(18,32)),not(equal(18,33)),not(equal(18,34)),not(equal(18,35)),not(equal(18,36)),not(equal(18,37)),not(equal(18,38)),not(equal(18,39)),not(equal(18,40)),not(equal(18,41)),not(equal(18,42)),not(equal(18,43)),not(equal(18,44)),not(equal(18,45)),not(equal(18,46)),not(equal(18,47)),not(equal(18,48)),not(equal(18,49)),not(equal(18,50)),not(equal(18,51)),not(equal(18,52)),not(equal(18,53)),not(equal(18,54)),not(equal(19,20)),not(equal(19,21)),not(equal(19,22)),not(equal(19,23)),not(equal(19,24)),not(equal(19,25)),not(equal(19,26)),not(equal(19,27)),not(equal(19,28)),not(equal(19,29)),not(equal(19,30)),not(equal(19,31)),not(equal(19,32)),not(equal(19,33)),not(equal(19,34)),not(equal(19,35)),not(equal(19,36)),not(equal(19,37)),not(equal(19,38)),not(equal(19,39)),not(equal(19,40)),not(equal(19,41)),not(equal(19,42)),not(equal(19,43)),not(equal(19,44)),not(equal(19,45)),not(equal(19,46)),not(equal(19,47)),not(equal(19,48)),not(equal(19,49)),not(equal(19,50)),not(equal(19,51)),not(equal(19,52)),not(equal(19,53)),not(equal(19,54)),not(equal(20,21)),not(equal(20,22)),not(equal(20,23)),not(equal(20,24)),not(equal(20,25)),not(equal(20,26)),not(equal(20,27)),not(equal(20,28)),not(equal(20,29)),not(equal(20,30)),not(equal(20,31)),not(equal(20,32)),not(equal(20,33)),not(equal(20,34)),not(equal(20,35)),not(equal(20,36)),not(equal(20,37)),not(equal(20,38)),not(equal(20,39)),not(equal(20,40)),not(equal(20,41)),not(equal(20,42)),not(equal(20,43)),not(equal(20,44)),not(equal(20,45)),not(equal(20,46)),not(equal(20,47)),not(equal(20,48)),not(equal(20,49)),not(equal(20,50)),not(equal(20,51)),not(equal(20,52)),not(equal(20,53)),not(equal(20,54)),not(equal(21,22)),not(equal(21,23)),not(equal(21,24)),not(equal(21,25)),not(equal(21,26)),not(equal(21,27)),not(equal(21,28)),not(equal(21,29)),not(equal(21,30)),not(equal(21,31)),not(equal(21,32)),not(equal(21,33)),not(equal(21,34)),not(equal(21,35)),not(equal(21,36)),not(equal(21,37)),not(equal(21,38)),not(equal(21,39)),not(equal(21,40)),not(equal(21,41)),not(equal(21,42)),not(equal(21,43)),not(equal(21,44)),not(equal(21,45)),not(equal(21,46)),not(equal(21,47)),not(equal(21,48)),not(equal(21,49)),not(equal(21,50)),not(equal(21,51)),not(equal(21,52)),not(equal(21,53)),not(equal(21,54)),not(equal(22,23)),not(equal(22,24)),not(equal(22,25)),not(equal(22,26)),not(equal(22,27)),not(equal(22,28)),not(equal(22,29)),not(equal(22,30)),not(equal(22,31)),not(equal(22,32)),not(equal(22,33)),not(equal(22,34)),not(equal(22,35)),not(equal(22,36)),not(equal(22,37)),not(equal(22,38)),not(equal(22,39)),not(equal(22,40)),not(equal(22,41)),not(equal(22,42)),not(equal(22,43)),not(equal(22,44)),not(equal(22,45)),not(equal(22,46)),not(equal(22,47)),not(equal(22,48)),not(equal(22,49)),not(equal(22,50)),not(equal(22,51)),not(equal(22,52)),not(equal(22,53)),not(equal(22,54)),not(equal(23,24)),not(equal(23,25)),not(equal(23,26)),not(equal(23,27)),not(equal(23,28)),not(equal(23,29)),not(equal(23,30)),not(equal(23,31)),not(equal(23,32)),not(equal(23,33)),not(equal(23,34)),not(equal(23,35)),not(equal(23,36)),not(equal(23,37)),not(equal(23,38)),not(equal(23,39)),not(equal(23,40)),not(equal(23,41)),not(equal(23,42)),not(equal(23,43)),not(equal(23,44)),not(equal(23,45)),not(equal(23,46)),not(equal(23,47)),not(equal(23,48)),not(equal(23,49)),not(equal(23,50)),not(equal(23,51)),not(equal(23,52)),not(equal(23,53)),not(equal(23,54)),not(equal(24,25)),not(equal(24,26)),not(equal(24,27)),not(equal(24,28)),not(equal(24,29)),not(equal(24,30)),not(equal(24,31)),not(equal(24,32)),not(equal(24,33)),not(equal(24,34)),not(equal(24,35)),not(equal(24,36)),not(equal(24,37)),not(equal(24,38)),not(equal(24,39)),not(equal(24,40)),not(equal(24,41)),not(equal(24,42)),not(equal(24,43)),not(equal(24,44)),not(equal(24,45)),not(equal(24,46)),not(equal(24,47)),not(equal(24,48)),not(equal(24,49)),not(equal(24,50)),not(equal(24,51)),not(equal(24,52)),not(equal(24,53)),not(equal(24,54)),not(equal(25,26)),not(equal(25,27)),not(equal(25,28)),not(equal(25,29)),not(equal(25,30)),not(equal(25,31)),not(equal(25,32)),not(equal(25,33)),not(equal(25,34)),not(equal(25,35)),not(equal(25,36)),not(equal(25,37)),not(equal(25,38)),not(equal(25,39)),not(equal(25,40)),not(equal(25,41)),not(equal(25,42)),not(equal(25,43)),not(equal(25,44)),not(equal(25,45)),not(equal(25,46)),not(equal(25,47)),not(equal(25,48)),not(equal(25,49)),not(equal(25,50)),not(equal(25,51)),not(equal(25,52)),not(equal(25,53)),not(equal(25,54)),not(equal(26,27)),not(equal(26,28)),not(equal(26,29)),not(equal(26,30)),not(equal(26,31)),not(equal(26,32)),not(equal(26,33)),not(equal(26,34)),not(equal(26,35)),not(equal(26,36)),not(equal(26,37)),not(equal(26,38)),not(equal(26,39)),not(equal(26,40)),not(equal(26,41)),not(equal(26,42)),not(equal(26,43)),not(equal(26,44)),not(equal(26,45)),not(equal(26,46)),not(equal(26,47)),not(equal(26,48)),not(equal(26,49)),not(equal(26,50)),not(equal(26,51)),not(equal(26,52)),not(equal(26,53)),not(equal(26,54)),not(equal(27,28)),not(equal(27,29)),not(equal(27,30)),not(equal(27,31)),not(equal(27,32)),not(equal(27,33)),not(equal(27,34)),not(equal(27,35)),not(equal(27,36)),not(equal(27,37)),not(equal(27,38)),not(equal(27,39)),not(equal(27,40)),not(equal(27,41)),not(equal(27,42)),not(equal(27,43)),not(equal(27,44)),not(equal(27,45)),not(equal(27,46)),not(equal(27,47)),not(equal(27,48)),not(equal(27,49)),not(equal(27,50)),not(equal(27,51)),not(equal(27,52)),not(equal(27,53)),not(equal(27,54)),not(equal(28,29)),not(equal(28,30)),not(equal(28,31)),not(equal(28,32)),not(equal(28,33)),not(equal(28,34)),not(equal(28,35)),not(equal(28,36)),not(equal(28,37)),not(equal(28,38)),not(equal(28,39)),not(equal(28,40)),not(equal(28,41)),not(equal(28,42)),not(equal(28,43)),not(equal(28,44)),not(equal(28,45)),not(equal(28,46)),not(equal(28,47)),not(equal(28,48)),not(equal(28,49)),not(equal(28,50)),not(equal(28,51)),not(equal(28,52)),not(equal(28,53)),not(equal(28,54)),not(equal(29,30)),not(equal(29,31)),not(equal(29,32)),not(equal(29,33)),not(equal(29,34)),not(equal(29,35)),not(equal(29,36)),not(equal(29,37)),not(equal(29,38)),not(equal(29,39)),not(equal(29,40)),not(equal(29,41)),not(equal(29,42)),not(equal(29,43)),not(equal(29,44)),not(equal(29,45)),not(equal(29,46)),not(equal(29,47)),not(equal(29,48)),not(equal(29,49)),not(equal(29,50)),not(equal(29,51)),not(equal(29,52)),not(equal(29,53)),not(equal(29,54)),not(equal(30,31)),not(equal(30,32)),not(equal(30,33)),not(equal(30,34)),not(equal(30,35)),not(equal(30,36)),not(equal(30,37)),not(equal(30,38)),not(equal(30,39)),not(equal(30,40)),not(equal(30,41)),not(equal(30,42)),not(equal(30,43)),not(equal(30,44)),not(equal(30,45)),not(equal(30,46)),not(equal(30,47)),not(equal(30,48)),not(equal(30,49)),not(equal(30,50)),not(equal(30,51)),not(equal(30,52)),not(equal(30,53)),not(equal(30,54)),not(equal(31,32)),not(equal(31,33)),not(equal(31,34)),not(equal(31,35)),not(equal(31,36)),not(equal(31,37)),not(equal(31,38)),not(equal(31,39)),not(equal(31,40)),not(equal(31,41)),not(equal(31,42)),not(equal(31,43)),not(equal(31,44)),not(equal(31,45)),not(equal(31,46)),not(equal(31,47)),not(equal(31,48)),not(equal(31,49)),not(equal(31,50)),not(equal(31,51)),not(equal(31,52)),not(equal(31,53)),not(equal(31,54)),not(equal(32,33)),not(equal(32,34)),not(equal(32,35)),not(equal(32,36)),not(equal(32,37)),not(equal(32,38)),not(equal(32,39)),not(equal(32,40)),not(equal(32,41)),not(equal(32,42)),not(equal(32,43)),not(equal(32,44)),not(equal(32,45)),not(equal(32,46)),not(equal(32,47)),not(equal(32,48)),not(equal(32,49)),not(equal(32,50)),not(equal(32,51)),not(equal(32,52)),not(equal(32,53)),not(equal(32,54)),not(equal(33,34)),not(equal(33,35)),not(equal(33,36)),not(equal(33,37)),not(equal(33,38)),not(equal(33,39)),not(equal(33,40)),not(equal(33,41)),not(equal(33,42)),not(equal(33,43)),not(equal(33,44)),not(equal(33,45)),not(equal(33,46)),not(equal(33,47)),not(equal(33,48)),not(equal(33,49)),not(equal(33,50)),not(equal(33,51)),not(equal(33,52)),not(equal(33,53)),not(equal(33,54)),not(equal(34,35)),not(equal(34,36)),not(equal(34,37)),not(equal(34,38)),not(equal(34,39)),not(equal(34,40)),not(equal(34,41)),not(equal(34,42)),not(equal(34,43)),not(equal(34,44)),not(equal(34,45)),not(equal(34,46)),not(equal(34,47)),not(equal(34,48)),not(equal(34,49)),not(equal(34,50)),not(equal(34,51)),not(equal(34,52)),not(equal(34,53)),not(equal(34,54)),not(equal(35,36)),not(equal(35,37)),not(equal(35,38)),not(equal(35,39)),not(equal(35,40)),not(equal(35,41)),not(equal(35,42)),not(equal(35,43)),not(equal(35,44)),not(equal(35,45)),not(equal(35,46)),not(equal(35,47)),not(equal(35,48)),not(equal(35,49)),not(equal(35,50)),not(equal(35,51)),not(equal(35,52)),not(equal(35,53)),not(equal(35,54)),not(equal(36,37)),not(equal(36,38)),not(equal(36,39)),not(equal(36,40)),not(equal(36,41)),not(equal(36,42)),not(equal(36,43)),not(equal(36,44)),not(equal(36,45)),not(equal(36,46)),not(equal(36,47)),not(equal(36,48)),not(equal(36,49)),not(equal(36,50)),not(equal(36,51)),not(equal(36,52)),not(equal(36,53)),not(equal(36,54)),not(equal(37,38)),not(equal(37,39)),not(equal(37,40)),not(equal(37,41)),not(equal(37,42)),not(equal(37,43)),not(equal(37,44)),not(equal(37,45)),not(equal(37,46)),not(equal(37,47)),not(equal(37,48)),not(equal(37,49)),not(equal(37,50)),not(equal(37,51)),not(equal(37,52)),not(equal(37,53)),not(equal(37,54)),not(equal(38,39)),not(equal(38,40)),not(equal(38,41)),not(equal(38,42)),not(equal(38,43)),not(equal(38,44)),not(equal(38,45)),not(equal(38,46)),not(equal(38,47)),not(equal(38,48)),not(equal(38,49)),not(equal(38,50)),not(equal(38,51)),not(equal(38,52)),not(equal(38,53)),not(equal(38,54)),not(equal(39,40)),not(equal(39,41)),not(equal(39,42)),not(equal(39,43)),not(equal(39,44)),not(equal(39,45)),not(equal(39,46)),not(equal(39,47)),not(equal(39,48)),not(equal(39,49)),not(equal(39,50)),not(equal(39,51)),not(equal(39,52)),not(equal(39,53)),not(equal(39,54)),not(equal(40,41)),not(equal(40,42)),not(equal(40,43)),not(equal(40,44)),not(equal(40,45)),not(equal(40,46)),not(equal(40,47)),not(equal(40,48)),not(equal(40,49)),not(equal(40,50)),not(equal(40,51)),not(equal(40,52)),not(equal(40,53)),not(equal(40,54)),not(equal(41,42)),not(equal(41,43)),not(equal(41,44)),not(equal(41,45)),not(equal(41,46)),not(equal(41,47)),not(equal(41,48)),not(equal(41,49)),not(equal(41,50)),not(equal(41,51)),not(equal(41,52)),not(equal(41,53)),not(equal(41,54)),not(equal(42,43)),not(equal(42,44)),not(equal(42,45)),not(equal(42,46)),not(equal(42,47)),not(equal(42,48)),not(equal(42,49)),not(equal(42,50)),not(equal(42,51)),not(equal(42,52)),not(equal(42,53)),not(equal(42,54)),not(equal(43,44)),not(equal(43,45)),not(equal(43,46)),not(equal(43,47)),not(equal(43,48)),not(equal(43,49)),not(equal(43,50)),not(equal(43,51)),not(equal(43,52)),not(equal(43,53)),not(equal(43,54)),not(equal(44,45)),not(equal(44,46)),not(equal(44,47)),not(equal(44,48)),not(equal(44,49)),not(equal(44,50)),not(equal(44,51)),not(equal(44,52)),not(equal(44,53)),not(equal(44,54)),not(equal(45,46)),not(equal(45,47)),not(equal(45,48)),not(equal(45,49)),not(equal(45,50)),not(equal(45,51)),not(equal(45,52)),not(equal(45,53)),not(equal(45,54)),not(equal(46,47)),not(equal(46,48)),not(equal(46,49)),not(equal(46,50)),not(equal(46,51)),not(equal(46,52)),not(equal(46,53)),not(equal(46,54)),not(equal(47,48)),not(equal(47,49)),not(equal(47,50)),not(equal(47,51)),not(equal(47,52)),not(equal(47,53)),not(equal(47,54)),not(equal(48,49)),not(equal(48,50)),not(equal(48,51)),not(equal(48,52)),not(equal(48,53)),not(equal(48,54)),not(equal(49,50)),not(equal(49,51)),not(equal(49,52)),not(equal(49,53)),not(equal(49,54)),not(equal(50,51)),not(equal(50,52)),not(equal(50,53)),not(equal(50,54)),not(equal(51,52)),not(equal(51,53)),not(equal(51,54)),not(equal(52,53)),not(equal(52,54)),not(equal(53,54))),nums\_are\_different\_tllign).
-
-% < and s 
-
-formula(forall([nat(x),nat(y)],implies(equal(x,y),equal(s(x),s(y)))),s\_injective\_tllign).
-
-formula(forall([nat(x)],not(exists([nat(y)],equal(s(y),0)))),no\_negative\_numbers\_tllign).
-
-formula(addr(search\_prev\_prime\_i),search\_prev\_\_is\_\_addr\_tllign).    formula(addr(search\_prev\_i),search\_prev\_\_is\_\_addr\_tllign).  
-
-formula(addr(search\_prev\_prime\_k\_0),search\_prev\_\_is\_\_addr\_tllign).  formula(addr(search\_prev\_k\_0),search\_prev\_\_is\_\_addr\_tllign).    
-
-formula(addr(search\_prev\_prime\_j),search\_prev\_\_is\_\_addr\_tllign).    formula(addr(search\_prev\_j),search\_prev\_\_is\_\_addr\_tllign).  
-
-formula(addr(search\_prev\_prime\_l),search\_prev\_\_is\_\_addr\_tllign).    formula(addr(search\_prev\_l),search\_prev\_\_is\_\_addr\_tllign).  
-
-formula(addr(search\_curr\_prime\_i),search\_curr\_\_is\_\_addr\_tllign).    formula(addr(search\_curr\_i),search\_curr\_\_is\_\_addr\_tllign).  
-
-formula(addr(search\_curr\_prime\_k\_0),search\_curr\_\_is\_\_addr\_tllign).  formula(addr(search\_curr\_k\_0),search\_curr\_\_is\_\_addr\_tllign).    
-
-formula(addr(search\_curr\_prime\_j),search\_curr\_\_is\_\_addr\_tllign).    formula(addr(search\_curr\_j),search\_curr\_\_is\_\_addr\_tllign).  
-
-formula(addr(search\_curr\_prime\_l),search\_curr\_\_is\_\_addr\_tllign).    formula(addr(search\_curr\_l),search\_curr\_\_is\_\_addr\_tllign).  
-
-formula(addr(search\_aux\_prime\_i),search\_aux\_\_is\_\_addr\_tllign).  formula(addr(search\_aux\_i),search\_aux\_\_is\_\_addr\_tllign).    
-
-formula(addr(search\_aux\_prime\_k\_0),search\_aux\_\_is\_\_addr\_tllign).    formula(addr(search\_aux\_k\_0),search\_aux\_\_is\_\_addr\_tllign).  
-
-formula(addr(search\_aux\_prime\_j),search\_aux\_\_is\_\_addr\_tllign).  formula(addr(search\_aux\_j),search\_aux\_\_is\_\_addr\_tllign).    
-
-formula(addr(search\_aux\_prime\_l),search\_aux\_\_is\_\_addr\_tllign).  formula(addr(search\_aux\_l),search\_aux\_\_is\_\_addr\_tllign).    
-
-formula(elem(search\_e\_prime\_i),search\_e\_\_is\_\_elem\_tllign).  formula(elem(search\_e\_i),search\_e\_\_is\_\_elem\_tllign).    
-
-formula(elem(search\_e\_prime\_k\_0),search\_e\_\_is\_\_elem\_tllign).    formula(elem(search\_e\_k\_0),search\_e\_\_is\_\_elem\_tllign).  
-
-formula(elem(search\_e\_prime\_j),search\_e\_\_is\_\_elem\_tllign).  formula(elem(search\_e\_j),search\_e\_\_is\_\_elem\_tllign).    
-
-formula(elem(search\_e\_prime\_l),search\_e\_\_is\_\_elem\_tllign).  formula(elem(search\_e\_l),search\_e\_\_is\_\_elem\_tllign).    
-
-formula(elem(search\_e\_prime\_i),search\_e\_\_is\_\_elem\_tllign).  formula(elem(search\_e\_i),search\_e\_\_is\_\_elem\_tllign).    
-
-formula(elem(search\_e\_prime\_k\_0),search\_e\_\_is\_\_elem\_tllign).    formula(elem(search\_e\_k\_0),search\_e\_\_is\_\_elem\_tllign).  
-
-formula(elem(search\_e\_prime\_j),search\_e\_\_is\_\_elem\_tllign).  formula(elem(search\_e\_j),search\_e\_\_is\_\_elem\_tllign).    
-
-formula(elem(search\_e\_prime\_l),search\_e\_\_is\_\_elem\_tllign).  formula(elem(search\_e\_l),search\_e\_\_is\_\_elem\_tllign).    
-
-formula(elem(search\_e\_prime\_i),search\_e\_\_is\_\_elem\_tllign).  formula(elem(search\_e\_i),search\_e\_\_is\_\_elem\_tllign).    
-
-formula(elem(search\_e\_prime\_k\_0),search\_e\_\_is\_\_elem\_tllign).    formula(elem(search\_e\_k\_0),search\_e\_\_is\_\_elem\_tllign).  
-
-formula(elem(search\_e\_prime\_j),search\_e\_\_is\_\_elem\_tllign).  formula(elem(search\_e\_j),search\_e\_\_is\_\_elem\_tllign).    
-
-formula(elem(search\_e\_prime\_l),search\_e\_\_is\_\_elem\_tllign).  formula(elem(search\_e\_l),search\_e\_\_is\_\_elem\_tllign).    
-
-formula(addr(remove\_prev\_prime\_i),remove\_prev\_\_is\_\_addr\_tllign).    formula(addr(remove\_prev\_i),remove\_prev\_\_is\_\_addr\_tllign).  
-
-formula(addr(remove\_prev\_prime\_k\_0),remove\_prev\_\_is\_\_addr\_tllign).  formula(addr(remove\_prev\_k\_0),remove\_prev\_\_is\_\_addr\_tllign).    
-
-formula(addr(remove\_prev\_prime\_j),remove\_prev\_\_is\_\_addr\_tllign).    formula(addr(remove\_prev\_j),remove\_prev\_\_is\_\_addr\_tllign).  
-
-formula(addr(remove\_prev\_prime\_l),remove\_prev\_\_is\_\_addr\_tllign).    formula(addr(remove\_prev\_l),remove\_prev\_\_is\_\_addr\_tllign).  
-
-formula(addr(remove\_curr\_prime\_i),remove\_curr\_\_is\_\_addr\_tllign).    formula(addr(remove\_curr\_i),remove\_curr\_\_is\_\_addr\_tllign).  
-
-formula(addr(remove\_curr\_prime\_k\_0),remove\_curr\_\_is\_\_addr\_tllign).  formula(addr(remove\_curr\_k\_0),remove\_curr\_\_is\_\_addr\_tllign).    
-
-formula(addr(remove\_curr\_prime\_j),remove\_curr\_\_is\_\_addr\_tllign).    formula(addr(remove\_curr\_j),remove\_curr\_\_is\_\_addr\_tllign).  
-
-formula(addr(remove\_curr\_prime\_l),remove\_curr\_\_is\_\_addr\_tllign).    formula(addr(remove\_curr\_l),remove\_curr\_\_is\_\_addr\_tllign).  
-
-formula(addr(remove\_aux\_prime\_i),remove\_aux\_\_is\_\_addr\_tllign).  formula(addr(remove\_aux\_i),remove\_aux\_\_is\_\_addr\_tllign).    
-
-formula(addr(remove\_aux\_prime\_k\_0),remove\_aux\_\_is\_\_addr\_tllign).    formula(addr(remove\_aux\_k\_0),remove\_aux\_\_is\_\_addr\_tllign).  
-
-formula(addr(remove\_aux\_prime\_j),remove\_aux\_\_is\_\_addr\_tllign).  formula(addr(remove\_aux\_j),remove\_aux\_\_is\_\_addr\_tllign).    
-
-formula(addr(remove\_aux\_prime\_l),remove\_aux\_\_is\_\_addr\_tllign).  formula(addr(remove\_aux\_l),remove\_aux\_\_is\_\_addr\_tllign).    
-
-formula(elem(remove\_e\_prime\_i),remove\_e\_\_is\_\_elem\_tllign).  formula(elem(remove\_e\_i),remove\_e\_\_is\_\_elem\_tllign).    
-
-formula(elem(remove\_e\_prime\_k\_0),remove\_e\_\_is\_\_elem\_tllign).    formula(elem(remove\_e\_k\_0),remove\_e\_\_is\_\_elem\_tllign).  
-
-formula(elem(remove\_e\_prime\_j),remove\_e\_\_is\_\_elem\_tllign).  formula(elem(remove\_e\_j),remove\_e\_\_is\_\_elem\_tllign).    
-
-formula(elem(remove\_e\_prime\_l),remove\_e\_\_is\_\_elem\_tllign).  formula(elem(remove\_e\_l),remove\_e\_\_is\_\_elem\_tllign).    
-
-formula(elem(remove\_e\_prime\_i),remove\_e\_\_is\_\_elem\_tllign).  formula(elem(remove\_e\_i),remove\_e\_\_is\_\_elem\_tllign).    
-
-formula(elem(remove\_e\_prime\_k\_0),remove\_e\_\_is\_\_elem\_tllign).    formula(elem(remove\_e\_k\_0),remove\_e\_\_is\_\_elem\_tllign).  
-
-formula(elem(remove\_e\_prime\_j),remove\_e\_\_is\_\_elem\_tllign).  formula(elem(remove\_e\_j),remove\_e\_\_is\_\_elem\_tllign).    
-
-formula(elem(remove\_e\_prime\_l),remove\_e\_\_is\_\_elem\_tllign).  formula(elem(remove\_e\_l),remove\_e\_\_is\_\_elem\_tllign).    
-
-formula(elem(remove\_e\_prime\_i),remove\_e\_\_is\_\_elem\_tllign).  formula(elem(remove\_e\_i),remove\_e\_\_is\_\_elem\_tllign).    
-
-formula(elem(remove\_e\_prime\_k\_0),remove\_e\_\_is\_\_elem\_tllign).    formula(elem(remove\_e\_k\_0),remove\_e\_\_is\_\_elem\_tllign).  
-
-formula(elem(remove\_e\_prime\_j),remove\_e\_\_is\_\_elem\_tllign).  formula(elem(remove\_e\_j),remove\_e\_\_is\_\_elem\_tllign).    
-
-formula(elem(remove\_e\_prime\_l),remove\_e\_\_is\_\_elem\_tllign).  formula(elem(remove\_e\_l),remove\_e\_\_is\_\_elem\_tllign).    
-
-formula(addr(insert\_prev\_prime\_i),insert\_prev\_\_is\_\_addr\_tllign).    formula(addr(insert\_prev\_i),insert\_prev\_\_is\_\_addr\_tllign).  
-
-formula(addr(insert\_prev\_prime\_k\_0),insert\_prev\_\_is\_\_addr\_tllign).  formula(addr(insert\_prev\_k\_0),insert\_prev\_\_is\_\_addr\_tllign).    
-
-formula(addr(insert\_prev\_prime\_j),insert\_prev\_\_is\_\_addr\_tllign).    formula(addr(insert\_prev\_j),insert\_prev\_\_is\_\_addr\_tllign).  
-
-formula(addr(insert\_prev\_prime\_l),insert\_prev\_\_is\_\_addr\_tllign).    formula(addr(insert\_prev\_l),insert\_prev\_\_is\_\_addr\_tllign).  
-
-formula(addr(insert\_curr\_prime\_i),insert\_curr\_\_is\_\_addr\_tllign).    formula(addr(insert\_curr\_i),insert\_curr\_\_is\_\_addr\_tllign).  
-
-formula(addr(insert\_curr\_prime\_k\_0),insert\_curr\_\_is\_\_addr\_tllign).  formula(addr(insert\_curr\_k\_0),insert\_curr\_\_is\_\_addr\_tllign).    
-
-formula(addr(insert\_curr\_prime\_j),insert\_curr\_\_is\_\_addr\_tllign).    formula(addr(insert\_curr\_j),insert\_curr\_\_is\_\_addr\_tllign).  
-
-formula(addr(insert\_curr\_prime\_l),insert\_curr\_\_is\_\_addr\_tllign).    formula(addr(insert\_curr\_l),insert\_curr\_\_is\_\_addr\_tllign).  
-
-formula(addr(insert\_aux\_prime\_i),insert\_aux\_\_is\_\_addr\_tllign).  formula(addr(insert\_aux\_i),insert\_aux\_\_is\_\_addr\_tllign).    
-
-formula(addr(insert\_aux\_prime\_k\_0),insert\_aux\_\_is\_\_addr\_tllign).    formula(addr(insert\_aux\_k\_0),insert\_aux\_\_is\_\_addr\_tllign).  
-
-formula(addr(insert\_aux\_prime\_j),insert\_aux\_\_is\_\_addr\_tllign).  formula(addr(insert\_aux\_j),insert\_aux\_\_is\_\_addr\_tllign).    
-
-formula(addr(insert\_aux\_prime\_l),insert\_aux\_\_is\_\_addr\_tllign).  formula(addr(insert\_aux\_l),insert\_aux\_\_is\_\_addr\_tllign).    
-
-formula(elem(insert\_e\_prime\_i),insert\_e\_\_is\_\_elem\_tllign).  formula(elem(insert\_e\_i),insert\_e\_\_is\_\_elem\_tllign).    
-
-formula(elem(insert\_e\_prime\_k\_0),insert\_e\_\_is\_\_elem\_tllign).    formula(elem(insert\_e\_k\_0),insert\_e\_\_is\_\_elem\_tllign).  
-
-formula(elem(insert\_e\_prime\_j),insert\_e\_\_is\_\_elem\_tllign).  formula(elem(insert\_e\_j),insert\_e\_\_is\_\_elem\_tllign).    
-
-formula(elem(insert\_e\_prime\_l),insert\_e\_\_is\_\_elem\_tllign).  formula(elem(insert\_e\_l),insert\_e\_\_is\_\_elem\_tllign).    
-
-formula(elem(insert\_e\_prime\_i),insert\_e\_\_is\_\_elem\_tllign).  formula(elem(insert\_e\_i),insert\_e\_\_is\_\_elem\_tllign).    
-
-formula(elem(insert\_e\_prime\_k\_0),insert\_e\_\_is\_\_elem\_tllign).    formula(elem(insert\_e\_k\_0),insert\_e\_\_is\_\_elem\_tllign).  
-
-formula(elem(insert\_e\_prime\_j),insert\_e\_\_is\_\_elem\_tllign).  formula(elem(insert\_e\_j),insert\_e\_\_is\_\_elem\_tllign).    
-
-formula(elem(insert\_e\_prime\_l),insert\_e\_\_is\_\_elem\_tllign).  formula(elem(insert\_e\_l),insert\_e\_\_is\_\_elem\_tllign).    
-
-formula(elem(insert\_e\_prime\_i),insert\_e\_\_is\_\_elem\_tllign).  formula(elem(insert\_e\_i),insert\_e\_\_is\_\_elem\_tllign).    
-
-formula(elem(insert\_e\_prime\_k\_0),insert\_e\_\_is\_\_elem\_tllign).    formula(elem(insert\_e\_k\_0),insert\_e\_\_is\_\_elem\_tllign).  
-
-formula(elem(insert\_e\_prime\_j),insert\_e\_\_is\_\_elem\_tllign).  formula(elem(insert\_e\_j),insert\_e\_\_is\_\_elem\_tllign).    
-
-formula(elem(insert\_e\_prime\_l),insert\_e\_\_is\_\_elem\_tllign).  formula(elem(insert\_e\_l),insert\_e\_\_is\_\_elem\_tllign).    
-
-
-% % % % Type equivalences: : : : : : 
-
-formula(forall([mem(x)],and(    not(path(x)),not(addr(x)),not(setaddr(x)),not(elem(x)),not(setelem(x)),not(cell(x)),not(nat(x)),not(tid(x)),not(settid(x)))),mem\_is\_not\_other\_type\_tllign).
-
-formula(forall([path(x)],and(   not(mem(x)),not(addr(x)),not(setaddr(x)),not(elem(x)),not(setelem(x)),not(cell(x)),not(nat(x)),not(tid(x)),not(settid(x)))),path\_is\_not\_other\_type\_tllign).
-
-formula(forall([addr(x)],and(   not(mem(x)),not(path(x)),not(setaddr(x)),not(elem(x)),not(setelem(x)),not(cell(x)),not(nat(x)),not(tid(x)),not(settid(x)))),addr\_is\_not\_other\_type\_tllign).
-
-formula(forall([setaddr(x)],and(not(mem(x)),not(path(x)),not(addr(x)),not(elem(x)),not(setelem(x)),not(cell(x)),not(nat(x)),not(tid(x)),not(settid(x)))),setaddr\_is\_not\_other\_type\_tllign).
-
-formula(forall([elem(x)],and(   not(mem(x)),not(path(x)),not(addr(x)),not(setaddr(x)),not(setelem(x)),not(cell(x)),nat(x),not(tid(x)),not(settid(x)))),elem\_is\_not\_other\_type\_tllign).
-
-formula(forall([setelem(x)],and(not(mem(x)),not(path(x)),not(addr(x)),not(setaddr(x)),not(elem(x)),not(cell(x)),not(nat(x)),not(tid(x)),not(settid(x)))),setelem\_is\_not\_other\_type\_tllign).
-
-formula(forall([cell(x)],and(   not(mem(x)),not(path(x)),not(addr(x)),not(setaddr(x)),not(elem(x)),not(setelem(x)),not(nat(x)),not(tid(x)),not(settid(x)))),cell\_is\_not\_other\_type\_tllign).
-
-formula(forall([nat(x)],and(    not(mem(x)),not(path(x)),not(addr(x)),not(setaddr(x)),not(setelem(x)),not(cell(x)),not(settid(x)))),nat\_is\_not\_other\_type\_tllign).
-
-formula(forall([tid(x)],and(    not(mem(x)),not(path(x)),not(addr(x)),not(setaddr(x)),not(elem(x)),not(setelem(x)),not(cell(x)),nat(x),not(settid(x)))),tid\_is\_not\_other\_type\_tllign).
-
-formula(forall([settid(x)],and(not(mem(x)),not(path(x)),not(addr(x)),not(setaddr(x)),not(elem(x)),not(setelem(x)),not(cell(x)),not(nat(x)),not(tid(x)))),settid\_is\_not\_other\_type\_tllign).
-
-
-
-
-
-% % % % Set
-
-
-formula(forall([setaddr(se),setaddr(se2),addr(x)],equiv(or(in(x,se),in(x,se2)),in(x,union(se,se2)))),union\_def).
-
-formula(forall([setaddr(se),setaddr(se2)],equal(union(se,se2),union(se2,se))),union\_conmutative).
-
-formula(forall([addr(b),addr(a),setaddr(se)],implies(not(in(a,se)),implies(in(b,se),not(equal(b,a))))),in\_set\_\_def).
-
-formula(forall([addr(a),addr(b)],and(implies(not(equal(a,b)),not(in(b,singl(a)))) ,in(a,singl(a)))),a\_\_in\_\_singl\_a).
-
-formula(forall([addr(a)],not(in(a,emptySet))),emptySet\_is\_empty).
-
-formula(forall([setaddr(se1),setaddr(se2)],equiv(not(exists([addr(a)],equiv(in(a,se1),not(in(a,se2))))),equal(se1,se2))),set\_eq\_addr).
-
-formula(forall([setaddr(se1),setaddr(se2)],implies(equal(se1,se2),forall([addr(a)],equiv(in(a,se1),in(a,se2))))),set\_extenaddr).
-
-formula(forall([setaddr(se1),setaddr(se2)],implies(forall([addr(a)],equiv(in(a,se1),in(a,se2))),    equal(se1,se2))),set\_exten\_invaddr).
-
-formula(forall([setaddr(se),setaddr(se2),addr(x)],equiv(and(in(x,se),not(in(x,se2))),in(x,setDiff(se,se2)))),SetDiff\_def).
-
-formula(forall([addr(a),setaddr(se)],implies(in(a,se),not(in(a,setDiff(se,singl(a)))))),a\_not\_\_in\_se\_dif\_a).
-
-
-
-% % % % Cell
-
-formula(forall([cell(c)],exists([elem(e),addr(a),tid(t)],equal(c,mkcell(e,a,t)))),mckcell\_\_def\_tllign).
-
-formula(forall([elem(e),addr(a),tid(t)],equal(data(mkcell(e,a,t)),e)),data\_\_def).
-
-formula(forall([elem(e),addr(a),tid(t)],equal(next(mkcell(e,a,t)),a)),next\_\_def).
-
-formula(forall([elem(e),addr(a),tid(t)],equal(lockid(mkcell(e,a,t)),t)),lockid\_\_def).
-
-formula(equal(next(error),null),next\_error\_\_is\_\_null).
-
-formula(forall([cell(c1),cell(c2)],implies(equal(c1,c2),and(equal(data(c1),data(c2)),equal(lockid(c1),lockid(c2)),equal(next(c1),next(c2))))),equality\_bt\_cell).
-
-formula(forall([mem(m),addr(a),addr(b)],implies(equal(a,b),equal(rd(m,a),rd(m,b)))),equality\_on\_read).
-
-
-        % % % % mem
-
-formula(forall([mem(m),addr(a),addr(b),cell(c),mem(m2)],implies(not(equal(a,null)),implies(equal(upd(m,a,c),m2),equal(rd(m2,a),c)))),upd\_\_def\_\_not\_null).
-
-formula(forall([mem(m),addr(a),addr(b),cell(c),mem(m2)],implies(and(not(equal(a,null)),not(equal(a,b))),implies(equal(upd(m,a,c),m2),equal(rd(m,b),rd(m2,b))))),upd\_\_def\_\_one\_at\_the\_time).
-
-formula(forall([mem(m)],equal(rd(m,null),error)),rd\_mem\_\_def).
-
-        % % % % elem
-
-formula(not(equal(lowestElem,highestElem)),lowest\_\_less\_than\_highest).
-
-formula(forall([elem(e)],or(equal(e,lowestElem),ls\_elem(lowestElem,e))),lowestElem\_\_def\_tll).
-
-formula(forall([elem(e)],or(equal(e,highestElem),ls\_elem(e,highestElem))),highestElem\_\_def\_tll).
-
-formula(forall([elem(x),elem(y),elem(z)],implies(and(ls\_elem(x,y),ls\_elem(y,z)),ls\_elem(x,z))),less\_trans).
-
-formula(forall([elem(x),elem(y)],not(and(ls\_elem(x,y),ls\_elem(y,x)))),less\_total).
-
-formula(forall([elem(x),elem(y)],equiv(ls\_elem(x,y),and(not(equal(x,y)),not(ls\_elem(y,x))))),ls\_xy\_\_not\_ls\_yx).
-
-% % % % % % Important axioms: 
-
-formula(forall([addr(c),addr(a),addr(b),mem(m),setaddr(se)],implies(and(in(a,se),equal(se,addr2set(m,b)),equal(c,next(rd(m,a))),not(equal(a,null))),in(c,se))),nextreg).
-
-formula(forall([tid(t),mem(hp\_p),mem(hp),addr(a),addr(hd)],implies(and(equal(hp\_p,upd(hp,a,mkcell(data(rd(hp,a)),next(rd(hp,a)),t)))),equal(addr2set(hp,hd),addr2set(hp\_p,hd)))),lock\_keeps\_addr2set).
-
-formula(forall([tid(t),mem(hp\_p),mem(hp),addr(tl),addr(a),addr(hd)],implies(and(equal(hp\_p,upd(hp,a,\textbf{mkcell(data(rd(hp,a)),next(rd(hp,a)),t)))),equiv(orderlist(hp,hd,tl),orderlist(hp\_p,hd,tl)))),lock\_keeps\_orderlist).}
-
-formula(forall([tid(t),mem(hp\_p),mem(hp),addr(a),addr(hd)],implies(and(equal(hp\_p,upd(hp,a,mkcell(data(rd(hp,a)),next(rd(hp,a)),t)))),equal(data(rd(hp,a)),data(rd(hp\_p,a))))),lock\_keeps\_heap\_\_data).
-
-formula(forall([tid(t),mem(hp\_p),mem(hp),addr(a),addr(hd)],implies(and(equal(hp\_p,upd(hp,a,mkcell(data(rd(hp,a)),next(rd(hp,a)),t)))),equal(next(rd(hp,a)),next(rd(hp\_p,a))))),lock\_keeps\_heap\_\_next).
-
-formula(forall([addr(a),addr(hd),cell(c),mem(hp)],implies(and(not(in(a,addr2set(hp,hd)))),equal(addr2set(hp,hd),addr2set(upd(hp,a,c),hd)))),not\_in\_region\_\_not\_change\_heap\_addr).
-
-formula(forall([addr(tl),addr(a),addr(hd),cell(c),mem(hp)],implies(and(not(in(a,addr2set(hp,hd)))),equiv(orderlist(hp,hd,tl),orderlist(upd(hp,a,c),hd,tl)))),not\_in\_region\_\_not\_change\_heap\_list).
-
-formula(forall([mem(hp),addr(hd),addr(tl),addr(nl)],implies(and(ls\_elem(data(rd(hp,hd)),data(rd(hp,tl))),equal(next(rd(hp,hd)),tl),equal(next(rd(hp,tl)),nl)),orderlist(hp,hd,tl))),order\_primim).
-
-formula(forall([mem(hp),addr(hd),addr(tl)],implies(and(ls\_elem(data(rd(hp,hd)),data(rd(hp,tl))),equal(next(rd(hp,hd)),tl),equal(next(rd(hp,tl)),null)),equal(addr2set(hp,hd),union(union(singl(hd),singl(tl)),singl(null))))),addr2set\_primim).
-
-formula(forall([addr(hd),addr(prev),addr(aux),addr(curr),mem(hp),mem(hp\_p),setaddr(reg),setaddr(reg\_p)],implies(and(equal(reg,addr2set(hp,hd)),equal(union(reg,singl(aux)),reg\_p),equal(next(rd(hp,prev)),curr),not(equal(prev,curr)),equal(next(rd(hp,aux)),curr),not(equal(aux,null)),not(equal(prev,null)),not(equal(curr,null)),in(prev,addr2set(hp,hd)),equal(hp\_p,upd(hp,prev,mkcell(data(rd(hp,prev)),aux,lockid(rd(hp,prev)))))),equal(reg\_p,addr2set(hp\_p,hd)))),insert\_\_keeps\_addr2set).
-
-formula(forall([addr(curr),addr(aux),addr(prev),addr(hd),mem(hp),mem(hp\_p)],implies(and(equal(next(rd(hp,curr)),aux),equal(next(rd(hp,prev)),curr),not(equal(aux,next(rd(hp,prev)))),equal(hp\_p,upd(hp,prev,mkcell(data(rd(hp,prev)),aux,lockid(rd(hp,prev))))),not(equal(aux,null)),in(curr,addr2set(hp,hd)),in(null,addr2set(hp,hd)),in(prev,addr2set(hp,hd))),equal(setDiff(addr2set(hp,hd),singl(curr)),addr2set(hp\_p,hd)))),remove\_\_keeps\_addr2set).
-
-% % % Addr2set
-
-formula(forall([mem(m),addr(a)],equal(addr2set(m,a),union(singl(a),addr2set(m,next(rd(m,a)))))),addr2set\_rec\_def).
-
-formula(forall([mem(m)],equal(addr2set(m,null),singl(null))),addr2set\_null\_\_is\_\_singl\_null).
-
-
-
-% % % Orderlist
-
-formula(forall([addr(a),addr(b),addr(c),addr(d),addr(hd),addr(tl),mem(hp)], implies( and( orderlist(hp,hd,tl),in(a,addr2set(hp,hd)) , in(b,addr2set(hp,hd)) , in(c,addr2set(hp,hd)) , in(d,addr2set(hp,hd)),not(equal(tl,null)),equal(null,next(rd(hp,tl))),not(equal(c,null)),not(equal(d,null)),not(equal(a,null)),not(equal(b,null)),not(equal(a,tl)),not(equal(b,tl)),equal(next(rd(hp,c)),a),equal(next(rd(hp,d)),b)),implies(equal(a,b),equal(c,d)))),next\_injective\_\_if\_ordered).
-
-formula(forall([addr(a),addr(tl),addr(hd),mem(hp)],implies(and(in(a,addr2set(hp,hd)),in(tl,addr2set(hp,hd)),not(equal(hd,null)),not(equal(tl,null)),not(equal(a,null)),equal(next(rd(hp,tl)),null)),not(equal(next(rd(hp,a)),a)))),next\_is\_not\_same\_\_if\_ordered).
-
-formula(forall([addr(d),addr(tl),addr(hd),mem(hp)],implies(and(in(tl,addr2set(hp,hd)),not(equal(hd,null)),not(equal(tl,null)),equal(next(rd(hp,tl)),null),not(equal(d,null)),equal(next(rd(hp,d)),null),in(d,addr2set(hp,hd))),equal(d,tl))),just\_tail\_\_points\_\_null).
-
-formula(forall([addr(hd),mem(hp),mem(hp\_p),addr(aux),addr(prev),addr(curr),addr(tl)],implies(and(orderlist(hp,hd,tl),not(equal(tl,null)),equal(next(rd(hp,tl)),null),ls\_elem(data(rd(hp,prev)),data(rd(hp,aux))),ls\_elem(data(rd(hp,aux)),data(rd(hp,curr))),equal(next(rd(hp,aux)),curr),equal(next(rd(hp,prev)),curr),equal(hp\_p,upd(hp,prev,mkcell(data(rd(hp,prev)),aux,lockid(rd(hp,prev)))))),orderlist(hp\_p,hd,tl))),insert\_\_keeps\_orderlist).
-
-formula(forall([addr(hd),mem(hp),mem(hp\_p),addr(aux),addr(prev),addr(curr),addr(tl)],implies(and(equal(aux,next(rd(hp,curr))),equal(curr,next(rd(hp,prev))),not(equal(aux,null)),equal(null,next(rd(hp,tl))),not(equal(aux,next(rd(hp,prev)))),equal(hp\_p,upd(hp,prev,mkcell(data(rd(hp,prev)),aux,lockid(rd(hp,prev))))),in(prev,addr2set(hp,hd)),in(curr,addr2set(hp,hd)),in(null,addr2set(hp,hd)),in(aux,addr2set(hp,hd)),orderlist(hp,hd,tl)),orderlist(hp\_p,hd,tl))),remove\_\_keeps\_orderlist).
-
-\textbf{end\_of\_list.}
-
-
-\textbf{list\_of\_formulae(conjectures).}
-
-formula(false).
-
-\textbf{end\_of\_list.}
-
-
-\large{\textbf{end\_problem.}}
-
-
-
+\end{lstlisting}
