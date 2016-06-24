@@ -64,7 +64,7 @@ I have found this topic very useful and we wanted to explore a very formal verif
 
 \section{Objectives}
 
-The goal is to prove the correctness of an implementation of a concurrent linked list.\footnote{The specification of the implementation is on \ref{def:problem}}
+The goal is to prove the correctness of an implementation of a concurrent linked list.\footnote{The specification of the implementation is on \ref{fig:listcode}}
 
 We achieve to prove with mathematical certain the correctness of the program. 
 %
@@ -161,11 +161,11 @@ We call \concept[Arity]{arity} to the number of arguments a function or a predic
 
 A \concept{formula} is defined recursively as it follows: Constants, $\true,\false$,predicates and functions are formulas. Let $F_1,F_2$ be two formulas. Then, $F_1\implies F_2, F_1\dimplies F_2, F_1\orcond F_2, F_1\andcond F_2$ are formulas.
 %
-We say a formula $F$ is \concept{satisfiable} \gls{iff} there exists a model $I$ that makes the formula true ($I \vDash F$). 
+We say a formula $F$ is \concept{satisfiable} iff there exists a model $I$ that makes the formula true ($I \vDash F$). 
 %
-We say a formula $F$ is \concept{valid} \gls{iff} for all interpretations $I$, $I\vDash F$.
+We say a formula $F$ is \concept{valid} iff for all interpretations $I$, $I\vDash F$.
 \label{def:validity}
-This 2 concepts are very important and they are very related. $F$ is valid \gls{iff} $\neg F$ is unsatisfiable. 
+This 2 concepts are very important and they are very related. $F$ is valid iff $\neg F$ is unsatisfiable. 
 
 
 A first-order \concept{theory} is defined by the following components: 
@@ -177,7 +177,7 @@ A first-order \concept{theory} is defined by the following components:
 
 There are some important properties that a theory may have. 
 
-A theory $\Sigma$ is \concept[Completeness]{complete} \gls{iff} for every closed $\Sigma-$formula $\sigma$ we have $(\Sigma\vDash \sigma) \text{ or } (\Sigma\neg\vDash \sigma) $
+A theory $\Sigma$ is \concept[Completeness]{complete} iff for every closed $\Sigma-$formula $\sigma$ we have $(\Sigma\vDash \sigma) \text{ or } (\Sigma\neg\vDash \sigma) $
 
 A theory $\Sigma$ is \concept[Consistency]{consistent} if there is at least one $\Sigma-$interpretation.	Equivalently, a theory $\Sigma$ is consistent if $\Sigma \not\vDash \false$
 
