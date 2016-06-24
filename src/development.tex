@@ -62,12 +62,12 @@ This is needed because \spass does not use any information or tactics to decide 
 \label{ProcessDescription}
 We describe now the way in which the tools cooperate.
 %
-The process followed is shown in Fig. \ref{fig:process}
+The process followed is shown in Fig. \ref{fig:process}. 
 
 
 \begin{figure}
 \input{tikz/processgraph}
-\caption{Process graph}
+\caption{Process graph.}
 \label{fig:process}
 \end{figure}
 
@@ -89,7 +89,7 @@ As the syntax of \spass (\cite{spasssyntax}) is not \leap syntax some parsing is
 %
 For example, \spass uses prefix notation  \leap uses infix notation for binary functions.
 %
-In order to solve this, it was necessary to learn \ocaml using \citeapos{ocamlbook}.
+In order to solve this, it was necessary to learn \ocaml using \cite{ocamlbook}.
 %
 \leap was forked so it could write the \gls{VC}s in prefix notation.
 %
@@ -97,7 +97,7 @@ Some other \leap functionalities had to be changed to make \leap output compatib
 
 In addition, one \spass problem has to be created for each \gls{VC}. 
 %
-The axiom list for each problem is determined as an argument. 
+The axiom list for each problem is determined as an argument because not every \spass problem need the same axioms. 
 %
 This is explained further in section \ref{sec:axiomgraph}.
 
@@ -280,6 +280,49 @@ As it is shown, the invariant \invDisjoint is not directly needed to proof \invP
 \label{fig:proofgraph}
 \end{center}
 
-One could think that it is not sound to prove \invLock using \invRegion as support and prove \invRegion using \invLock as support.
+
+One could think that it is not sound to prove \invLock using \invRegion as support and prove \invRegion using \invLock as support. 
 %
-%\todo{\;\;Why\;it\;is\;not \text{   cheating?}}
+This apparent circularity is an important point for the proofs.
+%
+We claim this apparent circularity is not a circularity and it is sound.
+
+Let $\varphi$,$\psi$ be two invariant candidates of a program such that the initiation step is valid for both of them.
+%
+It is sound using $\varphi$ as support for proving $\psi$ and using $\psi$ as support for proving $\varphi$. More formally, we show it as a lemma with its proof.
+
+\begin{lemma}
+Let $\varphi$ and $\psi$ be two candidate to invariants of a program. 
+
+
+Let $\theta$ be the initial condition and let initiation hold for $\varphi$ and $\psi$.
+\[\theta \to (\varphi \andcond \psi)\]
+
+Let $\psi$ be a support of $\varphi$ and $\varphi$ be a support of $\psi$. Then, for every transition $\tau_j$ in the program we have:
+%
+\[\forall j, \tau_j \andcond \varphi \andcond \psi \to \psi'\]
+\[\forall j, \tau_j \andcond \varphi \andcond \psi \to \varphi'\]
+
+\textbf{Then}, $\psi$ and $\varphi$ are invariants.
+\end{lemma}
+
+\begin{proof}
+Proof by contradiction: Let $\psi$ not be an invariant.
+%
+Thus, there is at least one state $j$ in which $\psi_j$ does not hold.
+%
+Lets take $j$ as the first counterexample.
+%
+By hypothesis, $\psi(0)$ (initiation) is valid, so $j>0$.
+
+Lets take the transition $\tau_{j-1}$.
+%
+As $j$ is the first counterexample, in state ${j-1}$ both $\psi,\varphi$ hold.
+%
+Thus, by hypothesis, $\psi_{j-1} \andcond \tau_{j-1} \andcond \varphi_{j-1} \to \psi_j$ is valid.
+%
+This is a contradiction because $\psi_j$ was not valid.
+\end{proof}
+
+
+

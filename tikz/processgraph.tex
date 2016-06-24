@@ -13,99 +13,200 @@
 \newcommand{\otherconsec}{Others consecution}
 \newcommand{\valid}{Valid}
   % Dialectics
-  \node[draw] (Program) at (1.5,1.5) {Program};
+  \node[draw] (ProgramName) at (1.5,1.5) {Invariant};
+  \node (Program) at (1.85,1.5) {};
   
-  \node[draw,minimum width=1.2cm, minimum height=0.7cm] (VC1) at (3,3.5) {$VC_1$};
-  \node[draw,minimum width=1.2cm, minimum height=0.7cm] (VC2) at (3,2) {$VC_2$};
-  \node[draw,minimum width=1.2cm, minimum height=0.7cm] (VC3) at (3,0.5) {$\vdots$};
-  \node[draw,minimum width=1.2cm, minimum height=0.7cm] (VCn) at (3,-0.8) {$VC_n$};
+  \node[draw,minimum width=1.2cm, minimum height=0.5cm] (VC1) at (3,3.8) {$VC_1$};
+  
 
-  \node[draw,text=white,fill=gray,minimum width=4.2cm, minimum height=0.9cm] (Ax) at (7.4,5) {\large{\textbf{List of axioms}}};
-  \node[draw,text=black,fill=green] (AxCons) at (4,5) {\textbf{Consistent}};
+
+  \node[draw,minimum width=1.2cm, minimum height=0.5cm] (VC21) at (3,2.8) {$VC_{2-1}$};
+  \node[draw,minimum width=1.2cm, minimum height=0.5cm] (VC22) at (3,2.2) {$VC_{2-2}$};
+  \node[draw,minimum width=1.2cm, minimum height=0.5cm] (VC3) at (3,1.0) {$\vdots$};
+  \node[draw,minimum width=1.2cm, minimum height=0.5cm] (VC55-1) at (3,0.3) {$VC_{55-1}$};
+  \node[draw,minimum width=1.2cm, minimum height=0.5cm] (VC55-2) at (3,-0.4) {$VC_{55-2}$};
+
+  \node[draw,text=white,fill=gray,minimum width=4.2cm, minimum height=0.9cm] (Ax) at (8.4,5) {\large{\textbf{List of axioms}}};
+  \node[draw,text=black,fill=green] (AxCons) at (4,5) {\textbf{Trustful}};
   \draw[-] (Ax) to node[above] {parser \& leap} (AxCons);
   %\draw[->] (Ax) to node[above] {parser and leap} (AxCons);
 
   %%%%%%%%%%%%%%%%% Gandalf Generation
-  \node[draw,minimum width=4.7cm,minimum height = 0.7cm] (SP11) at (5.5,4.2) {$\tau_1$ - \initiation};
-  \node[draw,minimum width=4.7cm,minimum height = 0.7cm] (SP12) at (5.5,3.6) {$\tau_1$ - \selfconsec};
-  \node[draw,minimum width=4.7cm,minimum height = 0.7cm] (SP1n) at (5.5,3.0) {$\tau_1$ - \otherconsec};
-  \node[draw,minimum width=4.7cm,minimum height = 0.7cm] (SP21) at (5.5,2.4) {$\tau_2$ - \initiation};
-  \node[draw,minimum width=4.7cm,minimum height = 0.7cm] (SP22) at (5.5,1.8) {$\tau_2$ - \selfconsec};
-  \node[draw,minimum width=4.7cm,minimum height = 0.7cm] (SP2n) at (5.5,1.2) {$\tau_2$ - \otherconsec};
-  \node[draw,minimum width=4.7cm,minimum height = 0.7cm] (SP31) at (5.5,0.5) {$...$};
-  \node[draw,minimum width=4.7cm,minimum height = 0.7cm] (SPn1) at (5.5,-0.2) {$\tau_n$ - \initiation};
-  \node[draw,minimum width=4.7cm,minimum height = 0.7cm] (SPn2) at (5.5,-0.8) {$\tau_n$ - \selfconsec};
-  \node[draw,minimum width=4.7cm,minimum height = 0.7cm] (SPnn) at (5.5,-1.4) {$\tau_n$ - \otherconsec};
+ %\newcommand{\smallToBig}{Ola} 
+  \node[draw,minimum width=5.4cm,minimum height = 0.5cm] (SP11) at (5.5,4.2) {$\tau_1$ - \initiation};
+  
+  \node[draw,minimum width=5.4cm,minimum height = 0.5cm] (SP21) at    (5.5,3.6) {$\tau_2$ - \selfconsec};
+  \node[draw,minimum width=5.4cm,minimum height = 0.5cm,fill=black!10!white] (SP21_f) at  (5.5,3.3) {\smallToBig};
+
+  \node[draw,minimum width=5.4cm,minimum height = 0.5cm] (SP221) at   (5.5,2.8) {$\tau_2$ - \otherconsec (1)};
+  \node[draw,minimum width=5.4cm,minimum height = 0.5cm] (SP222) at   (5.5,2.4) {$\dots$};
+  \node[draw,minimum width=5.4cm,minimum height = 0.5cm] (SP22n) at   (5.5,2.0) {$\tau_{55}$ - \otherconsec (55)};
+  \node[draw,minimum width=5.4cm,minimum height = 0.5cm,fill=black!10!white] (SP22n_f) at (5.5,1.6) {\smallToBig};
+
+  \node[draw,minimum width=5.4cm,minimum height = 0.5cm] (SP31) at    (5.5,1.1) {$...$};
+  \node[draw,minimum width=5.4cm,minimum height = 0.5cm,fill=black!10!white] (SP31_f) at  (5.5,0.8) {\smallToBig};
+
+  \node[draw,minimum width=5.4cm,minimum height = 0.5cm] (SP55-1) at  (5.5,0.3) {$\tau_{55}$ - \selfconsec};
+  \node[draw,minimum width=5.4cm,minimum height = 0.5cm,fill=black!10!white] (SP55-1_f) at (5.5,0) {\smallToBig};
+  
+  \node[draw,minimum width=5.4cm,minimum height = 0.5cm] (SP55-2) at   (5.5,-0.5) {$\tau_{55}$ - \otherconsec};
+  \node[draw,minimum width=5.4cm,minimum height = 0.5cm,fill=black!10!white] (SP55-2_f) at (5.5,-0.8) {\smallToBig};
+  
+  \node (SP11_p) at (4.25,4.2) {};
+
+  \node (SP21_p) at    (4.25,3.6)  {};
+  \node (SP21_f_p) at  (4.25,3.3)  {};
+
+  \node (SP221_p) at   (4.25,2.8)  {};
+  %%\node (SP221_f_p) at (4.25,2.5)  {};
+  
+  \node (SP222_p) at   (4.25,2.4)  {};
+  %%\node (SP222_f_p) at (4.25,1.7)  {};
+
+  \node (SP22n_p) at   (4.25,2.0)  {};
+  \node (SP22n_f_p) at (4.25,1.6)  {};
+
+  \node (SP31_p) at    (4.25,1.1)  {};
+  \node (SP31_f_p) at  (4.25,0.8)  {};
+
+  \node (SP55-1_p) at  (4.25,0.3) {};
+  \node (SP55-1_f_p) at (4.25,0) {};
+  
+  \node (SP55-2_p) at   (4.25,-0.5) {};
+  \node (SP55-2_f_p) at (4.25,-0.8) {};
   
 
-  %%%%%%%%%%%%%%%% TRUE NODES 
-  \node[draw,fill=green] (True11) at (8,4.2) {\valid};
-  \node[draw,fill=green] (True12) at (8,3.6) {\valid};
-  \node[draw,fill=green] (True1n) at (8,3.0) {\valid};
-  \node[draw,fill=green] (True21) at (8,2.4) {\valid};
-  \node[draw,fill=green] (True22) at (8,1.8) {\valid};
-  \node[draw,fill=green] (True2n) at (8,1.2) {\valid};
-  \node[draw,fill=green] (True31) at (8,0.5) {\valid};
-  \node[draw,fill=green] (Truen1) at (8,-0.2) {\valid};
-  \node[draw,fill=green] (Truen2) at (8,-0.8) {\valid};
-  \node[draw,fill=green] (Truenn) at (8,-1.4) {\valid};
+
+
+
+  
+
+  
+   \node[draw,fill=green] (True11) at (9,4.2) {\valid};
+  
+   \node[draw,fill=green] (True21) at (9,3.6) {\valid};
+   \node[draw,fill=green] (True21_f) at (9,3.3) {\valid};
+
+   \node[draw,fill=green] (True221) at (9,2.8) {\valid};
+   \node[draw,fill=green] (True222) at (9,2.4) {\valid};
+   \node[draw,fill=green] (True22n) at (9,2.0) {\valid};
+   \node[draw,fill=green] (True22n_f) at (9,1.6) {\valid};
+
+   \node[draw,fill=green] (True31) at (9,1.1) {\valid};
+   \node[draw,fill=green] (True31_f) at (9,0.8) {\valid};
+
+   \node[draw,fill=green] (True55-1) at (9,0.3) {\valid};
+   \node[draw,fill=green] (True55-1_f) at (9,0) {\valid};
+  
+   \node[draw,fill=green] (True55-2) at (9,-0.5) {\valid};
+   \node[draw,fill=green] (True55-2_f) at (9,-0.8) {\valid};
+
   
   
   %%%%%%%%%%%%%%%%%%%%%% 			 %%%%%%%%%%%%%%%%%%%%%%   
   %%%%%%%%%%%%%%%%%%%%%% TRANSITIONS %%%%%%%%%%%%%%%%%%%%%%
   %%%%%%%%%%%%%%%%%%%%%% 			 %%%%%%%%%%%%%%%%%%%%%% 
 
-  \draw[->,draw=blue] (Program) to node[pos=0.4,above] {\leap} (VC1);
-  \draw[->,draw=blue] (Program) to node[pos=0.4,above] {} (VC2);
+  \draw[->,draw=blue] (Program) to node[pos=0.3,above] {\leap} (VC1);
+  \draw[->,draw=blue] (Program) to node[pos=0.4,above] {} (VC21);
+  \draw[->,draw=blue] (Program) to node[pos=0.4,above] {} (VC22);
   \draw[->,draw=blue] (Program) to node[pos=0.4,above] {} (VC3);
-  \draw[->,draw=blue] (Program) to node[pos=0.4,above] {} (VCn);
+  \draw[->,draw=blue] (Program) to node[pos=0.4,above] {} (VC55-1);
+  \draw[->,draw=blue] (Program) to node[pos=0.4,above] {} (VC55-2);
   
  	
- 	\draw[->,draw=blue] (VC1) to node[above,pos=0.4] {\gandalf} (SP11);
-	\draw[->,draw=blue] (VC1) to node[above,pos=0.4] {} (SP12);
-	\draw[->,draw=blue] (VC1) to node[above,pos=0.4] {} (SP1n);
- 	
- 	\draw[->,draw=blue] (VC2) to node[above,pos=0.4] {\gandalf} (SP21);
-	\draw[->,draw=blue] (VC2) to node[above,pos=0.4] {} (SP22);
-	\draw[->,draw=blue] (VC2) to node[above,pos=0.4] {} (SP2n);
+  \draw[->,draw=blue] (VC1) to node[above,pos=0.4] {\gandalf} (SP11_p);
+  
+  \draw[->,draw=blue] (VC21) to node[above,pos=0.4] {\gandalf} (SP21_p);
+  \draw[->,draw=blue] (VC22) to node[above,pos=0.4] {\gandalf} (SP221_p);
+  \draw[->,draw=blue] (VC22) to node[above,pos=0.4] {} (SP222_p);
+  \draw[->,draw=blue] (VC22) to node[above,pos=0.4] {} (SP22n_p);
+  
+  \draw[->,draw=blue] (VC3) to node[above,pos=0.4] {\gandalf} (SP31_p);
+  
+  \draw[->,draw=blue] (VC55-1) to node[above,pos=0.4] {\gandalf} (SP55-1_p);
+  \draw[->,draw=blue] (VC55-2) to node[above,pos=0.4] {\gandalf} (SP55-2_p);
+
+  
+ 	%%% small to big
+ 	\draw[->,draw=blue] (VC21) to node[above,pos=0.4] {} (SP21_f_p);
+  %\draw[->,draw=blue] (VC22) to node[above,pos=0.4] {} (SP221_f_p);
+  %\draw[->,draw=blue] (VC22) to node[above,pos=0.4] {} (SP222_f_p);
+	\draw[->,draw=blue] (VC22) to node[above,pos=0.4] {} (SP22n_f_p);
 	
- 	\draw[->,draw=blue] (VC3) to node[above,pos=0.4] {\gandalf} (SP31);
+ 	\draw[->,draw=blue] (VC3) to node[above,pos=0.4] {} (SP31_f_p);
 	
- 	\draw[->,draw=blue] (VCn) to node[above,pos=0.4] {\gandalf} (SPn1);
-	\draw[->,draw=blue] (VCn) to node[above,pos=0.4] {} (SPn2);
-	\draw[->,draw=blue] (VCn) to node[above,pos=0.4] {} (SPnn);
+ 	\draw[->,draw=blue] (VC55-1) to node[above,pos=0.4] {} (SP55-1_f_p);
+	\draw[->,draw=blue] (VC55-2) to node[above,pos=0.4] {} (SP55-2_f_p);
+
 	
 
 	
 
   	
   	\draw[->] (SP11) to node[above,pos=0.4] {\textbf{\spass}} (True11);
-  	\draw[->] (SP12) to node[above,pos=0.4] {\textbf{\spass}} (True12);
-  	\draw[->] (SP1n) to node[above,pos=0.4] {\textbf{\spass}} (True1n);
+    
+    \draw[->] (SP21) to node[above,pos=0.4] {\textbf{\spass}} (True21);
+    \draw[->] (SP221) to node[above,pos=0.4] {\textbf{\spass}} (True221);
+    \draw[->] (SP222) to node[above,pos=0.4] {\textbf{\spass}} (True222);
+    \draw[->] (SP22n) to node[above,pos=0.4] {\textbf{\spass}} (True22n);
+    
+    
+    \draw[->] (SP31) to node[above,pos=0.4] {\textbf{\spass}} (True31);
+    
+    \draw[->] (SP55-1) to node[above,pos=0.4] {\textbf{\spass}} (True55-1);
+    \draw[->] (SP55-2) to node[above,pos=0.4] {\textbf{\spass}} (True55-2);
+  
+    %\draw[->] (SP11_f) to node[above,pos=0.4] {\textbf{\spass}} (True11_f);
   	
-  	\draw[->] (SP21) to node[above,pos=0.4] {\textbf{\spass}} (True21);
-  	\draw[->] (SP22) to node[above,pos=0.4] {\textbf{\spass}} (True22);
-  	\draw[->] (SP2n) to node[above,pos=0.4] {\textbf{\spass}} (True2n);
+  	\draw[->] (SP21_f) to node[above,pos=0.4] {\textbf{\spass}} (True21_f);
+    %\draw[->] (SP221_f) to node[above,pos=0.4] {\textbf{\spass}} (True221_f);
+    %\draw[->] (SP222_f) to node[above,pos=0.4] {\textbf{\spass}} (True222_f);
+  	\draw[->] (SP22n_f) to node[above,pos=0.4] {\textbf{\spass}} (True22n_f);
   	
-  	\draw[->] (SP31) to node[above,pos=0.4] {\textbf{\spass}} (True31);
   	
-  	\draw[->] (SPn1) to node[above,pos=0.4] {\textbf{\spass}} (Truen1);
-  	\draw[->] (SPn2) to node[above,pos=0.4] {\textbf{\spass}} (Truen2);
-  	\draw[->] (SPnn) to node[above,pos=0.4] {\textbf{\spass}} (Truenn);
+  	\draw[->] (SP31_f) to node[above,pos=0.4] {\textbf{\spass}} (True31_f);
+  	
+  	\draw[->] (SP55-1_f) to node[above,pos=0.4] {\textbf{\spass}} (True55-1_f);
+  	\draw[->] (SP55-2_f) to node[above,pos=0.4] {\textbf{\spass}} (True55-2_f);
   
 
-  \draw[-,draw=blue](Ax) to (7.4,-1.4);	
 
-  	\draw node[vertex] (Joint) at (7.4,4.2) {};
-  	\draw node[vertex] (Joint) at (7.4,3.6) {};
-  	\draw node[vertex] (Joint) at (7.4,3.0) {};
-  	\draw node[vertex] (Joint) at (7.4,2.4) {};
-  	\draw node[vertex] (Joint) at (7.4,1.8) {};
-  	\draw node[vertex] (Joint) at (7.4,1.2) {};
-  	\draw node[vertex] (Joint) at (7.4,0.5) {};
-  	\draw node[vertex] (Joint) at (7.4,-0.2) {};
-  	\draw node[vertex] (Joint) at (7.4,-0.8) {};
-  	\draw node[vertex] (Joint) at (7.4,-1.4) {};
+  \draw[-,draw=blue](Ax) to (8.4,-0.8);	
+
+
+
+  
+   \draw node[vertex] (Joint) at (8.4,4.2) {};
+  
+   \draw node[vertex] (Joint) at (8.4,3.6) {};
+   \draw node[vertex] (Joint) at (8.4,3.3) {};
+
+   \draw node[vertex] (Joint) at (8.4,2.8) {};
+   \draw node[vertex] (Joint) at (8.4,2.4) {};
+   \draw node[vertex] (Joint) at (8.4,2.0) {};
+   \draw node[vertex] (Joint) at (8.4,1.6) {};
+
+   \draw node[vertex] (Joint) at (8.4,1.1) {};
+   \draw node[vertex] (Joint) at (8.4,0.8) {};
+
+   \draw node[vertex] (Joint) at (8.4,0.3) {};
+   \draw node[vertex] (Joint) at (8.4,0) {};
+  
+   \draw node[vertex] (Joint) at (8.4,-0.5) {};
+   \draw node[vertex] (Joint) at (8.4,-0.8) {};
+
+
+  %	\draw node[vertex] (Joint) at (7.4,4.2) {};
+  % \draw node[vertex] (Joint) at (7.4,3.6) {};
+  %	\draw node[vertex] (Joint) at (7.4,3.0) {};
+  %	\draw node[vertex] (Joint) at (7.4,2.4) {};
+  %	\draw node[vertex] (Joint) at (7.4,1.8) {};
+  %	\draw node[vertex] (Joint) at (7.4,1.2) {};
+  %	\draw node[vertex] (Joint) at (7.4,0.5) {};
+  %	\draw node[vertex] (Joint) at (7.4,-0.2) {};
+  %	\draw node[vertex] (Joint) at (7.4,-0.8) {};
+  % \draw node[vertex] (Joint) at (7.4,-1.4) {};
 
 
   %\draw[->,draw=blue] (Joint) to (Synthesis);

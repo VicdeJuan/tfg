@@ -32,7 +32,7 @@ A whole bachelor thesis to prove something not very difficult to see looking car
 
 There is a fact which should not be forgotten, before we discuss about formal verification. 
 %
-This work has been realized to explore the possibility of complementing \leap with first order proofs, to cover some lacks of \leap
+This work has been realized to explore the possibility of complementing \leap\xspace with first order proofs, to cover some lacks of \leap
 \footnote{The main lack is the impossibility to reproduce verification without rerunning all the test}.
 %
 Additionally, this work has been done from the basis of formalism, using a theorem prover. 
@@ -49,3 +49,12 @@ We could have used \gls{VCC} and a C implementation of a fine-grained lock coupl
 Despite that fact, the certainty we have that this linked list is valid can not be obtained by testing. 
 %
 If one accept the axioms, then the validity must be accepted too with absolute certainty.
+
+
+\section{Increasing Leap Performance}
+
+There are some difficult transitions in which \leap spend significantly more time than in others.
+%
+We thought that may be, including some axioms in the decision procedure of \leap would increase \leap performance. 
+%
+Some preliminary analysis showed us that including axioms in difficult transitions would not made any performance difference so we did not explore deeply that possibility.
