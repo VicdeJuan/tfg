@@ -1,0 +1,52 @@
+\newcommand{\Cross}{$\mathbin{\tikz [x=1.4ex,y=1.4ex,line width=.2ex, red] \draw (0,0) -- (1,1) (0,1) -- (1,0);}$}%
+
+\newcommand{\Checkmark}{$\color{green}\checkmark$}
+
+
+	\subfloat{\begin{tikzpicture}[list/.style={rectangle split, rectangle split parts=2,draw, rectangle split horizontal}, >=stealth, start chain]
+		  \node[list,on chain] (A) {12};
+		  \node[list,on chain] (B) {90};
+		  \node[list,on chain] (C) {37};
+		  \node[on chain,draw,inner sep=6pt] (D) {$\fNull$};
+		  \node at (7,0) (T) {\LARGE\Cross};
+		  \draw[*->] let \p1 = (A.two), \p2 = (A.center) in (\x1,\y2) to (B);
+		  \draw[*->] let \p1 = (B.two), \p2 = (B.center) in (\x1,\y2) to (C);
+		  \draw[*->] let \p1 = (C.two), \p2 = (C.center) in (\x1 + 5.1,\y2-1.1) to[bend right] (A);
+	\end{tikzpicture}}
+	
+	\vspace{0.4cm}
+
+		\subfloat{\begin{tikzpicture}[list/.style={rectangle split, rectangle split parts=2,draw, rectangle split horizontal}, >=stealth, start chain]
+		  \node[list,on chain] (A) {12};
+		  \node[list,on chain] (B) {90};
+		  \node[list,on chain] (C) {37};
+		  \node[on chain,draw,inner sep=6pt] (D) {$\fNull$};
+		  \node at (7,0) (T) {\LARGE\Cross};
+		  \draw[*->] let \p1 = (A.two), \p2 = (A.center) in (\x1,\y2) -- (B);
+		  \draw[*->] let \p1 = (B.two), \p2 = (B.center) in (\x1,\y2) -- (C);
+		  \draw[*->] let \p1 = (C.two), \p2 = (C.center) in (\x1,\y2) -- (D);
+	\end{tikzpicture}}
+	
+	\vspace{0.4cm}
+
+		\subfloat{\begin{tikzpicture}[list/.style={rectangle split, rectangle split parts=2,draw, rectangle split horizontal}, >=stealth, start chain]
+		  \node[list,on chain] (A) {12};
+		  \node[list,on chain] (B) {37};
+		  \node[list,on chain] (C) {90};
+		  \node at (7,0) (T) {\LARGE\Cross};
+		  \draw[*->] let \p1 = (A.two), \p2 = (A.center) in (\x1,\y2) -- (B);
+		  \draw[*->] let \p1 = (B.two), \p2 = (B.center) in (\x1,\y2) -- (C);
+	\end{tikzpicture}}
+	
+	\vspace{0.4cm}
+
+	\subfloat{\begin{tikzpicture}[list/.style={rectangle split, rectangle split parts=2,draw, rectangle split horizontal}, >=stealth, start chain]
+		  \node[list,on chain] (A) {12};
+		  \node[list,on chain,bend right] (B) {37};
+		  \node[list,on chain] (C) {90};
+		  \node[on chain,draw,inner sep=6pt] (D) {$\fNull$};
+		  \node at (7,0) (T) {\LARGE\Checkmark};
+		  \draw[*->] let \p1 = (A.two), \p2 = (A.center) in (\x1,\y2) -- (B);
+		  \draw[*->] let \p1 = (B.two), \p2 = (B.center) in (\x1,\y2) -- (C);
+		  \draw[*->] let \p1 = (C.two), \p2 = (C.center) in (\x1,\y2) -- (D);
+	\end{tikzpicture}}
