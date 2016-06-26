@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70005" creator="Ipe 7.1.4">
-<info created="D:20100713154401" modified="D:20160623120126"/>
+<info created="D:20100713154401" modified="D:20160625172124"/>
 <preamble>\usepackage{algorithm}
 \usepackage{algpseudocode}
 %\usepackage{ltlfonts}
@@ -370,14 +370,7 @@ h
 <page>
 <layer name="alpha"/>
 <view layers="alpha" active="alpha"/>
-<path layer="alpha" matrix="0.494737 0 0 1 107.116 -16" stroke="black">
-212 1492 m
-212 1456 l
-592 1456 l
-592 1492 l
-h
-</path>
-<text matrix="1 0 0 1 -151 450" transformations="translations" pos="272 752" stroke="black" type="label" width="404" height="252.74" depth="245.26" valign="baseline">\newcommand{\Elem}{\ensuremath{\mathit{Elem}}\xspace}
+<text layer="alpha" matrix="1 0 0 1 -151 450" transformations="translations" pos="272 752" stroke="black" type="label" width="404" height="252.74" depth="245.26" valign="baseline">\newcommand{\Elem}{\ensuremath{\mathit{Elem}}\xspace}
 
 \begin{tabular}{c}
 \begin{minipage}[c]{6.5cm}
@@ -405,7 +398,7 @@ h
 	\Statex \textbf{begin}%
 	\While {true}
 	\State $e := HavocListElem()$
-	\State $non deterministic choice:$
+	\State non deterministic choice:
  	\State $\quad \Call Search(e)$
 	\Statex $\;\;\;\; \ProgOr$
 	\State $\quad \Call Insert(e)$
@@ -459,13 +452,6 @@ h
 \end{minipage}
 \end{tabular}
 </text>
-<path matrix="1.26902 0 0 0.466667 -52.1089 82.6667" stroke="black">
-216 260 m
-216 196 l
-468 196 l
-468 260 l
-h
-</path>
 <text matrix="1 0 0 1 -151 -336" transformations="translations" pos="272 752" stroke="black" type="label" width="434" height="312.32" depth="303.68" valign="baseline">\newcommand{\Elem}{\ensuremath{\mathit{Elem}}\xspace}
 
 \begin{tabular}{c}
@@ -504,13 +490,6 @@ h
 \end{minipage}
 \end{tabular}
 </text>
-<path matrix="1.22972 0 0 0.529412 -213.638 178.588" stroke="black">
-856 112 m
-856 48 l
-1108 48 l
-1108 112 l
-h
-</path>
 <text matrix="1 0 0 1 464 -320" transformations="translations" pos="272 752" stroke="black" type="label" width="434" height="300.3" depth="291.7" valign="baseline">\newcommand{\Elem}{\ensuremath{\mathit{Elem}}\xspace}
 
 \begin{tabular}{c}
@@ -547,5 +526,26 @@ h
 \end{minipage}
 \end{tabular}
 </text>
+<path matrix="1 0 0 1 0 -16" stroke="black">
+1152 224 m
+1152 256 l
+832 256 l
+832 224 l
+h
+</path>
+<path stroke="black">
+224 176 m
+224 208 l
+544 208 l
+544 176 l
+h
+</path>
+<path stroke="black">
+192 1440 m
+192 1472 l
+416 1472 l
+416 1440 l
+h
+</path>
 </page>
 </ipe>

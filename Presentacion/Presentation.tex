@@ -34,8 +34,8 @@
 \date{July 2016}
 \institute{Imdea Software}
 
-% \setbeameroption{hide notes}
-% \setbeameroption{show notes}
+\setbeameroption{hide notes}
+%\setbeameroption{show notes}
 % \setbeameroption{show only notes}
 
 
@@ -65,13 +65,36 @@
 	\end{array}}
 
 
+
+\renewcommand{\formulaFullListReducedBody}{
+  \left\{
+    \begin{array}{llc}
+      \fNull \in \region \andcond
+      \region = \fAddrToSet(\heap, \head) \andcond
+      \head \neq \tail & \andcond & \text{(L1)} \\
+      \heap[\tail].\fNext = \fNull \andcond
+      \tail \neq \fNull \andcond
+      \head \neq \fNull & \andcond & \text{(L2)} \\
+      \heap[\head].\fData = -\infty \andcond
+      \heap[\tail].\fData = +\infty & \andcond & \text{(L3)} \\
+			\Ordered (\heap, \head, \tail) && \text{(L4)}
+    \end{array}
+  \right.
+ }
+
+
 \begin{document}
+
+\begin{frame}
+\end{frame}
 
 \maketitle
 
-\begin{frame}{Tabla de contenidos}
-  \setbeamertemplate{section in toc}[sections numbered]
-  \tableofcontents[hideallsubsections]
+\begin{frame}{Table of contents}
+	\begin{center}
+		\setbeamertemplate{section in toc}[sections numbered]
+		\tableofcontents[hideallsubsections]
+	\end{center}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -79,6 +102,8 @@
 %%%%%%%%%%%%%%%%%%%%		Motivation 			%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Motivation}
 
 \begin{frame}{Motivation}
 	\begin{figure}
@@ -103,7 +128,7 @@
 	\end{figure}
 \end{frame}
 
-
+\section{Objectives}
 
 \begin{frame}{Objectives}
 \begin{itemize}
@@ -133,23 +158,26 @@
 \end{itemize}
 \end{frame}
 
+\section{Preliminaries}
 
 \begin{frame}{Preliminaries}
 \begin{itemize}
 	\item We assume the usual way of representing and working with First Order Logic (FOL)
-	\item Formal verification is proving correctness.... \textcolor{red}{LoL}
+	%\item Formal verification is proving correctness.... \textcolor{red}{LoL}
 	\item We approach to assess correctness is by proving properties:
 	\begin{itemize}
-		\item Lifeness properties.
 		\item \tikzmark{start1}Safety properties.\tikzmark{end1}
+		\item Lifeness properties.
 		\item Functional properties.
 	\end{itemize}
 	\begin{tikzpicture}[remember picture,overlay]
 		\node<2,3>[draw,line width=2pt,orange,ellipse,inner ysep=8pt,fit={(pic cs:start1) (pic cs:end1)}] {};
-		\node<3>[draw] at (5,1) {$\mathtt{x}≠0$};
+		\node<3>[draw] at (5,1.5) {$\mathtt{x}≠0$};
 	\end{tikzpicture} 
 \end{itemize}
 \end{frame}
+
+\subsection{Simple Programming Language (SPL)}
 
 \begin{frame}{Simple Programming Language (SPL)}
 \note{\begin{itemize}
@@ -180,6 +208,7 @@
 \]
 \end{frame}
 
+\subsection{Inductive Assertion Method}
 \begin{frame}{Inductive Assertion Method}
 \note{\begin{itemize}
 	\item Un programa no concurrente, por ser un ejemplo más ilutrativo. 
@@ -231,12 +260,17 @@
 		\right\}
 		\tikzmark{start2}
 		\begin{array}{l}
-			\tau_1 \andcond \varphi_i \to \varphi_i\prime  \\
-			\tau_2 \andcond \varphi_i \to \varphi_i\prime \\
-			\tau_3 \andcond \varphi_i \to \varphi_i\prime  \\
-			\tau_4 \andcond \varphi_i \to \varphi_i\prime \\
-			\tau_5 \andcond \varphi_i \to \varphi_i\prime  \\
-			\tau_6 \andcond \varphi_i \to \varphi_i\prime 
+			\text{VCs:}
+			\\
+			\begin{array}{r}
+				\theta \to \varphi_i\;							\\
+				\tau_1 \andcond \varphi_i \to \varphi_i\prime	\\
+				\tau_2 \andcond \varphi_i \to \varphi_i\prime 	\\
+				\tau_3 \andcond \varphi_i \to \varphi_i\prime	\\
+				\tau_4 \andcond \varphi_i \to \varphi_i\prime	\\
+				\tau_5 \andcond \varphi_i \to \varphi_i\prime	\\
+				\tau_6 \andcond \varphi_i \to \varphi_i\prime 
+			\end{array}
 		\end{array}
 		\tikzmark{end2}
 	\]
@@ -286,9 +320,9 @@
 		 \;$\tau_4 \andcond \varphi_1 \to \varphi_1\prime $: 
 		\begin{equation*}
 			(
-				\underbrace{\pc(T) = l_4 \andcond \pc\prime (T) = l_5 \andcond \mathtt{f}\prime  = \mathtt{f*x} \andcond \mathtt{x\prime =x}}_{\tau_4} \andcond (\underbrace{\pc(T) = l_5 \to \mathtt{x}\geq 1}_{\varphi_1})
+				\underbrace{\pc(T) = l_4 \andcond \textcolor{orange}{\pc\prime (T) = l_5} \andcond \mathtt{f}\prime  = \mathtt{f*x} \andcond \mathtt{x\prime =x}}_{\tau_4} \andcond (\underbrace{\pc(T) = l_5 \to \mathtt{x}\geq 1}_{\varphi_1})
 			) 
-				\to(\underbrace{\pc\prime (T) = l_5 \to \mathtt{x}\prime  \geq 1}_{\varphi_1\prime })\\\\
+				\to(\underbrace{\textcolor{orange}{\pc\prime (T) = l_5} \to \mathtt{x}\prime  \geq 1}_{\varphi_1\prime })\\\\
 		\end{equation*}
 		Equivalent to:
 		\begin{equation*}
@@ -335,7 +369,7 @@
 
 
 	\[
-		(\textcolor{orange}{\tau_5 \andcond} \varphi_1 \andcond \varphi_2 \to \varphi_2\prime ) \rightarrow (\varphi_2\to\varphi_2\prime )
+		(\tau_5 \andcond \textcolor{orange}{\varphi_1} \andcond \varphi_2 \to \varphi_2\prime ) \rightarrow ( \tau_5 \andcond \varphi_2\to\varphi_2\prime )
 	\]
 
 	\begin{block}<2->{}
@@ -367,23 +401,172 @@
 
 \end{frame}
 
+
+\section{Problem}
+\begin{frame}{Theory of linked list}
+
+\begin{itemize}
+	\item Compound of theories: $\displaystyle\Sigma_{\cell},\displaystyle\Sigma_{\elem},\displaystyle\Sigma_{\addr},\displaystyle\Sigma_{\mem},\displaystyle\Sigma_{\tid},\displaystyle\Sigma_{\sSetTid},\displaystyle\Sigma_{\sSetAddr},\displaystyle\Sigma_{Bridge}$
+	\item $\displaystyle\Sigma_{\elem}$ has a total order relation.
+	\item $\displaystyle\Sigma_{Bridge}$ contains an auxiliary function and a predicate:
+	\begin{itemize}
+		\item $\fAddrToSet : \mem \times \addr = \sSetAddr$
+		\item $\mathit{Ordered} : \mem\times\addr\addr = \{\true,\false\}$
+	\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+
 \begin{frame}{Problem}
-\includegraphics[scale=0.15]{../graphics/listcode}
+\vspace{-0.5cm}
+	\begin{center}
+		\includegraphics[scale=0.35]{../graphics/listcode}
+	\end{center}
 \end{frame}
 
+\begin{frame}{Problem}
+	\begin{center}
+		\vspace{-7.7cm}\includegraphics[scale=0.3]{../graphics/listcode}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Problem}
+%	\begin{block}<0->{}
+%		\begin{center}
+%			\begin{tikzpicture}[list/.style={rectangle split, rectangle split parts=2,draw, rectangle split horizontal}, >=stealth, start chain]
+%				\node[list,on chain] (head) {$-\infty$};
+%				\node[list,on chain] (A) {$e_1$};
+%				\node[list,on chain] (tail) {$\infty$};
+%				\node[on chain,draw,inner sep=6pt] (D) {$\fNull$};
+%			  	\draw[*->] let \p1 = (head.two), \p2 = (head.center) in (\x1,\y2) -- (A);
+%			  	\draw[*->] let \p1 = (A.two), \p2 = (A.center) in (\x1,\y2) -- (tail);
+%			  	\draw[*->] let \p1 = (tail.two), \p2 = (tail.center) in (\x1,\y2) -- (D);
+%			\end{tikzpicture}
+%		\end{center}
+%	\end{block}
+	
+	\begin{block}<1->{}
+		\begin{align}
+			\invPreserve & \overset{\mbox{def}}{=} \formulaFullListReducedBody
+			\label{inv:list}
+		\end{align}
+	\end{block}
+
+\end{frame}
+
+\section{Process}
+
+\newcommand{\inputTikZ}[2]{%  
+     \scalebox{#1}{\input{#2}}  
+}
+
+\begin{frame}{Tools}
+\begin{itemize}
+	\item \spass: Automated Theorem Prover (used).
+	\item \leap: VCs generator and theorem checker (forked).
+	\item \gandalf: Coordinator (developed).
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Process}
+
+	\begin{figure}
+		\inputTikZ{0.6}{../tikz/processgraph}
+		\caption{Process graph.}
+		\label{fig:process}
+	\end{figure}
+
+\end{frame}
+
+\section{Results}
+
+\subsection{Axioms}
 \begin{frame}{Axioms}
+
+	\begin{block}<1->{}
+		\begin{axiomdescription}[nextreg]
+			\label{ax::nextreg}
+			\explanation{
+				Let $a$ be an \addr\space reachable from another \addr\space $b$. 
+				%
+				If $a$ is different from \fNull, then the node pointed by $a$ is also reachable from $b$.
+			}
+			\begin{align*}
+				\forall \ast \;\; ((in(a,se) \wedge se = addr2set(m,b) \wedge c = next(rd(m,a)) \wedge (\neg\;  a = null))\implies in(c,se))
+			\end{align*}
+		\end{axiomdescription}
+	\end{block}
+	\begin{block}<2->{}
+		\begin{axiomdescription}[lock-keeps-addr2set]
+			\label{ax::lock_keeps_addr2set}
+			\explanation{
+				The set of \addr\space reachable from an \addr\space $hd$ is preserved after a \fLock statement targeting another (or the same) \addr\space $a$. 
+				%
+			}
+			\begin{align*}
+				\begin{array}{r}
+				\forall \ast \;\; (hp_p = upd(hp,a,mkcell(data(rd(hp,a)),next(rd(hp,a)),t))) 
+				\\
+				\implies (addr2set(p,hd) = addr2set(hp_p,hd))
+				\end{array}
+			\end{align*}
+		\end{axiomdescription}
+	\end{block}
+
 \end{frame}
 
+\begin{frame}{Results}
 
+	\begin{figure}[hbtp]
+		\centering
+		\includegraphics[scale=0.43]{../graphics/frequencyAxioms.png}
+		\caption{Number of problems solved against number of axiom needed.}
+		\label{fig:frequencyAxioms}
+	\end{figure}
+
+\end{frame}
 
 \begin{frame}{Times}
+\begin{table}[hbtp]
+\centering
+\begin{tabular}{r|rrrr}
+Invariant 		& Leap 	& Full process 		& Sum of \spass time 	& Check proofs 	\\\hline
+\invPreserve 	& 12 min 85	sec & $\infty$			& 10 min 56.56 sec				& 0 min 52.19 sec		\\
+\invOrder		& 1 min 20	sec & 180 min 40.548 sec		& 62 min 32.89 sec				& 7 min 41.17 sec 		\\
+\invLock		& 0 min 50	sec & 39 min 28.321 sec			& 13 min 34.00 sec 				& 1 min 53.94 sec		\\
+\invNext 		& 1 min 76	sec & 352 min 17.839 sec		& 123 min 37.73 sec				& 17 min 06.12 sec		\\
+\invRegion		& 25 min 67	sec & 7 min 34.425 sec			& 1 min 14.68 sec				& 0 min 19.14 sec		\\
+\invDisjoint 	& 0 min 22 	sec & 4 min 13.300 sec 			& 1 min 17.15 sec 				& 0 min 26.40 sec		\\
+%Total: 			& 		& 					& 						&  				\\
+\end{tabular}
+\caption{Compare of the times.}
+\label{analysis::bigtimetable}
+\end{table}
 \end{frame}
 
 
+
+\section{Conclusions}
 \begin{frame}{Conclusions}
+\begin{center}
+\large
+	\begin{itemize}
+		\item<1-> This implementation of Linked list is correct.
+		\item<2-> These proofs are reproducible.
+		\item<3-> Is this method worth it in every case?
+	\end{itemize}
+\end{center}
 \end{frame}
 
 
 
+\begin{frame}[standout]
+
+\begin{center}
+Thank you very much. Any questions?
+\end{center}
+
+\end{frame}
 
 \end{document}
