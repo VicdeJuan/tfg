@@ -91,10 +91,8 @@
 \maketitle
 
 \begin{frame}{Table of contents}
-	\begin{center}
-		\setbeamertemplate{section in toc}[sections numbered]
-		\tableofcontents[hideallsubsections]
-	\end{center}
+	\setbeamertemplate{section in toc}[sections numbered]
+	\tableofcontents[hideallsubsections]
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -104,8 +102,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Motivation}
+\note{Como todos sabemos, la verificación de Software es un tema muy importante. Me gustaría empezar con algunos ejemplos.}
 
 \begin{frame}{Motivation}
+	\note{Último 2 de Mayo, se perdió en el espacio por un error de Software.}
 	\begin{figure}
 		\centering
 		\includegraphics[scale=0.4]{imgs/japanesse.jpg}
@@ -114,6 +114,7 @@
 \end{frame}
 
 \begin{frame}{Motivation}
+	\note{Los problemas de software no son actuales. Hace 30 años murieron 6 personas por una máquina de rayos x que irradiaba una dosis superior a la debida por un problema de software.}
 	\begin{figure}
 		\includegraphics[scale=0.9]{imgs/xray.jpg}
 		\caption{XRay machine: Between 1985 and 1987 6 people died.}
@@ -121,6 +122,11 @@
 \end{frame}
 
 \begin{frame}{Motivation}
+\note{Hay otros casos, como el Boeing 787 en los que un grave error de software se descubrió en la fase de pruebas. 
+
+Bien que fue en la fase de pruebas y no hubo grandes problemas.
+¿Cómo asegurar que se han probado todos los posibles casos? Presentamos otra forma de verificar software formalmente.
+}
 	\begin{figure}
 		\centering
 		\includegraphics[scale=0.8]{imgs/boeing.jpg}
@@ -131,6 +137,7 @@
 \section{Objectives}
 
 \begin{frame}{Objectives}
+\note{Probar la correctitud de una implementación de una lista enlazada ordenada.}
 \begin{itemize}
 	\item Prove correctness of an implementation of an ordered linked list.
 	\begin{itemize}
@@ -146,15 +153,19 @@
 
 \begin{frame}{Objectives}
 \begin{itemize}
-	\item Prove correctness of an implementation of an ordered linked list.
+\note{Esta implementación de lista es concurrente por un número arbitrario de hilos, utilizando la técnica fine-grain-lock-couple para gestionar la concurrencia.
+
+Buscamos verificar formalmente, como quien demuestra formalmente el teorema de Gauss, la correctitud de esta lista enlazada.
+}
+	\item Prove correctness of an implementation of an \textbf{concurrent} ordered linked list.
 	\begin{itemize}
 		\item[--] Preservation as a list and order preservation.
 	\end{itemize}
 	\begin{figure}
 		\input{tikz/linkedlist}
 	\end{figure}
-	\item  Formal verification of the correctness.
-	\item Concurrent linked list (fine grain lock couple)
+	\item Formal verification of the correctness.
+	
 \end{itemize}
 \end{frame}
 
@@ -181,7 +192,10 @@
 
 \begin{frame}{Simple Programming Language (SPL)}
 \note{\begin{itemize}
+	\item La fórmula ya está en FOL, necesitamos expresar en FOL el programa. Tomamos un ejemplo con el statement while.
+	\item Variable \pc.
 	\item Pre-estado y postestado.
+	\item Descripción.
 \end{itemize}}
 \[
 	\begin{array}[t]{ll}
@@ -212,7 +226,7 @@
 \begin{frame}{Inductive Assertion Method}
 \note{\begin{itemize}
 	\item Un programa no concurrente, por ser un ejemplo más ilutrativo. 
-	\item El objetivo es probar que hay fórmulas \textbf{invariantes}. 
+	\item El objetivo es probar que hay fórmulas \textbf{invariantes} para toda ejecución. 
 	\item Es fácil ver que esto es cierto, tal y como lo tenemos aquí. Ilustramos el método con un ejemplo simple para que se entienda bien.
 \end{itemize}}
 
@@ -247,6 +261,7 @@
 
 \begin{frame}{Inductive Assertion Method}
 \note{\begin{itemize}
+	\item El método de inducción propone que si la condición inicial implica el candidato a invariante y si para cada transición, suponiendo cierto el invariante, tenemos el invariante en el post-estado podemos concluir que el candidato es realmente un invariante.
 	\item En naranja, las condiciones de verificación.
 	\item Si todas las condiciones de verificación son válidas, el candidato a invariante es un invariante.
 \end{itemize}}
@@ -263,19 +278,19 @@
 			\text{VCs:}
 			\\
 			\begin{array}{r}
-				\theta \to \varphi_i\;							\\
-				\tau_1 \andcond \varphi_i \to \varphi_i\prime	\\
-				\tau_2 \andcond \varphi_i \to \varphi_i\prime 	\\
-				\tau_3 \andcond \varphi_i \to \varphi_i\prime	\\
-				\tau_4 \andcond \varphi_i \to \varphi_i\prime	\\
-				\tau_5 \andcond \varphi_i \to \varphi_i\prime	\\
+				\theta \to \varphi_i\;\\
+				\tau_1 \andcond \varphi_i \to \varphi_i\prime\\
+				\tau_2 \andcond \varphi_i \to \varphi_i\prime\\
+				\tau_3 \andcond \varphi_i \to \varphi_i\prime\\
+				\tau_4 \andcond \varphi_i \to \varphi_i\prime\\
+				\tau_5 \andcond \varphi_i \to \varphi_i\prime\\
 				\tau_6 \andcond \varphi_i \to \varphi_i\prime 
 			\end{array}
 		\end{array}
 		\tikzmark{end2}
 	\]
 	\begin{tikzpicture}[remember picture,overlay]
-		\node<2>[draw,line width=2pt,orange,square,inner ysep=64pt,fit={(pic cs:start2) (pic cs:end2)}] {};
+		\node<2>[draw,line width=1.4pt,orange,square,inner ysep=60pt, inner xsep=-1pt, fit={(pic cs:start2) (pic cs:end2)}] {};
 	\end{tikzpicture} 
 
 \end{frame}
@@ -285,9 +300,11 @@
 	\paragraph{Some proofs for the invariance of $\varphi_1$:}
 	\note{
 	\begin{itemize}
-		\item 1: Una cualquiera.
-		\item 2: Claro, la interesante será en la que se modifica el valor de la x.
-		\item 3: No, la interesante es la que llega a esa línea.
+		\item 1: Una cualquiera. Razonamiento de \pc.
+		\subitem La fórmula se puede probar por resolución o búsqueda de modelos de la negación. Imdea $\to$ búsqueda.
+		Yo $\to$ resolución.
+		%\item 2: Claro, la interesante será en la que se modifica el valor de la x.
+		\item 2: No, la interesante es la que llega a esa línea.
 	\end{itemize}
 	}
 
@@ -358,7 +375,7 @@
 		\begin{center}\textcolor{red}{\textbf{Counter example:}} $x=0$\end{center}
 	\end{block}}
 	\only<3>{\begin{block}{}
-		\begin{center}$\varphi_1 \equiv \pc(T) = l_5 \to x ≥ 1$. Can we use that information?\end{center}
+		\begin{center}$\varphi_1 \equiv [\pc(T) = l_5 \orcond \pc(T) = l_4] \to x ≥ 1$. Can we use that information?\end{center}
 	\end{block}}
 \end{frame}
 
@@ -401,23 +418,36 @@
 
 
 \section{Problem}
-\begin{frame}{Theory of linked list}
+%\begin{frame}{Theory of linked list}
 
-\begin{itemize}
-	\item Compound of theories: $\displaystyle\Sigma_{\cell},\displaystyle\Sigma_{\elem},\displaystyle\Sigma_{\addr},\displaystyle\Sigma_{\mem},\displaystyle\Sigma_{\tid},\displaystyle\Sigma_{\sSetTid},\displaystyle\Sigma_{\sSetAddr},\displaystyle\Sigma_{Bridge}$
-	\item $\displaystyle\Sigma_{\elem}$ has a total order relation.
-	\item $\displaystyle\Sigma_{Bridge}$ contains an auxiliary function and a predicate:
-	\begin{itemize}
-		\item $\fAddrToSet : \mem \times \addr = \sSetAddr$
-		\item $\mathit{Ordered} : \mem\times\addr\addr = \{\true,\false\}$
-	\end{itemize}
-\end{itemize}
+%\begin{itemize}
+%	\item Compound of theories: $\displaystyle\Sigma_{\cell},\displaystyle\Sigma_{\elem},\displaystyle\Sigma_{\addr},\displaystyle\Sigma_{\mem},\displaystyle\Sigma_{\tid},\displaystyle\Sigma_{\sSetTid},\displaystyle\Sigma_{\sSetAddr},\displaystyle\Sigma_{Bridge}$
+%	\item $\displaystyle\Sigma_{\elem}$ has a total order relation.
+%	\item $\displaystyle\Sigma_{Bridge}$ contains an auxiliary function and a predicate:
+%	\begin{itemize}
+%		\item $\fAddrToSet : \mem \times \addr = \sSetAddr$
+%		\item $\mathit{Ordered} : \mem\times\addr\addr = \{\true,\false\}$
+%	\end{itemize}
+%\end{itemize}
 
-\end{frame}
+%\end{frame}
 
 
 \begin{frame}{Problem}
+\note{
+	
+	\begin{itemize}
+		\item Procedures.
+		\item Nodos centinela.
+		\item Variable Region.
+	\end{itemize}
+}
 \vspace{-0.5cm}
+\note{
+	\begin{itemize}
+		\item Actualización de region.
+	\end{itemize}
+}
 	\begin{center}
 		\includegraphics[scale=0.35]{../graphics/listcode}
 	\end{center}
@@ -443,7 +473,13 @@
 %			\end{tikzpicture}
 %		\end{center}
 %	\end{block}
-	
+	\note{
+
+	\begin{itemize}
+		\item Objetivo a probar. (\textbf{Hay otros invariantes utilizados como soporte}).
+		\item Descripción.
+	\end{itemize}
+	}
 	\begin{block}<1->{}
 		\begin{align}
 			\invPreserve & \overset{\mbox{def}}{=} \formulaFullListReducedBody
@@ -460,15 +496,26 @@
 }
 
 \begin{frame}{Tools}
+\note{
+	\begin{itemize}
+		\item Spass.
+		\item Leap: desarrollado por Ale. También prueba por búsqueda de modelos las VCs y queríamos complementarlo. 
+		He hecho un fork de la herramienta para pasar de infijo a prefijo.
+		\item Herramienta desarrollada.
+	\end{itemize}
+
+}
 \begin{itemize}
-	\item \spass: Automated Theorem Prover (used).
-	\item \leap: VCs generator and theorem checker (forked).
+	\item \spass: Automatic Theorem Prover (used).
+	\item \leap: VCs generator and theorem checker (forked). 
 	\item \gandalf: Coordinator (developed).
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Process}
-
+\note{
+	Descripción muy muy breve.
+}
 	\begin{figure}
 		\inputTikZ{0.6}{../tikz/processgraph}
 		\caption{Process graph.}
@@ -478,6 +525,7 @@
 \end{frame}
 
 \section{Results}
+\note{Resultados como los axiomas necesitados. A continuación, incluimos un par de ellos.}
 
 \subsection{Axioms}
 \begin{frame}{Axioms}
@@ -515,7 +563,12 @@
 \end{frame}
 
 \begin{frame}{Results}
+\note{
+	\begin{itemize}
+		\item Invariantes de la implementación.
+	\end{itemize}
 
+}
 	\begin{figure}[hbtp]
 		\centering
 		\includegraphics[scale=0.43]{../graphics/frequencyAxioms.png}
@@ -550,8 +603,8 @@ Invariant 		& Leap 	& Full process 		& Sum of \spass time 	& Check proofs 	\\\hl
 \begin{center}
 \large
 	\begin{itemize}
-		\item<1-> This implementation of Linked list is correct.
-		\item<2-> These proofs are reproducible.
+		\item<1-> If the axioms are accepted as valid then implementation of Linked list should be accepted too.
+		\item<2-> These proofs are reproducible and checkable for third-parties (Vampire, Isabelle).
 		\item<3-> Is this method worth it in every case?
 	\end{itemize}
 \end{center}
