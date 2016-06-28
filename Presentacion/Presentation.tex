@@ -53,7 +53,7 @@
 
 
 
-\newcommand{\GOALS}{\varphi_1 \equiv \forall T(\pc(T) = l_5 \to \mathtt{x}\geq 1) \;\; \wedge \;\; \varphi_2 \equiv \mathtt{x} \geq 0}
+\newcommand{\GOALS}{\varphi_1 \equiv \forall T([\pc(T) = l_5 \orcond \pc(T) = l_4 ]\to \mathtt{x}\geq 1) \;\; \wedge \;\; \varphi_2 \equiv \mathtt{x} \geq 0}
 
 \newcommand{\TRANSITIONS}{	\begin{array}{l}
 		 \tau_1 \equiv\pc(T) = l_1 \andcond \pc\prime (T) = l_2 \andcond \mathtt{f\prime =f} \andcond \mathtt{x}\prime  = 10\\
@@ -291,39 +291,37 @@
 	\end{itemize}
 	}
 
-	\only<1>{\begin{block}{}
-		 $\tau_2 \andcond \varphi_1 \to \varphi_1\prime $:
+%	\only<1>{\begin{block}{}
+%		 $\tau_2 \andcond \varphi_1 \to \varphi_1\prime $:
 	%	\begin{dmath*}[indentstep={0em}]
-		\begin{equation*}
-			(
-				\underbrace{\textcolor{black}{\pc(T) = l_2} \andcond \textcolor{orange}{\pc\prime (T) = l_3} \andcond \mathtt{f}\prime  = 1 \andcond x\prime =x}_{\tau_2} \andcond (\underbrace{\textcolor{black}{\pc(T) = l_5} \to \mathtt{x}\geq 1}_{\varphi_1})
-			) 
-				\to(\underbrace{\textcolor{orange}{\pc\prime (T) = l_5} \to \mathtt{x}\prime  \geq 1}_{\varphi_1\prime })\\\\
-		\end{equation*}
-	\end{block}}
+%		\begin{align*}
+%			(
+%				\underbrace{\textcolor{black}{\pc(T) = l_2} \andcond \textcolor{orange}{\pc\prime (T) = l_3} \andcond \mathtt{f}\prime  = 1 \andcond x\prime =x}_{\tau_2} \andcond (\underbrace{[\textcolor{black}{\pc(T) = l_5 \orcond \pc(T) = l_4 }] \to \mathtt{x}\geq 1}_{\varphi_1})
+%			) \\
+%				\to(\underbrace{[\textcolor{orange}{\pc\prime (T) = l_5 \orcond \pc\prime(T) = l_4}] \to \mathtt{x}\prime  \geq 1}_{\varphi_1\prime })\;\;\;\;
+%		\end{align*}
+%	\end{block}}
 
-	\only<2>{
+	\only<1>{
 	\begin{block}{}
 	 	$\tau_5 \andcond \varphi_1 \to \varphi_1\prime $:
 	%	\begin{dmath*}[indentstep={0em}]
-		\begin{equation*}
-		\begin{array}{r}
+		\begin{align*}
 			(
-				\underbrace{\pc(T) = l_5 \andcond \textcolor{orange}{\pc\prime (T) = l_3} \andcond \mathtt{f\prime =f} \andcond \mathtt{x\prime =x-1}}_{\tau_5} \andcond (\underbrace{\pc(T) = l_5 \to \mathtt{x}\geq 1}_{\varphi_1})
+				\underbrace{\pc(T) = l_5 \andcond \textcolor{orange}{\pc\prime (T) = l_3} \andcond \mathtt{f\prime =f} \andcond \mathtt{x\prime =x-1}}_{\tau_5} \andcond (\underbrace{[\pc(T) = l_5 \orcond \pc(T) = l_4] \to \mathtt{x}\geq 1}_{\varphi_1})
 			) \\
-				\to(\underbrace{\textcolor{orange}{\pc\prime (T) = l_5} \to \mathtt{x}\prime  \geq 1}_{\varphi_1\prime })\;\;\;\;
-			\end{array}
-		\end{equation*}
+				\to(\underbrace{[\textcolor{orange}{\pc\prime (T) = l_5 \orcond \pc\prime(T) = l_4 }] \to \mathtt{x}\prime  \geq 1}_{\varphi_1\prime })\;\;\;\;
+		\end{align*}
 	\end{block}}
 
-	\only<3>{\begin{block}{}
+	\only<2>{\begin{block}{}
 		 \;$\tau_4 \andcond \varphi_1 \to \varphi_1\prime $: 
-		\begin{equation*}
+		\begin{align*}
 			(
-				\underbrace{\pc(T) = l_4 \andcond \textcolor{orange}{\pc\prime (T) = l_5} \andcond \mathtt{f}\prime  = \mathtt{f*x} \andcond \mathtt{x\prime =x}}_{\tau_4} \andcond (\underbrace{\pc(T) = l_5 \to \mathtt{x}\geq 1}_{\varphi_1})
-			) 
-				\to(\underbrace{\textcolor{orange}{\pc\prime (T) = l_5} \to \mathtt{x}\prime  \geq 1}_{\varphi_1\prime })\\\\
-		\end{equation*}
+				\underbrace{\textcolor{cyan}{\pc(T) = l_4} \andcond \textcolor{orange}{\pc\prime (T) = l_5} \andcond \mathtt{f}\prime  = \mathtt{f*x} \andcond \mathtt{x\prime =x}}_{\tau_4} \andcond (\underbrace{[\pc(T) = l_5 \orcond \textcolor{cyan}{\pc(T) = l_4}]  \to \mathtt{x}\geq 1}_{\varphi_1})
+			) \\
+				\to(\underbrace{[\textcolor{orange}{\pc\prime (T) = l_5 \orcond \pc\prime(T) = l_4 }] \to \mathtt{x}\prime  \geq 1}_{\varphi_1\prime })\;\;\;\;
+		\end{align*}
 		Equivalent to:
 		\begin{equation*}
 			(
